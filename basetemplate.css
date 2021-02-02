@@ -58,3 +58,50 @@ body {
   justify-content: center;
   padding: 10px;
 }
+
+.featured {
+  width: 100%;
+  display: flex;
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+
+  background-color: rgb(13, 63, 126);
+}
+
+.featDivImg {
+  block-size: 350px;
+}
+
+.featDivComment {
+  width: 150%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+
+.featArticle {
+  display: absolute;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.featTitle {
+  border-bottom: solid;
+  border-width: 1px;
+  width: 100%;
+  position: top;
+}
+
+.featDivInfo {
+  width: 250%;
+}
+.featLink {
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+}
+
+.featured {
+  margin: 30px;
+  margin-left: 0px;
+  margin-right: ;
+}
