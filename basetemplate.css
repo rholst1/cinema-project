@@ -105,3 +105,25 @@ body {
   margin-left: 0px;
   margin-right: 0px;
 }
+.get-booking {
+  display: flex;
+  justify-content: center;
+}
+.get-booking input {
+  font-size: 16px;
+  padding: 10px;
+  border: 1px solid black;
+}
+button.get {
+  font-size: 16px;
+  background-color: rgb(13, 63, 126);
+  color: white;
+  border: none;
+  border-radius: 2px;
+  width: 80px;
+}
+button.get:active {
+  background-color: rgb(255, 255, 255);
+  color: rgb(13, 63, 126);
+  border: 2px solid rgb(13, 63, 126);
+}
