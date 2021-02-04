@@ -120,3 +120,9 @@ body {
   border: 3px solid rgb(104, 12, 190);
   padding: 0.5%;
 }
+
+.dropdown2{
+display: flex;
+justify-content: center;
+padding: 0.5%;
+}
