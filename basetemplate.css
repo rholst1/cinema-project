@@ -115,3 +115,8 @@ body {
   color: ghostwhite;
   font-weight: lighter;
 }
+
+.border{
+  border: 3px solid rgb(104, 12, 190);
+  padding: 0.5%;
+}
