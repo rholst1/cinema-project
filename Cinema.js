@@ -1,4 +1,5 @@
-class Cinema {
+import SeatRow from '/SeatRow.js';
+export default class Cinema {
   /* 2d-array of the seatings, row dimension is contained in SeatRow objects*/
   seating = [];
   /* seating should be an array contain number of seats for each row*/

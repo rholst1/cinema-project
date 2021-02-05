@@ -1,4 +1,4 @@
-class SeatRow {
+export default class SeatRow {
   row = [];
   constructor(SeatNumber) {
     for (let seat of this.row) {
