@@ -1,4 +1,4 @@
-import Cinema from '/Cinema.js';
+import Cinema from '/script/Cinema.js';
 //create a cinema with 4x4 seats
 let cinema = new Cinema([5, 4, 4, 4]);
 populateCinemaGUI(cinema);

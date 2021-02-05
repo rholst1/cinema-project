@@ -10,10 +10,10 @@ html {
 button {
   height: 35px;
   width: 35px;
-  background-color: #fff;
+  background-color:solid  #fff;
   border-radius: 3px;
   border: 1px solid #c4c4c4;
-  background-color: transparent;
+ 
   font-size: 2rem;
   color: #333;
   background-image: linear-gradient(to bottom,transparent,transparent 50%,rgba(0,0,0,.04));
@@ -30,7 +30,8 @@ button:hover {
 .cinema-seats{
    border: 1px solid #ccc;
   border-radius: 15px;
-  border-top: 10px solid #000000;
+  border-top: 10px solid #043acf;
+  background-color: rgb(172, 98, 46);
   padding: 10px;
   position: absolute;
   top: 50%;

@@ -1,4 +1,4 @@
-import SeatRow from '/SeatRow.js';
+import SeatRow from '/script/SeatRow.js';
 export default class Cinema {
   /* 2d-array of the seatings, row dimension is contained in SeatRow objects*/
   seatings = []; //todo should have a more intuitive way of reaching individual seats
