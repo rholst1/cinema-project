@@ -1,9 +1,10 @@
 export default class SeatRow {
-  row = [];
+  columns = [];
   constructor(SeatNumber) {
-    for (let seat of this.row) {
-      /*fill array with false as no one's yet seated*/
-      seat = false;
+    /*fill columns array with all seats for this row, all seats are initiated as false. 
+    Ie no seats are taken.*/
+    for (let i = 0; i < SeatNumber; i++) {
+      this.columns.push(false);
     }
   }
 }

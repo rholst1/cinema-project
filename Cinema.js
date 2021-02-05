@@ -1,17 +1,17 @@
 import SeatRow from '/SeatRow.js';
 export default class Cinema {
   /* 2d-array of the seatings, row dimension is contained in SeatRow objects*/
-  seatings = [];
+  seatings = []; //todo should have a more intuitive way of reaching individual seats
   /*the greatest row width is saved for easy access.*/
   maxRowWidth = 1;
   /* seating should be an array contain number of seats for each row*/
   constructor(seatings) {
     /*Parse list of row widths and create corresponding SeatRow objects.*/
-    for (let row of seatings) {
-      this.seatings = new SeatRow(row);
+    for (let rowWidth of seatings) {
+      this.seatings.push(new SeatRow(rowWidth));
       /*Save the row value to maxRowWidth if it's greater*/
-      if (row > this.maxRowWidth) {
-        this.maxRowWidth = row;
+      if (rowWidth > this.maxRowWidth) {
+        this.maxRowWidth = rowWidth;
       }
     }
   }
