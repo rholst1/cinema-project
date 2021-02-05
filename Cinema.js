@@ -17,29 +17,29 @@ export default class Cinema {
   }
   /*expects seat as string in the form {col}_{row} ex: 2_1. Returns cordinates as array {x,y}. */
   getSeatCoordinates(seat) {
-    seatArray = seat.split('_');
-    col = parseInt(seatArray[0]);
-    row = parseInt(seatArray[1]);
+    let seatArray = seat.split('_');
+    let col = parseInt(seatArray[0]);
+    let row = parseInt(seatArray[1]);
     return [col, row];
   }
   /*expects seat as string in the form {col}_{row} ex: 2_1. Returns seat booked status as boolean. */
   getSeatValue(seat) {
-    seatArray = this.getSeatCoordinates(seat);
-    col = seatArray[0];
-    row = seatArray[1];
-    return seatings[row].columns[col];
+    let seatArray = this.getSeatCoordinates(seat);
+    let col = seatArray[0];
+    let row = seatArray[1];
+    return this.seatings[row].columns[col];
   }
   /*expects seat as string in the form {col}_{row} ex: 2_1. Will toggle a between true/false 
   and return the new value.*/
   toggleSeatValue(seat) {
-    seatArray = this.getSeatCoordinates(seat);
-    col = seatArray[0];
-    row = seatArray[1];
-    if (seatings[row].columns[col] == false) {
-      seatings[row].columns[col] = true;
+    let seatArray = this.getSeatCoordinates(seat);
+    let col = seatArray[0];
+    let row = seatArray[1];
+    if (this.seatings[row].columns[col] == false) {
+      this.seatings[row].columns[col] = true;
       return true;
     } else {
-      seatings[row].columns[col] = false;
+      this.seatings[row].columns[col] = false;
       return false;
     }
   }
