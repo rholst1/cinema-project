@@ -21,6 +21,7 @@ button {
    border: 1px solid #ccc;
   border-radius: 15px;
   border-top: 10px solid #043acf;
+  min-width: 100px;
   background-color: rgb(172, 98, 46);
   padding: 10px;
   position: absolute;
