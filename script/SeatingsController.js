@@ -1,26 +1,44 @@
 import Cinema from '/script/Cinema.js';
-//create a cinema with 4x4 seats
-let cinema = new Cinema([5, 4, 4, 4]);
+/*saving color during hover effect*/
+let color;
+/* create cinema with given row lengths */
+let cinema = new Cinema([24, 20, 20, 20, 20, 20, 18]);
+/*We save our selected seats for ease of access*/
+let selectedSeats = [];
+/*create html code for our cinema*/
 populateCinemaGUI(cinema);
+/* */
 $('.seat-selectors').on('click', 'button', function () {
   let seat = $(this).val();
-  if (cinema.toggleSeatValue(seat)) {
-    $(`:button[value="${seat}"]`).css('background-color', 'red');
-  } else {
-    $(`:button[value="${seat}"]`).css('background-color', 'green');
+  let newSeatStatus = cinema.toggleSeatValue(seat);
+  if ((newSeatStatus).localeCompare("free") == 0) {
+    $(`:button[value="${seat}"]`).css('background-color', 'gray');
+    color = $(this).css('background-color');
+    selectedSeats.splice(selectedSeats.indexOf(seat), 1);
+  } else if ((newSeatStatus).localeCompare("selected") == 0) {
+    $(`:button[value="${seat}"]`).css('background-color', 'yellow');
+    color = $(this).css('background-color');
+    selectedSeats.push(seat);
   }
-})
+  console.log(selectedSeats);
+});
+
+$('.seat-selectors').on('mouseover', 'button', function () {
+  color = $(this).css('background-color');
+  $(this).css('background-color', '#e3dada');
+});
+
+$('.seat-selectors').on('mouseleave', 'button', function () {
+  $(this).css('background-color', color);
+});
 
 function populateCinemaGUI(cinema) {
   //clear .seat-selectors before we update it
   $('.seat-selectors').html('');
-  //How many columns does the cinema have?
-  //$('.seat-selectors').css('grid-template-columns', `repeat(${cinema.maxRowWidth}, 1fr)`);
   console.log(cinema.maxRowWidth);
-
-  for (let row = 0; row < cinema.seatings.length; row++) {
-    for (let col = 0; col < cinema.seatings[row].columns.length; col++) {
-      $('.seat-selectors').append(`<button type="button" value="${col}_${row}">${col}_${row}</button>`);
+  for (let row = 0; row < cinema.rows.length; row++) {
+    for (let col = 0; col < cinema.rows[row].columns.length; col++) {
+      $('.seat-selectors').append(`<button type="button" value="${col}_${row}"></button>`);
     }
     $('.seat-selectors').append('<br>');
   }
