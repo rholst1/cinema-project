@@ -105,6 +105,23 @@ body {
   margin-left: 0px;
   margin-right: 0px;
 }
+.cinema-button {
+  height: 30px;
+  width: 10px;
+  background-color: gray;
+  border-radius: 3px;
+  border: 1px solid #c4c4c4;
+}
+.cinema-seats{
+  display: inline-block;
+   border: 1px solid #ccc;
+  border-radius: 15px;
+  border-top: 10px solid #043acf;
+  min-width: 100px;
+  background-color: rgb(172, 98, 46);
+  padding: 10px;
+  text-align: center;
+}
 
 .footer{
   border: 3px solid rgb(104, 12, 190);
@@ -119,6 +136,7 @@ body {
 .border{
   border: 3px solid rgb(104, 12, 190);
   padding: 0.5%;
+  text-align: center;
 }
 
 .dropdown2{
