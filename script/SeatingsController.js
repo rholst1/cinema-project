@@ -12,11 +12,10 @@ export default class SeatingsController {
   /* Parses Seat objects in Cinema/SeatRow and adds buttons and row breaks to the .html. */
   populateCinemaGUI(cinema) {
     //clear .seat-selectors before we update it
-    $('.seat-selectors').html('');
     for (let row = 0; row < cinema.rows.length; row++) {
       for (let col = 0; col < cinema.rows[row].columns.length; col++) {
         $('.seat-selectors').append(`<button type="button" value="${col}_${row}" class="cinema-button"></button>`);
-        if (cinema.rows[row].columns[col].getSeatStatus().localeCompare("reserved") == 0) {
+        if ((cinema.rows[row].columns[col].getSeatStatus()).localeCompare("reserved") == 0) {
           $(`:button[value="${col}_${row}"]`).css('background-color', 'rgb(104, 12, 190)');
         }
       }
