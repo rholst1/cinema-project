@@ -2,8 +2,9 @@ import SeatingsController from '/script/SeatingsController.js';
 let cinemaIsInitiated = false;
 $("#date-and-time").change(function (e) {
   if (!cinemaIsInitiated) {
-    $('.border').append('<div class="cinema-seats"</div>');
-    $('.cinema-seats').append('<div class="seat-selectors"</div>');
+    $('.cinema-container').append('<h2>Platser</div>');
+    $('.cinema-container').append('<div class="cinema"></div>');
+    $('.cinema').append('<div class="seat-selectors"></div>');
     cinemaIsInitiated = true;
   }
   let valueFromDropdown = $(this).val(); //we should use this later
