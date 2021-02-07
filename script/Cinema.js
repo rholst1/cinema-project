@@ -4,8 +4,10 @@ export default class Cinema {
   rows = []; //todo should have a more intuitive way of reaching individual seats
   /*the greatest row width is saved for easy access.*/
   maxRowWidth = 1;
-  /* seating should be an array contain number of seats for each row*/
-  constructor(seatings) {
+  /* seating should be an array contain number of seats for each row. Argument
+  reserved is optional and should provide array with seat coordinates ({col}_{row} 
+    for reserved seats.*/
+  constructor(seatings, reservedSeats, randomise) {
     /*Parse list of row widths and create corresponding SeatRow objects.*/
     for (let rowWidth of seatings) {
       this.rows.push(new SeatRow(rowWidth));
@@ -13,6 +15,23 @@ export default class Cinema {
       if (rowWidth > this.maxRowWidth) {
         this.maxRowWidth = rowWidth;
       }
+    }
+    if (reservedSeats != undefined) {
+      reservedSeats.forEach(seat => {
+        let seatArray = this.getSeatCoordinates(seat);
+        let col = parseInt(seatArray[0]);
+        let row = parseInt(seatArray[1]);
+        this.rows[row].columns[col].setSeatStatus("reserved");
+      });
+    }
+    if (randomise != undefined) {
+      this.rows.forEach(row => {
+        row.columns.forEach(column => {
+          if (Math.random() > 0.5) {
+            column.setSeatStatus("reserved");
+          }
+        });
+      });
     }
   }
   /*expects seat as string in the form {col}_{row} ex: 2_1. Returns cordinates as array {x,y}. */

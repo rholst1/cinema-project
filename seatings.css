@@ -14,9 +14,6 @@ button {
   border-radius: 3px;
   border: 1px solid #c4c4c4;
 }
-
-
-
 .cinema-seats{
    border: 1px solid #ccc;
   border-radius: 15px;
@@ -24,9 +21,6 @@ button {
   min-width: 100px;
   background-color: rgb(172, 98, 46);
   padding: 10px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+
   text-align: center;
 }
