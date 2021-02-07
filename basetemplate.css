@@ -108,17 +108,17 @@ body {
 .cinema-button {
   height: 30px;
   width: 10px;
-  background-color: gray;
+  background-color: ghostwhite;
   border-radius: 3px;
-  border: 1px solid #c4c4c4;
+  border: 1px solid #000;
 }
 .cinema-seats{
   display: inline-block;
-   border: 1px solid #ccc;
+   border: 1px solid #000;
   border-radius: 15px;
-  border-top: 10px solid #043acf;
+  border-top: 10px double #000;
   min-width: 100px;
-  background-color: rgb(172, 98, 46);
+  background-color: ghostwhite;
   padding: 10px;
   text-align: center;
 }

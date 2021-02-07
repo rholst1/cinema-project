@@ -17,7 +17,7 @@ export default class SeatingsController {
       for (let col = 0; col < cinema.rows[row].columns.length; col++) {
         $('.seat-selectors').append(`<button type="button" value="${col}_${row}" class="cinema-button"></button>`);
         if (cinema.rows[row].columns[col].getSeatStatus().localeCompare("reserved") == 0) {
-          $(`:button[value="${col}_${row}"]`).css('background-color', 'red');
+          $(`:button[value="${col}_${row}"]`).css('background-color', 'rgb(104, 12, 190)');
         }
       }
       $('.seat-selectors').append('<br>');
@@ -37,11 +37,11 @@ export default class SeatingsController {
       let newSeatStatus = cinema.toggleSeatValue(seat);
       /* If new status is free or selected we change button color */
       if ((newSeatStatus).localeCompare("free") == 0) {
-        $(`:button[value="${seat}"]`).css('background-color', 'gray');
+        $(`:button[value="${seat}"]`).css('background-color', 'ghostwhite');
         //color = $(this).css('background-color');
         selectedSeats.splice(selectedSeats.indexOf(seat), 1);
       } else if ((newSeatStatus).localeCompare("selected") == 0) {
-        $(`:button[value="${seat}"]`).css('background-color', 'yellow');
+        $(`:button[value="${seat}"]`).css('background-color', 'rgb(13, 63, 126)');
         selectedSeats.push(seat);
       }
     });

@@ -16,7 +16,6 @@ export default class Seat {
   /* Expects a string in the parameter that corresponds to any of the 
   SeatStatus enums. */
   setSeatStatus(seatStatus) {
-    console.log(seatStatus);
     switch (seatStatus) {
       case SeatStatus.RESERVED:
         this.seatStatus = SeatStatus.RESERVED;
