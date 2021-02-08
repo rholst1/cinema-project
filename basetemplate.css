@@ -10,6 +10,19 @@ Might be a good idea to give the variables names such as "accent",
   --purple: rgb(123, 8, 230);
   --purple_border: rgb(104, 12, 190);
 }
+html {
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+body{
+  min-width: 100%;
+}
+
 .news {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   font-weight: lighter;
@@ -34,9 +47,10 @@ Might be a good idea to give the variables names such as "accent",
   padding-right: 3%;
   font-weight: lighter;
 }
+
 .menu-bar li {
   list-style-type: none;
-  padding: 12px;
+  padding: 16px;
 }
 
 .menu-bar a {
@@ -48,7 +62,6 @@ Might be a good idea to give the variables names such as "accent",
 .menu-bar ul {
   padding: 0;
   display: flex;
-  justify-content: space-around;
 }
 
 .menu-bar a:hover {
@@ -60,6 +73,7 @@ Might be a good idea to give the variables names such as "accent",
   position: sticky;
   top: 0;
   background-color: var(--blue);
+  justify-content: left;
 }
 body {
   width: 1100px;
@@ -215,4 +229,8 @@ grid-column: 2;
 
 .booking-button:hover{
   color: rgb(12, 12, 41);
+}
+.menu-bar-button-selected{
+  color: var(--orange_text_hover);
+  
 }
