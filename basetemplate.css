@@ -20,9 +20,20 @@ html {
   box-sizing: inherit;
 }
 body{
-  min-width: 100%;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 120%;
+}
+main {
+  flex-grow: 1;
 }
 
+main p:last-child {
+  display: none;
+}
 .news {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   font-weight: lighter;
@@ -75,10 +86,7 @@ body{
   background-color: var(--blue);
   justify-content: left;
 }
-body {
-  width: 1100px;
-  margin: auto;
-}
+
 .dropdown {
   display: flex;
   justify-content: center;
@@ -130,6 +138,7 @@ body {
   margin-left: 0px;
   margin-right: 0px;
 }
+/*Seat-picker*/
 .cinema-button {
   height: 30px;
   width: 10px;
@@ -149,18 +158,20 @@ body {
   padding: 2%;
   text-align: center;
 }
-
 .cinema-container{
 grid-row: 2;
 grid-column: 2;
 }
+/*Upcoming showings*/
 .upcoming-showings-container{
   grid-row: 2;
   grid-column: 1;
   background-color: var(--blue);
   color: var(--white_text);
-  padding: 5%;
+  width: auto;
   max-width: 500px;
+  padding: 5%;
+  padding-right: 0%;
 }
 .upcoming-showings-container li{
   list-style-type: decimal;
@@ -173,8 +184,8 @@ grid-column: 2;
 .upcoming-showings-container h2{
   border-bottom: 1px solid var(--white);
   text-align: left;
-  margin-right: -5%;
   padding-right: 5%;
+  margin-right: -5;
 }
 
 .footer{
