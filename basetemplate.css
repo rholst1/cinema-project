@@ -190,6 +190,7 @@ padding: 0.5%;
   border: 3px solid var(--purple_border);
   padding: 1%;
   margin: 3%;
+  margin-bottom: 1%;
   background: linear-gradient(
     180deg,
     rgba(238, 174, 202, 1) 0%,
@@ -201,3 +202,17 @@ padding: 0.5%;
   color: ghostwhite;
 }
 
+.booking-button{
+  background-color: rgb(92, 55, 194);
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-weight: lighter;
+  font-size: large;
+  color: ghostwhite;
+  padding: 1%;
+  margin-bottom: 1%;
+  border: navy;
+}
+
+.booking-button:hover{
+  color: rgb(12, 12, 41);
+}
