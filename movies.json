@@ -1,48 +1,51 @@
 [
   {
-    "title": "Call me by your name",
+    "title": "Hidden Figures",
     "productionCountries": [
-      "Italien",
       "USA"
     ],
     "productionYear": 2017,
-    "length": 132,
-    "genre": "Drama",
-    "distributor": "UIP",
-    "language": "engelska",
-    "subtitles": "svenska",
-    "director": "Luca Guadagnino",
-    "actors": [
-      "Armie Hammer",
-      "Timothée Chalamet",
-      "Michael Stuhlbarg"
+    "length": 127,
+    "genre": [
+      "Biografi",
+      "Drama",
+      "Historia"
     ],
-    "description": "<p>Filmen utspelas i norra Italien sommaren 1983. En ung amerikansk-italienare blir förälskad i en amerikansk student som kommer för att studera och bo hos hans familj.</p><p>Tillsammans upplever de en oförglömlig sommar - full av musik, mat och kärlek - som för evigt kommer att förändra dem.</p>",
+    "distributor": "20th Century Fox",
+    "language": "Engelska",
+    "subtitles": "Svenska",
+    "director": "Theodore Melfi",
+    "actors": [
+      "Taraji P. Henson",
+      "Octavia Spencer",
+      "Janelle Monáe"
+    ],
+    "description": "<p>Dolda tillgångar är en amerikansk biografisk dramafilm från 2016, regisserad av Theodore Melfi och skriven av Melfi och Allison Schroeder. Den är baserad på boken Dolda tillgångar av Margot Lee Shetterly och är en autentisk historia. Filmen handlar om tre kvinnliga afroamerikanska matematiker som arbetade på NASA under början av 1960-talet.</p>",
     "images": [
-      "call-me-poster1.jpg",
-      "call-me-poster2.jpg"
+      "hidden-figures-poster1.jpg",
+      "hidden-figures-poster2.jpg"
     ],
     "youtubeTrailers": [
-      "Z9AYPxH5NTM"
+      "https://www.youtube.com/watch?v=5wfrDhgUMGI"
     ],
     "reviews": [
       {
-        "source": "Sydsvenskan",
-        "quote": "ett drama berättat med stor ömhet",
-        "stars": 4,
-        "max": 5
+        "source": "We got this covered",
+        "quote": "While Hidden Figures hits many of the beats one would expect, Melfi’s film strikes a delicate balance of injecting levity within the character-based historical drama that propels the story forward. ",
+        "stars": 80,
+        "max": 100
       },
       {
-        "source": "Svenska Dagbladet",
-        "quote": "en film att förälska sig i",
-        "stars": 5,
-        "max": 5
+        "source": "TheWrap",
+        "quote": "Hidden Figures is feel-good history, but it works, and it works on behalf of heroes from a cinematically under-served community. These smart accomplished women had the right stuff, and so does this movie. ",
+        "stars": 75,
+        "max": 100
       },
       {
-        "source": "DN",
-        "quote": "en het romans i åttiotalskostym",
-        "stars": 4,
-        "max": 5
+        "source": "The Playlist",
+        "quote": "A paean to the unsung, Hidden Figures is also a romanticized tribute to everyday problem solvers who, in the movie’s eyes, are their own kind of superheroes.",
+        "stars": 75,
+        "max": 100
       }
     ]
   }
