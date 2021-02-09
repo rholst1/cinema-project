@@ -3,12 +3,11 @@ Might be a good idea to give the variables names such as "accent",
 "darker shade" etc and pick colors on a more general basis.*/
 
 :root {
-  --blue: rgb(13, 63, 126);
+  --blue: rgb(6, 43, 88);
   --white: rgb(248, 248, 255);
   --white_text: rgb(255, 255, 255);
-  --orange_text_hover: rgb(226, 136, 17);
-  --purple: rgb(123, 8, 230);
-  --purple_border: rgb(104, 12, 190);
+  --hover-color: rgb(160, 160, 160);
+  --purple: rgb(6, 43, 88);
 
   --lighter-shade: #000;
   --shade: #000;
@@ -20,23 +19,14 @@ Might be a good idea to give the variables names such as "accent",
   --font-bread: Comic Sans MS;
   --font-title: Comic Sans MS;
 }
-html {
-  box-sizing: border-box;
-}
 body {
+  font-family: 'Oswald', sans-serif;
   margin: 0;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-}
-main {
-  flex-grow: 1;
 }
 
-main p:last-child {
-  display: none;
-}
 .news {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-weight: lighter;
@@ -69,7 +59,7 @@ main p:last-child {
 
 .menu-bar a {
   text-decoration: none;
-  font-size: 24px;
+  font-size: 150%;
   color: var(--white);
 }
 
@@ -79,7 +69,7 @@ main p:last-child {
 }
 
 .menu-bar a:hover {
-  color: var(--orange_text_hover);
+  color: var(--hover-color);
 }
 
 .menu-bar {
@@ -187,7 +177,6 @@ main p:last-child {
 }
 
 .footer {
-  border: 3px solid var(--purple_border);
   background-color: var(--purple);
   padding: 0.5%;
   text-align: center;
@@ -205,8 +194,6 @@ main p:last-child {
 }
 
 .showing-selector-dropdowns select {
-  background-color: var(--blue);
-  color: var(--white_text);
   border-radius: 4px;
 }
 .dropdown {
@@ -280,4 +267,30 @@ button.get:active {
   background-color: rgb(255, 255, 255);
   color: rgb(13, 63, 126);
   border: 2px solid rgb(13, 63, 126);
+}
+
+img {
+  block-size: 250px;
+  display: block;
+}
+.currentMovie1 {
+  color: white;
+  display: flex;
+  background-color: rgb(26, 25, 25);
+  margin: 2% 10%;
+}
+.currentMovieTitleDiv {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+.movies h1 {
+  font-size: 200%;
+  letter-spacing: 3px;
+}
+p.title-p {
+  font-weight: lighter;
+}
+
+.movies p {
+  font-size: 110%;
 }
