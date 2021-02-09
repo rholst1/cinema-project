@@ -1,5 +1,10 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
 .news {
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-weight: lighter;
   font-size: large;
   color: ghostwhite;
@@ -16,7 +21,7 @@
 }
 
 .newsh3 {
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   float: inline-start;
   padding: 00.5%;
   padding-right: 3%;
@@ -49,10 +54,7 @@
   top: 0;
   background-color: rgb(13, 63, 126);
 }
-body {
-  width: 1100px;
-  margin: auto;
-}
+
 .dropdown {
   display: flex;
   justify-content: center;
@@ -128,23 +130,23 @@ button.get:active {
   border: 2px solid rgb(13, 63, 126);
 }
 
-.footer{
+.footer {
   border: 3px solid rgb(104, 12, 190);
   background-color: rgb(123, 8, 230);
   padding: 0.5%;
   text-align: center;
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   color: ghostwhite;
   font-weight: lighter;
 }
 
-.border{
+.border {
   border: 3px solid rgb(104, 12, 190);
   padding: 0.5%;
 }
 
-.dropdown2{
-display: flex;
-justify-content: center;
-padding: 0.5%;
+.dropdown2 {
+  display: flex;
+  justify-content: center;
+  padding: 0.5%;
 }
