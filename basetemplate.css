@@ -13,12 +13,12 @@ Might be a good idea to give the variables names such as "accent",
   --lighter-shade: #000;
   --shade: #000;
   --darker-shade: rgb(13, 63, 126);
-  --text: rgb(255,255,255);
+  --text: rgb(255, 255, 255);
   --hover: rgb(226, 136, 17);
   --accent: #000;
-/*Tmp - pls someone else pick appropriate fonts*/
+  /*Tmp - pls someone else pick appropriate fonts*/
   --font-bread: Oswald;
-  --font-title: Oswald; 
+  --font-title: Oswald;
 }
 body {
   font-family: 'Oswald', sans-serif;
@@ -29,9 +29,14 @@ body {
   background-color: #000;
 }
 
+main {
+  width: 100%;
+  height: 100%;
+}
+
 .news {
-  color: ghostwhite; 
-    background-color: rgb(33, 32, 36);
+  color: ghostwhite;
+  background-color: rgb(33, 32, 36);
   max-width: 45%;
   padding: 0.5%;
   margin: 0.5%;
@@ -45,7 +50,7 @@ body {
 
 .menu-bar li {
   list-style-type: none;
-  padding: 16px;
+  padding: 10px 16px;
 }
 
 .menu-bar a {
@@ -153,17 +158,17 @@ body {
   padding: 5%;
   padding-right: 0%;
 }
-.upcoming-showings-container li{
+.upcoming-showings-container li {
   list-style-type: none;
   text-align: left;
-   font: var(--font-bread);
-   line-height: 2em;
+  font: var(--font-bread);
+  line-height: 2em;
 }
-.upcoming-showings-container li:hover{
+.upcoming-showings-container li:hover {
   color: var(--hover);
   cursor: pointer;
 }
-.upcoming-showings-container h2{
+.upcoming-showings-container h2 {
   border-bottom: 1px solid var(--text);
   text-align: left;
   font: var(--font-title);
@@ -255,7 +260,8 @@ button.get:active {
 
 .currentMovieTitleH1 {
   color: white;
-  font-size: 600%;
+  font-size: 500%;
+  margin: auto;
   text-align: center;
 }
 
@@ -264,6 +270,9 @@ img {
   height: 280px;
 }
 
+hr {
+  position: relative;
+}
 .currentMovie1,
 .currentMovie2,
 .currentMovie3,
@@ -277,30 +286,70 @@ img {
 .currentMovieTitleDiv {
   padding-left: 5%;
   padding-right: 5%;
+  width: 100%;
+}
+
+.bookTicketButton {
+  margin: 5px;
+  background-color: var(--blue);
+  border-radius: 28px;
+  border: 1px solid var(--blue);
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 17px;
+  font-weight: bold;
+  padding: 16px 31px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px var(--darker-shade);
+}
+.bookTicketButton:hover {
+  background-color: var(--hover);
+}
+.bookTicketButton:active {
+  position: relative;
+  top: 1px;
 }
 .movies h2 {
   font-size: 200%;
   letter-spacing: 3px;
 }
+.movies h2:hover {
+  text-decoration: underline;
+}
 p.title-p {
   font-weight: lighter;
+  font-size: 120%;
 }
 
-.movies p {
-  font-size: 110%;
+.currentMovieTitleDiv h2 {
+  font-size: 200%;
 }
 
-.info-input form{
+.info-input form {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
-.info-input input{
+.info-input input {
   grid-column: 2;
   width: max-content;
   margin: 1%;
 }
-.info-input label{
-grid-column: 1;
-justify-self: right;
-padding: 1%;
+.info-input label {
+  grid-column: 1;
+  justify-self: right;
+  padding: 1%;
+}
+
+a.movie-link {
+  text-decoration: none;
+  color: white;
+  display: inline-block;
+}
+
+.currentMovieTitleContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 }
