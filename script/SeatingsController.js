@@ -1,39 +1,46 @@
 import Cinema from '/script/Cinema.js';
+import Showing from '/script/Showing.js';
 
 export default class SeatingsController {
 
   constructor() {
     /* create cinema with given row lengths */
-    this.cinema = new Cinema([24, 20, 20, 20, 20, 20, 18], null, "untitled", true);
+    this.cinema = new Cinema([24, 20, 20, 20, 20, 20, 18], "untitled");
     /*We save our selected seats for ease of access*/
     this.selectedSeats = [];
+    this.showing = new Showing(this.cinema, 'untitled', new Date(1995, 11, 17, 3, 24, 0));
+
   }
 
   /* Parses Seat objects in Cinema/SeatRow and adds buttons and row breaks to the .html. */
   populateCinemaGUI(cinema) {
-    //clear .seat-selectors before we update it
-    for (let row = 0; row < cinema.rows.length; row++) {
-      for (let col = 0; col < cinema.rows[row].columns.length; col++) {
+    for (let row = 0; row < cinema.seatsPerRow.length; row++) {
+      for (let col = 0; col < cinema.seatsPerRow[row]; col++) {
         $('.seat-selectors').append(`<button type="button" value="${col}_${row}" class="cinema-button"></button>`);
-        if ((cinema.rows[row].columns[col].getSeatStatus()).localeCompare("reserved") == 0) {
-          $(`:button[value="${col}_${row}"]`).css('background-color', 'rgb(104, 12, 190)');
-        }
       }
       $('.seat-selectors').append('<br>');
+    }
+  }
+  showSeatStatusCinemaGUI(showing) {
+    for (let seat of showing.seats) {
+      if ((seat.getSeatStatus()).localeCompare("reserved") == 0) {
+        $(`:button[value="${col}_${row}"]`).css('background-color', 'rgb(104, 12, 190)');
+      }
     }
   }
   init() {
     /*create html code for our cinema*/
     this.populateCinemaGUI(this.cinema);
+    this.showSeatStatusCinemaGUI(this.showing);
     /*TODO can I reach these without re-referencing them here? */
-    let cinema = this.cinema;
+    let showing = this.showing;
     let selectedSeats = this.selectedSeats;
     /* Listen click on seat-buttons. */
     $('.seat-selectors').on('click', '.cinema-button', function () {
       let seat = $(this).val();
       /* We get string telling us the new status of seat(selected,free,reserved) 
       and update backend.*/
-      let newSeatStatus = cinema.toggleSeatValue(seat);
+      let newSeatStatus = showing.toggleSeatValue(seat);
       /* If new status is free or selected we change button color */
       if ((newSeatStatus).localeCompare("free") == 0) {
         $(`:button[value="${seat}"]`).css('background-color', 'ghostwhite');

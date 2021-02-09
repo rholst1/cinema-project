@@ -10,8 +10,10 @@ Object.freeze(SeatStatus);
 export default class Seat {
   seatStatus = SeatStatus.FREE;
 
-  constructor(seatStatus) {
+  constructor(seatStatus, column, row) {
     this.setSeatStatus(seatStatus);
+    this.column = column;
+    this.row = row;
   }
   /* Expects a string in the parameter that corresponds to any of the 
   SeatStatus enums. */
