@@ -29,7 +29,6 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  font-size: 120%;
 }
 main {
   flex-grow: 1;
