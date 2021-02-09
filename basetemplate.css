@@ -9,6 +9,16 @@ Might be a good idea to give the variables names such as "accent",
   --orange_text_hover: rgb(226, 136, 17);
   --purple: rgb(123, 8, 230);
   --purple_border: rgb(104, 12, 190);
+
+  --lighter-shade: #000;
+  --shade: #000;
+  --darker-shade: #000;
+  --text: #000;
+  --hover: #000;
+  --accent: #000;
+
+  --font-bread: Comic Sans MS;
+  --font-title: Comic Sans MS;
 }
 html {
   box-sizing: border-box;
@@ -29,7 +39,7 @@ main p:last-child {
   display: none;
 }
 .news {
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   font-weight: lighter;
   font-size: large;
   color: ghostwhite;
@@ -46,7 +56,7 @@ main p:last-child {
 }
 
 .newsh3 {
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   float: inline-start;
   padding: 00.5%;
   padding-right: 3%;
@@ -109,7 +119,6 @@ main p:last-child {
 }
 
 .featArticle {
-  display: absolute;
   padding-left: 10px;
   padding-right: 10px;
 }
@@ -178,31 +187,10 @@ grid-column: 2;
   border-bottom: 1px solid var(--white);
   text-align: left;
 }
-.get-booking {
-  display: flex;
-  justify-content: center;
-}
-.get-booking input {
-  font-size: 16px;
-  padding: 10px;
-  border: 1px solid black;
-}
-button.get {
-  font-size: 16px;
-  background-color: rgb(13, 63, 126);
-  color: white;
-  border: none;
-  border-radius: 2px;
-  width: 80px;
-}
-button.get:active {
-  background-color: rgb(255, 255, 255);
-  color: rgb(13, 63, 126);
-  border: 2px solid rgb(13, 63, 126);
-}
 
 .footer{
-  background-color: rgb(33, 32, 36);
+  border: 3px solid var(--purple_border);
+  background-color: var(--purple);
   padding: 0.5%;
   text-align: center;
   color: var(--white_text);
@@ -236,14 +224,19 @@ button.get:active {
   border-radius: 4px;
 }
 .info-input{
+  border: 3px solid var(--purple_border);
   padding: 1%;
   margin: 3%;
   margin-bottom: 1%;
- background-color: rgb(33, 32, 36);
+  background: linear-gradient(
+    180deg,
+    rgba(238, 174, 202, 1) 0%,
+    rgba(85, 149, 226, 1) 100%
+  );
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   font-weight: lighter;
   font-size: large;
-  color: rgb(241, 237, 234);
+  color: ghostwhite;
 }
 
 .booking-button{
@@ -259,12 +252,4 @@ button.get:active {
 
 .booking-button:hover{
   color: rgb(12, 12, 41);
-}
-
-body{
-  background-color: rgb(17, 15, 19);
- /* background-image: url(https://images.unsplash.com/photo-1608554230881-58d5908bbf02?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80);
-  background-size: cover;
-  height: 100%;
-  overflow: hidden; */
 }
