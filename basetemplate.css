@@ -1,3 +1,4 @@
+@import url('"https://fonts.googleapis.com/css2?family=Oswald:wght@200;400&display=swap"');
 /*Accessing example var(--blue) instead of rgb(30, 144, 255).
 Might be a good idea to give the variables names such as "accent",
 "darker shade" etc and pick colors on a more general basis.*/
@@ -12,13 +13,13 @@ Might be a good idea to give the variables names such as "accent",
 
   --lighter-shade: #000;
   --shade: #000;
-  --darker-shade: #000;
-  --text: #000;
-  --hover: #000;
+  --darker-shade: rgb(13, 63, 126);
+  --text: rgb(255,255,255);
+  --hover: rgb(226, 136, 17);
   --accent: #000;
-
-  --font-bread: Comic Sans MS;
-  --font-title: Comic Sans MS;
+/*Tmp - pls someone else pick appropriate fonts*/
+  --font-bread: Oswald;
+  --font-title: Oswald; 
 }
 html {
   box-sizing: border-box;
@@ -29,7 +30,6 @@ body{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  font-size: 120%;
 }
 main {
   flex-grow: 1;
@@ -168,24 +168,26 @@ grid-column: 2;
   grid-row-start: 1;
   grid-row-end: 4;
   grid-column: 1;
-  background-color: var(--blue);
-  color: var(--white_text);
-  width: auto;
+  background-color: var(--darker-shade);
+  color: var(--text);
   max-width: 500px;
   padding: 5%;
   padding-right: 0%;
 }
 .upcoming-showings-container li{
-  list-style-type: decimal;
+  list-style-type: none;
   text-align: left;
-  line-height: 2em;
+   font: var(--font-bread);
+   line-height: 2em;
 }
 .upcoming-showings-container li:hover{
-  color: var(--orange_text_hover);
+  color: var(--hover);
 }
 .upcoming-showings-container h2{
-  border-bottom: 1px solid var(--white);
+  border-bottom: 1px solid var(--text);
   text-align: left;
+  font: var(--font-title);
+  font-size: larger;
 }
 
 .footer{
