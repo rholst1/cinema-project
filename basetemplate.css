@@ -281,3 +281,18 @@ button.get:active {
   color: rgb(13, 63, 126);
   border: 2px solid rgb(13, 63, 126);
 }
+
+.info-input form{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.info-input input{
+  grid-column: 2;
+  width: max-content;
+  margin: 1%;
+}
+.info-input label{
+grid-column: 1;
+justify-self: right;
+padding: 1%; 
+}
