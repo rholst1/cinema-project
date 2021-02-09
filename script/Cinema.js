@@ -1,17 +1,24 @@
 import SeatRow from '/script/SeatRow.js';
 export default class Cinema {
-  /* 2d-array of the seatings, row dimension is contained in SeatRow objects*/
-  rows = [];
-  /*the greatest row width is saved for easy access.*/
-  maxRowWidth = 1;
+
+
   /* seating should be an array contain number of seats for each row. Argument
   reserved is optional and should provide array with seat coordinates ({col}_{row} 
     for reserved seats.*/
-  constructor(seatings, reservedSeats, randomise) {
+  constructor(seatings, reservedSeats, name, randomise) {
+    /* 2d-array of the seatings, row dimension is contained in SeatRow objects*/
+    this.rows = [];
+    /*the greatest row width is saved for easy access.*/
+    this.maxRowWidth = 1;
+    /*Name of the cine represented in this object*/
+    this.name = name;
+    /*How many seats the cinema contains*/
+    numberOfSeats = 0;
     /*Parse list of row widths and create corresponding SeatRow objects.*/
     for (let rowWidth of seatings) {
       this.rows.push(new SeatRow(rowWidth));
-      /*Save the row value to maxRowWidth if it's greater*/
+      numberOfSeats++;
+      /*Save the row value to maxRowWidth if it's greater TODO is this needed?*/
       if (rowWidth > this.maxRowWidth) {
         this.maxRowWidth = rowWidth;
       }

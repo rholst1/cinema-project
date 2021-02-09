@@ -4,7 +4,7 @@ export default class SeatingsController {
 
   constructor() {
     /* create cinema with given row lengths */
-    this.cinema = new Cinema([24, 20, 20, 20, 20, 20, 18], null, true);
+    this.cinema = new Cinema([24, 20, 20, 20, 20, 20, 18], null, "untitled", true);
     /*We save our selected seats for ease of access*/
     this.selectedSeats = [];
   }
