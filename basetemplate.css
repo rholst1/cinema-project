@@ -7,7 +7,7 @@ Might be a good idea to give the variables names such as "accent",
   --white: rgb(248, 248, 255);
   --white_text: rgb(255, 255, 255);
   --hover-color: rgb(160, 160, 160);
-  --purple: rgb(6, 43, 88);
+  /* --footerBackground: rgb(6, 43, 88); */
 
   --lighter-shade: #000;
   --shade: #000;
@@ -25,6 +25,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: #000;
 }
 
 .news {
@@ -177,9 +178,13 @@ body {
 }
 
 .footer {
-  background-color: var(--purple);
+  background-color: var(--footerBackground);
   padding: 0.5%;
   text-align: center;
+  border-top: 1px solid white;
+  margin-left: 20%;
+  margin-right: 20%;
+  letter-spacing: 2px;
   color: var(--white_text);
 }
 
@@ -239,13 +244,6 @@ body {
   color: rgb(12, 12, 41);
 }
 
-body {
-  background-color: rgb(17, 15, 19);
-  /* background-image: url(https://images.unsplash.com/photo-1608554230881-58d5908bbf02?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80);
-  background-size: cover;
-  height: 100%;
-  overflow: hidden; */
-}
 .get-booking {
   display: flex;
   justify-content: center;
@@ -269,21 +267,35 @@ button.get:active {
   border: 2px solid rgb(13, 63, 126);
 }
 
-img {
-  block-size: 250px;
-  display: block;
+.currentMovieTitleH1 {
+  color: white;
+  font-size: 600%;
+  text-align: center;
 }
-.currentMovie1 {
+
+img {
+  width: 280px;
+  height: 280px;
+}
+.currentMovieIMG1 {
+  /* display: flex; */
+  /* width: 30%; */
+}
+.currentMovie1,
+.currentMovie2,
+.currentMovie3,
+.currentMovie4,
+.currentMovie5,
+.currentMovie6 {
   color: white;
   display: flex;
-  background-color: rgb(26, 25, 25);
   margin: 2% 10%;
 }
 .currentMovieTitleDiv {
   padding-left: 5%;
   padding-right: 5%;
 }
-.movies h1 {
+.movies h2 {
   font-size: 200%;
   letter-spacing: 3px;
 }
