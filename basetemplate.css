@@ -34,16 +34,10 @@ body {
   font-weight: lighter;
   font-size: large;
   color: ghostwhite;
-  background: rgb(238, 174, 202);
-  background: linear-gradient(
-    180deg,
-    rgba(238, 174, 202, 1) 0%,
-    rgba(85, 149, 226, 1) 100%
-  );
-
-  border: 0.05% solid var(--white);
+    background-color: rgb(33, 32, 36);
   max-width: 45%;
   padding: 0.5%;
+  margin: 1%;
 }
 
 .newsh3 {
