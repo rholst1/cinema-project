@@ -9,6 +9,16 @@ Might be a good idea to give the variables names such as "accent",
   --orange_text_hover: rgb(226, 136, 17);
   --purple: rgb(123, 8, 230);
   --purple_border: rgb(104, 12, 190);
+
+  --lighter-shade: #000;
+  --shade: #000;
+  --darker-shade: #000;
+  --text: #000;
+  --hover: #000;
+  --accent: #000;
+
+  --font-bread: Comic Sans MS;
+  --font-title: Comic Sans MS;
 }
 html {
   box-sizing: border-box;
@@ -108,7 +118,6 @@ main p:last-child {
 }
 
 .featArticle {
-  display: absolute;
   padding-left: 10px;
   padding-right: 10px;
 }
@@ -179,7 +188,8 @@ main p:last-child {
 }
 
 .footer {
-  background-color: rgb(33, 32, 36);
+  border: 3px solid var(--purple_border);
+  background-color: var(--purple);
   padding: 0.5%;
   text-align: center;
   color: var(--white_text);
@@ -213,14 +223,19 @@ main p:last-child {
   border-radius: 4px;
 }
 .info-input {
+  border: 3px solid var(--purple_border);
   padding: 1%;
   margin: 3%;
   margin-bottom: 1%;
-  background-color: rgb(33, 32, 36);
+  background: linear-gradient(
+    180deg,
+    rgba(238, 174, 202, 1) 0%,
+    rgba(85, 149, 226, 1) 100%
+  );
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-weight: lighter;
   font-size: large;
-  color: rgb(241, 237, 234);
+  color: ghostwhite;
 }
 
 .booking-button {
