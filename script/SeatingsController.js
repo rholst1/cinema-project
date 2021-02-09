@@ -5,14 +5,13 @@ export default class SeatingsController {
 
   constructor() {
     /* create cinema with given row lengths */
-    this.cinema = new Cinema([24, 20, 20, 20, 20, 20, 18], "untitled");
+    let cinema = new Cinema([24, 20, 20, 20, 20, 20, 18], "untitled-cinema");
     /*We save our selected seats for ease of access*/
     this.selectedSeats = [];
-    this.showing = new Showing(this.cinema, 'untitled', new Date(1995, 11, 17, 3, 24, 0));
-
+    this.showing = new Showing(cinema, 'untitled-film', new Date(1995, 11, 17, 3, 24, 0));
   }
 
-  /* Parses Seat objects in Cinema/SeatRow and adds buttons and row breaks to the .html. */
+  /* Populates html with buttons and row breaks visually corresponding to a Cinema object. */
   populateCinemaGUI(cinema) {
     for (let row = 0; row < cinema.seatsPerRow.length; row++) {
       for (let col = 0; col < cinema.seatsPerRow[row]; col++) {
@@ -30,7 +29,7 @@ export default class SeatingsController {
   }
   init() {
     /*create html code for our cinema*/
-    this.populateCinemaGUI(this.cinema);
+    this.populateCinemaGUI(this.showing.auditorium);
     this.showSeatStatusCinemaGUI(this.showing);
     /*TODO can I reach these without re-referencing them here? */
     let showing = this.showing;

@@ -8,8 +8,8 @@ const SeatStatus = {
 Object.freeze(SeatStatus);
 /* Seat objects represents seats in a cinema. */
 export default class Seat {
-  seatStatus = SeatStatus.FREE;
 
+  /*seatStatus should have any of the values from SeatStatus*/
   constructor(seatStatus, column, row) {
     this.setSeatStatus(seatStatus);
     this.column = column;
