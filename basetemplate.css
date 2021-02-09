@@ -173,30 +173,18 @@ main p:last-child {
   padding: 5%;
   padding-right: 0%;
 }
-<<<<<<< HEAD
-.upcoming-showings-container li {
-  list-style-type: decimal;
-=======
 .upcoming-showings-container li{
   list-style-type: none;
->>>>>>> upcoming_showings_GUI
   text-align: left;
    font: var(--font-bread);
    line-height: 2em;
 }
-<<<<<<< HEAD
-.upcoming-showings-container li:hover {
-  color: var(--orange_text_hover);
-}
-.upcoming-showings-container h2 {
-  border-bottom: 1px solid var(--white);
-=======
 .upcoming-showings-container li:hover{
   color: var(--hover);
+  cursor: pointer;
 }
 .upcoming-showings-container h2{
   border-bottom: 1px solid var(--text);
->>>>>>> upcoming_showings_GUI
   text-align: left;
   font: var(--font-title);
   font-size: larger;
