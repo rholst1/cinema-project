@@ -30,10 +30,7 @@ body {
 }
 
 .news {
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-weight: lighter;
-  font-size: large;
-  color: ghostwhite;
+  color: ghostwhite; 
     background-color: rgb(33, 32, 36);
   max-width: 45%;
   padding: 0.5%;
@@ -41,11 +38,9 @@ body {
 }
 
 .newsh3 {
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   float: inline-start;
   padding: 00.5%;
   padding-right: 3%;
-  font-weight: lighter;
 }
 
 .menu-bar li {
@@ -217,16 +212,13 @@ body {
   margin: 3%;
   margin-bottom: 1%;
   background-color: rgb(33, 32, 36);
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-weight: lighter;
   font-size: large;
   color: ghostwhite;
 }
 
 .booking-button {
   background-color: rgb(92, 55, 194);
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-weight: lighter;
+  font-family: 'Oswald', sans-serif;
   font-size: large;
   color: ghostwhite;
   padding: 1%;
@@ -296,4 +288,19 @@ p.title-p {
 
 .movies p {
   font-size: 110%;
+}
+
+.info-input form{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.info-input input{
+  grid-column: 2;
+  width: max-content;
+  margin: 1%;
+}
+.info-input label{
+grid-column: 1;
+justify-self: right;
+padding: 1%;
 }
