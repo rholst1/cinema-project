@@ -300,6 +300,7 @@ hr {
 .movies h2 {
   font-size: 200%;
   letter-spacing: 3px;
+  margin: 0;
 }
 
 .movies p {
