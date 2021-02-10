@@ -17,5 +17,6 @@ $("#date-and-time").change(function (e) {
     console.log(name);
     console.log(email);
     console.log(phoneNr);
+    seatingsController.reserveSelected();
   });
 });

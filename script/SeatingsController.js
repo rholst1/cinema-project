@@ -1,3 +1,4 @@
+
 import Cinema from '/script/Cinema.js';
 import Showing from '/script/Showing.js';
 
@@ -9,23 +10,6 @@ export default class SeatingsController {
     /*We save our selected seats for ease of access*/
     this.selectedSeats = [];
     this.showing = new Showing(cinema, 'untitled-film', new Date(1995, 11, 17, 3, 24, 0));
-  }
-
-  /* Populates html with buttons and row breaks visually corresponding to a Cinema object. */
-  populateCinemaGUI(cinema) {
-    for (let row = 0; row < cinema.seatsPerRow.length; row++) {
-      for (let col = 0; col < cinema.seatsPerRow[row]; col++) {
-        $('.seat-selectors').append(`<button type="button" value="${col}_${row}" class="cinema-button"></button>`);
-      }
-      $('.seat-selectors').append('<br>');
-    }
-  }
-  showSeatStatusCinemaGUI(showing) {
-    for (let seat of showing.seats) {
-      if ((seat.getSeatStatus()).localeCompare("reserved") == 0) {
-        $(`:button[value="${col}_${row}"]`).css('background-color', 'rgb(104, 12, 190)');
-      }
-    }
   }
   init() {
     /*create html code for our cinema*/
@@ -59,4 +43,28 @@ export default class SeatingsController {
       $(this).css('opacity', '1');
     });
   }
+  /* Populates html with buttons and row breaks visually corresponding to a Cinema object. */
+  populateCinemaGUI(cinema) {
+    for (let row = 0; row < cinema.seatsPerRow.length; row++) {
+      for (let col = 0; col < cinema.seatsPerRow[row]; col++) {
+        $('.seat-selectors').append(`<button type="button" value="${col}_${row}" class="cinema-button"></button>`);
+      }
+      $('.seat-selectors').append('<br>');
+    }
+  }
+  showSeatStatusCinemaGUI(showing) {
+    for (let seat of showing.seats) {
+      if ((seat.getSeatStatus()).localeCompare("reserved") == 0) {
+        $(`:button[value="${col}_${row}"]`).css('background-color', 'rgb(104, 12, 190)');
+      }
+    }
+  }
+  reserveSelected() {
+    console.log("we're here!");
+    for (let selectedSeat of this.selectedSeats) {
+      this.showing.reserveSeat(selectedSeat);
+      $(`:button[value="${selectedSeat}"]`).css('background-color', 'rgb(104, 12, 190)');
+    }
+  }
+
 }
