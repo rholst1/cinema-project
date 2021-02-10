@@ -22,6 +22,7 @@ let movieImages = [
   'img/batman.webp',
   'img/sallskapsresan.jpg',
 ];
+
 let movieGenre = ['Action', 'Action', 'Komedi'];
 let movieInfo = [
   `En pensionerad specialagent vid namn John Matrix ledde en
@@ -36,6 +37,7 @@ let movieInfo = [
 ];
 let movieLength = ['1 tim 45 min', '1 tim 57 min', '1 tim 12 min'];
 let ageMin = ['15 år', '15 år', '6 år'];
+let pageLink = [``];
 let i = 0;
 
 let currentTitle = `<h1 class="currentMovieTitleH1">AKTUELLA FILMER JUST NU</h1>`;
@@ -51,14 +53,18 @@ function buildMoviePage() {
                   <img src="${movieImages[i]}" class="img1" alt="Här ska en bild vara">
                 </div>
                 <div class="currentMovieTitleDiv">
-                    <a href = "#" class="movie-link"><h2>${movieTitles[i]}</h2></a><article class="currentMovieTitleContainer"> <p class="title-p"> ${movieGenre[i]} | ${movieLength[i]} | ${ageMin[i]} </p>
-                    </p><article><button class="generalButton" onclick="#">Mer info</button><button class="generalButton" onclick="#">Köp biljett</button></article></article><hr>
+                    <a href = "/moremovieinfo.html" class="movie-link"><h2>${movieTitles[i]}</h2></a><article class="currentMovieTitleContainer"> <p class="title-p"> ${movieGenre[i]} | ${movieLength[i]} | ${ageMin[i]} </p>
+                    </p><article><button class="generalButton" onclick = "buttonPage()">Mer info</button><button class="generalButton" onclick="#">Köp biljett</button></article></article><hr>
                       <p>${movieInfo[i]}
                       </p>
                   </div>`;
     i++;
     $(`.currentMovie${i}`).append(movieHtml);
   }
+}
+
+function buttonPage() {
+  window.location.href = '/moremovieinfo.html';
 }
 
 buildMoviePage();
