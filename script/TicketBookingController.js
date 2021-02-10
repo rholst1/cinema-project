@@ -16,6 +16,7 @@ let showing4 = new Showing(cinema1, 'untitled-film', new Date(2020, 3, 20, 17, 0
 let showing5 = new Showing(cinema2, 'untitled-film', new Date(2020, 3, 13, 17, 0, 0));
 
 let showingsOfSelectedFilm = new Map();
+let seatingsController = null;
 showingsOfSelectedFilm.set("2020-3-13-17-00-00", showing5);
 showingsOfSelectedFilm.set("2020-3-14-17-00-00", showing0);
 showingsOfSelectedFilm.set("2020-3-16-18-00-00", showing1);
@@ -37,7 +38,7 @@ $("#date-and-time").change(function (e) {
   $('.cinema').append('<div class="seat-selectors"></div>');
 
   selectedShowing = showingsOfSelectedFilm.get(value);
-  let seatingsController = new SeatingsController(selectedShowing);
+  seatingsController = new SeatingsController(selectedShowing);
   seatingsController.init();
 
   $('form input').change(function () {

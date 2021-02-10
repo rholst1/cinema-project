@@ -5,7 +5,7 @@ export default class Showing {
   constructor(auditorium, film, date, reservedSeats) {
     this.auditorium = auditorium; // Cinema
     this.film = film;
-    this.datus = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
+    this.date = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
     this.time = date.getHours() + '.' + date.getMinutes();
     this.seats = [];
     //for (let row of this.auditorium.seatsPerRow) {
