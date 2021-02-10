@@ -9,4 +9,13 @@ $("#date-and-time").change(function (e) {
   let valueFromDropdown = $(this).val(); //we should use this later
   let seatingsController = new SeatingsController();
   seatingsController.init();
+
+  $('.booking-button').on('click', function () {
+    let name = $('form :input[id="username"]').val();
+    let email = $('form :input[id="email"]').val();
+    let phoneNr = $('form :input[id="phonenumber"]').val();
+    console.log(name);
+    console.log(email);
+    console.log(phoneNr);
+  });
 });
