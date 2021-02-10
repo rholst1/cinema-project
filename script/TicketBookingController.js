@@ -31,32 +31,32 @@ let Customers = []; //this should not be here... but where? we might want to
 $("#date-and-time").change(function (e) {
   $('.cinema-container').html('');
   let value = $(this).val(); // fix name, showing
-  if (value == "0") return;
+  if (value == "0") return; //do nothing more if first item selected (should just be info text)
   $('.cinema-container').append('<h2>Platser</div>');
   $('.cinema-container').append('<div class="cinema"></div>');
   $('.cinema').append('<div class="seat-selectors"></div>');
 
-  if ($(this).val() == 0) return; //we should use this later
-  let seatingsController = new SeatingsController(showingsOfSelectedFilm.get(value));
-  selectedShowing
+  selectedShowing = showingsOfSelectedFilm.get(value);
+  let seatingsController = new SeatingsController(selectedShowing);
   seatingsController.init();
+
+  $('form input').change(function () {
+    //todo tidy up
+    if ($('form :input[id="username"]').val() !== '' && $('form :input[id="email"]').val() !== '' && $('form :input[id="phonenumber"]').val() !== '') {
+      $('.booking-button').prop('disabled', false);
+    } else {
+      $('.booking-button').prop('disabled', true);
+    }
+  });
+
 
   $('.booking-button').on('click', function () {
     let name = $('form :input[id="username"]').val();
     let email = $('form :input[id="email"]').val();
     let phoneNr = $('form :input[id="phonenumber"]').val();
+    console.log('');
     Customers.push(new Customer(name, email, phoneNr))
-    console.log(name);
-    console.log(email);
-    console.log(phoneNr);
     seatingsController.reserveSelected();
   });
 });
-function getDateFromString(dateDropDown) {
-  dateDropDown = dateDropDown.split(' '); //should be {month, hh:mm}
-  time = dateDropDown[2].split(':'); //should be {hh, mm}
-  hour = time[0];
-  minute = time[1];
-  day = dateDropDown[0];
-  //13 Mars 17:00
-}
+
