@@ -1,4 +1,4 @@
-export default class SeatingsController {
+export default class Customer {
   constructor(name, email, phoneNumber) {
     this.name = name;
     this.email = email;
