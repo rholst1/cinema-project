@@ -5,7 +5,7 @@ export default class Showing {
   constructor(auditorium, film, date, reservedSeats) {
     this.auditorium = auditorium; // Cinema
     this.film = film;
-    this.datus = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
+    this.date = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
     this.time = date.getHours() + '.' + date.getMinutes();
     this.seats = [];
     //for (let row of this.auditorium.seatsPerRow) {
@@ -49,6 +49,20 @@ export default class Showing {
       }
     }
   }
+  reserveSeat(seat) {
+    let seatArray = this.getSeatCoordinates(seat);
+    let col = seatArray[0];
+    let row = seatArray[1];
+    seat = this.getSeat(col, row);
+    seat.setSeatStatus("reserved");
+  }
+  resetSeat(seat) {
+    let seatArray = this.getSeatCoordinates(seat);
+    let col = seatArray[0];
+    let row = seatArray[1];
+    seat = this.getSeat(col, row);
+    seat.setSeatStatus("free");
+  }
   /*expects seat as string in the form {col}_{row} ex: 2_1. Will toggle a between true/false 
   and return the new value.*/
   toggleSeatValue(seat) {
@@ -68,7 +82,6 @@ export default class Showing {
     }
   }
   toString() {
-
     return JSON.stringify(this, null, '');
   }
 }
