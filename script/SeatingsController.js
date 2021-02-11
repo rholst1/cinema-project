@@ -33,14 +33,16 @@ export default class SeatingsController {
         selectedSeats.push(seat);
       }
     });
-    /* Lower button opacity on mouseover event. */
-    $('.seat-selectors').on('mouseover', '.cinema-button', function () {
-      $(this).css('opacity', '0.8');
-    });
-    /* Reset button opacity on mouseleave event. */
-    $('.seat-selectors').on('mouseleave', '.cinema-button', function () {
-      $(this).css('opacity', '1');
-    });
+    $(".seat-selectors").on({
+      /* Lower button opacity on mouseover event. */
+      mouseenter: function () {
+        $(this).css('opacity', '0.8');
+      },
+      /* Reset button opacity on mouseleave event. */
+      mouseleave: function () {
+        $(this).css('opacity', '1');
+      }
+    }, '.cinema-button');
   }
   /* Populates html with buttons and row breaks visually corresponding to a Cinema object. */
   populateCinemaGUI(cinema) {
@@ -59,7 +61,6 @@ export default class SeatingsController {
     }
   }
   reserveSelected() {
-    console.log("we're here!");
     for (let selectedSeat of this.selectedSeats) {
       this.showing.reserveSeat(selectedSeat);
       $(`:button[value="${selectedSeat}"]`).css('background-color', 'rgb(104, 12, 190)');
