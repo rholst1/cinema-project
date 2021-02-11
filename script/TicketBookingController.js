@@ -44,14 +44,14 @@ $("#date-and-time").change(function (e) {
   $('form input').change(function () {
     //todo tidy up
     if ($('form :input[id="username"]').val() !== '' && $('form :input[id="email"]').val() !== '' && $('form :input[id="phonenumber"]').val() !== '') {
-      $('.booking-button').prop('disabled', false);
+      $('.button-section .generalButton').prop('disabled', false);
     } else {
-      $('.booking-button').prop('disabled', true);
+      $('.button-section .generalButton').prop('disabled', true);
     }
   });
 
 
-  $('.booking-button').on('click', function () {
+  $('.button-section .generalButton').on('click', function () {
     let name = $('form :input[id="username"]').val();
     let email = $('form :input[id="email"]').val();
     let phoneNr = $('form :input[id="phonenumber"]').val();
