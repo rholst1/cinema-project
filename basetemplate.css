@@ -21,7 +21,7 @@
   --font-title-medium: 160% var(--font-family);
   --font-title-large: 200% var(--font-family);
   --font-title-x-large: 500% var(--font-family);
-  --font-button: bold 120% arial, sans-serif;
+  --font-button: bold 120% var(--font-family);
 }
 body {
   font: var(--font-bread);
@@ -40,6 +40,7 @@ body {
   cursor: pointer;
   color: var(--text);
   font: var(--font-button);
+  letter-spacing: 1pt;
   padding: 16px 31px;
   text-decoration: none;
   text-shadow: 0px 1px 0px var(--darker-shade);
