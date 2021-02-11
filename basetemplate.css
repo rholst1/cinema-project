@@ -293,6 +293,7 @@ hr {
 }
 .generalButton:hover {
   background-color: var(--hover);
+  border: 1px solid var(--hover);
 }
 .generalButton:active {
   position: relative;
