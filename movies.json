@@ -50,3 +50,56 @@
     ]
   }
 ]
+  
+[
+  {
+    "title": "The Toxic Avenger",
+    "productionCountries": [
+      "USA"
+    ],
+    "productionYear": 1984,
+    "length": 82,
+    "genre": [
+      "Action",
+      "Komedi",
+      "Skräck"
+    ],
+    "distributor": "Troma Entertainment",
+    "language": "Engelska",
+    "subtitles": "Svenska",
+    "director": "Michael Herz, Lloyd Kaufman",
+    "actors": [
+      "Mitch Cohen",
+      "Andree Maranda",
+      "Jennifer Babtist"
+    ],
+    "description": "<p>Melvin Junko är en liten och klent byggd man som arbetar som vaktmästare på ett av de lokala gymmen i Tromaville, New Jersey. Han blir konstant mobbad av ett gäng som hänger på gymmet och blir en dag kastad ner i en tunna med Kärnkraftsavfall. Detta gör att Melvin muterar och blir den enorma besten Toxic Avenger. Med stor styrka och ett ohyggligt utseende, bekämpar Toxic Avenger brott och räddar folket i Tromaville</p>",
+    "images": [
+      "the-toxic-tvenger-poster1.jpg",
+      "the-toxic-avenger-poster2.jpg"
+    ],
+    "youtubeTrailers": [
+      "https://www.youtube.com/watch?v=sKeONEIskWI&ab_channel=AGFA"
+    ],
+    "reviews": [
+      {
+        "source": "The Austin Chronicle",
+        "quote": "This is the main movie that built the house of Troma, Lloyd Kaufman's production company devoted to low-budget camp. The Toxic Avenger tells the humorous story of a geeky weakling who is turned into a superhero when he is slimed by some toxic waste.",
+        "stars": 78,
+        "max": 100
+      },
+      {
+        "source": "Variety",
+        "quote": "This madcap spoof on The Incredible Hulk is an outlandish mix of gory violence and realistic special effects.",
+        "stars": 70,
+        "max": 100
+      },
+      {
+        "source": "Reader",
+        "quote": "Cruddy, primal, extremely violent, and fairly entertaining, this 1984 feature from the New York-based exploitation outfit Troma, Inc. (Lloyd Kaufman and Michael Herz) captures some of the snot-flicking spirit of the old EC comics. How much you'll enjoy its deliberate crudity probably depends on how far you can let yourself regress to surly adolescence.",
+        "stars": 63,
+        "max": 100
+      }
+    ]
+  }
+]
