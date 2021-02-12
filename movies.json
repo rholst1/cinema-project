@@ -48,10 +48,55 @@
         "max": 100
       }
     ]
-  }
-]
-  
-[
+  },
+  {
+    "title": "Pulp Fiction",
+    "productionCountries": [
+      "USA"
+    ],
+    "productionYear": 2084,
+    "length": 24,
+    "genre": [
+      "Brott",
+      "Drama"
+    ],
+    "distributor": "Miramax Films",
+    "language": "Engelska",
+    "subtitles": "Svenska",
+    "director": "Quentin Tarantino",
+    "actors": [
+      "John Travolta",
+      "Uma Thurman",
+      "Samuel L. Jackson"
+    ],
+    "description": "<p>Två maffiamördares, en boxares, en gangsterfrus och ett par restaurangrånares liv sammanflätas i fyra berättelser om våld och försoning.</p>",
+    "images": [
+      "https://upload.wikimedia.org/wikipedia/en/3/3b/Pulp_Fiction_(1994)_poster.jpg"
+    ],
+    "youtubeTrailers": [
+      "https://www.youtube.com/watch?v=s7EdQ4FqbhY"
+    ],
+    "reviews": [
+      {
+        "source": "Variety",
+        "quote": "A spectacularly entertaining piece of pop culture, Pulp Fiction is the \"American Graffiti\" of violent crime pictures.",
+        "stars": 78,
+        "max": 100
+      },
+      {
+        "source": "Rolling Stone",
+        "quote": "The new King Kong of crime movies...Ferocious fun without a trace of caution, complacency or political correctness to inhibit its 154 deliciously lurid minutes.",
+        "stars": 100,
+        "max": 100
+      },
+      {
+        "source": "The Washington Post",
+        "quote": "The experience overall is like laughing down a gun barrel, a little bit tiring, a lot sick and maybe far too perverse for less jaded moviegoers. ",
+        "stars": 70,
+        "max": 100
+      }
+    ]
+  },
   {
     "title": "The Toxic Avenger",
     "productionCountries": [
