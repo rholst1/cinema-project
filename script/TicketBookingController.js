@@ -31,41 +31,24 @@ let Customers = []; //this should not be here... but where? we might want to
 // know which customer booked a particular seat and we might want to see 
 //which showings a particular customer has booked
 $("#date-and-time").change(function (e) {
+
+
+
+
+
   $('.cinema-container').html('');
   clearBookingButton();
-  clearInputForms();
+  clearInputForm();
   let value = $(this).val(); // fix name, showing
   if (value == "0") {
     return;
   } //do nothing more if first item selected (should just be info text)
   buildCinema();
-
   selectedShowing = showingsOfSelectedFilm.get(value);
   seatingsController = new SeatingsController(selectedShowing);
   seatingsController.init();
-  buildInputForms();
-  buildBookingButton();
+  listenToSeatSelection();
 
-  $('form input').change(function () {
-    //todo tidy up
-    if ($('form :input[id="username"]').val() !== ''
-      && $('form :input[id="email"]').val() !== ''
-      && $('form :input[id="phonenumber"]').val() !== '') {
-      enableBookingButton();
-    } else {
-      disableBookingButton();
-    }
-  });
-  listenToBookingButton();
-  /*
-  $('.button-section .generalButton').on('click', function () {
-    let name = $('form :input[id="username"]').val();
-    let email = $('form :input[id="email"]').val();
-    let phoneNr = $('form :input[id="phonenumber"]').val();
-    Customers.push(new Customer(name, email, phoneNr))
-    seatingsController.reserveSelected();
-    SeatingsController.selectedSeats.clear();
-  });*/
 });
 function listenToBookingButton() {
   $(".button-section").on({
@@ -75,7 +58,7 @@ function listenToBookingButton() {
       let phoneNr = $('form :input[id="phonenumber"]').val();
       Customers.push(new Customer(name, email, phoneNr))
       seatingsController.reserveSelected();
-      SeatingsController.selectedSeats.clear();
+      seatingsController.clearSeatSelection();
     },
     mouseenter: function () {
       $(this).css('background-color', 'var(--hover)');
@@ -88,8 +71,36 @@ function listenToBookingButton() {
     }
   }, '.generalButton');
 }
-
-function buildInputForms() {
+function listenToSeatSelection() {
+  document.removeEventListener("selecting", seatsSelected, false);
+  document.removeEventListener("deselecting", seatsDeselected, false);
+  // First seat is selected
+  document.addEventListener('selecting', seatsSelected, false);
+  // Last seat is deselected
+  document.addEventListener('deselecting', seatsDeselected, false);
+}
+function seatsSelected() {
+  buildInputForm();
+  buildBookingButton();
+  listenToInputForm();
+  listenToBookingButton();
+}
+function seatsDeselected() {
+  clearBookingButton();
+  clearInputForm();
+}
+function listenToInputForm() {
+  $('form input').change(function () {
+    if ($('form :input[id="username"]').val() !== ''
+      && $('form :input[id="email"]').val() !== ''
+      && $('form :input[id="phonenumber"]').val() !== '') {
+      enableBookingButton();
+    } else {
+      disableBookingButton();
+    }
+  });
+}
+function buildInputForm() {
   //$('.seat-selectors').append(`<button type="button" value="${col}_${row}" class="cinema-button"></button>`);
   //$(`:button[value="${seat.column}_${seat.row}"]`).css('background-color', 'rgb(104, 12, 190)');
   $('.border').append(`<section class="info-input">
@@ -105,7 +116,7 @@ function buildInputForms() {
         </form>
       </section>`);
 }
-function clearInputForms() {
+function clearInputForm() {
   $('.info-input').remove();
 }
 function buildBookingButton() {
