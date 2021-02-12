@@ -1,5 +1,5 @@
 let main = `<main></main > `;
-$('nav').after(main);
+$('header').after(main);
 
 let section = `<section class="movies">
 </section>
