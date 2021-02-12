@@ -11,8 +11,8 @@
     "director": "Theodore Melfi",
     "actors": ["Taraji P. Henson", "Octavia Spencer", "Janelle Monáe"],
     "description": "<p>Dolda tillgångar är en amerikansk biografisk dramafilm från 2016, regisserad av Theodore Melfi och skriven av Melfi och Allison Schroeder. Den är baserad på boken Dolda tillgångar av Margot Lee Shetterly och är en autentisk historia. Filmen handlar om tre kvinnliga afroamerikanska matematiker som arbetade på NASA under början av 1960-talet.</p>",
-    "images": ["hidden-figures-poster1.jpg", "hidden-figures-poster2.jpg"],
-    "youtubeTrailers": ["https://www.youtube.com/watch?v=5wfrDhgUMGI"],
+    "images": "hidden-figures-poster1.jpg",
+    "youtubeTrailers": "https://www.youtube.com/watch?v=5wfrDhgUMGI",
     "reviews": [
       {
         "source": "We got this covered",
@@ -46,10 +46,8 @@
     "director": "Quentin Tarantino",
     "actors": ["John Travolta", "Uma Thurman", "Samuel L. Jackson"],
     "description": "Två maffiamördares, en boxares, en gangsterfrus och ett par restaurangrånares liv sammanflätas i fyra berättelser om våld och försoning.",
-    "images": [
-      "https://upload.wikimedia.org/wikipedia/en/3/3b/Pulp_Fiction_(1994)_poster.jpg"
-    ],
-    "youtubeTrailers": ["https://www.youtube.com/watch?v=s7EdQ4FqbhY"],
+    "images": "https://upload.wikimedia.org/wikipedia/en/3/3b/Pulp_Fiction_(1994)_poster.jpg",
+    "youtubeTrailers": "https://www.youtube.com/watch?v=s7EdQ4FqbhY",
     "reviews": [
       {
         "source": "Variety",
@@ -83,13 +81,9 @@
     "director": "Michael Herz, Lloyd Kaufman",
     "actors": ["Mitch Cohen", "Andree Maranda", "Jennifer Babtist"],
     "description": "<Melvin Junko är en liten och klent byggd man som arbetar som vaktmästare på ett av de lokala gymmen i Tromaville, New Jersey. Han blir konstant mobbad av ett gäng som hänger på gymmet och blir en dag kastad ner i en tunna med Kärnkraftsavfall. Detta gör att Melvin muterar och blir den enorma besten Toxic Avenger. Med stor styrka och ett ohyggligt utseende, bekämpar Toxic Avenger brott och räddar folket i Tromaville",
-    "images": [
-      "the-toxic-tvenger-poster1.jpg",
-      "the-toxic-avenger-poster2.jpg"
-    ],
-    "youtubeTrailers": [
-      "https://www.youtube.com/watch?v=sKeONEIskWI&ab_channel=AGFA"
-    ],
+    "images": "the-toxic-tvenger-poster1.jpg",
+
+    "youtubeTrailers": "https://www.youtube.com/watch?v=sKeONEIskWI&ab_channel=AGFA",
     "reviews": [
       {
         "source": "The Austin Chronicle",
