@@ -1,33 +1,18 @@
 [
   {
     "title": "Hidden Figures",
-    "productionCountries": [
-      "USA"
-    ],
+    "productionCountries": ["USA"],
     "productionYear": 2017,
     "length": 127,
-    "genre": [
-      "Biografi",
-      "Drama",
-      "Historia"
-    ],
+    "genre": ["Biografi", "Drama", "Historia"],
     "distributor": "20th Century Fox",
     "language": "Engelska",
     "subtitles": "Svenska",
     "director": "Theodore Melfi",
-    "actors": [
-      "Taraji P. Henson",
-      "Octavia Spencer",
-      "Janelle Monáe"
-    ],
+    "actors": ["Taraji P. Henson", "Octavia Spencer", "Janelle Monáe"],
     "description": "<p>Dolda tillgångar är en amerikansk biografisk dramafilm från 2016, regisserad av Theodore Melfi och skriven av Melfi och Allison Schroeder. Den är baserad på boken Dolda tillgångar av Margot Lee Shetterly och är en autentisk historia. Filmen handlar om tre kvinnliga afroamerikanska matematiker som arbetade på NASA under början av 1960-talet.</p>",
-    "images": [
-      "hidden-figures-poster1.jpg",
-      "hidden-figures-poster2.jpg"
-    ],
-    "youtubeTrailers": [
-      "https://www.youtube.com/watch?v=5wfrDhgUMGI"
-    ],
+    "images": ["hidden-figures-poster1.jpg", "hidden-figures-poster2.jpg"],
+    "youtubeTrailers": ["https://www.youtube.com/watch?v=5wfrDhgUMGI"],
     "reviews": [
       {
         "source": "We got this covered",
@@ -51,31 +36,20 @@
   },
   {
     "title": "Pulp Fiction",
-    "productionCountries": [
-      "USA"
-    ],
+    "productionCountries": ["USA"],
     "productionYear": 2084,
     "length": 24,
-    "genre": [
-      "Brott",
-      "Drama"
-    ],
+    "genre": ["Brott", "Drama"],
     "distributor": "Miramax Films",
     "language": "Engelska",
     "subtitles": "Svenska",
     "director": "Quentin Tarantino",
-    "actors": [
-      "John Travolta",
-      "Uma Thurman",
-      "Samuel L. Jackson"
-    ],
+    "actors": ["John Travolta", "Uma Thurman", "Samuel L. Jackson"],
     "description": "<p>Två maffiamördares, en boxares, en gangsterfrus och ett par restaurangrånares liv sammanflätas i fyra berättelser om våld och försoning.</p>",
     "images": [
       "https://upload.wikimedia.org/wikipedia/en/3/3b/Pulp_Fiction_(1994)_poster.jpg"
     ],
-    "youtubeTrailers": [
-      "https://www.youtube.com/watch?v=s7EdQ4FqbhY"
-    ],
+    "youtubeTrailers": ["https://www.youtube.com/watch?v=s7EdQ4FqbhY"],
     "reviews": [
       {
         "source": "Variety",
@@ -99,25 +73,15 @@
   },
   {
     "title": "The Toxic Avenger",
-    "productionCountries": [
-      "USA"
-    ],
+    "productionCountries": ["USA"],
     "productionYear": 1984,
     "length": 82,
-    "genre": [
-      "Action",
-      "Komedi",
-      "Skräck"
-    ],
+    "genre": ["Action", "Komedi", "Skräck"],
     "distributor": "Troma Entertainment",
     "language": "Engelska",
     "subtitles": "Svenska",
     "director": "Michael Herz, Lloyd Kaufman",
-    "actors": [
-      "Mitch Cohen",
-      "Andree Maranda",
-      "Jennifer Babtist"
-    ],
+    "actors": ["Mitch Cohen", "Andree Maranda", "Jennifer Babtist"],
     "description": "<p>Melvin Junko är en liten och klent byggd man som arbetar som vaktmästare på ett av de lokala gymmen i Tromaville, New Jersey. Han blir konstant mobbad av ett gäng som hänger på gymmet och blir en dag kastad ner i en tunna med Kärnkraftsavfall. Detta gör att Melvin muterar och blir den enorma besten Toxic Avenger. Med stor styrka och ett ohyggligt utseende, bekämpar Toxic Avenger brott och räddar folket i Tromaville</p>",
     "images": [
       "the-toxic-tvenger-poster1.jpg",
@@ -146,5 +110,46 @@
         "max": 100
       }
     ]
-  }
+  },
+  [
+    {
+      "title": "Tenet",
+      "productionCountries": ["USA", "England"],
+      "productionYear": 2020,
+      "length": "2 tim 30 min",
+      "genre": "Action",
+      "distributor": "Warner Bros. Pictures",
+      "language": "Engelska",
+      "subtitles": "Svenska",
+      "director": "Christopher Nolan",
+      "actors": [
+        "John David Washington",
+        "Robert Pattinson",
+        "Elizabeth Debicki"
+      ],
+      "description": "I en skuggvärld av spionage på hög internationell nivå är ordet Tenet det enda redskap han har för att rädda mänskligheten. Hans mål utvecklas under det att uppdraget utförs. Bortom tiden. Inte tidsresor. Inversion.",
+      "images": "img/tenet.jpg",
+      "youtubeTrailers": "https://www.youtube.com/watch?v=AZGcmvrTX9M",
+      "reviews": [
+        {
+          "source": "Ljud & Bild",
+          "quote": "Nolans kaotiska lek med tid och rum.",
+          "stars": 5,
+          "max": 6
+        },
+        {
+          "source": "Filmtopp",
+          "quote": "Kungen av 'brainy blockbusters' är tillbaka.",
+          "stars": 4,
+          "max": 5
+        },
+        {
+          "source": "Cinetaste",
+          "quote": "Christopher Nolan tar actiongenren till nya nivåer",
+          "stars": 4,
+          "max": 5
+        }
+      ]
+    }
+  ]
 ]
