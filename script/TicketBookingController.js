@@ -31,25 +31,41 @@ let selectedShowing = null;
 let Customers = []; /*this should not be here... but where? we might want to know which 
 customer booked a particular seat and we might want to see which showings a particular 
 customer has booked*/
-$('.border').append(`  
-    <article class="ticketbooking-container">
-      <div class="showing-selector-dropdowns">
-        <div class="movie-picker-dropdown">
-          <select id="select-movie">
-            <option value="0">Välj film:</option>
-            <option value="movie1">Lorem ipsum dolor sit.</option>
-            <option value="movie2">Lorem ipsum dolor sit amet.</option>
-            <option value="movie3">Lorem ipsum dolor sit amet consectetur.</option>
-            <option value="movie4">Lorem ipsum dolor sit.</option>
-            <option value="movie5">Lorem ipsum dolor sit amet consectetur.</option>
-            <option value="movie6">Lorem, ipsum dolor.</option>
-          </select>
-        </div>
-      </div>
-    </article>`);
-$("#select-movie").change(function (e) {
-  $(".showing-selector-dropdowns #date-and-time").remove();
-  $(".showing-selector-dropdowns").append(`        
+init();
+
+function init() {
+  buildContainer();
+  buildSelectorContainer();
+  buildMoviePickerDropdown();
+  listenToMovieSelector();
+  listenToShowingSelector();
+}
+function buildContainer() {
+  $('.border').append(`
+  <article class="ticketbooking-container"></article>`);
+}
+function buildSelectorContainer() {
+  $('.ticketbooking-container').append(`
+  <div class="showing-selector-dropdowns"></div>`);
+}
+function buildMoviePickerDropdown() {
+  $('.showing-selector-dropdowns').append(`
+  <div class="movie-picker-dropdown">
+      <select id="select-movie">
+        <option value="0">Välj film:</option>
+        <option value="movie1">Lorem ipsum dolor sit.</option>
+        <option value="movie2">Lorem ipsum dolor sit amet.</option>
+        <option value="movie3">Lorem ipsum dolor sit amet consectetur.</option>
+        <option value="movie4">Lorem ipsum dolor sit.</option>
+        <option value="movie5">Lorem ipsum dolor sit amet consectetur.</option>
+        <option value="movie6">Lorem, ipsum dolor.</option>
+      </select>
+  </div>`);
+}
+function listenToMovieSelector() {
+  $("#select-movie").change(function (e) {
+    $(".showing-selector-dropdowns #date-and-time").remove();
+    $(".showing-selector-dropdowns").append(`        
       <div class="showings-picker-dropdown">
         <select id="date-and-time">
           <option value="0">Välj Datum och Tid:</option>
@@ -61,7 +77,7 @@ $("#select-movie").change(function (e) {
           <option value="2020-3-20-17-00-00">20 Mars 17:00</option>
         </select>
       </div>`);
-  $('.ticketbooking-container').append(`<section class="upcoming-showings-container">
+    $('.ticketbooking-container').append(`<section class="upcoming-showings-container">
         <h2>Kommande visningar</h2>
         <li>Lorem, ipsum dolor.</li>
         <li>Quam, exercitationem doloremque!</li>
@@ -75,26 +91,28 @@ $("#select-movie").change(function (e) {
         <li>Dicta, veritatis distinctio!</li>
       </section>
       <section class="cinema-container"></section>`);
-});
-
+  });
+}
 
 
 /* Listen to which showing the user picks*/
-$(".showing-selector-dropdowns").on('change', "#date-and-time", function (e) {
-  $('.cinema-container').html('');
-  clearBookingButton();
-  clearInputForm();
-  let showingsPickerDropdownValue = $(this).val();
-  if (showingsPickerDropdownValue == "0") {
-    return;
-  } //do nothing more if first item selected (should just be info text)
-  buildCinema();
-  selectedShowing = showingsOfSelectedFilm.get(showingsPickerDropdownValue);
-  seatingsController = new SeatingsController(selectedShowing);
-  seatingsController.init();
-  listenToSeatSelection();
+function listenToShowingSelector() {
+  $(".showing-selector-dropdowns").on('change', "#date-and-time", function (e) {
+    $('.cinema-container').html('');
+    clearBookingButton();
+    clearInputForm();
+    let showingsPickerDropdownValue = $(this).val();
+    if (showingsPickerDropdownValue == "0") {
+      return;
+    } //do nothing more if first item selected (should just be info text)
+    buildCinema();
+    selectedShowing = showingsOfSelectedFilm.get(showingsPickerDropdownValue);
+    seatingsController = new SeatingsController(selectedShowing);
+    seatingsController.init();
+    listenToSeatSelection();
 
-});
+  });
+}
 function listenToBookingButton() {
   $(".button-section").on({
     click: function () {
