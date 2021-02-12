@@ -265,7 +265,10 @@ justify-self: center;
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
 }
-
+.showing-selector-dropdowns{
+  grid-row: 1;
+  grid-column: 2;
+}
 .showing-selector-dropdowns select {
   border-radius: 4px;
 }

@@ -31,18 +31,65 @@ let selectedShowing = null;
 let Customers = []; /*this should not be here... but where? we might want to know which 
 customer booked a particular seat and we might want to see which showings a particular 
 customer has booked*/
+$('.border').append(`  
+    <article class="ticketbooking-container">
+      <div class="showing-selector-dropdowns">
+        <div class="movie-picker-dropdown">
+          <select id="select-movie">
+            <option value="0">Välj film:</option>
+            <option value="movie1">Lorem ipsum dolor sit.</option>
+            <option value="movie2">Lorem ipsum dolor sit amet.</option>
+            <option value="movie3">Lorem ipsum dolor sit amet consectetur.</option>
+            <option value="movie4">Lorem ipsum dolor sit.</option>
+            <option value="movie5">Lorem ipsum dolor sit amet consectetur.</option>
+            <option value="movie6">Lorem, ipsum dolor.</option>
+          </select>
+        </div>
+      </div>
+    </article>`);
+$("#select-movie").change(function (e) {
+  $(".showing-selector-dropdowns #date-and-time").remove();
+  $(".showing-selector-dropdowns").append(`        
+      <div class="showings-picker-dropdown">
+        <select id="date-and-time">
+          <option value="0">Välj Datum och Tid:</option>
+          <option value="2020-3-13-17-00-00">13 Mars 17:00</option>
+          <option value="2020-3-14-17-00-00">14 Mars 17:00</option>
+          <option value="2020-3-16-18-00-00">16 Mars 18:00</option>
+          <option value="2020-3-18-19-00-00">18 Mars 19:00</option>
+          <option value="2020-3-19-19-00-00">19 Mars 19:00</option>
+          <option value="2020-3-20-17-00-00">20 Mars 17:00</option>
+        </select>
+      </div>`);
+  $('.ticketbooking-container').append(`<section class="upcoming-showings-container">
+        <h2>Kommande visningar</h2>
+        <li>Lorem, ipsum dolor.</li>
+        <li>Quam, exercitationem doloremque!</li>
+        <li>At, sint voluptatibus.</li>
+        <li>Officiis, ab maiores!</li>
+        <li>Eligendi, alias aperiam!</li>
+        <li>Quo, sunt similique.</li>
+        <li>Quia, nobis quos.</li>
+        <li>Itaque, quasi totam?</li>
+        <li>Culpa, molestiae delectus.</li>
+        <li>Dicta, veritatis distinctio!</li>
+      </section>
+      <section class="cinema-container"></section>`);
+});
 
-/* Listen */
-$("#date-and-time").change(function (e) {
+
+
+/* Listen to which showing the user picks*/
+$(".showing-selector-dropdowns").on('change', "#date-and-time", function (e) {
   $('.cinema-container').html('');
   clearBookingButton();
   clearInputForm();
-  let value = $(this).val(); // fix name, showing
-  if (value == "0") {
+  let showingsPickerDropdownValue = $(this).val();
+  if (showingsPickerDropdownValue == "0") {
     return;
   } //do nothing more if first item selected (should just be info text)
   buildCinema();
-  selectedShowing = showingsOfSelectedFilm.get(value);
+  selectedShowing = showingsOfSelectedFilm.get(showingsPickerDropdownValue);
   seatingsController = new SeatingsController(selectedShowing);
   seatingsController.init();
   listenToSeatSelection();
