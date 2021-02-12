@@ -32,10 +32,6 @@ let Customers = []; //this should not be here... but where? we might want to
 //which showings a particular customer has booked
 $("#date-and-time").change(function (e) {
 
-
-
-
-
   $('.cinema-container').html('');
   clearBookingButton();
   clearInputForm();
