@@ -26,16 +26,14 @@ showingsOfSelectedFilm.set("2020-3-20-17-00-00", showing4);
 showingsOfSelectedFilm.set("2020-3-13-17-00-00", showing5);
 /*temporary example showings==============ended */
 
+/*The showing we are viewing right now - todo will probably change this with db-integration*/
 let selectedShowing = null;
-let Customers = []; //this should not be here... but where? we might want to
-// know which customer booked a particular seat and we might want to see 
-//which showings a particular customer has booked
+let Customers = []; /*this should not be here... but where? we might want to know which 
+customer booked a particular seat and we might want to see which showings a particular 
+customer has booked*/
+
+/* Listen */
 $("#date-and-time").change(function (e) {
-
-
-
-
-
   $('.cinema-container').html('');
   clearBookingButton();
   clearInputForm();

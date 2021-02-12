@@ -269,13 +269,13 @@ justify-self: center;
 .showing-selector-dropdowns select {
   border-radius: 4px;
 }
-.dropdown {
+.movie-picker-dropdown {
   grid-row: 1;
   grid-column: 2;
   justify-content: center;
   border-radius: 4px;
 }
-.dropdown2 {
+.showings-picker-dropdown {
   grid-row: 1;
   grid-column: 2;
   justify-content: center;
