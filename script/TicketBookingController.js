@@ -127,23 +127,51 @@ function listenToBookingButton() {
   }, '.generalButton');
 }
 function listenToSeatSelection() {
-  document.removeEventListener("selecting", seatsSelected, false);
-  document.removeEventListener("deselecting", seatsDeselected, false);
-  // First seat is selected
-  document.addEventListener('selecting', seatsSelected, false);
-  // Last seat is deselected
-  document.addEventListener('deselecting', seatsDeselected, false);
+  document.removeEventListener("seat selection updated'", seatsSelected, false);
+  // New seat either selected or deselcted.
+  document.addEventListener('seat selection updated', seatsSelected, false);
 }
 function seatsSelected() {
-  buildInputForm();
-  buildBookingButton();
-  listenToInputForm();
-  listenToBookingButton();
+  if (seatingsController.selectedSeats.length === 1) {
+    buildInputForm();
+    buildBookingButton();
+    listenToInputForm();
+    listenToBookingButton();
+  } else if (seatingsController.selectedSeats.length === 0) {
+    clearBookingButton();
+    clearInputForm();
+  }
+  /*todo this should not be done here*/
+  let seatNumbers = []
+  for (let seat of seatingsController.selectedSeats) {
+    let seatCoordinate = selectedShowing.getSeatCoordinates(seat);
+    let column = seatCoordinate[0];
+    let row = seatCoordinate[1];
+    let seatNumber = 0;
+    for (let i = 0; i < row; i++) {
+      seatNumber += selectedShowing.auditorium.seatsPerRow[i];
+    }
+    seatNumbers.push(seatNumber + column);
+  }
+  buildSeatNumberCounter(seatNumbers);
 }
-function seatsDeselected() {
-  clearBookingButton();
-  clearInputForm();
+
+function buildSeatNumberCounter(seatNumbers) {
+  if ($('.info-input').length) {
+    if (!$('.seat-counter').length) {
+      $('.info-input').append(`<div class="seat-counter"></div>`);
+    } else {
+      $('.seat-counter').html('');
+    }
+    for (let seatNumber of seatNumbers) {
+      $('.seat-counter').append(`
+      <p>${seatNumber}</p> 
+      <br>`);
+    }
+  }
 }
+/*Each time input form changes we check if there is information in all fields.
+Later on we'll probably want to havve more specific conditions.*/
 function listenToInputForm() {
   $('form input').change(function () {
     if ($('form :input[id="username"]').val() !== ''
@@ -156,7 +184,8 @@ function listenToInputForm() {
   });
 }
 function buildInputForm() {
-  $('.border').append(`<section class="info-input">
+  if (!$('.info-input').length) {
+    $('.border').append(`<section class="info-input">
         <form>
           <label for="username">Namn</label>
           <input type="text" id="username" placeholder="Ditt namn" />
@@ -168,12 +197,14 @@ function buildInputForm() {
           <input type="text" id="phonenumber" placeholder="Ditt mobilnummer" />
         </form>
       </section>`);
+  }
 }
 function clearInputForm() {
   $('.info-input').remove();
 }
 function buildBookingButton() {
-  $('.border').append(`<section class="button-section">
+  if (!$('.button-section').length) {
+    $('.border').append(`<section class="button-section">
         <input
           type="submit"
           class="generalButton hoverable"
@@ -182,6 +213,7 @@ function buildBookingButton() {
           value="BOKA"
         />
       </section>`);
+  }
 }
 function clearBookingButton() {
   $('.button-section').remove();

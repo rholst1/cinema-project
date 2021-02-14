@@ -27,7 +27,7 @@
 --featured-color: var(--darker-shade);
 --upcoming-showings-container-color:var(--lighter-shade);
 --footer-color: var(--darker-shade);
---info-input-color: var(--darker-shade);
+--info-input-color: var(--lighter-shade);
 /*Hover effect - pick which effects you want and comment out the others. Might need to update the .hoverable:hover class also.*/
 /*--hover: 0.7;*/
 --hover: rgb(226, 136, 17);
