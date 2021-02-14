@@ -1,33 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;400&display=swap"
-      rel="stylesheet"
-    />
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="basetemplate.css" />
-    <title>Document</title>
-  </head>
-  <body>
-    <header>
-      <nav class="menu-bar">
-        <a href="index.html">Hem</a>
-        <a href="currentmovies.html">Aktuella Filmer</a>
-        <a href="ticketbooking.html">Boka Biljetter</a>
-        <a href="mybookings.html" style="color: var(--hover)">Mina Bokningar</a>
-      </nav>
-    </header>
-    <form class="get-booking">
-      <input type="text" placeholder="Ange bokningsnummer..." />
-      <button class="generalButton">Hämta bokning</button>
-    </form>
-    <footer>
-      <p class="footer">
-        Bio Namn | Bio Adress | Bio Telefonnummer | Bio email | Copyright 2021 ©
-      </p>
-    </footer>
-  </body>
+
+<head>
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;400&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="basetemplate.css" />
+  <title>Document</title>
+</head>
+
+<body>
+  <header>
+    <nav class="menu-bar">
+      <a href="index.html" class="hoverable">Hem</a>
+      <a href="currentmovies.html" class="hoverable">Aktuella Filmer</a>
+      <a href="ticketbooking.html" class="hoverable">Boka Biljetter</a>
+      <a href="mybookings.html" style="color:var(--hover);pointer-events: none;" class="hoverable">Mina
+        Bokningar</a>
+    </nav>
+  </header>
+  <form class="get-booking">
+    <input type="text" placeholder="Ange bokningsnummer..." />
+    <button class="generalButton hoverable">Hämta bokning</button>
+  </form>
+  <footer>
+    <p class="footer">
+      Bio Namn | Bio Adress | Bio Telefonnummer | Bio email | Copyright 2021 ©
+    </p>
+  </footer>
+</body>
+
 </html>

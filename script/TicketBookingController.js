@@ -77,18 +77,19 @@ function listenToMovieSelector() {
           <option value="2020-3-20-17-00-00">20 Mars 17:00</option>
         </select>
       </div>`);
-    $('.ticketbooking-container').append(`<section class="upcoming-showings-container">
+    $('.ticketbooking-container').append(`
+    <section class="upcoming-showings-container">
         <h2>Kommande visningar</h2>
-        <li>Lorem, ipsum dolor.</li>
-        <li>Quam, exercitationem doloremque!</li>
-        <li>At, sint voluptatibus.</li>
-        <li>Officiis, ab maiores!</li>
-        <li>Eligendi, alias aperiam!</li>
-        <li>Quo, sunt similique.</li>
-        <li>Quia, nobis quos.</li>
-        <li>Itaque, quasi totam?</li>
-        <li>Culpa, molestiae delectus.</li>
-        <li>Dicta, veritatis distinctio!</li>
+        <li class="hoverable">Lorem, ipsum dolor.</li>
+        <li class="hoverable"> Quam, exercitationem doloremque!</li>
+        <li class="hoverable">At, sint voluptatibus.</li>
+        <li class="hoverable">Officiis, ab maiores!</li>
+        <li class="hoverable">Eligendi, alias aperiam!</li>
+        <li class="hoverable">Quo, sunt similique.</li>
+        <li class="hoverable">Quia, nobis quos.</li>
+        <li class="hoverable">Itaque, quasi totam?</li>
+        <li class="hoverable">Culpa, molestiae delectus.</li>
+        <li class="hoverable">Dicta, veritatis distinctio!</li>
       </section>
       <section class="cinema-container"></section>`);
   });
@@ -122,15 +123,6 @@ function listenToBookingButton() {
       Customers.push(new Customer(name, email, phoneNr))
       seatingsController.reserveSelected();
       seatingsController.clearSeatSelection();
-    },
-    mouseenter: function () {
-      $(this).css('background-color', 'var(--hover)');
-      $(this).css('border', '1px solid var(--hover)');
-    },
-    /* Reset button opacity on mouseleave event. */
-    mouseleave: function () {
-      $(this).css('background-color', 'var(--accent)');
-      $(this).css('border', '1px solid var(--accent)');
     }
   }, '.generalButton');
 }
@@ -186,7 +178,7 @@ function buildBookingButton() {
   $('.border').append(`<section class="button-section">
         <input
           type="submit"
-          class="generalButton"
+          class="generalButton hoverable"
           disabled
           onclick="alert('Bokning klar!')"
           value="BOKA"

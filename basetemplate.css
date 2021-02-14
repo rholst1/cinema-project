@@ -1,41 +1,68 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;400&display=swap');
 /*Variables for colors and fonts. Accessing example var(--blue) instead of rgb(30, 144, 255).*/
-:root {
-  /*Colors:==================================================================================*/
-  /* Legacy, better to use general colorname so whole site can be harmonised more intuitively.
-  --blue: rgb(6, 43, 88);
-  --white: rgb(248, 248, 255);
-  --white_text: rgb(255, 255, 255);
-  --hover-color: rgb(160, 160, 160);
-   --footerBackground: rgb(6, 43, 88); */
+:root { 
+/* Experimental colors.
+  --lighter-shade: linear-gradient(to bottom, rgba(48,47,48,1) 0%,rgba(59,58,59,0.9) 20%,rgba(65,64,66,0.9) 32%,rgba(65,64,66,0.9) 78%,rgba(56,55,57,0.9) 87%,rgba(43,43,43,1) 100%);
+  --shade: linear-gradient(to bottom, rgba(14,13,13,1) 0%,rgba(114,0,21,1) 21%,rgba(143,2,34,1) 40%,rgba(143,2,34,1) 62%,rgba(102,0,28,1) 83%,rgba(14,13,13,1) 100%); 
+  --darker-shade: #1b1818;
+  --text: rgb(255, 255, 255);
+  --accent: rgb(226, 136, 17);
+
+  --shade-variation-list: linear-gradient(to bottom, rgba(27,24,24,0.87) 0%,rgba(114,0,21,0.98) 14%,rgba(118,0,23,1) 17%,rgba(143,2,34,1) 35%,rgba(143,2,34,1) 64%,rgba(107,0,29,1) 85%,rgba(102,0,28,0.97) 88%,rgba(27,24,24,0.87) 100%);
+  --shade-variation-menu-top: linear-gradient(to bottom, rgba(114,0,21,1) 17%,rgba(114,0,21,1) 21%,rgba(120,0,24,1) 25%,rgba(125,0,26,1) 28%,rgba(143,2,34,1) 40%,rgba(143,2,34,1) 62%,rgba(102,0,28,1) 83%,rgba(93,3,28,1) 85%,rgba(27,24,24,0.87) 100%);
+  --shade-variation-menu-left: var(--darker-shade);*/
+
+    /*Colors - feel free to add here, don't forget to connect specific elements to your new variable*/
+  --cinema:rgb(17, 8, 5);
   --lighter-shade: rgb(61, 59, 68);
   --shade: rgb(33, 32, 36);
   --darker-shade: rgb(14, 13, 13);
-  --text: rgb(255, 255, 255);
-  --hover: rgb(226, 136, 17);
+  --text: rgb(255, 255, 255); 
   --accent: rgb(92, 55, 194);
-  /*Fonts:===================================================================================*/
-  --font-family: 'Oswald', sans-serif;
-  --font-bread: 100% var(--font-family);
-  --font-title-small: 120% var(--font-family);
-  --font-title-medium: 160% var(--font-family);
-  --font-title-large: 200% var(--font-family);
-  --font-title-x-large: 500% var(--font-family);
-  --font-button: bold 120% var(--font-family);
+  /*Specific element colors - best if these are are connected to any of the variables above.*/
+--body-color: var(--darker-shade);
+--generalButton-color: var(--accent);
+--news-color: var(--lighter-shade);
+--nowShowing-color: var(--lighter-shade);
+--header-color:var(--shade);
+--featured-color: var(--darker-shade);
+--upcoming-showings-container-color:var(--lighter-shade);
+--footer-color: var(--darker-shade);
+--info-input-color: var(--darker-shade);
+/*Hover effect - pick which effects you want and comment out the others. Might need to update the .hoverable:hover class also.*/
+/*--hover: 0.7;*/
+--hover: rgb(226, 136, 17);
+--hover-background:rgb(226, 136, 17);
+/*Cinema visualisation*/
+--seat-free: rgb(107, 106, 106);
+--seat-reserved:rgba(114,0,21,1);
+--seat-selected:rgb(218, 208, 223);
+/*--cinema:radial-gradient(ellipse at center, rgba(27,24,24,0.75) 0%,rgba(48,39,37,1) 50%,rgba(48,39,37,1) 51%,rgba(27,24,24,0.75) 100%);*/
+--cinema:linear-gradient(to bottom, rgba(66,59,59,1) 0%,rgba(27,24,24,0.75) 100%);
+/*Fonts*/
+--font-family: 'Oswald', sans-serif;
+--font-bread: 100% var(--font-family);
+--font-title-small: 120% var(--font-family);
+--font-title-medium: 160% var(--font-family);
+--font-title-large: 200% var(--font-family);
+--font-title-x-large: 500% var(--font-family);
+--font-button: bold 120% var(--font-family);
 }
+
 body {
+  background: var(--body-color);
   font: var(--font-bread);
   margin: 0;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: var(--darker-shade);
+ 
 }
 .generalButton {
   margin: 5px;
-  background-color: var(--accent);
+  background: var(--generalButton-color);
   border-radius: 28px;
-  border: 1px solid var(--accent);
+  border: 0px solid var(--accent);
   display: inline-block;
   cursor: pointer;
   color: var(--text);
@@ -44,10 +71,21 @@ body {
   padding: 16px 31px;
   text-decoration: none;
   text-shadow: 0px 1px 0px var(--darker-shade);
+
 }
-.generalButton:hover {
-  background-color: var(--hover);
-  border: 1px solid var(--hover);
+/*General hovereffect. */
+.hoverable:hover{
+  /*opacity:var(--hover) !important;*/
+  color:var(--hover) !important;
+  /*background:var(--hover-background);*/
+  cursor: pointer;
+}
+.generalButton:hover{
+  /*opacity:var(--hover) !important;*/
+  /*color:var(--hover) !important;*/
+  color:var(--text) !important;
+  background:var(--hover-background) !important;
+  cursor: pointer;
 }
 .generalButton:active {
   position: relative;
@@ -65,18 +103,17 @@ main {
   justify-content: space-evenly;
   padding: 1%;
 }
-
 .news {
   color: var(--text);
-  background-color: var(--shade);
+  background: var(--news-color);
   max-width: 45%;
   padding: 3%;
   margin: 3%;
 }
 
 .nowShowing {
-  color: ghostwhite;
-  background-color: rgb(33, 32, 36);
+  color: var(--text);
+  background: var(--nowShowing-color);
   max-width: 45%;
   padding: 5%;
   margin: 0.5%;
@@ -94,16 +131,13 @@ main {
   text-decoration: none;
 }
 
-.nowShowingTitles a:hover {
-  background-color: grey;
-}
-
 /* Header elements */
 header {
-  background-color: var(--lighter-shade);
+  background: var(--header-color);
   color: var(--text);
   position: sticky;
   top: 0;
+  /*border-bottom: 2px ridge var(--accent);*/
 }
 .menu-bar {
   display: flex;
@@ -117,22 +151,21 @@ header {
   padding: 0 2vw;
 }
 
-.menu-bar a:hover {
-  color: var(--hover);
-}
-
 /*Featured movies on front page*/
 .featured {
   width: 100%;
-  max-width: 1200px;
+  max-width: 2200px;
   display: flex;
   text-decoration: none;
   color: var(--text);
-  background-color: var(--lighter-shade);
+  background: var(--featured-color);
   padding: 1%;
-  margin: 3px;
-  margin-left: 0px;
-  margin-right: 0px;
+  margin-left: 5%;
+  margin-right: 5%;
+  border-bottom: 3px double var(--text);
+  border-right: 1px solid var(--text);
+    margin-bottom: 69px;
+
 }
 
 .featDivImg {
@@ -168,7 +201,6 @@ header {
 }
 
 /*Seat-picker*/
-
 .cinema-container {
   grid-row: 2;
   grid-column: 2;
@@ -180,21 +212,22 @@ header {
   margin-bottom: 0px;
 }
 .cinema-button {
-  height: 30px;
-  width: 10px;
-  background-color: var(--text);
-  border-radius: 3px;
+  height: 35px;
+  min-width: 10px;
+  max-width: 15px;
+  background-color: var(--seat-free);
+  border-radius: 8px;
+  border: 0px;
   cursor: pointer;
+  margin: 3px;
 }
 .cinema {
   padding: 2%;
   padding-top: 10%;
-  border: 1px solid #000;
   border-radius: 15px;
-  /*border-top: 10px double gold;*/
-  background-color: var(--lighter-shade);
-  width: max-content;
-  min-width: 100px;
+  background: var(--cinema);
+border-radius: 15px;
+  min-width: max-content;
 }
 
 .cinema-screen-container{
@@ -219,34 +252,34 @@ justify-self: center;
   min-width: 100px;
 }
 /*Upcoming showings*/
-.upcoming-showings-container {
-  grid-row-start: 1;
-  grid-row-end: 4;
-  grid-column: 1;
-  background-color: var(--shade);
-  color: var(--text);
-  max-width: 500px;
-  padding: 5%;
-  padding-right: 0%;
-}
 .upcoming-showings-container li {
   list-style-type: none;
   text-align: left;
   font: var(--font-bread);
   line-height: 2em;
+  margin-right: 20px;
 }
-.upcoming-showings-container li:hover {
-  color: var(--hover);
-  cursor: pointer;
+.upcoming-showings-container {
+  grid-row-start: 1;
+  grid-row-end: 4;
+  grid-column: 1;
+  background: var(--upcoming-showings-container-color);
+  color: var(--text);
+  width: max-content;
+  max-width: 500px;
+  padding: 8%;
+  padding-right: 0;
+   border-bottom: 1px solid white;
+   border-right: 1px solid white;
 }
 .upcoming-showings-container h2 {
-  border-bottom: 1px solid var(--text);
+  border-bottom: 3px double var(--text);
   text-align: left;
   font: var(--font-title-medium);
 }
 
 .footer {
-  background-color: var(--footerBackground);
+  background: var(--footer-color);
   padding: 0.5%;
   text-align: center;
   border-top: 1px solid var(--text);
@@ -271,13 +304,20 @@ justify-self: center;
 }
 .showing-selector-dropdowns select {
   border-radius: 4px;
+  color: var(--text);
+  background: var(--darker-shade);
+  border: none;
+  font: var(--font-title-small);
+  margin-bottom: 2%;
+  border: 1px solid var(--text);
 }
-.movie-picker-dropdown {
-  grid-row: 1;
-  grid-column: 2;
-  justify-content: center;
-  border-radius: 4px;
+.showing-selector-dropdowns option {
+  color: var(--text);
+  background-color: var(--lighter-shade);
+  
+  font: var(--font-bread);
 }
+
 .showings-picker-dropdown {
   grid-row: 1;
   grid-column: 2;
@@ -285,11 +325,11 @@ justify-self: center;
   border-radius: 4px;
 }
 .info-input {
-  border: 3px solid var(--purple_border);
+  border: 3px double var(--text);
   padding: 1%;
   margin: 3%;
   margin-bottom: 1%;
-  background-color: var(--shade);
+  background: var(--info-input-color);
   font: var(--font-title-small);
   color: var(--text);
 }
@@ -344,7 +384,7 @@ hr {
 .currentMovie4,
 .currentMovie5,
 .currentMovie6 {
-  color: white;
+  color: var(--text);
   display: flex;
   margin: 2% 10%;
 }
