@@ -159,14 +159,16 @@ function seatsSelected() {
 function buildSeatNumberCounter(seatNumbers) {
   if ($('.info-input').length) {
     if (!$('.seat-counter').length) {
-      $('.info-input').append(`<div class="seat-counter"></div>`);
+      $('.info-input').append(`<div class="seat-counter">Selected seats:</div>`);
     } else {
-      $('.seat-counter').html('');
+      $('.seat-counter').html('Selected seats:');
     }
-    for (let seatNumber of seatNumbers) {
-      $('.seat-counter').append(`
-      <p>${seatNumber}</p> 
-      <br>`);
+    $('.seat-counter').append('<p></p>');
+    for (let i = 0; i < seatNumbers.length; i++) {
+      $('.seat-counter p').append(`${seatNumbers[i]}`);
+      if (i < (seatNumbers.length - 1)) {
+        $('.seat-counter p').append(`, `);
+      }
     }
   }
 }
