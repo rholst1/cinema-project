@@ -156,8 +156,6 @@ function listenToInputForm() {
   });
 }
 function buildInputForm() {
-  //$('.seat-selectors').append(`<button type="button" value="${col}_${row}" class="cinema-button"></button>`);
-  //$(`:button[value="${seat.column}_${seat.row}"]`).css('background-color', 'rgb(104, 12, 190)');
   $('.border').append(`<section class="info-input">
         <form>
           <label for="username">Namn</label>
