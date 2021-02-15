@@ -21,7 +21,7 @@
   --font-title-medium: 160% var(--font-family);
   --font-title-large: 200% var(--font-family);
   --font-title-x-large: 500% var(--font-family);
-  --font-button: bold 120% var(--font-family);
+  --font-button: bold 130% var(--font-family);
 }
 body {
   font: var(--font-bread);
@@ -31,33 +31,36 @@ body {
   flex-direction: column;
   background-color: var(--darker-shade);
 }
-.generalButton {
+
+hr {
+  border: none;
+  background-color: #ccc;
+  color: #ccc;
+  height: 1px;
+}
+
+button {
   margin: 5px;
-  background-color: var(--accent);
+  background-color: rgb(6, 43, 88);
   border-radius: 28px;
-  border: 1px solid var(--accent);
+  border: 1px solid rgb(6, 43, 88);
   display: inline-block;
   cursor: pointer;
   color: var(--text);
   font: var(--font-button);
-  letter-spacing: 1pt;
-  padding: 16px 31px;
+  padding: 15px 20px;
   text-decoration: none;
   text-shadow: 0px 1px 0px var(--darker-shade);
 }
-.generalButton:hover {
+button:hover {
   background-color: var(--hover);
   border: 1px solid var(--hover);
 }
-.generalButton:active {
+button:active {
   position: relative;
   top: 1px;
 }
-main {
-  width: 100%;
-  height: 100%;
-}
-/* "Nyheter" and "Visas just nu" Elements */ 
+/* "Nyheter" and "Visas just nu" Elements */
 .newsAndShowtimeElements {
   display: flex;
   align-items: stretch;
@@ -100,7 +103,7 @@ main {
 
 /* Header elements */
 header {
-  background-color: var(--lighter-shade);
+  background-color: rgb(6, 43, 88);
   color: var(--text);
   position: sticky;
   top: 0;
@@ -174,7 +177,7 @@ header {
   grid-column: 2;
   justify-self: center;
 }
-.cinema-container h2{
+.cinema-container h2 {
   font: var(--font-title-medium);
   color: var(--text);
   margin-bottom: 0px;
@@ -197,24 +200,27 @@ header {
   min-width: 100px;
 }
 
-.cinema-screen-container{
-perspective: 400px;
-margin-bottom: 0;
-margin-top: 0;
-transform: translate(4px,30px);
-justify-self: center;
+.cinema-screen-container {
+  perspective: 400px;
+  margin-bottom: 0;
+  margin-top: 0;
+  transform: translate(4px, 30px);
+  justify-self: center;
 }
-.cinema-screen{
-  background: linear-gradient(180deg, rgb(255, 255, 255) 24%, rgb(80, 77, 77) 100%);
+.cinema-screen {
+  background: linear-gradient(
+    180deg,
+    rgb(255, 255, 255) 24%,
+    rgb(80, 77, 77) 100%
+  );
   border-top: darkgray ridge;
   width: 100%;
   height: 100px;
   opacity: 90%;
   transform-style: preserve-3d;
   transform: rotateX(-65deg);
-
 }
-.seat-selectors{
+.seat-selectors {
   width: max-content;
   min-width: 100px;
 }
@@ -265,7 +271,7 @@ justify-self: center;
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
 }
-.showing-selector-dropdowns{
+.showing-selector-dropdowns {
   grid-row: 1;
   grid-column: 2;
 }
@@ -293,7 +299,7 @@ justify-self: center;
   font: var(--font-title-small);
   color: var(--text);
 }
-.button-section>.generalButton {
+.button-section > .generalButton {
   pointer-events: none;
   opacity: 0.3;
 }
@@ -354,7 +360,6 @@ hr {
   width: 100%;
 }
 
-
 .movies h2 {
   font: var(--font-title-large);
   letter-spacing: 3px;
@@ -403,4 +408,31 @@ a.movie-link {
   display: flex;
   width: 100%;
   justify-content: space-between;
+}
+.movie-info {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.youtube {
+  height: 30vw;
+}
+
+.info-text {
+  color: white;
+  padding: 0 20vw;
+}
+.info-text h2 {
+  font-size: 40px;
+  margin: 0;
+  display: flex;
+  align-items: flex-end;
+}
+.title-row {
+  display: flex;
+  justify-content: space-between;
+}
+.button-title {
+  margin-top: 5px;
+  margin-bottom: 0px;
 }
