@@ -19,12 +19,13 @@ function buildPage(selectedMovie) {
     language,
     genres,
     ageGroup,
+    trailer,
   } of movies) {
     if (selectedMovie === title) {
       let movieHtml = /*html*/ `
                           <div>
                                <div class="youtube">
-                              <iframe width="100%" height="100%" src="https://www.youtube.com/embed/-FZ-pPFAjYY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                              <iframe width="100%" height="100%" src="${trailer}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                               </div>
                               <div class="info-text">
                               <div class="title-row">
