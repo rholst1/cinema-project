@@ -5,7 +5,8 @@ async function start() {
 
   let result = await db.run(/*sql*/`
 
-      SELECT * FROM movie_list 
+     
+      SELECT * FROM new_movie_list; 
 
   `);
 

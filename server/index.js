@@ -1,8 +1,9 @@
-
+const path = require("path");
+console.log(__dirname)
 
 require('best-sqlite3-frontend')({
   bestSqlite3: require('best-sqlite3'),
-  databasePath: './movie_db.db',
+  databasePath: './new_movie_db.db',
   addDatabaseFunctions: {
     // example of user defined functions
     // (write your own as you go...)
