@@ -469,10 +469,14 @@ a.movie-link {
   padding: 0 20vw;
 }
 .info-text h2 {
-  font-size: 40px;
+  font-size: 300%;
   margin: 0;
   display: flex;
   align-items: flex-end;
+}
+.info-text article {
+  font-size: 130%;
+  letter-spacing: 0.5px;
 }
 .title-row {
   display: flex;
