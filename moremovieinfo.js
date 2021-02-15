@@ -46,6 +46,12 @@ function buildPage(selectedMovie) {
     productionCountries,
     ID,
     description,
+    productionYear,
+    movieLength,
+    distributor,
+    subtitles,
+    actors,
+    genre,
   } of movies) {
     if (selectedMovie === ID) {
       let movieHtml = /*html*/ `
@@ -61,7 +67,7 @@ function buildPage(selectedMovie) {
                                 </div>
                               </div>
                                 <hr width='100%'>
-                                <article><span> | Produktionsland: ${productionCountries} | </span><span>Producent: ${producer}</span><span> | Regissör: ${title} | </span><span>Producent: ${title}</span><span> | Regissör: ${title} | </span><span>Producent: ${title}</span><span> | Regissör: ${title} | </span><span>Producent: ${title}</span><span> | Regissör: ${title} | </span><span>Producent: ${title}</span><span> | Regissör: ${title} | </span><span>Producent: ${title}</span><span> | Regissör: ${title} | </span><span>Producent: ${title}</span>
+                                <article><span> | Produktionsland: ${productionCountries} | </span><span>Produktions år: ${productionYear}</span><span> | Längd: ${movieLength} | </span><span>Genre: ${genre}</span><span> | Distributör: ${distributor} | </span><span>Undertext: ${subtitles}</span><span> | Skådespelare: ${actors} | </span><span>Producent: ${title}</span><span> | Regissör: ${title} | </span><span>Producent: ${title}</span><span> | Regissör: ${title} | </span><span>Producent: ${title}</span><span> | Regissör: ${title} | </span><span>Producent: ${title}</span>
                                 <span> | Regissör: ${title} | </span><span>Producent: ${producer}</span></article>
                                 <hr>
 
@@ -73,5 +79,8 @@ function buildPage(selectedMovie) {
       $(`.movie-info`).append(movieHtml);
     }
   }
+}
+function buttonPage() {
+  window.location.href = '/currentmovies.html';
 }
 getMovies();
