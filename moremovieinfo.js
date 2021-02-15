@@ -18,7 +18,7 @@ class moreMovieInfo {
     this.title = title;
     this.productionCountries = productionCountries;
     this.productionYear = productionYear;
-    this.moivieLength = movieLength;
+    this.movieLength = movieLength;
     this.genre = genre;
     this.distributor = distributor;
     this.language = language;
@@ -31,26 +31,47 @@ class moreMovieInfo {
     this.reviews = reviews;
   }
 }
-
-function buildPage() {
-  $('nav').after(`<main></main > `);
-  $('main').append(`<section class="movies">
-</section>
-`);
-
-  let movieHtml = /*html*/ `<div class="currentMovieIMG1">
-                              <img src="${movieImages[i]}" class="img1" alt="Här ska en bild vara">
-                            </div>
-                          <div class="currentMovieTitleDiv">
-                              <a href = "/moremovieinfo.html" class="movie-link"><h2>${movieTitles[i]}</h2></a>
-                                <article class="currentMovieTitleContainer"><p class="title-p"> ${movieGenre[i]} | ${movieLength[i]}| ${ageMin[i]}
-                                </p><article>
-                                <button class="generalButton" onclick = "buttonPage()">Mer info</button><button class="generalButton" onclick="#">Köp biljett</button></article></article><hr>
-                                <p>${movieInfo[i]}
-                                </p>
-                            </div>`;
-
-  $(`.currentMovie${i}`).append(movieHtml);
+let movies;
+async function getMovies() {
+  movies = await $.getJSON('movies.json');
+  buildPage();
 }
 
-buildPage();
+function buildPage(selectedMovie) {
+  $('header').after(`<section class="movie-info"></section>`);
+
+  for (let {
+    producer,
+    title,
+    productionCountries,
+    ID,
+    description,
+  } of movies) {
+    if (selectedMovie === ID) {
+      let movieHtml = /*html*/ `
+                          <div>
+                               <div class="youtube">
+                              <iframe width="100%" height="100%" src="https://www.youtube.com/embed/-FZ-pPFAjYY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                              </div>
+                              <div class="info-text">
+                              <div class="title-row">
+                              <h2>${title}</h2>
+                              <div class="button-title">
+                                <button onclick = "buttonPage()">Gå tillbaka</button><button onclick="#">Köp biljett</button>
+                                </div>
+                              </div>
+                                <hr width='100%'>
+                                <article><span> | Produktionsland: ${productionCountries} | </span><span>Producent: ${producer}</span><span> | Regissör: ${title} | </span><span>Producent: ${title}</span><span> | Regissör: ${title} | </span><span>Producent: ${title}</span><span> | Regissör: ${title} | </span><span>Producent: ${title}</span><span> | Regissör: ${title} | </span><span>Producent: ${title}</span><span> | Regissör: ${title} | </span><span>Producent: ${title}</span><span> | Regissör: ${title} | </span><span>Producent: ${title}</span>
+                                <span> | Regissör: ${title} | </span><span>Producent: ${producer}</span></article>
+                                <hr>
+
+                                <article>${description}</article>
+                                                               
+                                </div>
+                            </div>`;
+
+      $(`.movie-info`).append(movieHtml);
+    }
+  }
+}
+getMovies();
