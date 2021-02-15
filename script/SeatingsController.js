@@ -11,9 +11,7 @@ export default class SeatingsController {
     /*which showing are we viewing right now?*/
     this.showing = showing;
     /*Event for selection of first seat*/
-    this.selecting = new Event('selecting');
-    /*Event for deselection of last seat*/
-    this.deselecting = new Event('deselecting');
+    this.seatSelectionEvent = new Event('seat selection updated');
   }
   init() {
     /*create html code for our cinema*/
@@ -41,22 +39,21 @@ export default class SeatingsController {
   _activateCinemaButton() {
     /* Listen click on seat-buttons. */
     let seat = $(this).val();
-    console.log(parent.selectedSeats);
     /* We get string telling us the new status of seat(selected,free,reserved) 
     and update backend.*/
     let newSeatStatus = parent.showing.toggleSeatValue(seat);
     /* If new status is free or selected we change button color */
     if ((newSeatStatus).localeCompare("free") == 0) {
-      $(`:button[value="${seat}"]`).css('background-color', 'ghostwhite');
+      $(`:button[value="${seat}"]`).css('background-color', 'var(--seat-free)');
       //color = $(this).css('background-color');
       parent.selectedSeats.splice(parent.selectedSeats.indexOf(seat), 1);
-      //dispatch event if there are no selected seats
-      if (parent.selectedSeats.length === 0) document.dispatchEvent(parent.deselecting);
+      //dispatch event if seats are deselected
+      document.dispatchEvent(parent.seatSelectionEvent);
     } else if ((newSeatStatus).localeCompare("selected") == 0) {
-      $(`:button[value="${seat}"]`).css('background-color', 'rgb(13, 63, 126)');
-      //dispatch event if this is the first selected seat
-      if (parent.selectedSeats.length === 0) document.dispatchEvent(parent.selecting);
+      $(`:button[value="${seat}"]`).css('background-color', 'var(--seat-selected)');
+      //dispatch event if new seats are selected
       parent.selectedSeats.push(seat);
+      document.dispatchEvent(parent.seatSelectionEvent);
     }
   }
   /* Populates html with buttons and row breaks visually corresponding to a Cinema object. */
@@ -73,7 +70,8 @@ export default class SeatingsController {
   _markReservedSeats(showing) {
     for (let seat of showing.seats) {
       if ((seat.getSeatStatus()).localeCompare("reserved") == 0) {
-        $(`:button[value="${seat.column}_${seat.row}"]`).css('background-color', 'rgb(104, 12, 190)');
+        $(`:button[value="${seat.column}_${seat.row}"]`).css('background-color', 'var(--seat-reserved)');
+        $(`:button[value="${seat.column}_${seat.row}"]`).prop('disabled', true);
       }
     }
   }
@@ -82,13 +80,14 @@ export default class SeatingsController {
   reserveSelected() {
     for (let selectedSeat of this.selectedSeats) {
       this.showing.reserveSeat(selectedSeat);
-      $(`:button[value="${selectedSeat}"]`).css('background-color', 'rgb(104, 12, 190)');
+      $(`:button[value="${selectedSeat}"]`).css('background-color', 'var(--seat-reserved)');
+      $(`:button[value="${selectedSeat}"]`).prop('disabled', true);
     }
   }
   /*Clear selectedSeats array and notify observers that the array is empty.*/
   clearSeatSelection() {
     this.selectedSeats.length = 0;
-    document.dispatchEvent(this.deselecting);
+    document.dispatchEvent(this.seatSelectionEvent);
   }
 
 }
