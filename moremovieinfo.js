@@ -17,7 +17,7 @@ function buildPage(selectedMovie) {
     subtitles,
     actors,
     language,
-    genre,
+    genres,
     ageGroup,
   } of movies) {
     if (selectedMovie === title) {
@@ -34,7 +34,7 @@ function buildPage(selectedMovie) {
                                 </div>
                               </div>
                                 <hr width='100%'>
-                                <article><span> | Produktions land: ${productionCountries} | </span><span>Produktions år: ${productionYear}</span><span> | Längd: ${movieLength} | </span><span>Genre: ${genre}</span><span> | Ålder: ${ageGroup} | </span><span>Undertext: ${subtitles}</span><span> | Skådespelare: ${actors} | </span><span>Producent: ${title}</span><span> | Språk: ${language} | </span><span>Producent: ${title}</span><span> | Regissör: ${title} | </span><span>Producent: ${title}</span><span> | Regissör: ${title} | </span><span>Producent: ${title}</span>
+                                <article><span> | Produktions land: ${productionCountries} | </span><span>Produktions år: ${productionYear}</span><span> | Längd: ${movieLength} | </span><span>Genre: ${genres}</span><span> | Ålder: ${ageGroup} | </span><span>Undertext: ${subtitles}</span><span> | Skådespelare: ${actors} | </span><span>Producent: ${title}</span><span> | Språk: ${language} | </span><span>Producent: ${title}</span><span> | Regissör: ${title} | </span><span>Producent: ${title}</span><span> | Regissör: ${title} | </span><span>Producent: ${title}</span>
                                 <span> | Regissör: ${title} | </span><span>Producent: ${producer}</span></article>
                                 <hr>
 
