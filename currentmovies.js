@@ -42,7 +42,7 @@ let currentTitle = `<h1 class="currentMovieTitleH1">AKTUELLA FILMER JUST NU</h1>
 
 $('.movies').prepend(currentTitle);
 
-function addButtons() {}
+function addButtons() { }
 
 function buildMoviePage() {
   let movieHtml;
@@ -52,7 +52,7 @@ function buildMoviePage() {
                 </div>
                 <div class="currentMovieTitleDiv">
                     <a href = "#" class="movie-link"><h2>${movieTitles[i]}</h2></a><article class="currentMovieTitleContainer"> <p class="title-p"> ${movieGenre[i]} | ${movieLength[i]} | ${ageMin[i]} </p>
-                    </p><article><button class="generalButton" onclick="#">Mer info</button><button class="generalButton" onclick="#">Köp biljett</button></article></article><hr>
+                    </p><article><button class="generalButton hoverable" onclick="#">Mer info</button><button class="generalButton hoverable onclick="#">Köp biljett</button></article></article><hr>
                       <p>${movieInfo[i]}
                       </p>
                   </div>`;
