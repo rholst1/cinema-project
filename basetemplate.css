@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;400&display=swap');
 /*Variables for colors and fonts. Accessing example var(--blue) instead of rgb(30, 144, 255).*/
-:root { 
-/* Experimental colors.
+:root {
+  /* Experimental colors.
   --lighter-shade: linear-gradient(to bottom, rgba(48,47,48,1) 0%,rgba(59,58,59,0.9) 20%,rgba(65,64,66,0.9) 32%,rgba(65,64,66,0.9) 78%,rgba(56,55,57,0.9) 87%,rgba(43,43,43,1) 100%);
   --shade: linear-gradient(to bottom, rgba(14,13,13,1) 0%,rgba(114,0,21,1) 21%,rgba(143,2,34,1) 40%,rgba(143,2,34,1) 62%,rgba(102,0,28,1) 83%,rgba(14,13,13,1) 100%); 
   --darker-shade: #1b1818;
@@ -12,49 +12,49 @@
   --shade-variation-menu-top: linear-gradient(to bottom, rgba(114,0,21,1) 17%,rgba(114,0,21,1) 21%,rgba(120,0,24,1) 25%,rgba(125,0,26,1) 28%,rgba(143,2,34,1) 40%,rgba(143,2,34,1) 62%,rgba(102,0,28,1) 83%,rgba(93,3,28,1) 85%,rgba(27,24,24,0.87) 100%);
   --shade-variation-menu-left: var(--darker-shade);*/
 
-    /*Colors - feel free to add here, don't forget to connect specific elements to your new variable*/
+  /*Colors - feel free to add here, don't forget to connect specific elements to your new variable*/
   --lighter-shade: rgb(61, 59, 68);
   --shade: rgb(33, 32, 36);
   --darker-shade: rgb(14, 13, 13);
-  --text: rgb(255, 255, 255); 
+  --text: rgb(255, 255, 255);
   --accent: rgb(92, 55, 194);
   /*Specific element colors - best if these are are connected to any of the variables above.*/
---body-color: var(--darker-shade);
---generalButton-color: var(--accent);
---news-color: var(--lighter-shade);
---nowShowing-color: var(--lighter-shade);
---header-color:var(--shade);
---featured-color: var(--darker-shade);
---upcoming-showings-container-color:var(--lighter-shade);
---footer-color: var(--darker-shade);
---info-input-color: var(--lighter-shade);
-/*Hover effect - pick which effects you want and comment out the others. Might need to update the .hoverable:hover class also.*/
-/*--hover: 0.7;*/
---hover: rgb(226, 136, 17);
---hover-background:rgb(226, 136, 17);
-/*Cinema visualisation*/
---seat-free: rgb(107, 106, 106);
---seat-reserved:rgba(114,0,21,1);
---seat-selected:rgb(218, 208, 223);
---cinema:linear-gradient(to bottom, rgba(66,59,59,1) 0%,rgba(27,24,24,0.75) 100%);
-/*Fonts*/
---font-family: 'Oswald', sans-serif;
---font-bread: 100% var(--font-family);
---font-title-small: 120% var(--font-family);
---font-title-medium: 160% var(--font-family);
---font-title-large: 200% var(--font-family);
---font-title-x-large: 500% var(--font-family);
---font-button: bold 120% var(--font-family);
+  --body-color: var(--darker-shade);
+  --generalButton-color: var(--accent);
+  --news-color: var(--lighter-shade);
+  --nowShowing-color: var(--lighter-shade);
+  --header-color: var(--shade);
+  --featured-color: var(--darker-shade);
+  --upcoming-showings-container-color: var(--lighter-shade);
+  --footer-color: var(--darker-shade);
+  --info-input-color: var(--lighter-shade);
+  /*Hover effect - pick which effects you want and comment out the others. Might need to update the .hoverable:hover class also.*/
+  /*--hover: 0.7;*/
+  --hover: rgb(226, 136, 17);
+  --hover-background: rgb(226, 136, 17);
+  /*Cinema visualisation*/
+  --seat-free: rgb(107, 106, 106);
+  --seat-reserved: rgba(114, 0, 21, 1);
+  --seat-selected: rgb(218, 208, 223);
+  --cinema: linear-gradient(
+    to bottom,
+    rgba(66, 59, 59, 1) 0%,
+    rgba(27, 24, 24, 0.75) 100%
+  );
+  /*Fonts*/
+  --font-family: 'Oswald', sans-serif;
+  --font-bread: 100% var(--font-family);
+  --font-title-small: 120% var(--font-family);
+  --font-title-medium: 160% var(--font-family);
+  --font-title-large: 200% var(--font-family);
+  --font-title-x-large: 500% var(--font-family);
+  --font-button: bold 120% var(--font-family);
 }
 
 body {
   background: var(--body-color);
   font: var(--font-bread);
   margin: 0;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
- 
 }
 .generalButton {
   margin: 5px;
@@ -69,62 +69,54 @@ body {
   padding: 16px 31px;
   text-decoration: none;
   text-shadow: 0px 1px 0px var(--darker-shade);
-
 }
 /*General hovereffect. */
-.hoverable:hover{
+.hoverable:hover {
   /*opacity:var(--hover) !important;*/
-  color:var(--hover) !important;
+  color: var(--hover) !important;
   /*background:var(--hover-background);*/
   cursor: pointer;
 }
-.generalButton:hover{
+.generalButton:hover {
   /*opacity:var(--hover) !important;*/
   /*color:var(--hover) !important;*/
-  color:var(--text) !important;
-  background:var(--hover-background) !important;
+  color: var(--text) !important;
+  background: var(--hover-background) !important;
   cursor: pointer;
 }
 .generalButton:active {
   position: relative;
   top: 1px;
 }
-main {
-  width: 100%;
-  height: 100%;
-}
-/* "Nyheter" and "Visas just nu" Elements */ 
+/* "Nyheter" and "Visas just nu" Elements */
 .newsAndShowtimeElements {
   display: flex;
-  align-items: stretch;
   flex-direction: row;
-  justify-content: space-evenly;
-  padding: 1%;
+  justify-content: space-between;
+  padding: 0 5vw;
 }
 .news {
   color: var(--text);
   background: var(--news-color);
-  max-width: 45%;
-  padding: 3%;
-  margin: 3%;
+  width: 50vw;
+  padding: 3vw;
+  margin: 3vw 2vw 3vw 0;
 }
 
 .nowShowing {
   color: var(--text);
   background: var(--nowShowing-color);
-  max-width: 45%;
-  padding: 5%;
-  margin: 0.5%;
+  width: 25vw;
+  padding: 4vw;
+  margin: 3vw 0;
 }
-
-.nowShowingTitles > li {
-  margin-bottom: 7%;
-  border-bottom: solid;
-  padding: 3%;
-  border-width: 1px;
-  width: 100%;
+.nowShowing h2 {
+  font-size: 200%;
 }
-
+.nowShowingTitles li {
+  margin-bottom: 1vw;
+  padding: 0;
+}
 .nowShowingTitles a {
   text-decoration: none;
 }
@@ -151,15 +143,12 @@ header {
 
 /*Featured movies on front page*/
 .featured {
-  width: 100%;
-  max-width: 2200px;
   display: flex;
   text-decoration: none;
   color: var(--text);
   background: var(--featured-color);
   padding: 1%;
-  margin-left: 5%;
-  margin-right: 5%;
+  margin: 0 5vw;
 }
 
 .featDivImg {
@@ -200,7 +189,7 @@ header {
   grid-column: 2;
   justify-self: center;
 }
-.cinema-container h2{
+.cinema-container h2 {
   font: var(--font-title-medium);
   color: var(--text);
   margin-bottom: 0px;
@@ -220,28 +209,31 @@ header {
   padding-top: 10%;
   border-radius: 15px;
   background: var(--cinema);
-border-radius: 15px;
+  border-radius: 15px;
   min-width: max-content;
 }
 
-.cinema-screen-container{
-perspective: 400px;
-margin-bottom: 0;
-margin-top: 0;
-transform: translate(4px,30px);
-justify-self: center;
+.cinema-screen-container {
+  perspective: 400px;
+  margin-bottom: 0;
+  margin-top: 0;
+  transform: translate(4px, 30px);
+  justify-self: center;
 }
-.cinema-screen{
-  background: linear-gradient(180deg, rgb(255, 255, 255) 24%, rgb(80, 77, 77) 100%);
+.cinema-screen {
+  background: linear-gradient(
+    180deg,
+    rgb(255, 255, 255) 24%,
+    rgb(80, 77, 77) 100%
+  );
   border-top: darkgray ridge;
   width: 100%;
   height: 100px;
   opacity: 90%;
   transform-style: preserve-3d;
   transform: rotateX(-65deg);
-
 }
-.seat-selectors{
+.seat-selectors {
   width: max-content;
   min-width: 100px;
 }
@@ -272,12 +264,10 @@ justify-self: center;
 
 .footer {
   background: var(--footer-color);
-  padding: 0.5%;
   text-align: center;
   border-top: 1px solid var(--text);
-  margin-left: 20%;
-  margin-right: 20%;
-  letter-spacing: 2px;
+  margin: 0 20vw 0 20vw;
+  letter-spacing: 1px;
   color: var(--text);
 }
 
@@ -290,7 +280,7 @@ justify-self: center;
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
 }
-.showing-selector-dropdowns{
+.showing-selector-dropdowns {
   grid-row: 1;
   grid-column: 2;
 }
@@ -306,7 +296,7 @@ justify-self: center;
 .showing-selector-dropdowns option {
   color: var(--text);
   background-color: var(--lighter-shade);
-  
+
   font: var(--font-bread);
 }
 
@@ -325,7 +315,7 @@ justify-self: center;
   color: var(--text);
 }
 
-.button-section>.generalButton {
+.button-section > .generalButton {
   pointer-events: none;
   opacity: 0.3;
 }
@@ -378,14 +368,12 @@ hr {
 .currentMovie6 {
   color: var(--text);
   display: flex;
-  margin: 2% 10%;
+  padding: 1vw 5vw;
 }
 .currentMovieTitleDiv {
-  padding-left: 5%;
-  padding-right: 5%;
-  width: 100%;
+  padding: 0 5vw;
+  width: 100vw;
 }
-
 
 .movies h2 {
   font: var(--font-title-large);
@@ -402,7 +390,7 @@ p.title-p {
   font: var(--font-title-small);
   font-weight: lighter;
   align-self: flex-end;
-  margin: 0%;
+  margin: 0;
 }
 
 .currentMovieTitleDiv h2 {
@@ -433,7 +421,7 @@ p.title-p {
   justify-self: right;
   padding: 1%;
 }
-.info-input>.seat-counter{
+.info-input > .seat-counter {
   grid-column: 3;
   grid-row-start: 1;
   grid-row-end: 3;
@@ -442,15 +430,16 @@ p.title-p {
   text-align: left;
   margin-left: 3%;
 }
-.seat-counter p{
+.seat-counter p {
   line-height: 0em;
   max-width: 10em;
-  font:var(--font-bread);
+  font: var(--font-bread);
 }
 a.movie-link {
   text-decoration: none;
   color: var(--text);
   display: inline-block;
+  /* font-size: 150%; */
 }
 
 .currentMovieTitleContainer {
@@ -459,17 +448,17 @@ a.movie-link {
   justify-content: space-between;
 }
 
-.info-input form{
+.info-input form {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
-.info-input input{
+.info-input input {
   grid-column: 2;
   width: max-content;
   margin: 1%;
 }
-.info-input label{
-grid-column: 1;
-justify-self: right;
-padding: 1%; 
+.info-input label {
+  grid-column: 1;
+  justify-self: right;
+  padding: 1%;
 }
