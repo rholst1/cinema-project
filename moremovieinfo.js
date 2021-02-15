@@ -1,40 +1,7 @@
-class moreMovieInfo {
-  constructor(
-    title,
-    productionCountries,
-    productionYear,
-    movieLength,
-    genre,
-    distributor,
-    language,
-    subtitles,
-    director,
-    actors,
-    description,
-    images,
-    youtubeTrailers,
-    reviews
-  ) {
-    this.title = title;
-    this.productionCountries = productionCountries;
-    this.productionYear = productionYear;
-    this.movieLength = movieLength;
-    this.genre = genre;
-    this.distributor = distributor;
-    this.language = language;
-    this.subtitles = subtitles;
-    this.director = director;
-    this.actors = actors;
-    this.description = description;
-    this.images = images;
-    this.youtubeTrailers = youtubeTrailers;
-    this.reviews = reviews;
-  }
-}
 let movies;
 async function getMovies() {
-  movies = await $.getJSON('movies.json');
-  buildPage();
+  movies = await db.run(`SELECT * FROM new_movie_list`);
+  buildPage('Tenet');
 }
 
 function buildPage(selectedMovie) {
@@ -44,16 +11,16 @@ function buildPage(selectedMovie) {
     producer,
     title,
     productionCountries,
-    ID,
     description,
     productionYear,
     movieLength,
-    distributor,
     subtitles,
     actors,
+    language,
     genre,
+    ageGroup,
   } of movies) {
-    if (selectedMovie === ID) {
+    if (selectedMovie === title) {
       let movieHtml = /*html*/ `
                           <div>
                                <div class="youtube">
@@ -67,7 +34,7 @@ function buildPage(selectedMovie) {
                                 </div>
                               </div>
                                 <hr width='100%'>
-                                <article><span> | Produktionsland: ${productionCountries} | </span><span>Produktions år: ${productionYear}</span><span> | Längd: ${movieLength} | </span><span>Genre: ${genre}</span><span> | Distributör: ${distributor} | </span><span>Undertext: ${subtitles}</span><span> | Skådespelare: ${actors} | </span><span>Producent: ${title}</span><span> | Regissör: ${title} | </span><span>Producent: ${title}</span><span> | Regissör: ${title} | </span><span>Producent: ${title}</span><span> | Regissör: ${title} | </span><span>Producent: ${title}</span>
+                                <article><span> | Produktions land: ${productionCountries} | </span><span>Produktions år: ${productionYear}</span><span> | Längd: ${movieLength} | </span><span>Genre: ${genre}</span><span> | Ålder: ${ageGroup} | </span><span>Undertext: ${subtitles}</span><span> | Skådespelare: ${actors} | </span><span>Producent: ${title}</span><span> | Språk: ${language} | </span><span>Producent: ${title}</span><span> | Regissör: ${title} | </span><span>Producent: ${title}</span><span> | Regissör: ${title} | </span><span>Producent: ${title}</span>
                                 <span> | Regissör: ${title} | </span><span>Producent: ${producer}</span></article>
                                 <hr>
 
