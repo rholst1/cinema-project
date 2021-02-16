@@ -40,13 +40,18 @@ function init() {
   listenToMovieSelector();
   listenToShowingSelector();
 }
+/*todo*/
 function buildContainer() {
   $('.border').append(`
-  <article class="ticketbooking-container"></article>`);
+  <article class="ticketbooking-container">
+  <div class="booking-flex-row0"></div>
+  <div class="booking-flex-row1"></div>
+  <div class="booking-flex-row2"></div>
+  <div class="booking-flex-row3"></div>
+  </article>`);
 }
 function buildSelectorContainer() {
-  $('.ticketbooking-container').append(`
-  <div class="showing-selector-dropdowns"></div>`);
+  $('.booking-flex-row0').append(`<div class="showing-selector-dropdowns"></div>`);
 }
 function buildMoviePickerDropdown() {
   $('.showing-selector-dropdowns').append(`
@@ -62,6 +67,8 @@ function buildMoviePickerDropdown() {
       </select>
   </div>`);
 }
+
+/*todo*/
 function listenToMovieSelector() {
   $("#select-movie").change(function (e) {
     $(".showing-selector-dropdowns #date-and-time").remove();
@@ -77,7 +84,7 @@ function listenToMovieSelector() {
           <option value="2020-3-20-17-00-00">20 Mars 17:00</option>
         </select>
       </div>`);
-    $('.ticketbooking-container').append(`
+    $('.booking-flex-row1').append(`
     <section class="upcoming-showings-container">
         <h2>Kommande visningar</h2>
         <li class="hoverable">Lorem, ipsum dolor.</li>
@@ -155,7 +162,7 @@ function seatsSelected() {
   }
   buildSeatNumberCounter(seatNumbers);
 }
-
+/*todo join*/
 function buildSeatNumberCounter(seatNumbers) {
   if ($('.info-input').length) {
     if (!$('.seat-counter').length) {
@@ -187,8 +194,9 @@ function listenToInputForm() {
 }
 function buildInputForm() {
   if (!$('.info-input').length) {
-    $('.border').append(`<section class="info-input">
+    $('.booking-flex-row2').append(`<section class="info-input">
         <form>
+        
           <label for="username">Namn</label>
           <input type="text" id="username" placeholder="Ditt namn" />
           <br /><br />
@@ -206,7 +214,7 @@ function clearInputForm() {
 }
 function buildBookingButton() {
   if (!$('.button-section').length) {
-    $('.border').append(`<section class="button-section">
+    $('.booking-flex-row3').append(`<section class="button-section">
         <input
           type="submit"
           class="generalButton hoverable"
