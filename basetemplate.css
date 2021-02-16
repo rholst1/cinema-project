@@ -281,6 +281,7 @@ a.movie-link {
   margin-right: 2vw;
 }
 .upcoming-showings-container {
+  order: 1;
   display:flex;
   flex-direction: column;
   background: var(--upcoming-showings-container-color);
@@ -373,6 +374,7 @@ justify-content: center;
 }
 /*Seat-picker*/
 .cinema-container {
+  order: 2;
   flex-grow: 1;
   display: flex;
   flex-direction: column;

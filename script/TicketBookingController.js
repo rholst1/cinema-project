@@ -40,9 +40,9 @@ function init() {
   listenToMovieSelector();
   listenToShowingSelector();
 }
-/*todo*/
+
 function buildContainer() {
-  $('.border').append(`
+  $('.border').html(`
   <article class="ticketbooking-container">
   <div class="booking-flex-row0"></div>
   <div class="booking-flex-row1"></div>
@@ -54,7 +54,7 @@ function buildSelectorContainer() {
   $('.booking-flex-row0').append(`<div class="showing-selector-dropdowns"></div>`);
 }
 function buildMoviePickerDropdown() {
-  $('.showing-selector-dropdowns').append(`
+  $('.showing-selector-dropdowns').html(`
   <div class="movie-picker-dropdown">
       <select id="select-movie">
         <option value="0">Välj film:</option>
@@ -68,12 +68,26 @@ function buildMoviePickerDropdown() {
   </div>`);
 }
 
-/*todo*/
 function listenToMovieSelector() {
   $("#select-movie").change(function (e) {
-    $(".showing-selector-dropdowns #date-and-time").remove();
+    if (this.value !== "0") {
+      buildShowingsPickerDropdown();
+      buildUpcomingShowingsSection();
+    } else {
+      /*Reset all naturally dependant elements*/
+      $(".booking-flex-row1").html('');
+      $(".booking-flex-row2").html('');
+      $(".booking-flex-row3").html('');
+    }
+  });
+}
+function buildShowingsPickerDropdown() {
+  if (!$('.showings-picker-dropdown').length) {
     $(".showing-selector-dropdowns").append(`        
       <div class="showings-picker-dropdown">
+      </div>`);
+  }
+  $('.showings-picker-dropdown').html(`        
         <select id="date-and-time">
           <option value="0">Välj Datum och Tid:</option>
           <option value="2020-3-13-17-00-00">13 Mars 17:00</option>
@@ -82,10 +96,17 @@ function listenToMovieSelector() {
           <option value="2020-3-18-19-00-00">18 Mars 19:00</option>
           <option value="2020-3-19-19-00-00">19 Mars 19:00</option>
           <option value="2020-3-20-17-00-00">20 Mars 17:00</option>
-        </select>
-      </div>`);
+        </select>`);
+}
+function buildUpcomingShowingsSection() {
+  /* If .upcoming-showings-container does not exist we create it otherwise we just
+  change its contents.*/
+  if (!$('.upcoming-showings-container').length) {
     $('.booking-flex-row1').append(`
     <section class="upcoming-showings-container">
+    </section>`);
+  }
+  $('.upcoming-showings-container').html(`
         <h2>Kommande visningar</h2>
         <li class="hoverable">Lorem, ipsum dolor.</li>
         <li class="hoverable"> Quam, exercitationem doloremque!</li>
@@ -96,12 +117,8 @@ function listenToMovieSelector() {
         <li class="hoverable">Quia, nobis quos.</li>
         <li class="hoverable">Itaque, quasi totam?</li>
         <li class="hoverable">Culpa, molestiae delectus.</li>
-        <li class="hoverable">Dicta, veritatis distinctio!</li>
-      </section>
-      <section class="cinema-container"></section>`);
-  });
+        <li class="hoverable">Dicta, veritatis distinctio!</li>`);
 }
-
 
 /* Listen to which showing the user picks*/
 function listenToShowingSelector() {
@@ -195,8 +212,7 @@ function listenToInputForm() {
 function buildInputForm() {
   if (!$('.info-input').length) {
     $('.booking-flex-row2').append(`<section class="info-input">
-        <form>
-        
+        <form>      
           <label for="username">Namn</label>
           <input type="text" id="username" placeholder="Ditt namn" />
           <br /><br />
@@ -229,8 +245,14 @@ function clearBookingButton() {
   $('.button-section').remove();
 }
 function buildCinema() {
-  $('.cinema-container').append('<h2>Platser</h2>');
-
+  /*If .cinema-container does not exist we create it. */
+  if (!$('.cinema-container').length) {
+    $('.booking-flex-row1').append(`
+      <section class="cinema-container">
+      </section>`);
+  }
+  /*We reset the previous contents while seating the header. */
+  $('.cinema-container').html('<h2>Platser</h2>');
   $('.cinema-container').append('<div class="cinema"></div>');
   $('.cinema').append('<div class="cinema-screen-container"></div>');
   $('.cinema-screen-container').append('<div class="cinema-screen"></div>');
