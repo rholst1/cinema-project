@@ -107,7 +107,7 @@ body {
   color: var(--text);
   background: var(--nowShowing-color);
   width: 25vw;
-  padding: 4vw;
+  padding: 3vw;
   margin: 3vw 0;
 }
 .nowShowing h2 {
