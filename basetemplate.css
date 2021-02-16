@@ -354,7 +354,7 @@ header {
 
 img {
   width: 280px;
-  height: 280px;
+  height: 330px;
 }
 
 hr {
@@ -439,7 +439,7 @@ a.movie-link {
   text-decoration: none;
   color: var(--text);
   display: inline-block;
-  /* font-size: 150%; */
+  font-size: 140%;
 }
 
 .currentMovieTitleContainer {
