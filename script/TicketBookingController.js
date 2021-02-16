@@ -230,9 +230,10 @@ function clearBookingButton() {
 }
 function buildCinema() {
   $('.cinema-container').append('<h2>Platser</h2>');
-  $('.cinema-container').append('<div class=cinema-screen-container></div>');
-  $('.cinema-screen-container').append('<div class=cinema-screen></div>');
+
   $('.cinema-container').append('<div class="cinema"></div>');
+  $('.cinema').append('<div class="cinema-screen-container"></div>');
+  $('.cinema-screen-container').append('<div class="cinema-screen"></div>');
   $('.cinema').append('<div class="seat-selectors"></div>');
 }
 function enableBookingButton() {
