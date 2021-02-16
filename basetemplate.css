@@ -46,7 +46,7 @@
   --font-bread: 100% var(--font-family);
   --font-title-small: 120% var(--font-family);
   --font-title-medium: 160% var(--font-family);
-  --font-title-large: 200% var(--font-family);
+  --font-title-large: 160% var(--font-family);
   --font-title-x-large: 500% var(--font-family);
   --font-button: bold 120% var(--font-family);
 }
@@ -378,6 +378,7 @@ hr {
 .movies h2 {
   font: var(--font-title-large);
   letter-spacing: 3px;
+  margin-bottom: 0;
 }
 
 .movies p {
@@ -393,9 +394,6 @@ p.title-p {
   margin: 0;
 }
 
-.currentMovieTitleDiv h2 {
-  font: var(--font-title-large);
-}
 .info-input {
   padding: 1%;
   margin: 3%;
