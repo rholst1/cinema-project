@@ -266,7 +266,7 @@ header {
   background: var(--footer-color);
   text-align: center;
   border-top: 1px solid var(--text);
-  margin: 0 20vw 0 20vw;
+  margin: 1vw 20vw 1vw 20vw;
   letter-spacing: 1px;
   color: var(--text);
 }
