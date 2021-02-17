@@ -1,5 +1,5 @@
 $('header').after(`<main></main > `);
-$('main').append(`<section class="movies"></section>`);
+$('main').replaceWith(`<section class="movies"></section>`);
 $('.movies').prepend(
   `<h1 class="currentMovieTitleH1">AKTUELLA FILMER JUST NU</h1>`
 );
@@ -13,13 +13,12 @@ function createDivs(numberOfMovies) {
 }
 
 let movies;
-async function getMovies() {
+async function buildInitialPage() {
   movies = await db.run(`SELECT * FROM new_movie_list`);
-
-  buildMoviePage();
+  buildMovieList();
 }
 
-function buildMoviePage(selectedMovie) {
+function buildMovieList(selectedMovie) {
   createDivs(movies.length);
   let i = 0;
   while (i < movieDivs.length) {
@@ -37,8 +36,8 @@ function buildMoviePage(selectedMovie) {
                   <img src="${images}" class="img1" alt="Här ska en bild vara">
                 </div>
                 <div class="currentMovieTitleDiv">
-                    <a href = "/moremovieinfo.html" class="movie-link"><h2>${title}</h2></a><article class="currentMovieTitleContainer"> <p class="title-p"> ${genres} | ${length} | ${ageGroup} </p>
-                    <article><button class="generalButton" onclick = "buttonPage()">Mer info</button><button class="generalButton" onclick="#">Köp biljett</button></article></article><hr>
+                    <a href = "javascript:buttonPage('${title}')" class="movie-link"><h2>${title}</h2></a><article class="currentMovieTitleContainer"> <p class="title-p"> ${genres} | ${length} | ${ageGroup} </p>
+                    <article><button class="generalButton" onclick = "buttonPage('${title}')">Mer info</button><button class="generalButton" onclick="#">Köp biljett</button></article></article><hr>
                       <p>${description}
                       </p>
                   </div>`;
@@ -47,7 +46,53 @@ function buildMoviePage(selectedMovie) {
     }
   }
 }
-function buttonPage() {
-  window.location.href = '/moremovieinfo.html';
+
+function buildMoreInfoPage(selectedMovie) {
+  $('header').after(`<section class="movie-info"></section>`);
+
+  for (let {
+    title,
+    productionCountries,
+    detailedDescription,
+    productionYear,
+    length,
+    subtitles,
+    actors,
+    language,
+    genres,
+    ageGroup,
+    trailer,
+    director,
+  } of movies) {
+    if (selectedMovie === title) {
+      let movieHtml = /*html*/ `
+                          <div>
+                               <div class="youtube">
+                              <iframe width="100%" height="100%" src="${trailer}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                              </div>
+                              <div class="info-text">
+                              <div class="title-row">
+                              <h2>${title}</h2>
+                              <div class="button-title">
+                                <button onclick = "window.location.href='/currentmovies.html'">Gå tillbaka</button><button onclick="#">Köp biljett</button>
+                                </div>
+                              </div>
+                                <hr width='100%'>
+                                <article><span> | Produktions land: ${productionCountries} | </span><span>Produktions år: ${productionYear}</span><span> | Längd: ${length} | </span><span>Genre: ${genres}</span><span> | Ålder: ${ageGroup} | Språk: ${language} | </span><span>Undertext: ${subtitles}</span><span> | Skådespelare: ${actors} | </span><span>Regissör: ${director}</span><span> </article>
+                                <hr>
+
+                                <article>${detailedDescription}</article>
+                                                               
+                                </div>
+                            </div>`;
+
+      $(`.movies`).replaceWith(movieHtml);
+    }
+  }
 }
-getMovies();
+
+function buttonPage(title) {
+  console.log(title);
+  buildMoreInfoPage(title);
+}
+buildInitialPage();
