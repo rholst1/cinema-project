@@ -85,6 +85,13 @@ button:active {
   position: relative;
   top: 1px;
 }
+/*General hovereffect. */
+ .hoverable:hover{
+   /*opacity:var(--hover) !important;*/
+   color: var(--hover) !important;
+   /*background:var(--hover-background);*/
+   cursor: pointer;
+ }
 /* "Nyheter" and "Visas just nu" Elements */
 .newsAndShowtimeElements {
   display: flex;
