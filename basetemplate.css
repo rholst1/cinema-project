@@ -522,3 +522,7 @@ padding: 1%;
   background-color: var(--header-color);
 }
 
+.other-button{
+  margin-left: 2%;
+}
+
