@@ -43,18 +43,21 @@ function init() {
 
 function buildContainer() {
   $('.border').html(`
+  <div class="booking-row0"></div>
   <article class="ticketbooking-container">
-  <div class="booking-flex-row0"></div>
-  <div class="booking-flex-row1"></div>
-  <div class="booking-flex-row2"></div>
-  <div class="booking-flex-row3"></div>
+  <div class="booking-row1">
+  <div class="booking-row1-col0"></div>
+  <div class="booking-row1-col1"></div>
+  <div class="booking-row1-col2"></div>
+  </div>
+  <div class="booking-row2"></div>
+  <div class="booking-row3"></div>
   </article>`);
 }
 function buildSelectorContainer() {
-  $('.booking-flex-row0').append(`<div class="showing-selector-dropdowns"></div>`);
 }
 function buildMoviePickerDropdown() {
-  $('.showing-selector-dropdowns').html(`
+  $('.booking-row0').html(`
   <div class="movie-picker-dropdown">
       <select id="select-movie">
         <option value="0">Välj film:</option>
@@ -73,17 +76,18 @@ function listenToMovieSelector() {
     if (this.value !== "0") {
       buildShowingsPickerDropdown();
       buildUpcomingShowingsSection();
+      buildInfoButton();
     } else {
       /*Reset all naturally dependant elements*/
-      $(".booking-flex-row1").html('');
-      $(".booking-flex-row2").html('');
-      $(".booking-flex-row3").html('');
+      $(".booking-row1").html('');
+      $(".booking-row2").html('');
+      $(".booking-row3").html('');
     }
   });
 }
 function buildShowingsPickerDropdown() {
   if (!$('.showings-picker-dropdown').length) {
-    $(".showing-selector-dropdowns").append(`        
+    $(".booking-row1-col1").append(`        
       <div class="showings-picker-dropdown">
       </div>`);
   }
@@ -102,7 +106,7 @@ function buildUpcomingShowingsSection() {
   /* If .upcoming-showings-container does not exist we create it otherwise we just
   change its contents.*/
   if (!$('.upcoming-showings-container').length) {
-    $('.booking-flex-row1').append(`
+    $('.booking-row1-col0').append(`
     <section class="upcoming-showings-container">
     </section>`);
   }
@@ -122,7 +126,7 @@ function buildUpcomingShowingsSection() {
 
 /* Listen to which showing the user picks*/
 function listenToShowingSelector() {
-  $(".showing-selector-dropdowns").on('change', "#date-and-time", function (e) {
+  $(".booking-row1-col1").on('change', "#date-and-time", function (e) {
     $('.cinema-container').html('');
     clearBookingButton();
     clearInputForm();
@@ -211,7 +215,7 @@ function listenToInputForm() {
 }
 function buildInputForm() {
   if (!$('.info-input').length) {
-    $('.booking-flex-row2').append(`<section class="info-input">
+    $('.booking-row2').append(`<section class="info-input">
         <form>      
           <label for="username">Namn</label>
           <input type="text" id="username" placeholder="Ditt namn" />
@@ -228,9 +232,14 @@ function buildInputForm() {
 function clearInputForm() {
   $('.info-input').remove();
 }
+function buildInfoButton() {
+  if (!$('.booking-row1-col2 button').length) {
+    $('.booking-row1-col2').append(`<button type="button" value="booking" class="generalButton hoverable">INFO</button>`);
+  }
+}
 function buildBookingButton() {
   if (!$('.button-section').length) {
-    $('.booking-flex-row3').append(`<section class="button-section">
+    $('.booking-row3').append(`<section class="button-section">
         <input
           type="submit"
           class="generalButton hoverable"
@@ -247,12 +256,12 @@ function clearBookingButton() {
 function buildCinema() {
   /*If .cinema-container does not exist we create it. */
   if (!$('.cinema-container').length) {
-    $('.booking-flex-row1').append(`
+    $('.booking-row1-col1').append(`
       <section class="cinema-container">
       </section>`);
   }
   /*We reset the previous contents while seating the header. */
-  $('.cinema-container').html('<h2>Platser</h2>');
+  $('.cinema-container').html(/*'<h2>Platser</h2>'*/'');
   $('.cinema-container').append('<div class="cinema"></div>');
   $('.cinema').append('<div class="cinema-screen-container"></div>');
   $('.cinema-screen-container').append('<div class="cinema-screen"></div>');

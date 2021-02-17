@@ -25,9 +25,9 @@
   --nowShowing-color: var(--lighter-shade);
   --header-color: var(--shade);
   --featured-color: var(--darker-shade);
-  --upcoming-showings-container-color: var(--lighter-shade);
+  --upcoming-showings-container-color: var(--darker-shade);
   --footer-color: var(--darker-shade);
-  --info-input-color: var(--lighter-shade);
+  --info-input-color: var(--darker-shade);
   /*Hover effect - pick which effects you want and comment out the others. Might need to update the .hoverable:hover class also.*/
   /*--hover: 0.7;*/
   --hover: rgb(226, 136, 17);
@@ -55,6 +55,7 @@ body {
   background: var(--body-color);
   font: var(--font-bread);
   margin: 0;
+  width: max(100vw,100%);
 }
 .generalButton {
   margin: 5px;
@@ -193,8 +194,9 @@ header {
 
 .border {
   /*border: 3px solid var(--purple_border);*/
-  padding: 0.5%;
+  padding: max(2%,2vw);
   text-align: center;
+
 }
 
 
@@ -289,14 +291,40 @@ a.movie-link {
   width: max-content;
   padding: 2vw;
   padding-right: 0;
-  margin-left: 2vw;
 }
 .upcoming-showings-container h2 {
-  border-bottom: 3px double var(--text);
+  border-bottom: 3px solid var(--text);
   text-align: left;
   font: var(--font-title-medium);
 }
 
+.booking-row0{
+display: flex;
+/*justify-self: stretch;*/
+justify-content: center;
+}
+.booking-row1{
+display: flex;
+justify-content: space-between;
+}
+.booking-row1-col0{
+  flex-grow: 1;
+}
+.booking-row1-col1{
+  flex-grow: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border:3px solid white;
+}
+.booking-row1-col2{
+  flex-grow: 1;
+  text-align: left;
+  max-width: 25vw;
+}
+.booking-row1-col2>button{
+
+}
 .info-input form {
   grid-column: 2;
   display: grid;
@@ -322,10 +350,11 @@ a.movie-link {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   min-width: fit-content;
+  border:1px solid white;
 }
 
 .info-input > .seat-counter {
-  grid-column: 3;
+  grid-column: 1;
   grid-row-start: 1;
   grid-row-end: 3;
   word-wrap: break-word;
@@ -344,12 +373,14 @@ a.movie-link {
 .ticketbooking-container {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  border:1px solid white;
 }
 /*Showing selection dropdowns*/
-.showing-selector-dropdowns{
-  align-self: stretch;
+.showings-picker-dropdown{
+  text-align: center;
 }
-.showing-selector-dropdowns select {
+ select {
   border-radius: 4px;
   color: var(--text);
   background: var(--darker-shade);
@@ -359,30 +390,13 @@ a.movie-link {
   border: 1px solid var(--text);
 }
 .showings-picker-dropdown {
-  justify-content: center;
   border-radius: 4px;
 }
 
-.booking-flex-row0{
-display: flex;
-justify-self: stretch;
-justify-content: center;
-}
-.booking-flex-row1{
-display: flex;
-justify-content: center;
-}
 /*Seat-picker*/
 .cinema-container {
-  order: 2;
-  flex-grow: 1;
   display: flex;
-  flex-direction: column;
-  justify-self: stretch;
-  justify-content: right;
-  margin-left: unset;
-  align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 }
 .cinema-container h2 {
   font: var(--font-title-medium);
@@ -408,7 +422,6 @@ justify-content: center;
   border-radius: 15px;
   width: fit-content;
   max-height: min-content;
-  margin-left: 4vw;
 }
 
 .cinema-screen-container {
