@@ -34,29 +34,30 @@ customer has booked*/
 init();
 
 function init() {
-  buildContainer();
-  buildSelectorContainer();
   buildMoviePickerDropdown();
   listenToMovieSelector();
-  listenToShowingSelector();
 }
 
-function buildContainer() {
-  $('.border').html(`
-  <div class="booking-row0"></div>
-  <article class="ticketbooking-container">
-  <div class="booking-row1">
-  <div class="booking-row1-col0"></div>
-  <div class="booking-row1-col1"></div>
-  <div class="booking-row1-col2"></div>
-  </div>
-  <div class="booking-row2"></div>
-  <div class="booking-row3"></div>
+
+function buildTicketBookingContainer() {
+  if ($('.ticketbooking-container').length) {
+    $('.ticketbooking-container').remove();
+  }
+  $('.border').append(`<article class="ticketbooking-container">
+    <div class="booking-row1">
+      <div class="booking-row1-col0"></div>
+      <div class="booking-row1-col1"></div>
+      <div class="booking-row1-col2"></div>
+    </div>
+    <div class="booking-row2"></div>
+    <div class="booking-row3"></div>
   </article>`);
 }
-function buildSelectorContainer() {
-}
+
 function buildMoviePickerDropdown() {
+  $('.border').html(`
+  <div class="booking-row0"></div>
+  `);
   $('.booking-row0').html(`
   <div class="movie-picker-dropdown">
       <select id="select-movie">
@@ -74,14 +75,14 @@ function buildMoviePickerDropdown() {
 function listenToMovieSelector() {
   $("#select-movie").change(function (e) {
     if (this.value !== "0") {
+      buildTicketBookingContainer();
       buildShowingsPickerDropdown();
       buildUpcomingShowingsSection();
       buildInfoButton();
+      listenToShowingSelector();
     } else {
-      /*Reset all naturally dependant elements*/
-      $(".booking-row1").html('');
-      $(".booking-row2").html('');
-      $(".booking-row3").html('');
+      $(".border").html('');
+      init();
     }
   });
 }
