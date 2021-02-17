@@ -11,7 +11,7 @@ function buildPage(selectedMovie) {
     producer,
     title,
     productionCountries,
-    description,
+    detailedDescription,
     productionYear,
     movieLength,
     subtitles,
@@ -39,7 +39,7 @@ function buildPage(selectedMovie) {
                                 <span> | Regissör: ${title} | </span><span>Producent: ${producer}</span></article>
                                 <hr>
 
-                                <article>${description}</article>
+                                <article>${detailedDescription}</article>
                                                                
                                 </div>
                             </div>`;
