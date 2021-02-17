@@ -473,3 +473,52 @@ grid-column: 1;
 justify-self: right;
 padding: 1%; 
 }
+
+/* my bookings page */
+
+.maindiv{
+  color: var(--text);
+  word-spacing: 5px;
+  font: 150% var(--font-family); 
+  grid-column: 2; 
+  display: flex;
+  justify-content: space-evenly;
+  margin: 0 7%;
+  margin-left: 1%;
+
+}
+.maindiv section{
+  display: flex; 
+  flex-flow: column;
+  max-width: 25vw;
+  margin-top: 0;
+}
+
+.maindiv h1{
+  margin-bottom: 0;
+  border-bottom: 1px solid var(--text);
+  padding-bottom: 2%;
+  font: var(--font-title-large);
+  letter-spacing: 3px;
+}
+
+.maindiv hr{
+  margin: 5%
+}
+.col1{
+  display: inline-block;
+}
+
+.col1, .col2, li {
+  margin: 3% 0;
+  padding: 1%;
+}
+
+.col1 li:nth-child(odd){
+  background-color: var(--header-color);
+}
+
+.col2 li:nth-child(odd){
+  background-color: var(--header-color);
+}
+
