@@ -1,8 +1,7 @@
 export default class Booking {
-  /*Expected parameter (Showing, []) the array should contain seat coordinates 
-  as {col}_{row}.*/
-  constructor(showing, seats) {
+  /*Expected parameter (Showing, []) the array should contain Ticket objects.*/
+  constructor(showing, tickets) {
     this.showing = showing;
-    this.seats = seats;
+    this.tickets = tickets;
   }
 }
