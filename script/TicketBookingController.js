@@ -1,12 +1,12 @@
 import Customer from '/script/Customer.js';
-import Cinema from '/script/Cinema.js';
 import Showing from '/script/Showing.js';
 import SeatingsController from '/script/SeatingsController.js';
+import Auditorium from '/script/Auditorium.js';
 
 /*temporary example showings*/
-let cinema0 = new Cinema([24, 20, 20, 20, 20, 20, 18], "cinema1");
-let cinema1 = new Cinema([14, 16, 18, 19, 18, 16, 14], "cinema2");
-let cinema2 = new Cinema([10, 10, 10, 8], "cinema3");
+let cinema0 = new Auditorium([24, 20, 20, 20, 20, 20, 18], "cinema1");
+let cinema1 = new Auditorium([14, 16, 18, 19, 18, 16, 14], "cinema2");
+let cinema2 = new Auditorium([10, 10, 10, 8], "cinema3");
 
 let showing0 = new Showing(cinema0, 'untitled-film', new Date(2020, 3, 14, 17, 0, 0));
 let showing1 = new Showing(cinema1, 'untitled-film', new Date(2020, 3, 16, 18, 0, 0));

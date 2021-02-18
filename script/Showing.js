@@ -1,9 +1,8 @@
 import Seat from "/script/Seat.js";
-import Cinema from "/script/Cinema.js";
 
 export default class Showing {
   constructor(auditorium, film, date, reservedSeats) {
-    this.auditorium = auditorium; // Cinema
+    this.auditorium = auditorium;
     this.film = film;
     this.date = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
     this.time = date.getHours() + '.' + date.getMinutes();
