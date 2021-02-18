@@ -1,3 +1,4 @@
+@import "currentmovies.css";
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;400&display=swap');
 /*Variables for colors and fonts. Accessing example var(--blue) instead of rgb(30, 144, 255).*/
 :root {
@@ -347,22 +348,22 @@ header {
   border: 1px solid black;
 }
 
-.currentMovieTitleH1 {
+/* .currentMovieTitleH1 {
   color: var(--text);
   font: var(--font-title-x-large);
   margin: auto;
   text-align: center;
-}
+} */
 
-img {
+/* img {
   width: 280px;
   height: 330px;
-}
+} */
 
 hr {
   position: relative;
 }
-.movie-container {
+/* .movie-container {
   color: var(--text);
   display: flex;
   padding: 1vh 5vw;
@@ -397,7 +398,7 @@ p.title-p {
   font-weight: lighter;
   align-self: flex-end;
   margin: 0;
-}
+} */
 
 .info-input {
   padding: 1%;
@@ -438,7 +439,7 @@ p.title-p {
   max-width: 10em;
   font: var(--font-bread);
 }
-a.movie-link {
+/* a.movie-link {
   text-decoration: none;
   color: var(--text);
   display: inline-block;
@@ -481,7 +482,7 @@ a.movie-link {
 .button-title {
   margin-top: 5px;
   margin-bottom: 0px;
-}
+} */
 
 .info-input form {
   display: grid;
