@@ -269,12 +269,8 @@ function buildCinema() {
   $('.cinema').append('<div class="seat-selectors"></div>');
 }
 function enableBookingButton() {
-  $('.button-section .general-button').prop('disabled', false);
-  $('.button-section .general-button').css('pointer-events', 'all');
-  $('.button-section .general-button').css('opacity', '1');
+  $('.button-section .general-button').removeClass("disabled");
 }
 function disableBookingButton() {
-  $('.button-section .general-button').prop('disabled', true);
-  $('.button-section .general-button').css('pointer-events', 'none');
-  $('.button-section .general-button').css('opacity', '0.3');
+  $('.button-section .general-button').addClass("disabled");
 }

@@ -77,16 +77,11 @@ hr {
   text-decoration: none;
   text-shadow: 0px 1px 0px var(--darker-shade);
 }
-<<<<<<< HEAD
 button:hover {
-  background-color: var(--hover) !important;
+  background-color: var(--hover) ;
   border: 0px;
-=======
-.general-button:hover {
-  background-color: var(--hover);
-  border: 1px solid var(--hover);
->>>>>>> main
 }
+
 .general-button:active {
   position: relative;
   top: 1px;
@@ -394,9 +389,13 @@ text-align: center;
   max-width: 10em;
   font: var(--font-bread);
 }
-.button-section > .generalButton {
-  pointer-events: none;
-  opacity: 0.3;
+.general-button:hover{
+  background-color: var(--hover) ;
+  border: 0px;
+}
+.disabled {
+    opacity: 0.3;
+    pointer-events: none;
 }
 .ticketbooking-container {
   align-self: left;
