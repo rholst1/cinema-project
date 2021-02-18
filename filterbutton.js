@@ -8,3 +8,9 @@ let $btns = $('.btn').click(function () {
   $btns.removeClass('active');
   $(this).addClass('active');
 })
+
+$(document).ready(function () {
+  $("#toggle").click(function () {
+    $(".btn").toggle();
+  });
+});
