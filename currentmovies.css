@@ -1,0 +1,103 @@
+.movies img {
+  width: 280px;
+  height: 330px;
+}
+
+.movies h2 {
+  font: var(--font-title-large);
+  letter-spacing: 3px;
+  margin-bottom: 0;
+}
+
+.movies p {
+  letter-spacing: 0.5px;
+}
+
+.movies h2:hover {
+  text-decoration: underline;
+}
+
+.currentMovieTitleH1 {
+  color: var(--text);
+  font: var(--font-title-x-large);
+  margin: auto;
+  text-align: center;
+}
+
+.btn-container {
+  padding-right: 10vw;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.general-button.btn {
+  display: none;
+}
+
+.movie-container {
+  color: var(--text);
+  display: flex;
+  padding: 1vh 5vw;
+}
+
+.currentMovieTitleDiv {
+  padding: 0 5vw;
+  width: 100vw;
+}
+
+p.title-p {
+  font: var(--font-title-small);
+  font-weight: lighter;
+  align-self: flex-end;
+  margin: 0;
+}
+a.movie-link {
+  text-decoration: none;
+  color: var(--text);
+  display: inline-block;
+  font-size: 140%;
+}
+
+.currentMovieTitleContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.movie-info {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.youtube {
+  height: 40vh;
+  width: 100vw;
+}
+
+.info-text {
+  color: white;
+  padding: 0 20vw;
+}
+
+.info-text h2 {
+  font-size: 300%;
+  margin: 0;
+  display: flex;
+  align-items: flex-end;
+}
+
+.info-text article {
+  font-size: 130%;
+  letter-spacing: 0.5px;
+}
+
+.title-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button-title {
+  margin-top: 5px;
+  margin-bottom: 0px;
+}
