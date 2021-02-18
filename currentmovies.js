@@ -1,64 +1,98 @@
-let main = `<main></main > `;
-$('header').after(main);
+$('header').after(`<main></main > `);
+$('main').replaceWith(`<section class="movies"></section>`);
+$('.movies').prepend(
+  `<h1 class="currentMovieTitleH1">AKTUELLA FILMER JUST NU</h1>`
+);
 
-let section = `<section class="movies">
-</section>
-`;
-$('main').append(section);
+let movieDivs = [];
+function createDivs(numberOfMovies) {
+  for (let i = 1; i < numberOfMovies + 1; i++) {
+    movieDivs.push(`<div class="currentMovie${i}"></div>`);
+  }
+  $('section').append(movieDivs);
+}
 
-let movieDivs = [
-  `<div class="currentMovie1"></div>`,
-  `<div class="currentMovie2"></div>`,
-  `<div class="currentMovie3"></div>`,
-  `<div class="currentMovie4"></div>`,
-  `<div class="currentMovie5"></div>`,
-  `<div class="currentMovie6"></div>`,
-];
-$('section').append(movieDivs);
+let movies;
+async function buildInitialPage() {
+  movies = await db.run(`SELECT * FROM new_movie_list`);
+  buildMovieList();
+}
 
-let movieTitles = ['COMMANDO', 'THE BATMAN', 'SÄLLSKAPSRESAN'];
-let movieImages = [
-  'img/commando2.jpg',
-  'img/batman.webp',
-  'img/sallskapsresan.jpg',
-];
-let movieGenre = ['Action', 'Action', 'Komedi'];
-let movieInfo = [
-  `En pensionerad specialagent vid namn John Matrix ledde en
-                  elitenhet och har lämnat de väpnade styrkorna för att bo i
-                  ett avskilt bergshem  med sin dotter Jenny.
-                  Men nu tvingas han gå ur pension när hans dotter
-                  kidnappas av ett band av skurkar som vill hämnas!
-                  Utan att Matrixtill dödas medlemmarna i hans tidigare
-                  enhet en efter en. Även om Matrix vän General Franklin Kirby ger Matrix beväpnade vakter, lyckas angripare kidnappa Matrix och Jenny.`,
-  `Batman info`,
-  `Välkommen till våran ö, sluta tänk på regn och snö. Sola, bada och ha  kul med Suntrip över jul! Om du vill ha nattklubbssväng, häng då med i Gabbes gäng.`,
-];
-let movieLength = ['1 tim 45 min', '1 tim 57 min', '1 tim 12 min'];
-let ageMin = ['15 år', '15 år', '6 år'];
-let i = 0;
+function buildMovieList(selectedMovie) {
+  createDivs(movies.length);
+  let i = 0;
+  while (i < movieDivs.length) {
+    for (let {
+      title,
+      description,
+      length,
+      genres,
+      ageGroup,
+      images,
+    } of movies) {
+      let movieHtml;
 
-let currentTitle = `<h1 class="currentMovieTitleH1">AKTUELLA FILMER JUST NU</h1>`;
-
-$('.movies').prepend(currentTitle);
-
-function addButtons() { }
-
-function buildMoviePage() {
-  let movieHtml;
-  while (i < movieTitles.length) {
-    movieHtml = `<div class="currentMovieIMG1">
-                  <img src="${movieImages[i]}" class="img1" alt="Här ska en bild vara">
+      movieHtml = /*html*/ `<div class="currentMovieIMG1">
+                  <img src="${images}" class="img1" alt="Här ska en bild vara">
                 </div>
                 <div class="currentMovieTitleDiv">
-                    <a href = "#" class="movie-link"><h2>${movieTitles[i]}</h2></a><article class="currentMovieTitleContainer"> <p class="title-p"> ${movieGenre[i]} | ${movieLength[i]} | ${ageMin[i]} </p>
-                    </p><article><button class="generalButton hoverable" onclick="#">Mer info</button><button class="generalButton hoverable onclick="#">Köp biljett</button></article></article><hr>
-                      <p>${movieInfo[i]}
+                    <a href = "javascript:buttonPage('${title}')" class="movie-link"><h2>${title}</h2></a><article class="currentMovieTitleContainer"> <p class="title-p"> ${genres} | ${length} | ${ageGroup} </p>
+                    <article><button class="general-button" onclick = "buttonPage('${title}')">Mer info</button><button class="general-button" onclick="#">Köp biljett</button></article></article><hr>
+                      <p>${description}
                       </p>
                   </div>`;
-    i++;
-    $(`.currentMovie${i}`).append(movieHtml);
+      i++;
+      $(`.currentMovie${i}`).append(movieHtml);
+    }
   }
 }
 
-buildMoviePage();
+function buildMoreInfoPage(selectedMovie) {
+  $('header').after(`<section class="movie-info"></section>`);
+
+  for (let {
+    title,
+    productionCountries,
+    detailedDescription,
+    productionYear,
+    length,
+    subtitles,
+    actors,
+    language,
+    genres,
+    ageGroup,
+    trailer,
+    director,
+  } of movies) {
+    if (selectedMovie === title) {
+      let movieHtml = /*html*/ `
+                          <div>
+                               <div class="youtube">
+                              <iframe width="100%" height="100%" src="${trailer}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                              </div>
+                              <div class="info-text">
+                              <div class="title-row">
+                              <h2>${title}</h2>
+                              <div class="button-title">
+                                <button onclick = "window.location.href='/currentmovies.html'">Gå tillbaka</button><button onclick="#">Köp biljett</button>
+                                </div>
+                              </div>
+                                <hr width='100%'>
+                                <article><span> | Produktions land: ${productionCountries} | </span><span>Produktions år: ${productionYear}</span><span> | Längd: ${length} | </span><span>Genre: ${genres}</span><span> | Ålder: ${ageGroup} | Språk: ${language} | </span><span>Undertext: ${subtitles}</span><span> | Skådespelare: ${actors} | </span><span>Regissör: ${director}</span><span> </article>
+                                <hr>
+
+                                <article>${detailedDescription}</article>
+                                                               
+                                </div>
+                            </div>`;
+
+      $(`.movies`).replaceWith(movieHtml);
+    }
+  }
+}
+
+function buttonPage(title) {
+  console.log(title);
+  buildMoreInfoPage(title);
+}
+buildInitialPage();

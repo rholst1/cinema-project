@@ -235,7 +235,7 @@ function clearInputForm() {
 }
 function buildInfoButton() {
   if (!$('.booking-row1-col2 button').length) {
-    $('.booking-row1-col2').append(`<button type="button" value="booking" class="generalButton hoverable">INFO</button>`);
+    $('.booking-row1-col2').append(`<button type="button" value="booking" class="general-button">INFO</button>`);
   }
 }
 function buildBookingButton() {
@@ -243,7 +243,7 @@ function buildBookingButton() {
     $('.booking-row3').append(`<section class="button-section">
         <input
           type="submit"
-          class="generalButton hoverable"
+          class="general-button"
           disabled
           onclick="alert('Bokning klar!')"
           value="BOKA"

@@ -56,38 +56,42 @@ body {
   font: var(--font-bread);
   margin: 0;
 }
-.generalButton {
+
+hr {
+  border: none;
+  background-color: #ccc;
+  color: #ccc;
+  height: 1px;
+}
+
+.general-button {
   margin: 5px;
-  background: var(--generalButton-color);
+  background-color: rgb(6, 43, 88);
   border-radius: 28px;
-  border: 0px solid var(--accent);
+  border: 1px solid rgb(6, 43, 88);
   display: inline-block;
   cursor: pointer;
   color: var(--text);
   font: var(--font-button);
-  letter-spacing: 1pt;
-  padding: 16px 31px;
+  padding: 15px 20px;
   text-decoration: none;
   text-shadow: 0px 1px 0px var(--darker-shade);
 }
-/*General hovereffect. */
-.hoverable:hover {
-  /*opacity:var(--hover) !important;*/
-  color: var(--hover) !important;
-  /*background:var(--hover-background);*/
-  cursor: pointer;
+button:hover {
+  background-color: var(--hover);
+  border: 1px solid var(--hover);
 }
-.generalButton:hover {
-  /*opacity:var(--hover) !important;*/
-  /*color:var(--hover) !important;*/
-  color: var(--text) !important;
-  background: var(--hover-background) !important;
-  cursor: pointer;
-}
-.generalButton:active {
+button:active {
   position: relative;
   top: 1px;
 }
+/*General hovereffect. 
+ .hoverable:hover{
+   opacity:var(--hover) !important;
+   color: var(--hover) !important;
+   background:var(--hover-background);
+   cursor: pointer;
+ }*/
 /* "Nyheter" and "Visas just nu" Elements */
 .newsAndShowtimeElements {
   display: flex;
@@ -123,7 +127,7 @@ body {
 
 /* Header elements */
 header {
-  background: var(--header-color);
+  background-color: rgb(6, 43, 88);
   color: var(--text);
   position: sticky;
   z-index: 1;
@@ -437,7 +441,44 @@ text-align: center;
   border: 0px;
   cursor: pointer;
   margin: 3px;
-  z-index: 3;
+  z-index: 3;}
+  
+.movie-info {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.youtube {
+  height: 40vh;
+  width: 100vw;
+}
+
+.info-text {
+  color: white;
+  padding: 0 20vw;
+}
+.info-text h2 {
+  font-size: 300%;
+  margin: 0;
+  display: flex;
+  align-items: flex-end;
+}
+.info-text article {
+  font-size: 130%;
+  letter-spacing: 0.5px;
+}
+.title-row {
+  display: flex;
+  justify-content: space-between;
+}
+.button-title {
+  margin-top: 5px;
+  margin-bottom: 0px;
+}
+
+.info-input form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 .cinema {
   padding: 10px;
