@@ -413,9 +413,9 @@ text-align: right;
 .cinema-container {
   display: flex;
   justify-content: center;
-  margin-bottom: 2vw;
-  margin-left: 2vw;
-  margin-right: 2vw;
+  margin-bottom: 1vw;
+  margin-left: 1vw;
+  margin-right: 1vw;
 }
 /*
 .cinema-container h2 {
