@@ -55,7 +55,6 @@ body {
   background: var(--body-color);
   font: var(--font-bread);
   margin: 0;
-  /*min-width: fit-content;*/
 }
 .generalButton {
   margin: 5px;
@@ -129,7 +128,6 @@ header {
   position: sticky;
   z-index: 1;
   top: 0;
-  /*min-width: 100%;*/
 }
 .menu-bar {
   display: flex;
@@ -195,8 +193,9 @@ header {
 .border {
   display: flex;
   flex-direction: column;
-  align-content: flex-start;
+  align-items: flex-start;
   padding: max(2%,2vw);
+  border:3px solid pink;
 }
 
 .get-booking {
@@ -294,28 +293,29 @@ a.movie-link {
   padding-right: 0;
 }
 .upcoming-showings-container h2 {
-  border-bottom: 3px solid var(--text);
+  border-bottom: 1px solid var(--text);
   text-align: left;
   font: var(--font-title-medium);
-  max-width: 20vw;
+  max-width: fit-content;
 }
-
+/*Booking page is divided into 4 rows startif from .booking-row0. the 2nd row
+has 3 columns starting from .booking-row1-col0.*/
 .booking-row0{
 display: flex;
-/*justify-self: stretch;*/
 justify-content: center;
 }
 .booking-row1{
 display: flex;
 flex-direction: row;
 align-content: center;
-min-width: max-content;
+min-width: fit-content;
 }
 .booking-row1-col0{
+  width: fit-content;
+  flex-grow: 3;
 }
 .booking-row1-col1{
-  flex-grow: 1;
-  min-width: max(30vw,30%);
+  flex-grow: 4;
   padding:2vw;
   display: flex;
   flex-direction: column;
@@ -323,18 +323,18 @@ min-width: max-content;
   border:1px solid white;
 }
 .booking-row1-col2{
-  flex-grow: 1;
   display: flex;
   flex-direction: row;
 justify-self: stretch;
   min-width: max-content;
 }
+/*info button*/
 .booking-row1-col2>button{
 height: min-content;
 width:min-content;
 }
 .booking-row3{
-text-align: right;
+text-align: center;
 }
 .info-input form {
   grid-column: 2;
@@ -344,12 +344,16 @@ text-align: right;
 .info-input input {
   grid-column: 2;
   width: max-content;
-  margin: 1%;
+  margin: 1vw;
 }
 .info-input label {
   grid-column: 1;
   justify-self: right;
   padding: 1%;
+}
+.booking-row2{
+  display: flex;
+  justify-content: flex-end;
 }
 .info-input {
   padding: 1%;
@@ -360,7 +364,8 @@ text-align: right;
   color: var(--text);
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  min-width: fit-content;
+  width: fit-content;
+  max-width: 90vw;
   border:1px solid white;
 }
 
@@ -382,12 +387,13 @@ text-align: right;
   opacity: 0.3;
 }
 .ticketbooking-container {
-  align-self: center;
+  align-self: left;
   display: flex;
   flex-direction: column;
-  width: 100%;
-  min-width: min-content;
   border:1px solid white;
+  /*min-width: fit-content;*/
+  min-width: 80vw;
+
 }
 /*Showing selection dropdowns*/
 .showings-picker-dropdown{
