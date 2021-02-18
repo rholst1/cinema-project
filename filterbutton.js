@@ -14,3 +14,11 @@ $(document).ready(function () {
     $(".btn").toggle();
   });
 });
+
+$(function () {
+  $("#toggle").click(function () {
+    $(this).text(function (i, text) {
+      return text === "Visa filter" ? "Dölj filter" : "Visa filter";
+    })
+  });
+})
