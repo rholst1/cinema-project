@@ -10,10 +10,10 @@ Object.freeze(SeatStatus);
 export default class Seat {
 
   /*seatStatus should have any of the values from SeatStatus*/
-  constructor(seatStatus, column, row) {
+  constructor(seatStatus, seatNumber) {
+
     this.setSeatStatus(seatStatus);
-    this.column = column;
-    this.row = row;
+    this.seatNumber = seatNumber;
   }
   /* Expects a string in the parameter that corresponds to any of the 
   SeatStatus enums. */

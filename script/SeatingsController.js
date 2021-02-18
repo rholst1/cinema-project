@@ -1,5 +1,3 @@
-
-import Cinema from '/script/Cinema.js';
 import Showing from '/script/Showing.js';
 
 export default class SeatingsController {
