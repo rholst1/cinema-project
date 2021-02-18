@@ -3,7 +3,8 @@ $('main').append(`<section class="movies"></section>`);
 $('.movies').prepend(
   `<h1 class="currentMovieTitleH1">AKTUELLA FILMER JUST NU</h1>`
 );
-$('.movies').append(/*html*/`<div class="btn-container"><button class="general-button" id="toggle">Visa filter</button><button class="btn general-button" id="all">Alla</button>
+$('.movies')
+  .append(/*html*/ `<div class="btn-container"><button class="general-button" id="toggle">Visa filter</button><button class="btn general-button" id="all">Alla</button>
 <button class="btn general-button" id="15-år">15 år</button>
 <button class="btn general-button" id="11-år">11 år</button>
 <button class="btn general-button" id="7-år">7 år</button>
@@ -101,6 +102,5 @@ function buttonPage(title) {
   console.log(title);
   buildMoreInfoPage(title);
 }
-$.getScript("filterbutton.js", function () {
-});
+$.getScript('filterbutton.js', function () {});
 buildInitialPage();
