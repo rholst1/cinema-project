@@ -362,15 +362,15 @@ img {
 hr {
   position: relative;
 }
-.currentMovie1,
-.currentMovie2,
-.currentMovie3,
-.currentMovie4,
-.currentMovie5,
-.currentMovie6 {
+.movie-container {
   color: var(--text);
   display: flex;
   padding: 1vh 5vw;
+}
+.btn-container {
+  padding-right: 10vw;
+  display: flex;
+  flex-direction: row-reverse;
 }
 .currentMovieTitleDiv {
   padding: 0 5vw;
