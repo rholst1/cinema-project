@@ -3,7 +3,7 @@ $('main').append(`<section class="movies"></section>`);
 $('.movies').prepend(
   `<h1 class="currentMovieTitleH1">AKTUELLA FILMER JUST NU</h1>`
 );
-$('.movies').append(`<div class="btn-container"><button class="active btn" id="all">Show All</button>
+$('.movies').append(/*html*/`<div class="btn-container"><button id="toggle">Visa filter</button><button class="active btn" id="all">Alla</button>
 <button class="btn" id="15-år">15 år</button>
 <button class="btn" id="11-år">11 år</button>
 <button class="btn" id="7-år">7 år</button>
