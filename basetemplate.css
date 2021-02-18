@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;400&display=swap');
+@import './styles/ticketbooking.css';
 /*Variables for colors and fonts. Accessing example var(--blue) instead of rgb(30, 144, 255).*/
 :root {
   /* Experimental colors.
@@ -280,7 +281,7 @@ a.movie-link {
 }
 /*=============TicketBooking page=================*/
 /*Upcoming showings*/
-.upcoming-showings-container li {
+/*.upcoming-showings-container li {
   list-style-type: none;
   text-align: left;
   font: var(--font-bread);
@@ -304,10 +305,10 @@ a.movie-link {
   text-align: left;
   font: var(--font-title-medium);
   max-width: fit-content;
-}
+}*/
 /*Booking page is divided into 4 rows startif from .booking-row0. the 2nd row
 has 3 columns starting from .booking-row1-col0.*/
-.booking-row0{
+/*.booking-row0{
 display: flex;
 justify-content: center;
 }
@@ -334,8 +335,8 @@ min-width: fit-content;
   flex-direction: row;
 justify-self: stretch;
   min-width: max-content;
-}
-/*info button*/
+}*/
+/*info button*//*
 .booking-row1-col2>button{
 height: min-content;
 width:min-content;
@@ -402,12 +403,10 @@ text-align: center;
   display: flex;
   flex-direction: column;
   border:1px solid white;
-  /*min-width: fit-content;*/
   min-width: 80vw;
-
-}
+}*/
 /*Showing selection dropdowns*/
-.showings-picker-dropdown{
+/*.showings-picker-dropdown{
   text-align: center;
 }
  select {
@@ -425,22 +424,22 @@ text-align: center;
 .movie-picker-dropdown{
   
 }
-
+*/
 /*Seat-picker*/
-.cinema-container {
+/*.cinema-container {
   display: flex;
   justify-content: center;
   margin-bottom: 1vw;
   margin-left: 1vw;
   margin-right: 1vw;
-}
+}*/
 /*
 .cinema-container h2 {
   font: var(--font-title-medium);
   color: var(--text);
   margin-bottom: 0px;
 }*/
-.cinema-button {
+/*.cinema-button {
   height: 30px;
   min-width: 5px;
   max-width: 12px;
@@ -449,7 +448,7 @@ text-align: center;
   border: 0px;
   cursor: pointer;
   margin: 3px;
-  z-index: 3;}
+  z-index: 3;}*/
   
 .movie-info {
   display: flex;
@@ -483,7 +482,7 @@ text-align: center;
   margin-top: 5px;
   margin-bottom: 0px;
 }
-
+/*
 .info-input form {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -523,3 +522,4 @@ text-align: center;
   width: max-content;
   text-align: center;  
 }
+*/
