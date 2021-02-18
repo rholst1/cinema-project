@@ -3,11 +3,11 @@ $('main').append(`<section class="movies"></section>`);
 $('.movies').prepend(
   `<h1 class="currentMovieTitleH1">AKTUELLA FILMER JUST NU</h1>`
 );
-$('.movies').append(/*html*/`<div class="btn-container"><button id="toggle">Visa filter</button><button class="active btn" id="all">Alla</button>
-<button class="btn" id="15-år">15 år</button>
-<button class="btn" id="11-år">11 år</button>
-<button class="btn" id="7-år">7 år</button>
-<button class="btn" id="Barntillåten">Barntillåten</button></div>`);
+$('.movies').append(/*html*/`<div class="btn-container"><button class="general-button" id="toggle">Visa filter</button><button class="btn general-button" id="all">Alla</button>
+<button class="btn general-button" id="15-år">15 år</button>
+<button class="btn general-button" id="11-år">11 år</button>
+<button class="btn general-button" id="7-år">7 år</button>
+<button class="btn general-button" id="Barntillåten">Barntillåten</button></div>`);
 
 // let movieDivs = [];
 // function createDivs(numberOfMovies) {
@@ -43,7 +43,7 @@ function buildMovieList(selectedMovie) {
                 </div>
                 <div class="currentMovieTitleDiv">
                     <a href = "javascript:buttonPage('${title}')" class="movie-link"><h2>${title}</h2></a><article class="currentMovieTitleContainer"> <p class="title-p"> ${genres} | ${length} | ${ageGroup} </p>
-                    <article><button class="generalButton" onclick = "buttonPage('${title}')">Mer info</button><button class="generalButton" onclick="#">Köp biljett</button></article></article><hr>
+                    <article><button class="general-button" onclick = "buttonPage('${title}')">Mer info</button><button class="general-button" onclick="#">Köp biljett</button></article></article><hr>
                       <p>${description}
                       </p>
                   </div></div>`;
@@ -80,7 +80,7 @@ function buildMoreInfoPage(selectedMovie) {
                               <div class="title-row">
                               <h2>${title}</h2>
                               <div class="button-title">
-                                <button onclick = "window.location.href='/currentmovies.html'">Gå tillbaka</button><button onclick="#">Köp biljett</button>
+                                <button class="general-button" onclick = "window.location.href='/currentmovies.html'">Gå tillbaka</button><button class="general-button" onclick="#">Köp biljett</button>
                                 </div>
                               </div>
                                 <hr width='100%'>
