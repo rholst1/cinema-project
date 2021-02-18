@@ -1,4 +1,4 @@
-@import "css/currentmovies.css";
+@import "styles/currentmovies.css";
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;400&display=swap');
 /*Variables for colors and fonts. Accessing example var(--blue) instead of rgb(30, 144, 255).*/
 :root {
