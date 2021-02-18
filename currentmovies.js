@@ -101,4 +101,6 @@ function buttonPage(title) {
   console.log(title);
   buildMoreInfoPage(title);
 }
+$.getScript("filterbutton.js", function () {
+});
 buildInitialPage();
