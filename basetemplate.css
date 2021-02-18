@@ -372,6 +372,9 @@ hr {
   display: flex;
   flex-direction: row-reverse;
 }
+.btn {
+  display: none;
+}
 .currentMovieTitleDiv {
   padding: 0 5vw;
   width: 100vw;
