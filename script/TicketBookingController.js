@@ -164,6 +164,7 @@ function seatsSelected() {
   if (seatingsController.selectedSeats.length === 1) {
     buildInputForm();
     buildBookingButton();
+    disableBookingButton();
     listenToInputForm();
     listenToBookingButton();
   } else if (seatingsController.selectedSeats.length === 0) {
@@ -244,7 +245,6 @@ function buildBookingButton() {
         <input
           type="submit"
           class="general-button"
-          disabled
           onclick="alert('Bokning klar!')"
           value="BOKA"
         />
