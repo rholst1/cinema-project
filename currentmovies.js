@@ -1,16 +1,21 @@
 $('header').after(`<main></main > `);
-$('main').replaceWith(`<section class="movies"></section>`);
+$('main').append(`<section class="movies"></section>`);
 $('.movies').prepend(
   `<h1 class="currentMovieTitleH1">AKTUELLA FILMER JUST NU</h1>`
 );
+$('.movies').append(/*html*/`<div class="btn-container"><button class="general-button" id="toggle">Visa filter</button><button class="btn general-button" id="all">Alla</button>
+<button class="btn general-button" id="15-år">15 år</button>
+<button class="btn general-button" id="11-år">11 år</button>
+<button class="btn general-button" id="7-år">7 år</button>
+<button class="btn general-button" id="Barntillåten">Barntillåten</button></div>`);
 
-let movieDivs = [];
-function createDivs(numberOfMovies) {
-  for (let i = 1; i < numberOfMovies + 1; i++) {
-    movieDivs.push(`<div class="currentMovie${i}"></div>`);
-  }
-  $('section').append(movieDivs);
-}
+// let movieDivs = [];
+// function createDivs(numberOfMovies) {
+//   for (let i = 1; i < numberOfMovies + 1; i++) {
+//     movieDivs.push(`<div class="currentMovies"></div>`);
+//   }
+//   $('section').append(movieDivs);
+// }
 
 let movies;
 async function buildInitialPage() {
@@ -19,9 +24,10 @@ async function buildInitialPage() {
 }
 
 function buildMovieList(selectedMovie) {
-  createDivs(movies.length);
+  $('section').append(`<div class="currentMovies"></div>`);
+  // createDivs(movies.length);
   let i = 0;
-  while (i < movieDivs.length) {
+  while (i < movies.length) {
     for (let {
       title,
       description,
@@ -32,7 +38,7 @@ function buildMovieList(selectedMovie) {
     } of movies) {
       let movieHtml;
 
-      movieHtml = /*html*/ `<div class="currentMovieIMG1">
+      movieHtml = /*html*/ `<div class="movie-container ${ageGroup}"><div class="currentMovieIMG1">
                   <img src="${images}" class="img1" alt="Här ska en bild vara">
                 </div>
                 <div class="currentMovieTitleDiv">
@@ -40,9 +46,9 @@ function buildMovieList(selectedMovie) {
                     <article><button class="general-button" onclick = "buttonPage('${title}')">Mer info</button><button class="general-button" onclick="#">Köp biljett</button></article></article><hr>
                       <p>${description}
                       </p>
-                  </div>`;
+                  </div></div>`;
       i++;
-      $(`.currentMovie${i}`).append(movieHtml);
+      $(`.currentMovies`).append(movieHtml);
     }
   }
 }
@@ -74,7 +80,7 @@ function buildMoreInfoPage(selectedMovie) {
                               <div class="title-row">
                               <h2>${title}</h2>
                               <div class="button-title">
-                                <button onclick = "window.location.href='/currentmovies.html'">Gå tillbaka</button><button onclick="#">Köp biljett</button>
+                                <button class="general-button" onclick = "window.location.href='/currentmovies.html'">Gå tillbaka</button><button class="general-button" onclick="#">Köp biljett</button>
                                 </div>
                               </div>
                                 <hr width='100%'>
@@ -95,4 +101,6 @@ function buttonPage(title) {
   console.log(title);
   buildMoreInfoPage(title);
 }
+$.getScript("filterbutton.js", function () {
+});
 buildInitialPage();
