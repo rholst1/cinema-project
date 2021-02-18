@@ -267,18 +267,18 @@ p.title-p {
 
 
 
-a.movie-link {
+/* a.movie-link {
   text-decoration: none;
   color: var(--text);
   display: inline-block;
   font-size: 140%;
-}
+} */
 
-.currentMovieTitleContainer {
+/* .currentMovieTitleContainer {
   display: flex;
   width: 100%;
   justify-content: space-between;
-}
+} */
 /*=============TicketBooking page=================*/
 /*Upcoming showings*/
 .upcoming-showings-container li {
@@ -452,7 +452,7 @@ text-align: center;
   margin: 3px;
   z-index: 3;}
   
-.movie-info {
+/* .movie-info {
   display: flex;
   justify-content: center;
   flex-direction: column;
