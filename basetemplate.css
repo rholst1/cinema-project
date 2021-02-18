@@ -68,7 +68,7 @@ hr {
   margin: 5px;
   background-color: rgb(6, 43, 88);
   border-radius: 28px;
-  border: 1px solid rgb(6, 43, 88);
+  border: 0px solid rgb(6, 43, 88);
   display: inline-block;
   cursor: pointer;
   color: var(--text);
@@ -79,7 +79,7 @@ hr {
 }
 button:hover {
   background-color: var(--hover);
-  border: 1px solid var(--hover);
+  border: 0px solid var(--hover);
 }
 button:active {
   position: relative;

@@ -153,7 +153,7 @@ function listenToBookingButton() {
       seatingsController.reserveSelected();
       seatingsController.clearSeatSelection();
     }
-  }, '.generalButton');
+  }, '.general-button');
 }
 function listenToSeatSelection() {
   document.removeEventListener("seat selection updated'", seatsSelected, false);
@@ -269,12 +269,12 @@ function buildCinema() {
   $('.cinema').append('<div class="seat-selectors"></div>');
 }
 function enableBookingButton() {
-  $('.button-section .generalButton').prop('disabled', false);
-  $('.button-section .generalButton').css('pointer-events', 'all');
-  $('.button-section .generalButton').css('opacity', '1');
+  $('.button-section .general-button').prop('disabled', false);
+  $('.button-section .general-button').css('pointer-events', 'all');
+  $('.button-section .general-button').css('opacity', '1');
 }
 function disableBookingButton() {
-  $('.button-section .generalButton').prop('disabled', true);
-  $('.button-section .generalButton').css('pointer-events', 'none');
-  $('.button-section .generalButton').css('opacity', '0.3');
+  $('.button-section .general-button').prop('disabled', true);
+  $('.button-section .general-button').css('pointer-events', 'none');
+  $('.button-section .general-button').css('opacity', '0.3');
 }
