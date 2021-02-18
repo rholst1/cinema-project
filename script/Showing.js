@@ -1,4 +1,5 @@
 import Seat from "/script/Seat.js";
+import Auditorium from "/script/Auditorium.js";
 
 export default class Showing {
   constructor(auditorium, film, date, reservedSeats) {
@@ -42,11 +43,29 @@ export default class Showing {
     }
   }
   getSeat(col, row) {
+    let seatNumber = this.getSeatNumberFromCoordinates(col, row);
     for (let seat of this.seats) {
-      if (seat.column == col && seat.row == row) {
+      if (seat.seatNumber === seatNumber) {
         return seat;
       }
     }
+  }
+  getSeatNumberFromCoordinates(column, row) {
+    let seatNumber = 0;
+    for (let i = 0; i < row - 1; i++) {
+      seatNumber += seatsPerRow[i];
+    }
+    seatNumber += column;
+    return seatNumber;
+  }
+  getSeatCoordinatesFromSeatNumber(seatNumber) {
+    let column = seatNumber;
+    let row = 0;
+    for (row; row < this.auditorium.seatsPerRow.length; row++) {
+      if (column < seatsPerRow[row]) break;
+      column -= seatsPerRow[row];
+    }
+    return [column, row];
   }
   reserveSeat(seat) {
     let seatArray = this.getSeatCoordinates(seat);
