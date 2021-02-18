@@ -195,7 +195,6 @@ header {
   flex-direction: column;
   align-items: flex-start;
   padding: max(2%,2vw);
-  border:3px solid pink;
 }
 
 .get-booking {
