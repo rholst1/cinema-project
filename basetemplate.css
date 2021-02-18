@@ -26,9 +26,9 @@
   --nowShowing-color: var(--lighter-shade);
   --header-color: var(--shade);
   --featured-color: var(--darker-shade);
-  --upcoming-showings-container-color: var(--lighter-shade);
+  --upcoming-showings-container-color: var(--darker-shade);
   --footer-color: var(--darker-shade);
-  --info-input-color: var(--lighter-shade);
+  --info-input-color: var(--darker-shade);
   /*Hover effect - pick which effects you want and comment out the others. Might need to update the .hoverable:hover class also.*/
   /*--hover: 0.7;*/
   --hover: rgb(226, 136, 17);
@@ -69,7 +69,7 @@ hr {
   margin: 5px;
   background-color: rgb(6, 43, 88);
   border-radius: 28px;
-  border: 1px solid rgb(6, 43, 88);
+  border: 0px solid rgb(6, 43, 88);
   display: inline-block;
   cursor: pointer;
   color: var(--text);
@@ -78,21 +78,22 @@ hr {
   text-decoration: none;
   text-shadow: 0px 1px 0px var(--darker-shade);
 }
-.general-button:hover {
-  background-color: var(--hover);
-  border: 1px solid var(--hover);
+button:hover {
+  background-color: var(--hover) ;
+  border: 0px;
 }
+
 .general-button:active {
   position: relative;
   top: 1px;
 }
-/*General hovereffect. */
+/*General hovereffect. 
  .hoverable:hover{
-   /*opacity:var(--hover) !important;*/
+   opacity:var(--hover) !important;
    color: var(--hover) !important;
-   /*background:var(--hover-background);*/
+   background:var(--hover-background);
    cursor: pointer;
- }
+ }*/
 /* "Nyheter" and "Visas just nu" Elements */
 .newsAndShowtimeElements {
   display: flex;
@@ -131,8 +132,8 @@ header {
   background-color: rgb(6, 43, 88);
   color: var(--text);
   position: sticky;
+  z-index: 1;
   top: 0;
-  /*border-bottom: 2px ridge var(--accent);*/
 }
 .menu-bar {
   display: flex;
@@ -186,86 +187,6 @@ header {
   text-decoration: none;
   color: var(--text);
 }
-
-/*Seat-picker*/
-.cinema-container {
-  grid-row: 2;
-  grid-column: 2;
-  justify-self: center;
-}
-.cinema-container h2 {
-  font: var(--font-title-medium);
-  color: var(--text);
-  margin-bottom: 0px;
-}
-.cinema-button {
-  height: 35px;
-  min-width: 10px;
-  max-width: 15px;
-  background-color: var(--seat-free);
-  border-radius: 8px;
-  border: 0px;
-  cursor: pointer;
-  margin: 3px;
-}
-.cinema {
-  padding: 2%;
-  padding-top: 10%;
-  border-radius: 15px;
-  background: var(--cinema);
-  border-radius: 15px;
-  min-width: max-content;
-}
-
-.cinema-screen-container {
-  perspective: 400px;
-  margin-bottom: 0;
-  margin-top: 0;
-  transform: translate(4px, 30px);
-  justify-self: center;
-}
-.cinema-screen {
-  background: linear-gradient(
-    180deg,
-    rgb(255, 255, 255) 24%,
-    rgb(80, 77, 77) 100%
-  );
-  border-top: darkgray ridge;
-  width: 100%;
-  height: 100px;
-  opacity: 90%;
-  transform-style: preserve-3d;
-  transform: rotateX(-65deg);
-}
-.seat-selectors {
-  width: max-content;
-  min-width: 100px;
-}
-/*Upcoming showings*/
-.upcoming-showings-container li {
-  list-style-type: none;
-  text-align: left;
-  font: var(--font-bread);
-  line-height: 2em;
-  margin-right: 20px;
-}
-.upcoming-showings-container {
-  grid-row-start: 1;
-  grid-row-end: 4;
-  grid-column: 1;
-  background: var(--upcoming-showings-container-color);
-  color: var(--text);
-  width: max-content;
-  max-width: 500px;
-  padding: 8%;
-  padding-right: 0;
-}
-.upcoming-showings-container h2 {
-  border-bottom: 3px double var(--text);
-  text-align: left;
-  font: var(--font-title-medium);
-}
-
 .footer {
   background: var(--footer-color);
   text-align: center;
@@ -276,68 +197,12 @@ header {
 }
 
 .border {
-  /*border: 3px solid var(--purple_border);*/
-  padding: 0.5%;
-  text-align: center;
-}
-.ticketbooking-container {
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-}
-.showing-selector-dropdowns {
-  grid-row: 1;
-  grid-column: 2;
-}
-.showing-selector-dropdowns select {
-  border-radius: 4px;
-  color: var(--text);
-  background: var(--darker-shade);
-  border: none;
-  font: var(--font-title-small);
-  margin-bottom: 2%;
-  border: 1px solid var(--text);
-}
-.showing-selector-dropdowns option {
-  color: var(--text);
-  background-color: var(--lighter-shade);
-
-  font: var(--font-bread);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: max(2%,2vw);
 }
 
-.showings-picker-dropdown {
-  grid-row: 1;
-  grid-column: 2;
-  justify-content: center;
-  border-radius: 4px;
-}
-.info-input {
-  padding: 1%;
-  margin: 3%;
-  margin-bottom: 1%;
-  background-color: var(--shade);
-  font: var(--font-title-small);
-  color: var(--text);
-}
-.button-section > .generalButton {
-  pointer-events: none;
-  opacity: 0.3;
-}
-
-/*
-.button-section .generalButton {
-  background-color: var(--accent);
-  font-family: 'Oswald', sans-serif;
-  font-size: large;
-  color: ghostwhite;
-  padding: 1%;
-  margin-bottom: 1%;
-  border: navy;
-}
-
-.button-section .generalButton:hover {
-  color: rgb(12, 12, 41);
-}
-*/
 .get-booking {
   display: flex;
   justify-content: center;
@@ -400,46 +265,9 @@ p.title-p {
   margin: 0;
 } */
 
-.info-input {
-  padding: 1%;
-  margin: 3%;
-  margin-bottom: 1%;
-  background: var(--info-input-color);
-  font: var(--font-title-small);
-  color: var(--text);
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-}
-.info-input form {
-  grid-column: 2;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-.info-input input {
-  grid-column: 2;
-  max-height: 2em;
-  margin: 1%;
-}
-.info-input label {
-  grid-column: 1;
-  justify-self: right;
-  padding: 1%;
-}
-.info-input > .seat-counter {
-  grid-column: 3;
-  grid-row-start: 1;
-  grid-row-end: 3;
-  margin-right: 40px;
-  word-wrap: break-word;
-  text-align: left;
-  margin-left: 3%;
-}
-.seat-counter p {
-  line-height: 0em;
-  max-width: 10em;
-  font: var(--font-bread);
-}
-/* a.movie-link {
+
+
+a.movie-link {
   text-decoration: none;
   color: var(--text);
   display: inline-block;
@@ -451,6 +279,179 @@ p.title-p {
   width: 100%;
   justify-content: space-between;
 }
+/*=============TicketBooking page=================*/
+/*Upcoming showings*/
+.upcoming-showings-container li {
+  list-style-type: none;
+  text-align: left;
+  font: var(--font-bread);
+  line-height: 2em;
+  margin-right: 2vw;
+  max-width: 20vw;
+}
+.upcoming-showings-container {
+  order: 1;
+  display:flex;
+  flex-direction: column;
+  word-wrap: break-word;
+  background: var(--upcoming-showings-container-color);
+  color: var(--text);
+  max-width: 20vw;
+  padding: 2vw;
+  padding-right: 0;
+}
+.upcoming-showings-container h2 {
+  border-bottom: 1px solid var(--text);
+  text-align: left;
+  font: var(--font-title-medium);
+  max-width: fit-content;
+}
+/*Booking page is divided into 4 rows startif from .booking-row0. the 2nd row
+has 3 columns starting from .booking-row1-col0.*/
+.booking-row0{
+display: flex;
+justify-content: center;
+}
+.booking-row1{
+display: flex;
+flex-direction: row;
+align-content: center;
+min-width: fit-content;
+}
+.booking-row1-col0{
+  width: fit-content;
+  flex-grow: 3;
+}
+.booking-row1-col1{
+  flex-grow: 4;
+  padding:2vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border:1px solid white;
+}
+.booking-row1-col2{
+  display: flex;
+  flex-direction: row;
+justify-self: stretch;
+  min-width: max-content;
+}
+/*info button*/
+.booking-row1-col2>button{
+height: min-content;
+width:min-content;
+}
+.booking-row3{
+text-align: center;
+}
+.info-input form {
+  grid-column: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.info-input input {
+  grid-column: 2;
+  width: max-content;
+  margin-left: 1vw;
+}
+.info-input label {
+  grid-column: 1;
+  justify-self: right;
+  padding: 1%;
+}
+.booking-row2{
+  display: flex;
+  justify-content: flex-end;
+}
+.info-input {
+  padding: 1%;
+  margin: 3%;
+  margin-bottom: 1%;
+  background: var(--info-input-color);
+  font: var(--font-title-small);
+  color: var(--text);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: fit-content;
+  max-width: 90vw;
+  border:1px solid white;
+}
+
+.info-input > .seat-counter {
+  grid-column: 1;
+  grid-row-start: 1;
+  grid-row-end: 3;
+  word-wrap: break-word;
+  text-align: left;
+  margin-left: 3%;
+}
+.seat-counter p {
+  line-height: 0em;
+  max-width: 10em;
+  font: var(--font-bread);
+}
+.general-button:hover{
+  background-color: var(--hover) ;
+  border: 0px;
+}
+.disabled {
+    opacity: 0.3;
+    pointer-events: none;
+}
+.ticketbooking-container {
+  align-self: left;
+  display: flex;
+  flex-direction: column;
+  border:1px solid white;
+  /*min-width: fit-content;*/
+  min-width: 80vw;
+
+}
+/*Showing selection dropdowns*/
+.showings-picker-dropdown{
+  text-align: center;
+}
+ select {
+  border-radius: 4px;
+  color: var(--text);
+  background: var(--darker-shade);
+  border: none;
+  font: var(--font-title-small);
+  margin-bottom: 2%;
+  border: 1px solid var(--text);
+}
+.showings-picker-dropdown {
+  border-radius: 4px;
+}
+.movie-picker-dropdown{
+  
+}
+
+/*Seat-picker*/
+.cinema-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1vw;
+  margin-left: 1vw;
+  margin-right: 1vw;
+}
+/*
+.cinema-container h2 {
+  font: var(--font-title-medium);
+  color: var(--text);
+  margin-bottom: 0px;
+}*/
+.cinema-button {
+  height: 30px;
+  min-width: 5px;
+  max-width: 12px;
+  background-color: var(--seat-free);
+  border-radius: 8px;
+  border: 0px;
+  cursor: pointer;
+  margin: 3px;
+  z-index: 3;}
+  
 .movie-info {
   display: flex;
   justify-content: center;
@@ -488,13 +489,38 @@ p.title-p {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
-.info-input input {
-  grid-column: 2;
-  width: max-content;
-  margin: 1%;
+.cinema {
+  padding: 10px;
+  padding-top: 30px;
+  border-radius: 15px;
+  background: var(--cinema);
+  border-radius: 15px;
+  width: fit-content;
+  max-height: min-content;
 }
-.info-input label {
-  grid-column: 1;
-  justify-self: right;
-  padding: 1%;
+
+.cinema-screen-container {
+  perspective: 400px;
+  margin-bottom: 0;
+  margin-top: 0;
+  transform: translate(0, -90px);
+  justify-self: center;
+  max-height: 1px;
+}
+.cinema-screen {
+  background: linear-gradient(
+    180deg,
+    rgb(255, 255, 255) 24%,
+    rgb(80, 77, 77) 100%
+  );
+  border-top: darkgray ridge;
+  width: 100%;
+  height: 100px;
+  opacity: 90%;
+  transform-style: preserve-3d;
+  transform: rotateX(-65deg);
+}
+.seat-selectors {
+  width: max-content;
+  text-align: center;  
 }
