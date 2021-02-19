@@ -14,5 +14,5 @@ require('best-sqlite3-frontend')({
   port: 3000,
   staticFolder: '../',
 }).then(({ app, db }) => {
-  //write code here
+  //Insert code here
 });
