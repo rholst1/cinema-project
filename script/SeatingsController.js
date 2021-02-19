@@ -23,8 +23,8 @@ export default class SeatingsController {
     /*We delegate handling of the three different interactions (mouseeneter, 
       mouseleave,click) to corresponding methods*/
     $(".seat-selectors").on({
-      mouseenter: parent._activateCinemaButtonHover,
-      mouseleave: parent._deactivateCinemaButtonHover,
+      /*mouseenter: parent._activateCinemaButtonHover,
+      mouseleave: parent._deactivateCinemaButtonHover,*/
       click: parent._activateCinemaButton
     }, '.cinema-button');
   }

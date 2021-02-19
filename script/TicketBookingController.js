@@ -34,22 +34,31 @@ customer has booked*/
 init();
 
 function init() {
-  buildContainer();
-  buildSelectorContainer();
   buildMoviePickerDropdown();
   listenToMovieSelector();
-  listenToShowingSelector();
 }
-function buildContainer() {
-  $('.border').append(`
-  <article class="ticketbooking-container"></article>`);
+
+
+function buildTicketBookingContainer() {
+  if ($('.ticketbooking-container').length) {
+    $('.ticketbooking-container').remove();
+  }
+  $('.border').append(`<article class="ticketbooking-container">
+    <div class="booking-row1">
+      <div class="booking-row1-col0"></div>
+      <div class="booking-row1-col1"></div>
+      <div class="booking-row1-col2"></div>
+    </div>
+    <div class="booking-row2"></div>
+    <div class="booking-row3"></div>
+  </article>`);
 }
-function buildSelectorContainer() {
-  $('.ticketbooking-container').append(`
-  <div class="showing-selector-dropdowns"></div>`);
-}
+
 function buildMoviePickerDropdown() {
-  $('.showing-selector-dropdowns').append(`
+  $('.border').html(`
+  <div class="booking-row0"></div>
+  `);
+  $('.booking-row0').html(`
   <div class="movie-picker-dropdown">
       <select id="select-movie">
         <option value="0">Välj film:</option>
@@ -62,11 +71,28 @@ function buildMoviePickerDropdown() {
       </select>
   </div>`);
 }
+
 function listenToMovieSelector() {
   $("#select-movie").change(function (e) {
-    $(".showing-selector-dropdowns #date-and-time").remove();
-    $(".showing-selector-dropdowns").append(`        
+    if (this.value !== "0") {
+      buildTicketBookingContainer();
+      buildShowingsPickerDropdown();
+      buildUpcomingShowingsSection();
+      buildInfoButton();
+      listenToShowingSelector();
+    } else {
+      $(".border").html('');
+      init();
+    }
+  });
+}
+function buildShowingsPickerDropdown() {
+  if (!$('.showings-picker-dropdown').length) {
+    $(".booking-row1-col1").append(`        
       <div class="showings-picker-dropdown">
+      </div>`);
+  }
+  $('.showings-picker-dropdown').html(`        
         <select id="date-and-time">
           <option value="0">Välj Datum och Tid:</option>
           <option value="2020-3-13-17-00-00">13 Mars 17:00</option>
@@ -75,10 +101,17 @@ function listenToMovieSelector() {
           <option value="2020-3-18-19-00-00">18 Mars 19:00</option>
           <option value="2020-3-19-19-00-00">19 Mars 19:00</option>
           <option value="2020-3-20-17-00-00">20 Mars 17:00</option>
-        </select>
-      </div>`);
-    $('.ticketbooking-container').append(`
+        </select>`);
+}
+function buildUpcomingShowingsSection() {
+  /* If .upcoming-showings-container does not exist we create it otherwise we just
+  change its contents.*/
+  if (!$('.upcoming-showings-container').length) {
+    $('.booking-row1-col0').append(`
     <section class="upcoming-showings-container">
+    </section>`);
+  }
+  $('.upcoming-showings-container').html(`
         <h2>Kommande visningar</h2>
         <li class="hoverable">Lorem, ipsum dolor.</li>
         <li class="hoverable"> Quam, exercitationem doloremque!</li>
@@ -89,16 +122,12 @@ function listenToMovieSelector() {
         <li class="hoverable">Quia, nobis quos.</li>
         <li class="hoverable">Itaque, quasi totam?</li>
         <li class="hoverable">Culpa, molestiae delectus.</li>
-        <li class="hoverable">Dicta, veritatis distinctio!</li>
-      </section>
-      <section class="cinema-container"></section>`);
-  });
+        <li class="hoverable">Dicta, veritatis distinctio!</li>`);
 }
-
 
 /* Listen to which showing the user picks*/
 function listenToShowingSelector() {
-  $(".showing-selector-dropdowns").on('change', "#date-and-time", function (e) {
+  $(".booking-row1-col1").on('change', "#date-and-time", function (e) {
     $('.cinema-container').html('');
     clearBookingButton();
     clearInputForm();
@@ -124,7 +153,7 @@ function listenToBookingButton() {
       seatingsController.reserveSelected();
       seatingsController.clearSeatSelection();
     }
-  }, '.generalButton');
+  }, '.general-button');
 }
 function listenToSeatSelection() {
   document.removeEventListener("seat selection updated'", seatsSelected, false);
@@ -135,6 +164,7 @@ function seatsSelected() {
   if (seatingsController.selectedSeats.length === 1) {
     buildInputForm();
     buildBookingButton();
+    disableBookingButton();
     listenToInputForm();
     listenToBookingButton();
   } else if (seatingsController.selectedSeats.length === 0) {
@@ -155,7 +185,7 @@ function seatsSelected() {
   }
   buildSeatNumberCounter(seatNumbers);
 }
-
+/*todo join*/
 function buildSeatNumberCounter(seatNumbers) {
   if ($('.info-input').length) {
     if (!$('.seat-counter').length) {
@@ -187,8 +217,8 @@ function listenToInputForm() {
 }
 function buildInputForm() {
   if (!$('.info-input').length) {
-    $('.border').append(`<section class="info-input">
-        <form>
+    $('.booking-row2').append(`<section class="info-input">
+        <form>      
           <label for="username">Namn</label>
           <input type="text" id="username" placeholder="Ditt namn" />
           <br /><br />
@@ -204,13 +234,17 @@ function buildInputForm() {
 function clearInputForm() {
   $('.info-input').remove();
 }
+function buildInfoButton() {
+  if (!$('.booking-row1-col2 button').length) {
+    $('.booking-row1-col2').append(`<button type="button" value="booking" class="general-button">INFO</button>`);
+  }
+}
 function buildBookingButton() {
   if (!$('.button-section').length) {
-    $('.border').append(`<section class="button-section">
+    $('.booking-row3').append(`<section class="button-section">
         <input
           type="submit"
-          class="generalButton hoverable"
-          disabled
+          class="general-button"
           onclick="alert('Bokning klar!')"
           value="BOKA"
         />
@@ -221,19 +255,22 @@ function clearBookingButton() {
   $('.button-section').remove();
 }
 function buildCinema() {
-  $('.cinema-container').append('<h2>Platser</h2>');
-  $('.cinema-container').append('<div class=cinema-screen-container></div>');
-  $('.cinema-screen-container').append('<div class=cinema-screen></div>');
+  /*If .cinema-container does not exist we create it. */
+  if (!$('.cinema-container').length) {
+    $('.booking-row1-col1').append(`
+      <section class="cinema-container">
+      </section>`);
+  }
+  /*We reset the previous contents while seating the header. */
+  $('.cinema-container').html(/*'<h2>Platser</h2>'*/'');
   $('.cinema-container').append('<div class="cinema"></div>');
+  $('.cinema').append('<div class="cinema-screen-container"></div>');
+  $('.cinema-screen-container').append('<div class="cinema-screen"></div>');
   $('.cinema').append('<div class="seat-selectors"></div>');
 }
 function enableBookingButton() {
-  $('.button-section .generalButton').prop('disabled', false);
-  $('.button-section .generalButton').css('pointer-events', 'all');
-  $('.button-section .generalButton').css('opacity', '1');
+  $('.button-section .general-button').removeClass("disabled");
 }
 function disableBookingButton() {
-  $('.button-section .generalButton').prop('disabled', true);
-  $('.button-section .generalButton').css('pointer-events', 'none');
-  $('.button-section .generalButton').css('opacity', '0.3');
+  $('.button-section .general-button').addClass("disabled");
 }
