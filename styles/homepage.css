@@ -1,0 +1,36 @@
+
+/* "Nyheter" and "Visas just nu" Elements */ 
+.newsAndShowtimeElements {
+  display: flex;
+  align-items: stretch;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 1%;
+}
+.news {
+  color: var(--text);
+  background: var(--news-color);
+  max-width: 45%;
+  padding: 3%;
+  margin: 3%;
+}
+
+.nowShowing {
+  color: var(--text);
+  background: var(--nowShowing-color);
+  max-width: 45%;
+  padding: 5%;
+  margin: 0.5%;
+}
+
+.nowShowingTitles > li {
+  margin-bottom: 7%;
+  border-bottom: solid;
+  padding: 3%;
+  border-width: 1px;
+  width: 100%;
+}
+
+.nowShowingTitles a {
+  text-decoration: none;
+}
