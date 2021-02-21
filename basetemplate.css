@@ -1,4 +1,4 @@
-/* @import "styles/homepage.css"; */
+@import "styles/homepage.css";
 @import "styles/currentmovies.css";
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;400&display=swap');
 /*Variables for colors and fonts. Accessing example var(--blue) instead of rgb(30, 144, 255).*/
@@ -95,7 +95,10 @@ button:hover {
    background:var(--hover-background);
    cursor: pointer;
  }*/
-/* "Nyheter" and "Visas just nu" Elements */
+
+/* "Nyheter" and "Visas just nu" Elements | REMOVE WHEN CLEANING UP basetemplate CSS */
+
+/*
 .newsAndShowtimeElements {
   display: flex;
   flex-direction: row;
@@ -127,6 +130,7 @@ button:hover {
 .nowShowingTitles a {
   text-decoration: none;
 }
+*/
 
 /* Header elements */
 header {
