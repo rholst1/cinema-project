@@ -3,6 +3,11 @@ import Showing from '/script/Showing.js';
 import SeatingsController from '/script/SeatingsController.js';
 import DatabaseController from '/script/DatabaseController.js';
 import Auditorium from '/script/Auditorium.js';
+import Film from '/script/Film.js';
+
+
+let dbController = new DatabaseController();
+
 
 /*temporary example showings*/
 let cinema0 = new Auditorium([24, 20, 20, 20, 20, 20, 18], "cinema1");
@@ -18,6 +23,9 @@ let showing5 = new Showing(cinema2, 'untitled-film', new Date(2020, 3, 13, 17, 0
 
 let showingsOfSelectedFilm = new Map();
 let seatingsController = null;
+
+
+
 
 showingsOfSelectedFilm.set("2020-3-14-17-00-00", showing0);
 showingsOfSelectedFilm.set("2020-3-16-18-00-00", showing1);
@@ -35,8 +43,6 @@ customer has booked*/
 init();
 
 function init() {
-  let dbController = new DatabaseController();
-  dbController.test();
   buildMoviePickerDropdown();
   listenToMovieSelector();
 }
@@ -58,6 +64,7 @@ function buildTicketBookingContainer() {
 }
 
 function buildMoviePickerDropdown() {
+
   $('.border').html(`
   <div class="booking-row0"></div>
   `);
@@ -65,14 +72,15 @@ function buildMoviePickerDropdown() {
   <div class="movie-picker-dropdown">
       <select id="select-movie">
         <option value="0">Välj film:</option>
-        <option value="movie1">Lorem ipsum dolor sit.</option>
-        <option value="movie2">Lorem ipsum dolor sit amet.</option>
-        <option value="movie3">Lorem ipsum dolor sit amet consectetur.</option>
-        <option value="movie4">Lorem ipsum dolor sit.</option>
-        <option value="movie5">Lorem ipsum dolor sit amet consectetur.</option>
-        <option value="movie6">Lorem, ipsum dolor.</option>
       </select>
   </div>`);
+  /*Get all films from DB and build dropdown with their titles*/
+  (async () => {
+    let films = await dbController.getAllFilms();
+    for (let film of films) {
+      $('#select-movie').append(`<option value="${film.title}">${film.title}</option>`)
+    }
+  })();
 }
 
 function listenToMovieSelector() {

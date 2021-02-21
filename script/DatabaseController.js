@@ -1,5 +1,5 @@
 import Customer from '/script/Customer.js';
-
+import Film from '/script/Film.js';
 export default class DatabaseController {
   constructor() {
   }
@@ -17,15 +17,28 @@ export default class DatabaseController {
     console.log('All db tables', await db.tables());
     console.log('All db views', await db.views());
   }
-
+  /*returns film object from film title*/
   async getFilm(title) {
-    let result = await db.run(/*sql*/` 
+    let result = await db.run(` 
       SELECT * FROM new_movie_list WHERE title="${title}";
   `);
     film = result[0];
     return new Film(film.title, film.productionCountries, film.productionYear, film.length,
       film.genres, film.ageGroup, film.language, film.subtitles, film.director, film.actors,
-      film.description, fiolm.detailedDescription);
+      film.description, film.detailedDescription);
+  }
+  async getAllFilms() {
+    let result = await db.run(` 
+      SELECT * FROM new_movie_list;
+  `);
+    let films = [];
+    for (let film of result) {
+      films.push(new Film(film.title, film.productionCountries, film.productionYear, film.length,
+        film.genres, film.ageGroup, film.language, film.subtitles, film.director, film.actors,
+        film.description, film.detailedDescription));
+    }
+    console.log(films);
+    return films;
   }
   async test() {
     let title = "Hidden Figures";
