@@ -3,18 +3,38 @@ import Customer from '/script/Customer.js';
 export default class DatabaseController {
   constructor() {
   }
+  /*showing object does not apply seat reservations*/
+  async addShowing(showing) {
 
-  async addShowing(filmName,) {
+    let result = await db.run(/*sql*/` 
+      INSERT INTO Showings (filmID,auditorium,date,time) 
+      VALUES (${showing.film.id}, ${showing.auditorium.id}, "${showing.date}", "${showing.getTime()}");
+  `);
+    // Log the result of the query      
+    console.table(result);
+    // You can ask the db which tables and views
+    // that are in it
+    console.log('All db tables', await db.tables());
+    console.log('All db views', await db.views());
+  }
 
+  async getFilm(title) {
+    let result = await db.run(/*sql*/` 
+      SELECT * FROM new_movie_list WHERE title="${title}";
+  `);
+    film = result[0];
+    return new Film(film.title, film.productionCountries, film.productionYear, film.length,
+      film.genres, film.ageGroup, film.language, film.subtitles, film.director, film.actors,
+      film.description, fiolm.detailedDescription);
   }
   async test() {
-    let title = "Engelska";
+    let title = "Hidden Figures";
     // You can run any query you want against it
     let result = await db.run(/*sql*/` 
-      SELECT title FROM new_movie_list WHERE language="${title}";
+      SELECT * FROM new_movie_list WHERE title="${title}";
   `);
     // Log the result of the query
-    console.table(result);
+    console.log(result[0]);
     // You can ask the db which tables and views
     // that are in it
     console.log('All db tables', await db.tables());
