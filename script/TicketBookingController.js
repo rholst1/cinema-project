@@ -8,6 +8,9 @@ import Film from '/script/Film.js';
 
 let dbController = new DatabaseController();
 
+(async () => {
+  await dbController.addCustomer(new Customer("Pelle", "pelle@email.com", "0707070707"));
+})();
 
 /*temporary example showings*/
 let cinema0 = new Auditorium([24, 20, 20, 20, 20, 20, 18], "cinema1");
@@ -64,7 +67,6 @@ function buildTicketBookingContainer() {
 }
 
 function buildMoviePickerDropdown() {
-
   $('.border').html(`
   <div class="booking-row0"></div>
   `);
@@ -78,7 +80,7 @@ function buildMoviePickerDropdown() {
   (async () => {
     let films = await dbController.getAllFilms();
     for (let film of films) {
-      $('#select-movie').append(`<option value="${film.title}">${film.title}</option>`)
+      $('#select-movie').append(`<option value="${film.id}">${film.title}</option>`)
     }
   })();
 }
@@ -160,11 +162,15 @@ function listenToBookingButton() {
       let name = $('form :input[id="username"]').val();
       let email = $('form :input[id="email"]').val();
       let phoneNr = $('form :input[id="phonenumber"]').val();
-      Customers.push(new Customer(name, email, phoneNr))
+      (async () => {
+        await dbController.addCustomer(new Customer(name, email, phoneNr));
+      })();
       seatingsController.reserveSelected();
       seatingsController.clearSeatSelection();
     }
   }, '.general-button');
+
+
 }
 function listenToSeatSelection() {
   document.removeEventListener("seat selection updated'", seatsSelected, false);

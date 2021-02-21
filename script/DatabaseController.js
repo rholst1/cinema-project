@@ -6,16 +6,15 @@ export default class DatabaseController {
   /*showing object does not apply seat reservations*/
   async addShowing(showing) {
 
-    let result = await db.run(/*sql*/` 
+    let result = await db.run(` 
       INSERT INTO Showings (filmID,auditorium,date,time) 
       VALUES (${showing.film.id}, ${showing.auditorium.id}, "${showing.date}", "${showing.getTime()}");
   `);
-    // Log the result of the query      
-    console.table(result);
-    // You can ask the db which tables and views
-    // that are in it
-    console.log('All db tables', await db.tables());
-    console.log('All db views', await db.views());
+  }
+  async addCustomer(customer) {
+    await db.run(` 
+      INSERT INTO Customer (name, email, phoneNr) VALUES ("${customer.name}","${customer.email}","${customer.phoneNr}");
+  `);
   }
   /*returns film object from film title*/
   async getFilm(title) {
@@ -25,8 +24,9 @@ export default class DatabaseController {
     film = result[0];
     return new Film(film.title, film.productionCountries, film.productionYear, film.length,
       film.genres, film.ageGroup, film.language, film.subtitles, film.director, film.actors,
-      film.description, film.detailedDescription);
+      film.description, film.detailedDescription, film.ID);
   }
+  /*returns all films as film objects*/
   async getAllFilms() {
     let result = await db.run(` 
       SELECT * FROM new_movie_list;
@@ -35,9 +35,8 @@ export default class DatabaseController {
     for (let film of result) {
       films.push(new Film(film.title, film.productionCountries, film.productionYear, film.length,
         film.genres, film.ageGroup, film.language, film.subtitles, film.director, film.actors,
-        film.description, film.detailedDescription));
+        film.description, film.detailedDescription, film.ID));
     }
-    console.log(films);
     return films;
   }
   async test() {
