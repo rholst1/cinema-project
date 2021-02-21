@@ -1,6 +1,7 @@
 import Customer from '/script/Customer.js';
 import Showing from '/script/Showing.js';
 import SeatingsController from '/script/SeatingsController.js';
+import DatabaseController from '/script/DatabaseController.js';
 import Auditorium from '/script/Auditorium.js';
 
 /*temporary example showings*/
@@ -34,6 +35,8 @@ customer has booked*/
 init();
 
 function init() {
+  let dbController = new DatabaseController();
+  dbController.test();
   buildMoviePickerDropdown();
   listenToMovieSelector();
 }
