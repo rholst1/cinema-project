@@ -66,7 +66,7 @@ function buildNowShowing() {
 
 /* Function that builds the carousel */
 function buildCarousel() {
-  let carousel = /*html*/ `<div class="slides">
+  return /*html*/ `<div class="slides">
     <a href="#">            
       <img src="img/hf.jpeg">
     </a>
@@ -92,6 +92,4 @@ function buildCarousel() {
     <span class="dot" onclick="changeDotSlide(2)"></span>
     <span class="dot" onclick="changeDotSlide(3)"></span>
   </div>`
-
-  return carousel;
 }
