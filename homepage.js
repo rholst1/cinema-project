@@ -1,4 +1,4 @@
-$.getScript('script/carousel.js');
+$.getScript('script/Carousel.js');
 
 $('header').after(`<main></main > `);
 $('main').append(`<div class="slideshow-container"></div>`);
