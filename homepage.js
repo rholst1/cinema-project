@@ -64,19 +64,22 @@ function buildNowShowing() {
 
 /* Function that builds the carousel */
 function buildCarousel() {
-  let carousel = /*html*/ `<div class="slides">               
+  let carousel = /*html*/ `<div class="slides">
+    <a href="#">            
       <img src="img/hf.jpeg">
-      <div class="text">en review här kanske?</div>
+    </a>
     </div>
 
     <div class="slides">
+    <a href="#">
       <img src="/img/ts.jpg">
-      <div class="text">en review här kanske?</div>
+    </a>
     </div>
 
     <div class="slides">
+    <a href="#">
       <img src="img/tenet.jpg">
-      <div class="text">en review här kanske?</div>
+    </a>
     </div>
 
     <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
