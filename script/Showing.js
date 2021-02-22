@@ -16,10 +16,7 @@ export default class Showing {
         this.seats.push(new Seat("free", seatNumber++));
       }
     }
-    this.id = null;
-    if (id != undefined) {
-      this.id = id;
-    }
+    this.id = id;
     if (reservedSeats != undefined) {
       for (let reservedSeat of reservedSeats) {
         let seatArray = this.getSeatCoordinates(reservedSeat);

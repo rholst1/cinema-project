@@ -2,21 +2,83 @@ import Customer from '/script/Customer.js';
 import Film from '/script/Film.js';
 import Showing from '/script/Showing.js';
 import Auditorium from '/script/Auditorium.js';
+import Ticket from './Ticket';
+import Booking from './Booking';
 export default class DatabaseController {
   constructor() {
   }
-  /*showing object does not apply seat reservations*/
+  /*Add a showing to db from a Showing object. Does not apply seat reservations*/
   async addShowing(showing) {
     await db.run(` 
       INSERT INTO Showings (filmID,auditorium,date,time) 
-      VALUES (${showing.film.id}, ${showing.auditorium.id}, "${showing.date}", "${showing.getTime()}");
+      VALUES (${showing.film.id}, ${showing.auditorium.id}, "${showing.date}", "${showing.time}");
   `);
   }
+  async addBooking(booking) {
+    //add customer (if already added nothing will happen since email, phoneNr is unique)
+    this.addCustomer(booking.customer);
+    //get customer ID (should be added through auto incrementing in the db if new customer)
+    let customerID = this.getCustomer(booking.customer.email).id;
+    let showingID = booking.showing.id;
+    await db.run(` 
+      INSERT INTO Bookings (showingID, customerID)
+      VALUES (${showingID},${customerID});
+  `);
+    //get booking ID so we can add the tickets
+    result = await db.run(` 
+      SELECT ID FROM Bookings WHERE showingID=${showingID} AND customerID=${customerID};
+  `);
+    let bookingID = result[0].ID;
+    this.addTickets(booking.tickets, bookingID);
+  }
+  async addTickets(tickets, bookingID) {
+    //TODO make single query
+    for (let ticket of tickets) {
+      await db.run(` 
+      INSERT INTO Tickets (bookingID, seatNumber, type)
+      VALUES (${bookingID},${ticket.seatNumber},${ticket.ticketType});
+  `);
+    }
+  }
+  /*Add a customer from a customer object.*/
   async addCustomer(customer) {
     await db.run(` 
       INSERT INTO Customer (name, email, phoneNr)
       VALUES ("${customer.name}","${customer.email}","${customer.phoneNr}");
   `);
+  }
+  /* Get all bookings belonging to a customer from their customer ID */
+  async getBookings(email) {
+    let customer = this.getCustomer(email);
+    let result = await db.run(` 
+      SELECT * FROM Bookings
+      WHERE customerID=${customer.id};`);
+    let bookings = [];
+    for (let booking of result) {
+      bookings.push(
+        new Booking(
+          this.getShowings("ID", booking.showingID),
+          customer, this.getTickets(booking.ID)));
+    }
+    return bookings;
+  }
+  async getTicketPrice(ticketType) {
+    let result = await db.run(` 
+      SELECT price FROM TicketPriceReference
+      WHERE type="${ticketType}";`);
+    return result[0].price;
+  }
+  /*Takes in ticket id. */
+  async getTickets(bookingID) {
+    let result = await db.run(` 
+      SELECT * FROM Tickets
+      WHERE ID="${bookingID}";`);
+    let tickets = [];
+    for (let ticket of result) {
+      tickets.push(new Ticket(ticket.seatNumber, ticket.ticketType,
+        this.getTicketPrice(ticket.ticketType), ticket.ID));
+    }
+    return tickets;
   }
   /*returns array of film objects from selected column value (only single value).*/
   async getFilms(column, value) {
@@ -79,31 +141,19 @@ export default class DatabaseController {
     }
     return showings;
   }
-  async test() {
-    let title = "Hidden Figures";
-    // You can run any query you want against it
-    let result = await db.run(/*sql*/` 
-      SELECT * FROM new_movie_list WHERE title="${title}";
-  `);
-    // Log the result of the query
-    console.log(result[0]);
-    // You can ask the db which tables and views
-    // that are in it
-    console.log('All db tables', await db.tables());
-    console.log('All db views', await db.views());
-  }
 
   async getCustomer(email) {
-    let customer = await db.run(` 
-      SELECT name, email, phoneNr, ID
+    let result = await db.run(` 
+      SELECT *
       FROM Customer
       where email="${email}"
   `);
-    return new Customer(customer[0], customer[1], customer[2], customer[3]);
+    let customer = result[0];
+    return new Customer(customer.name, customer.email, customer.phoneNr, customer.ID);
   }
-  /*wip */
+  /*wip 
   async getBookings(customerID) {
-    let bookings = await db.run(/*sql*/` 
+    let bookings = await db.run(` 
       select distinct bookings.ID, Tickets.ID, Tickets.ticketType, ticketPrice, seatID, showingID
       from TicketPriceReference, Tickets
         (SELECT ID, ticketID
@@ -112,12 +162,12 @@ export default class DatabaseController {
       WHERE bookings.ticketID = ticketID 
       AND Tickets.ticketType = TicketPriceReference.type
   `);
-    // Log the result of the query
+
     console.table(bookings);
 
   }
 
   getBookingInfoDB(email) {
     let customer = getCustomer(email);
-  }
+  }*/
 }

@@ -5,22 +5,18 @@ import DatabaseController from '/script/DatabaseController.js';
 import Auditorium from '/script/Auditorium.js';
 import Film from '/script/Film.js';
 
-
+/*Accessing the database through this controller */
 let dbController = new DatabaseController();
+/*Controller for reading and manageing the seat selector buttons and
+its related classes. */
 let seatingsController = null;
 
-/*temporary example showings==============ended */
-
-/*The showing we are viewing right now - todo will probably change this with db-integration*/
-
-
 init();
-
+/*Start up the page here */
 function init() {
-  buildMoviePickerDropdown();
+  buildMovieSelectorDropdown();
   listenToMovieSelector();
 }
-
 
 function buildTicketBookingContainer() {
   if ($('.ticketbooking-container').length) {
@@ -37,12 +33,12 @@ function buildTicketBookingContainer() {
   </article>`);
 }
 
-function buildMoviePickerDropdown() {
+function buildMovieSelectorDropdown() {
   $('.border').html(`
   <div class="booking-row0"></div>
   `);
   $('.booking-row0').html(`
-  <div class="movie-picker-dropdown">
+  <div class="movie-selector-dropdown">
       <select id="select-movie">
         <option value="0">Välj film:</option>
       </select>
@@ -60,7 +56,7 @@ function listenToMovieSelector() {
   $("#select-movie").change(function (e) {
     if (this.value !== "0") {
       buildTicketBookingContainer();
-      buildShowingsPickerDropdown();
+      buildShowingsSelectorDropdown();
       buildUpcomingShowingsSection();
       buildInfoButton();
       listenToShowingSelector();
@@ -72,13 +68,13 @@ function listenToMovieSelector() {
 }
 /*Build the dropdown selector for choosing the specific showing of a movie.
 The movie should already be choosen when this is used. */
-function buildShowingsPickerDropdown() {
-  if (!$('.showings-picker-dropdown').length) {
+function buildShowingsSelectorDropdown() {
+  if (!$('.showings-selector-dropdown').length) {
     $(".booking-row1-col1").append(`        
-      <div class="showings-picker-dropdown">
+      <div class="showings-selector-dropdown">
       </div>`);
   }
-  $('.showings-picker-dropdown').html(`        
+  $('.showings-selector-dropdown').html(`        
         <select id="date-and-time">
           <option value="0">Välj Datum och Tid:</option>
           </select>`);
@@ -126,8 +122,6 @@ function listenToShowingSelector() {
       return;
     } //do nothing more if first item selected (should just be info text)
     buildCinema();
-
-
     seatingsController = dbController.getShowings("ID", parseInt(selectedShowingID))
       .then(showing => {
         seatingsController = new SeatingsController(showing[0]);
