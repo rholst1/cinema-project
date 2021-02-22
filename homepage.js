@@ -1,5 +1,7 @@
 $('header').after(`<main></main > `);
-$('main').append(`<section class="newsAndShowtimeElements"></section>`);
+$('main').append(`<div class="slideshow-container"></div>`);
+$('.slideshow-container').append(buildCarousel());
+$('.slideshow-container').after(`<section class="newsAndShowtimeElements"></section>`);
 $('.newsAndShowtimeElements').append(buildNews());
 $('.newsAndShowtimeElements').append(buildNowShowing());
 
@@ -60,3 +62,31 @@ function buildNowShowing() {
   return nowShowingHtml;
 }
 
+/* Function that builds the carousel */
+function buildCarousel() {
+  let carousel = /*html*/ `<div class="slides">               
+      <img src="img/hf.jpeg">
+      <div class="text">en review här kanske?</div>
+    </div>
+
+    <div class="slides">
+      <img src="/img/ts.jpg">
+      <div class="text">en review här kanske?</div>
+    </div>
+
+    <div class="slides">
+      <img src="img/tenet.jpg">
+      <div class="text">en review här kanske?</div>
+    </div>
+
+    <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+    <a class="next" onclick="changeSlide(1)">&#10095;</a>
+  </div>
+  <div class="dot-container">
+    <span class="dot" onclick="changeDotSlide(1)"></span>
+    <span class="dot" onclick="changeDotSlide(2)"></span>
+    <span class="dot" onclick="changeDotSlide(3)"></span>
+  </div>`
+
+  return carousel;
+}
