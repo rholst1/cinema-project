@@ -7,42 +7,13 @@ import Film from '/script/Film.js';
 
 
 let dbController = new DatabaseController();
-
-(async () => {
-  await dbController.addCustomer(new Customer("Pelle", "pelle@email.com", "0707070707"));
-})();
-
-/*temporary example showings*/
-let cinema0 = new Auditorium([24, 20, 20, 20, 20, 20, 18], "cinema1");
-let cinema1 = new Auditorium([14, 16, 18, 19, 18, 16, 14], "cinema2");
-let cinema2 = new Auditorium([10, 10, 10, 8], "cinema3");
-
-let showing0 = new Showing(cinema0, 'untitled-film', new Date(2020, 3, 14, 17, 0, 0));
-let showing1 = new Showing(cinema1, 'untitled-film', new Date(2020, 3, 16, 18, 0, 0));
-let showing2 = new Showing(cinema2, 'untitled-film', new Date(2020, 3, 18, 19, 0, 0));
-let showing3 = new Showing(cinema0, 'untitled-film', new Date(2020, 3, 19, 19, 0, 0));
-let showing4 = new Showing(cinema1, 'untitled-film', new Date(2020, 3, 20, 17, 0, 0));
-let showing5 = new Showing(cinema2, 'untitled-film', new Date(2020, 3, 13, 17, 0, 0));
-
-let showingsOfSelectedFilm = new Map();
 let seatingsController = null;
 
-
-
-
-showingsOfSelectedFilm.set("2020-3-14-17-00-00", showing0);
-showingsOfSelectedFilm.set("2020-3-16-18-00-00", showing1);
-showingsOfSelectedFilm.set("2020-3-18-19-00-00", showing2);
-showingsOfSelectedFilm.set("2020-3-19-19-00-00", showing3);
-showingsOfSelectedFilm.set("2020-3-20-17-00-00", showing4);
-showingsOfSelectedFilm.set("2020-3-13-17-00-00", showing5);
 /*temporary example showings==============ended */
 
 /*The showing we are viewing right now - todo will probably change this with db-integration*/
-let selectedShowing = null;
-let Customers = []; /*this should not be here... but where? we might want to know which 
-customer booked a particular seat and we might want to see which showings a particular 
-customer has booked*/
+
+
 init();
 
 function init() {
@@ -99,6 +70,8 @@ function listenToMovieSelector() {
     }
   });
 }
+/*Build the dropdown selector for choosing the specific showing of a movie.
+The movie should already be choosen when this is used. */
 function buildShowingsPickerDropdown() {
   if (!$('.showings-picker-dropdown').length) {
     $(".booking-row1-col1").append(`        
@@ -108,13 +81,17 @@ function buildShowingsPickerDropdown() {
   $('.showings-picker-dropdown').html(`        
         <select id="date-and-time">
           <option value="0">Välj Datum och Tid:</option>
-          <option value="2020-3-13-17-00-00">13 Mars 17:00</option>
-          <option value="2020-3-14-17-00-00">14 Mars 17:00</option>
-          <option value="2020-3-16-18-00-00">16 Mars 18:00</option>
-          <option value="2020-3-18-19-00-00">18 Mars 19:00</option>
-          <option value="2020-3-19-19-00-00">19 Mars 19:00</option>
-          <option value="2020-3-20-17-00-00">20 Mars 17:00</option>
-        </select>`);
+          </select>`);
+  (async () => {
+    let showings = await dbController.getShowings($("#select-movie").val(), 1);
+    for (let showing of showings) {
+      if (showing.auditorium != undefined) {
+        $('#date-and-time').append(`
+          <option value="${showing.id}">${showing.date} ${showing.time} ${showing.auditorium.name}</option>
+          `);
+      }
+    }
+  })();
 }
 function buildUpcomingShowingsSection() {
   /* If .upcoming-showings-container does not exist we create it otherwise we just
@@ -144,18 +121,25 @@ function listenToShowingSelector() {
     $('.cinema-container').html('');
     clearBookingButton();
     clearInputForm();
-    let showingsPickerDropdownValue = $(this).val();
-    if (showingsPickerDropdownValue == "0") {
+    let selectedShowingID = $(this).val();
+    if (selectedShowingID == "0") {
       return;
     } //do nothing more if first item selected (should just be info text)
     buildCinema();
-    selectedShowing = showingsOfSelectedFilm.get(showingsPickerDropdownValue);
-    seatingsController = new SeatingsController(selectedShowing);
-    seatingsController.init();
-    listenToSeatSelection();
 
+
+    seatingsController = dbController.getShowings("ID", parseInt(selectedShowingID))
+      .then(showing => {
+        seatingsController = new SeatingsController(showing[0]);
+        seatingsController.init();
+        listenToSeatSelection();
+        return seatingsController;
+      }).catch(err => {
+      });
   });
 }
+/*When the booking button is pressed we update db with a customer with data from the 
+textfields in form. TODO create a Booking/Tickets */
 function listenToBookingButton() {
   $(".button-section").on({
     click: function () {
@@ -169,8 +153,6 @@ function listenToBookingButton() {
       seatingsController.clearSeatSelection();
     }
   }, '.general-button');
-
-
 }
 function listenToSeatSelection() {
   document.removeEventListener("seat selection updated'", seatsSelected, false);
@@ -178,6 +160,7 @@ function listenToSeatSelection() {
   document.addEventListener('seat selection updated', seatsSelected, false);
 }
 function seatsSelected() {
+
   if (seatingsController.selectedSeats.length === 1) {
     buildInputForm();
     buildBookingButton();
@@ -191,16 +174,17 @@ function seatsSelected() {
   /*todo this should not be done here*/
   let seatNumbers = []
   for (let seat of seatingsController.selectedSeats) {
-    let seatCoordinate = selectedShowing.getSeatCoordinates(seat);
+    let seatCoordinate = seatingsController.showing.getSeatCoordinates(seat);
     let column = seatCoordinate[0];
     let row = seatCoordinate[1];
     let seatNumber = 0;
     for (let i = 0; i < row; i++) {
-      seatNumber += selectedShowing.auditorium.seatsPerRow[i];
+      seatNumber += seatingsController.showing.auditorium.seatsPerRow[i];
     }
     seatNumbers.push(seatNumber + column);
   }
   buildSeatNumberCounter(seatNumbers);
+
 }
 /*todo join*/
 function buildSeatNumberCounter(seatNumbers) {

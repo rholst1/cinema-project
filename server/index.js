@@ -12,7 +12,7 @@ require('best-sqlite3-frontend')({
   },
   express: require('express'),
   port: 3000,
-  staticFolder: '../'
+  staticFolder: path.basename('..')
 }).then(({ app, db }) => {
   // if you want to you can
   // do more things with the express app 

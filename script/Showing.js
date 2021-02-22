@@ -2,17 +2,23 @@ import Seat from "/script/Seat.js";
 import Auditorium from "/script/Auditorium.js";
 
 export default class Showing {
-  constructor(auditorium, film, date, reservedSeats) {
+  constructor(auditorium, film, date, time, id, reservedSeats) {
     this.auditorium = auditorium;
     this.film = film;
-    this.date = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
-    this.time = date.getHours() + '.' + date.getMinutes();
+    this.date = date;
+    this.time = time;
+    /*this.date = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
+    this.time = date.getHours() + '.' + date.getMinutes();*/
     this.seats = [];
-    //for (let row of this.auditorium.seatsPerRow) {
+    let seatNumber = 0;
     for (let row = 0; row < this.auditorium.seatsPerRow.length; row++) {
       for (let col = 0; col < this.auditorium.seatsPerRow[row]; col++) {
-        this.seats.push(new Seat("free", col, row));
+        this.seats.push(new Seat("free", seatNumber++));
       }
+    }
+    this.id = null;
+    if (id != undefined) {
+      this.id = id;
     }
     if (reservedSeats != undefined) {
       for (let reservedSeat of reservedSeats) {
@@ -45,15 +51,15 @@ export default class Showing {
   getSeat(col, row) {
     let seatNumber = this.getSeatNumberFromCoordinates(col, row);
     for (let seat of this.seats) {
-      if (seat.seatNumber === seatNumber) {
+      if (seat.seatNumber == seatNumber) {
         return seat;
       }
     }
   }
   getSeatNumberFromCoordinates(column, row) {
     let seatNumber = 0;
-    for (let i = 0; i < row - 1; i++) {
-      seatNumber += seatsPerRow[i];
+    for (let i = 0; i < row; i++) {
+      seatNumber += this.auditorium.seatsPerRow[i];
     }
     seatNumber += column;
     return seatNumber;
