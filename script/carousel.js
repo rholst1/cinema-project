@@ -1,4 +1,3 @@
-/* Functions that changes the slides and dots */
 let slideIndex = 1;
 
 function changeSlide(slideNumber) {
