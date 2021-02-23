@@ -45,6 +45,8 @@ function listenToEmailButton() {
 
 listenToEmailButton();
 
+
+
 console.log(db);
 
 let runQuery;
