@@ -46,7 +46,7 @@ function buildNowShowing() {
   let nowShowingHtml;
 
   nowShowingHtml = /*html*/ `<div class="nowShowing">
-      <h2 class="nowShowingh2">Visas just nu</h2>
+      <h2 class="nowShowingh2">På Bio idag</h2>
       <ul class="nowShowingTitles">
      </div>`;
   databasePullShowings();
