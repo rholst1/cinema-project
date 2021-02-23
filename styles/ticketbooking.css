@@ -123,9 +123,7 @@ text-align: center;
   border:1px solid white;
   min-width: 80vw;
 }
-.showings-picker-dropdown{
-  text-align: center;
-}
+
  select {
   border-radius: 4px;
   color: var(--text);
@@ -135,12 +133,12 @@ text-align: center;
   margin-bottom: 2%;
   border: 1px solid var(--text);
 }
-.showings-picker-dropdown {
+.showings-selector-dropdown {
+  text-align: center;
   border-radius: 4px;
+  margin-bottom: 3vh;
 }
-.movie-picker-dropdown{
-  
-}
+
 .info-input form {
   display: grid;
   grid-template-columns: 1fr 1fr;

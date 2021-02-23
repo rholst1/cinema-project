@@ -4,6 +4,8 @@ import SeatingsController from '/script/SeatingsController.js';
 import DatabaseController from '/script/DatabaseController.js';
 import Auditorium from '/script/Auditorium.js';
 import Film from '/script/Film.js';
+import Ticket from '/script/Ticket.js';
+import Booking from '/script/Booking.js';
 
 /*Accessing the database through this controller */
 let dbController = new DatabaseController();
@@ -98,17 +100,17 @@ function buildUpcomingShowingsSection() {
     </section>`);
   }
   $('.upcoming-showings-container').html(`
-        <h2>Kommande visningar</h2>
-        <li class="hoverable">Lorem, ipsum dolor.</li>
-        <li class="hoverable"> Quam, exercitationem doloremque!</li>
-        <li class="hoverable">At, sint voluptatibus.</li>
-        <li class="hoverable">Officiis, ab maiores!</li>
-        <li class="hoverable">Eligendi, alias aperiam!</li>
-        <li class="hoverable">Quo, sunt similique.</li>
-        <li class="hoverable">Quia, nobis quos.</li>
-        <li class="hoverable">Itaque, quasi totam?</li>
-        <li class="hoverable">Culpa, molestiae delectus.</li>
-        <li class="hoverable">Dicta, veritatis distinctio!</li>`);
+        <h2>Kommande visningar</h2>`);
+  (async () => {
+    let showings = await dbController.getShowings($("#select-movie").val(), 1);
+    for (let showing of showings) {
+      if (showing.auditorium != undefined) {
+        $('.upcoming-showings-container').append(`
+          <li value="${showing.id}">${showing.date} ${showing.time} ${showing.auditorium.name}</li>
+          `);
+      }
+    }
+  })();
 }
 
 /* Listen to which showing the user picks*/
@@ -140,8 +142,18 @@ function listenToBookingButton() {
       let name = $('form :input[id="username"]').val();
       let email = $('form :input[id="email"]').val();
       let phoneNr = $('form :input[id="phonenumber"]').val();
+
+      let customer = new Customer(name, email, phoneNr);
+      let showing = seatingsController.showing;
+      let tickets = [];
+      //TODO check tickettype price
+      for (let seatNumber of listSelectedSeats()) {
+        tickets.push(new Ticket(seatNumber, "normal", 85));
+      }
       (async () => {
-        await dbController.addCustomer(new Customer(name, email, phoneNr));
+        console.log("heyyy");
+        await dbController.addBooking(new Booking(showing, tickets, customer));
+        console.log("heyyy");
       })();
       seatingsController.reserveSelected();
       seatingsController.clearSeatSelection();
@@ -165,7 +177,9 @@ function seatsSelected() {
     clearBookingButton();
     clearInputForm();
   }
-  /*todo this should not be done here*/
+  buildSeatNumberCounter();
+}
+function listSelectedSeats() {
   let seatNumbers = []
   for (let seat of seatingsController.selectedSeats) {
     let seatCoordinate = seatingsController.showing.getSeatCoordinates(seat);
@@ -177,24 +191,19 @@ function seatsSelected() {
     }
     seatNumbers.push(seatNumber + column);
   }
-  buildSeatNumberCounter(seatNumbers);
-
+  return seatNumbers
 }
 /*todo join*/
-function buildSeatNumberCounter(seatNumbers) {
+function buildSeatNumberCounter() {
+  let seatNumbers = listSelectedSeats()
+  seatNumbers = seatNumbers.join(', ');
   if ($('.info-input').length) {
     if (!$('.seat-counter').length) {
       $('.info-input').append(`<div class="seat-counter">Selected seats:</div>`);
     } else {
       $('.seat-counter').html('Selected seats:');
     }
-    $('.seat-counter').append('<p></p>');
-    for (let i = 0; i < seatNumbers.length; i++) {
-      $('.seat-counter p').append(`${seatNumbers[i]}`);
-      if (i < (seatNumbers.length - 1)) {
-        $('.seat-counter p').append(`, `);
-      }
-    }
+    $('.seat-counter').append(`<p>${seatNumbers}</p>`);
   }
 }
 /*Each time input form changes we check if there is information in all fields.

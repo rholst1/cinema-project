@@ -1,3 +1,4 @@
+
 async function start() {
 
 
@@ -25,6 +26,5 @@ async function start() {
   console.log('All db views', await db.views());
 
 }
-
 
 start();

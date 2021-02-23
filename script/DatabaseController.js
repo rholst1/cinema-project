@@ -2,8 +2,9 @@ import Customer from '/script/Customer.js';
 import Film from '/script/Film.js';
 import Showing from '/script/Showing.js';
 import Auditorium from '/script/Auditorium.js';
-import Ticket from './Ticket';
-import Booking from './Booking';
+import Ticket from '/script/Ticket.js';
+import Booking from '/script/Booking.js';
+
 export default class DatabaseController {
   constructor() {
   }
@@ -18,17 +19,20 @@ export default class DatabaseController {
     //add customer (if already added nothing will happen since email, phoneNr is unique)
     this.addCustomer(booking.customer);
     //get customer ID (should be added through auto incrementing in the db if new customer)
-    let customerID = this.getCustomer(booking.customer.email).id;
+    let customerID = (this.getCustomer(booking.customer.email)).id;
     let showingID = booking.showing.id;
+    console.log("showingID: " + showingID + "  customerID: " + customerID);
     await db.run(` 
       INSERT INTO Bookings (showingID, customerID)
       VALUES (${showingID},${customerID});
   `);
     //get booking ID so we can add the tickets
-    result = await db.run(` 
-      SELECT ID FROM Bookings WHERE showingID=${showingID} AND customerID=${customerID};
+
+    let result = await db.run(` 
+      SELECT ID FROM Bookings WHERE showingID="${showingID}" AND customerID="${customerID}";
   `);
-    let bookingID = result[0].ID;
+
+    let bookingID = result[0];
     this.addTickets(booking.tickets, bookingID);
   }
   async addTickets(tickets, bookingID) {
@@ -66,7 +70,7 @@ export default class DatabaseController {
     let result = await db.run(` 
       SELECT price FROM TicketPriceReference
       WHERE type="${ticketType}";`);
-    return result[0].price;
+    return result[0];
   }
   /*Takes in ticket id. */
   async getTickets(bookingID) {
@@ -85,7 +89,7 @@ export default class DatabaseController {
     if (column.localeCompare("name") === 0) value = '"' + value + '"';
     let result = await db.run(` 
       SELECT * FROM new_movie_list
-      WHERE ${column}="${value}";
+      WHERE ${column}=${value};
   `);
     let films = [];
     for (let film of result) {
