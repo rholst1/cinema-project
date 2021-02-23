@@ -46,23 +46,19 @@ function listenToEmailButton() {
 listenToEmailButton();
 
 
-
-console.log(db);
-
 let runQuery;
 
 async function getBookings() {
 
-  // let inputEmail = document.getElementById("emailInput").value;
+  let inputEmail = document.getElementById("emailInput").value;
 
   let runQuery = await db.run(/*sql*/`
-
-  USE new_movie_db;
-	SELECT * FROM bookingHistory where email = ${inputEmail};
-  SELECT * FROM Showings WHERE ID = showingsID IN bookingHistory WHERE email = ${inputEmail}; 
+	  SELECT * FROM bookingHistory where email = ${inputEmail};
+    SELECT * FROM Showings WHERE ID = showingsID IN bookingHistory WHERE email = ${inputEmail}; 
   `);
 
-  console.table(runQuery);
+  console.log(runQuery);
+  // console.table(runQuery);
 
   // let unpacked = runQuery.map(
   //   ([email, seats, showingsID, ID, filmID, auditorium, date, time]) => ({ email, seats, showingsID, ID, filmID, auditorium, date, time})
