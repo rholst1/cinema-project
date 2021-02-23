@@ -44,12 +44,12 @@ async function getBookings() {
   let inputEmail = document.getElementById("emailInput").value;
 
   let runQuery = await db.run(/*sql*/`
-	  SELECT * FROM bookingHistory where email = ${inputEmail};
-   SELECT * FROM Showings WHERE ID = showingsID IN bookingHistory WHERE email = ${inputEmail}; 
+	  SELECT * FROM bookingHistory WHERE email = '${inputEmail}';
+    SELECT * FROM Showings WHERE ID = showingsID IN bookingHistory WHERE email = '${inputEmail}'; 
   `);
 
   console.log(runQuery);
-  // console.table(runQuery);
+  console.table(runQuery);
 
   // let unpacked = runQuery.map(
   //   ([email, seats, showingsID, ID, filmID, auditorium, date, time]) => ({ email, seats, showingsID, ID, filmID, auditorium, date, time})
