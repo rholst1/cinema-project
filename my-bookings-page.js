@@ -21,24 +21,15 @@ function listenToEmailButton() {
       $('form').after(`<div class="maindiv"></div>`);
 
       $('.maindiv').prepend(
-        `<br><br> <section class="col1"> <h1> Aktuella bokningar: </h1></section> <br> <hr> <br>
-  <section class="col2"> <h1>  Bokningshistorik:  </h1> </section>`);
-
-      $('.col1').append(
-        `<ul>
-   <li>(Salong 1) film: Hidden Figures kl 17.00 15/3-2021 </li>
-   <li>(Salong 2) film: Hidden Fig kl 18.00 17/3-2021 </li>
-   <li>(Salong 1) film: Hidden kl 17.00 19/3-2021 </li>
-   </ul>`);
+        `<br><br> <section class="col2"> <h1>  Bokningshistorik:  </h1> </section>`);
 
       $('.col2').append(
         `<ul>
-   <li>(Salong 1) film: Hidden Figures kl 17.00 15/3-2021 </li>
+   <li>(Salong 1) film: Hidden Figures kl 17.00 15/3-2021 test test test test test test </li>
    <li>(Salong 2) film: Hidden Fig kl 18.00 17/3-2021 </li>
    <li>(Salong 1) film: Hidden kl 17.00 19/3-2021 </li>
    </ul>`);
 
-      //eventuell annan kod du vill köra
     }
   }, '.email-button');
 }
@@ -54,7 +45,7 @@ async function getBookings() {
 
   let runQuery = await db.run(/*sql*/`
 	  SELECT * FROM bookingHistory where email = ${inputEmail};
-    SELECT * FROM Showings WHERE ID = showingsID IN bookingHistory WHERE email = ${inputEmail}; 
+   SELECT * FROM Showings WHERE ID = showingsID IN bookingHistory WHERE email = ${inputEmail}; 
   `);
 
   console.log(runQuery);
