@@ -1,0 +1,100 @@
+
+/* "Nyheter" and "Visas just nu" Elements */ 
+.newsAndShowtimeElements {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 5vw;
+}
+.news {
+  color: var(--text);
+  background: var(--news-color);
+  width: 50vw;
+  padding: 3vh 3vw;
+  margin: 3vh 2vw 3vh 0;
+}
+
+.nowShowing {
+  color: var(--text);
+  background: var(--nowShowing-color);
+  width: 25vw;
+  padding: 3vh 3vw;
+  margin: 3vh 0;
+}
+.nowShowing h2 {
+  font-size: 200%;
+}
+.nowShowingTitles li {
+  margin-bottom: 1vw;
+  padding: 0;
+}
+.nowShowingTitles a {
+  text-decoration: none;
+}
+
+/* Carousel styling */
+.slideshow-container {
+  width: 70vw;
+  position: relative;
+  margin: auto;
+  margin-top: 1vh;
+}
+.slideshow-container img {
+  width: 70vw;
+  height: 40vh;
+}
+
+.slides {
+  display: none;
+}
+
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+.text {
+  color: #f2f2f2;
+  font-size: 30px;
+  font-weight: bold;
+  padding: 1vh 1vw;
+  position: absolute;
+  bottom: 20px;
+  text-align: left;
+}
+
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: rgb(187, 187, 187);
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot-container {
+  text-align: center;
+}
+
+.active, .dot:hover {
+  background-color: #c57805;
+}

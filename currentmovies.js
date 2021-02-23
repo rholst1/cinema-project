@@ -1,3 +1,5 @@
+$.getScript('script/Filterbutton.js');
+
 $('header').after(`<main></main > `);
 $('main').append(`<section class="movies"></section>`);
 $('.movies').prepend(
@@ -102,5 +104,5 @@ function buttonPage(title) {
   console.log(title);
   buildMoreInfoPage(title);
 }
-$.getScript('filterbutton.js', function () {});
+
 buildInitialPage();
