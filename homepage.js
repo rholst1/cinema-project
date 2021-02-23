@@ -1,5 +1,9 @@
+$.getScript('script/Carousel.js');
+
 $('header').after(`<main></main > `);
-$('main').append(`<section class="newsAndShowtimeElements"></section>`);
+$('main').append(`<div class="slideshow-container"></div>`);
+$('.slideshow-container').append(buildCarousel());
+$('.slideshow-container').after(`<section class="newsAndShowtimeElements"></section>`);
 $('.newsAndShowtimeElements').append(buildNews());
 $('.newsAndShowtimeElements').append(buildNowShowing());
 
@@ -80,3 +84,32 @@ function buildNowShowingElements(filmID, auditorium, time) {
 
 
 
+/* Function that builds the carousel */
+function buildCarousel() {
+  return /*html*/ `<div class="slides">
+    <a href="#" onclick="buildInfo('Hidden Figures')">
+      <img src="img/hf.jpeg">
+    </a>
+    </div>
+
+    <div class="slides">
+    <a href="#" onclick="buildInfo('Toy Story 4')">
+      <img src="/img/ts.jpg">
+    </a>
+    </div>
+
+    <div class="slides">
+    <a href="#" onclick="buildInfo('Tenet')">
+      <img src="img/tenet.jpg">
+    </a>
+    </div>
+
+    <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+    <a class="next" onclick="changeSlide(1)">&#10095;</a>
+  </div>
+  <div class="dot-container">
+    <span class="dot" onclick="changeDotSlide(1)"></span>
+    <span class="dot" onclick="changeDotSlide(2)"></span>
+    <span class="dot" onclick="changeDotSlide(3)"></span>
+  </div>`
+}
