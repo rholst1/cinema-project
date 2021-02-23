@@ -25,7 +25,7 @@ function listenToEmailButton() {
 
       $('.col2').append(
         `<ul>
-   <li>(Salong 1) film: Hidden Figures kl 17.00 15/3-2021 test test test test test test </li>
+   <li>(Salong 1) film: Hidden Figures kl 17.00 15/3-2021</li>
    <li>(Salong 2) film: Hidden Fig kl 18.00 17/3-2021 </li>
    <li>(Salong 1) film: Hidden kl 17.00 19/3-2021 </li>
    </ul>`);
