@@ -47,10 +47,6 @@ async function databasePullShowings() {
     console.log("Failed to load from Database");
   }
   console.table(showings);
-  console.log(showings[0].filmID);
-
-  let i = 0;
-  let showingsTmp = [];
 
   for (let { filmID, auditorium, date, time } of showings) {
 
@@ -63,13 +59,12 @@ async function databasePullShowings() {
 
   }
 
-
 }
 
 function buildHtmlElements(filmID, auditorium, time) {
-  let html = /*html*/ `<div class=showtoday><p color=white>${filmID} | ${time} | Salong ${auditorium}</p></div>
+  let html = /*html*/ `<li><a href="ticketbooking.html" style="color: ghostwhite" class="hoverabe"l>${filmID} | ${time} | Salong ${auditorium}</a></li>
   `;
-  $('.nowShowing').append(html);
+  $('.nowShowingTitles').append(html);
 }
 
 /* Function that builds the "Visas just nu" section with links etc */
@@ -80,19 +75,6 @@ function buildNowShowing() {
   nowShowingHtml = /*html*/ `<div class="nowShowing">
       <h2 class="nowShowingh2">Visas just nu</h2>
       <ul class="nowShowingTitles">
-    //     <li>
-    //       <a href="ticketbooking.html" style="color: ghostwhite" class="hoverabe"l>COMMANDO | 18:00 Sal 1</a>
-    //     </li>
-    //     <li>
-    //       <a href="ticketbooking.html" style="color: ghostwhite" class="hoverable">Sällskapsresan | 19:00 Sal 2</a>
-    //     </li>
-    //     <li>
-    //       <a href="ticketbooking.html" style="color: ghostwhite" class="hoverable">Hot Rod | 21:00 Sal 1</a>
-    //     </li>
-    //     <li>
-    //       <a href="ticketbooking.html" style="color: ghostwhite" class="hoverable">Interstellar | 21:30 Sal 2</a>
-    //     </li>
-    //   </ul>
      </div>`;
 
   $('.newsAndShowtimeElements').append(nowShowingHtml, databasePullShowings());
