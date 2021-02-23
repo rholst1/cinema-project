@@ -67,19 +67,19 @@ function buildNowShowing() {
 /* Function that builds the carousel */
 function buildCarousel() {
   return /*html*/ `<div class="slides">
-    <a href="#">            
+    <a href="#" onclick="buildInfo('Hidden Figures')">
       <img src="img/hf.jpeg">
     </a>
     </div>
 
     <div class="slides">
-    <a href="#">
+    <a href="#" onclick="buildInfo('Toy Story 4')">
       <img src="/img/ts.jpg">
     </a>
     </div>
 
     <div class="slides">
-    <a href="#">
+    <a href="#" onclick="buildInfo('Tenet')">
       <img src="img/tenet.jpg">
     </a>
     </div>
