@@ -77,7 +77,7 @@ async function databasePullShowings() {
 
 /* Function that builds the elements that gets loaded underneath "Visas Just Nu" Header */
 function buildNowShowingElements(filmID, auditorium, time) {
-  let html = /*html*/ `<li><a href="ticketbooking.html" style="color: ghostwhite" class="hoverabe"l>${filmID} | ${time} | Salong ${auditorium}</a></li>
+  let html = /*html*/ `<li><a href="ticketbooking.html" style="color: ghostwhite" class="hoverabe"l>${filmID} | ${time} | Salong ${auditorium}</a><hr></li>
   `;
   $('.nowShowingTitles').append(html);
 }
