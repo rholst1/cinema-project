@@ -29,3 +29,12 @@ function slideShow(slideNumber) {
   dots[slideIndex - 1].className += " active";
 }
 slideShow(slideIndex);
+
+/* Function to build the more info site when you click a slide */
+function buildInfo(title) {
+  // $("img").click(function () {
+  $.getScript('moremovieinfo.js', function () {
+    buildInitialPage(title);
+  });
+  // });
+}
