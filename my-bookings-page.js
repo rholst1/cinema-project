@@ -25,42 +25,52 @@ function listenToEmailButton() {
 
       $('.col2').append(
         `<ul>
-   <li>(Salong 1) film: Hidden Figures kl 17.00 15/3-2021</li>
-   <li>(Salong 2) film: Hidden Fig kl 18.00 17/3-2021 </li>
-   <li>(Salong 1) film: Hidden kl 17.00 19/3-2021 </li>
+  
    </ul>`);
 
     }
   }, '.email-button');
 }
 
-listenToEmailButton();
 
+listenToEmailButton();
 
 let runQuery;
 
 async function getBookings() {
 
+
   let inputEmail = document.getElementById("emailInput").value;
 
   let runQuery = await db.run(/*sql*/`
-	  SELECT * FROM bookingHistory WHERE email = '${inputEmail}';
-    SELECT * FROM Showings WHERE ID = showingsID IN bookingHistory WHERE email = '${inputEmail}'; 
+    SELECT * FROM Showings JOIN bookingHistory ON showingsID WHERE ID = showingsID AND email = '${inputEmail}';
   `);
 
   console.log(runQuery);
   console.table(runQuery);
 
-  // let unpacked = runQuery.map(
-  //   ([email, seats, showingsID, ID, filmID, auditorium, date, time]) => ({ email, seats, showingsID, ID, filmID, auditorium, date, time})
-  // );
-  // console.log('unpacked', unpacked);
+  //   for (i = 0; i < runQuery.length; i++) {
+  let [ID, filmID, auditorium, date, time, email, seats, showingsID] = runQuery[0];
 
-  // $('.col1').append(
-  //   `<ul>
-  //  <li> ${auditorium} film: ${filmID} sittplats: ${seat} Datum och tid: ${date} ${time} </li>
+  //     console.log(`
 
-  //  </ul>`);
+  //   Hi! I am ${email}
+
+  //   and I am ${date} years old!
+
+  // `);
+
+  //   }
+  let unpacked = runQuery.map(
+    ([ID, filmID, auditorium, date, time, email, seats, showingsID]) => ({ ID, filmID, auditorium, date, time, email, seats, showingsID })
+  );
+  console.log('unpacked', unpacked);
+
+
+  // for (let { ID, filmID, auditorium, date, time, email, seats, showingsID } of unpacked) {
+  //   $('.col2 ul').append(
+  //   `<li> Salong: ${auditorium} film: ${filmID} sittplats: ${seat} Datum och tid: ${date} ${time} </li>`);
+  // }
 
 }
 getBookings();
