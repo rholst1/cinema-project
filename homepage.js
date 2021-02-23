@@ -1,9 +1,9 @@
 $('header').after(`<main></main > `);
 $('main').append(`<section class="newsAndShowtimeElements"></section>`);
 $('.newsAndShowtimeElements').append(buildNews());
-//$('.newsAndShowtimeElements').append(buildNowShowing());
+$('.newsAndShowtimeElements').append(buildNowShowing());
 
-buildNowShowing();
+
 
 /* Function that builds the "Nyheter" section with the bullet point news */
 function buildNews() {
@@ -36,38 +36,7 @@ function buildNews() {
   return newsHtml;
 }
 
-/* Function that loads DB entries from Showings into Now Showing box */
-
-let showings = [];
-async function databasePullShowings() {
-  try {
-    showings = await db.run(`SELECT * FROM Showings`);
-  }
-  catch (err) {
-    console.log("Failed to load from Database");
-  }
-  console.table(showings);
-
-  for (let { filmID, auditorium, date, time } of showings) {
-
-    if (date.localeCompare("2021-03-2") === 0) {
-      buildHtmlElements(filmID, auditorium, time);
-
-      console.log(filmID, auditorium, date, time);
-    }
-
-
-  }
-
-}
-
-function buildHtmlElements(filmID, auditorium, time) {
-  let html = /*html*/ `<li><a href="ticketbooking.html" style="color: ghostwhite" class="hoverabe"l>${filmID} | ${time} | Salong ${auditorium}</a></li>
-  `;
-  $('.nowShowingTitles').append(html);
-}
-
-/* Function that builds the "Visas just nu" section with links etc */
+/* Function that builds the "Visas just nu" section with links etc and database info */
 function buildNowShowing() {
 
   let nowShowingHtml;
@@ -76,10 +45,38 @@ function buildNowShowing() {
       <h2 class="nowShowingh2">Visas just nu</h2>
       <ul class="nowShowingTitles">
      </div>`;
-
-  $('.newsAndShowtimeElements').append(nowShowingHtml, databasePullShowings());
-
-
+  databasePullShowings();
+  return nowShowingHtml;
 
 }
+
+/* Function that loads DB entries from Showings into Now Showing box */
+let showings = [];
+async function databasePullShowings() {
+  try {
+    showings = await db.run(`SELECT * FROM Showings`);
+  }
+  catch (err) {
+    console.log("Failed to load from Database");
+  }
+
+  for (let { filmID, auditorium, date, time } of showings) {
+
+    if (date.localeCompare("2021-03-1") === 0) {
+      buildNowShowingElements(filmID, auditorium, time);
+
+    }
+
+  }
+
+}
+
+/* Function that builds the elements that gets loaded underneath "Visas Just Nu" Header */
+function buildNowShowingElements(filmID, auditorium, time) {
+  let html = /*html*/ `<li><a href="ticketbooking.html" style="color: ghostwhite" class="hoverabe"l>${filmID} | ${time} | Salong ${auditorium}</a></li>
+  `;
+  $('.nowShowingTitles').append(html);
+}
+
+
 
