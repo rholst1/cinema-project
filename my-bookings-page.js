@@ -49,18 +49,18 @@ async function getBookings() {
   console.log(runQuery);
   console.table(runQuery);
 
-  //   for (i = 0; i < runQuery.length; i++) {
-  let [ID, filmID, auditorium, date, time, email, seats, showingsID] = runQuery[0];
+  for (i = 0; i < runQuery.length; i++) {
+    let [ID, filmID, auditorium, date, time, email, seats, showingsID] = runQuery[i];
 
-  //     console.log(`
+    console.log(`
 
-  //   Hi! I am ${email}
+    Hi! I am ${email}
 
-  //   and I am ${date} years old!
+    and I am ${date} years old!
 
-  // `);
+  `);
 
-  //   }
+  }
   let unpacked = runQuery.map(
     ([ID, filmID, auditorium, date, time, email, seats, showingsID]) => ({ ID, filmID, auditorium, date, time, email, seats, showingsID })
   );
