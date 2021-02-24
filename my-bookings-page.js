@@ -42,15 +42,15 @@ async function getBookings() {
 
   let inputEmail = document.getElementById("emailInput").value;
 
-  let runQuery = await db.run(/*sql*/`
+  runQuery = await db.run(/*sql*/`
     SELECT * FROM Showings JOIN bookingHistory ON showingsID WHERE ID = showingsID AND email = '${inputEmail}';
   `);
 
   console.log(runQuery);
   console.table(runQuery);
 
-  for (i = 0; i < runQuery.length; i++) {
-    let [ID, filmID, auditorium, date, time, email, seats, showingsID] = runQuery[i];
+  for (let { ID, filmID, auditorium, date, time, email, seats, showingsID } of runQuery) {
+    // let [ID, filmID, auditorium, date, time, email, seats, showingsID] = runQuery[i];
 
     console.log(`
 
@@ -59,6 +59,8 @@ async function getBookings() {
     and I am ${date} years old!
 
   `);
+
+
 
   }
   let unpacked = runQuery.map(
