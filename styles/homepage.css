@@ -20,17 +20,16 @@
   width: 25vw;
   padding: 3vh 3vw;
   margin: 3vh 0;
+
 }
 .nowShowing h2 {
   font-size: 200%;
-}
-.nowShowingTitles li {
-  margin-bottom: 1vw;
-  padding: 0;
+
 }
 .nowShowingTitles a {
   text-decoration: none;
 }
+
 
 /* Carousel styling */
 .slideshow-container {
