@@ -8,6 +8,12 @@ $('main').append(`<div class="space"></div>`);
 
 $('.space').prepend(`<br> <br>`);
 
+$('.space').after(`<form class="get-booking">
+  <input type="text" class="other-button" placeholder="Ange email..." id="emailInput" />
+  <button type="button" class="generalButton hoverable email-button">Hämta dina bokningar</button>
+</form>`);
+
+
 function listenToEmailButton() {
   $('form').on(
     {
