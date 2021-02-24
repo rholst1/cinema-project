@@ -13,6 +13,7 @@ let dbController = new DatabaseController();
 its related classes. */
 let seatingsController = null;
 
+
 init();
 /*Start up the page here */
 function init() {
@@ -46,12 +47,11 @@ function buildMovieSelectorDropdown() {
       </select>
   </div>`);
   /*Get all films from DB and build dropdown with their titles*/
-  (async () => {
-    let films = await dbController.getAllFilms();
+  dbController.getAllFilms().then((films) => {
     for (let film of films) {
       $('#select-movie').append(`<option value="${film.id}">${film.title}</option>`)
     }
-  })();
+  });
 }
 
 function listenToMovieSelector() {
@@ -80,16 +80,14 @@ function buildShowingsSelectorDropdown() {
         <select id="date-and-time">
           <option value="0">Välj Datum och Tid:</option>
           </select>`);
-  (async () => {
-    let showings = await dbController.getShowings($("#select-movie").val(), 1);
+
+  dbController.getShowings($("#select-movie").val(), 1).then((showings) => {
     for (let showing of showings) {
-      if (showing.auditorium != undefined) {
-        $('#date-and-time').append(`
+      $('#date-and-time').append(`
           <option value="${showing.id}">${showing.date} ${showing.time} ${showing.auditorium.name}</option>
           `);
-      }
     }
-  })();
+  });
 }
 function buildUpcomingShowingsSection() {
   /* If .upcoming-showings-container does not exist we create it otherwise we just
@@ -101,8 +99,8 @@ function buildUpcomingShowingsSection() {
   }
   $('.upcoming-showings-container').html(`
         <h2>Kommande visningar</h2>`);
-  (async () => {
-    let showings = await dbController.getShowings($("#select-movie").val(), 1);
+
+  dbController.getShowings($("#select-movie").val(), 1).then((showings) => {
     for (let showing of showings) {
       if (showing.auditorium != undefined) {
         $('.upcoming-showings-container').append(`
@@ -110,7 +108,7 @@ function buildUpcomingShowingsSection() {
           `);
       }
     }
-  })();
+  });
 }
 
 /* Listen to which showing the user picks*/
@@ -121,16 +119,18 @@ function listenToShowingSelector() {
     clearInputForm();
     let selectedShowingID = $(this).val();
     if (selectedShowingID == "0") {
-      return;
-    } //do nothing more if first item selected (should just be info text)
+      return; //do nothing more if first item selected (should just be info text)
+    }
     buildCinema();
     seatingsController = dbController.getShowings("ID", parseInt(selectedShowingID))
       .then(showing => {
+        //we need to check
         seatingsController = new SeatingsController(showing[0]);
         seatingsController.init();
         listenToSeatSelection();
         return seatingsController;
       }).catch(err => {
+        console.log(err);
       });
   });
 }
@@ -150,15 +150,23 @@ function listenToBookingButton() {
       for (let seatNumber of listSelectedSeats()) {
         tickets.push(new Ticket(seatNumber, "normal", 85));
       }
-      (async () => {
-        console.log("heyyy");
-        await dbController.addBooking(new Booking(showing, tickets, customer));
-        console.log("heyyy");
-      })();
+      makeBooking(new Booking(showing, tickets, customer));
       seatingsController.reserveSelected();
       seatingsController.clearSeatSelection();
+
     }
   }, '.general-button');
+}
+function makeBooking(booking) {
+
+  //add customer (if already added nothing will happen since email, phoneNr is unique)
+
+  //let customerID = dbController.addCustomer(booking.customer);
+  //let bookingID = customerID.then(customerID => dbController.addBooking(booking.showing.id, customerID));
+  //bookingID.then(bookingID => dbController.addTickets(booking.tickets, bookingID));
+  //get customer ID (should be added through auto incrementing in the db if new customer)
+
+
 }
 function listenToSeatSelection() {
   document.removeEventListener("seat selection updated'", seatsSelected, false);
@@ -166,7 +174,6 @@ function listenToSeatSelection() {
   document.addEventListener('seat selection updated', seatsSelected, false);
 }
 function seatsSelected() {
-
   if (seatingsController.selectedSeats.length === 1) {
     buildInputForm();
     buildBookingButton();

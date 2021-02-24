@@ -15,41 +15,51 @@ export default class DatabaseController {
       VALUES (${showing.film.id}, ${showing.auditorium.id}, "${showing.date}", "${showing.time}");
   `);
   }
-  async addBooking(booking) {
+
+  /*
+  makeBooking(booking) {
     //add customer (if already added nothing will happen since email, phoneNr is unique)
     this.addCustomer(booking.customer);
     //get customer ID (should be added through auto incrementing in the db if new customer)
-    let customerID = (this.getCustomer(booking.customer.email)).id;
-    let showingID = booking.showing.id;
-    console.log("showingID: " + showingID + "  customerID: " + customerID);
-    await db.run(` 
-      INSERT INTO Bookings (showingID, customerID)
-      VALUES (${showingID},${customerID});
-  `);
-    //get booking ID so we can add the tickets
-
-    let result = await db.run(` 
-      SELECT ID FROM Bookings WHERE showingID="${showingID}" AND customerID="${customerID}";
-  `);
-
-    let bookingID = result[0];
+    booking.customer.id = (this.getCustomer(booking.customer.email)).id;
+    console.log(booking.customer.id);
+    this.addBooking(booking);
+    let bookingID = this.getBookingID(booking);
     this.addTickets(booking.tickets, bookingID);
+  }*/
+  async getBookingID(booking) {
+    let result = await db.run(` 
+      SELECT ID FROM Bookings WHERE showingID=${booking.showing.id} AND customerID=${booking.customer.id};
+  `);
+    return result[0];
   }
+  async addBooking(showingID, customerID) {
+    let result = await db.run(`INSERT INTO Bookings (customerID, showingID) VALUES (${customerID}, ${showingID});`);
+    console.log(result);
+    return result.lastInsertRowId;
+  }
+
   async addTickets(tickets, bookingID) {
     //TODO make single query
     for (let ticket of tickets) {
       await db.run(` 
-      INSERT INTO Tickets (bookingID, seatNumber, type)
-      VALUES (${bookingID},${ticket.seatNumber},${ticket.ticketType});
-  `);
+      INSERT INTO Tickets (bookingID, seatNumber, ticketType)
+      VALUES (${bookingID},${ticket.seatNumber},"${ticket.ticketType}");`);
     }
   }
   /*Add a customer from a customer object.*/
   async addCustomer(customer) {
-    await db.run(` 
+    console.log(customer);
+    let result = await db.run(` 
       INSERT INTO Customer (name, email, phoneNr)
-      VALUES ("${customer.name}","${customer.email}","${customer.phoneNr}");
-  `);
+      VALUES ($name, $email, $phoneNr);
+  `, {
+      name: customer.name,
+      email: customer.email,
+      phoneNr: customer.phoneNr
+    });
+    console.log(result);
+    return result.lastInsertRowId;
   }
   /* Get all bookings belonging to a customer from their customer ID */
   async getBookings(email) {
@@ -132,7 +142,7 @@ export default class DatabaseController {
   async getShowings(column, value) {
     if (column.localeCompare("name") === 0) value = '"' + value + '"';
     let result = await db.run(` 
-      SELECT * FROM Showings WHERE ${column}=${value} ORDER BY date ASC;
+      SELECT * FROM Showings WHERE ${column} = ${value} ORDER BY date ASC;
   `);
     let showings = [];
     for (let showing of result) {
@@ -143,6 +153,7 @@ export default class DatabaseController {
           showing.date,
           showing.time, showing.ID));
     }
+    console.table(result);
     return showings;
   }
 
@@ -150,7 +161,7 @@ export default class DatabaseController {
     let result = await db.run(` 
       SELECT *
       FROM Customer
-      where email="${email}"
+      where email="${email}";
   `);
     let customer = result[0];
     return new Customer(customer.name, customer.email, customer.phoneNr, customer.ID);
