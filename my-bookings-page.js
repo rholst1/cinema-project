@@ -22,7 +22,7 @@ function listenToEmailButton() {
         $('form').after(`<div class="maindiv"></div>`);
 
         $('.maindiv').prepend(
-          `<br><br> <section class="col2"> <h1>  Bokningshistorik:  </h1> </section>`
+          `<br><br> <section class="col2"> <h1>  Bokningar:  </h1> </section>`
         );
 
         queryDatabase();
@@ -41,6 +41,10 @@ function listenToEmailButton() {
 listenToEmailButton();
 
 let runQuery;
+let fullDate;
+let time;
+
+currentDateAndTime();
 
 //Runs when user clicks "Hämta bokningar"
 async function queryDatabase() {
@@ -61,8 +65,37 @@ async function queryDatabase() {
     seats,
     showingsID,
   } of runQuery) {
-    let queryHtml = /*HTML*/ `<li> Salong: ${auditorium} film: ${filmID} sittplats: ${seats} Datum och tid: ${date} ${time} </li>`;
-    $('ul').append(queryHtml);
+
+    //add if statement for kommande visningar vs history
+    //in the kommande visningar if statement, add avboka knapp
+
+
+    let parsedDate = Date.parse(`${date}`);
+    console.log(parsedDate);
+    (parsedDate >= fullDate)
+
+    if (parsedDate >= fullDate) {
+      let queryHtml = /*HTML*/ `<li class= "kommandevisning"> Kommande visning : Salong: ${auditorium} film: ${filmID} sittplats: ${seats} Datum och tid: ${date} ${time} </li> 
+      <button class="general-button" onclick = "remove booking">Avboka</button >`;
+      $('ul').append(queryHtml);
+    }
+    if ((`${date}` <= fullDate) && (`${time}` <= time)) {
+      let queryHtml = /*HTML*/ `<li> Salong: ${auditorium} film: ${filmID} sittplats: ${seats} Datum och tid: ${date} ${time} </li>`;
+      $('ul').append(queryHtml);
+    }
   }
 }
 
+
+async function currentDateAndTime() {
+
+  let currentDate = new Date();
+  let cDay = currentDate.getDate();
+  let cMonth = currentDate.getMonth() + 1;
+  let cYear = currentDate.getFullYear();
+  console.log(cYear + "-" + cMonth + "-" + cDay);
+  fullDate = cYear + "-" + cMonth + "-" + cDay;
+
+  time = currentDate.getHours() + ":" + currentDate.getMinutes();
+  console.log(time);
+}
