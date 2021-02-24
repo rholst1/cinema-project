@@ -82,6 +82,11 @@ export default class DatabaseController {
       WHERE type="${ticketType}";`);
     return result[0];
   }
+  async getTicketPriceReference() {
+    let result = await db.run(` 
+      SELECT * FROM TicketPriceReference;`);
+    return result;
+  }
   /*Takes in ticket id. */
   async getTickets(bookingID) {
     let result = await db.run(` 
