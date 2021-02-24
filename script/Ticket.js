@@ -10,11 +10,11 @@ export default class Ticket {
   static childPrice = null;
   static adultPrice = null;
   static seniorPrice = null;
-
+  //todo clear ticketprice from parameter
   constructor(seatNumber, ticketType, ticketPrice, id) {
     this.seatNumber = seatNumber;
     this.ticketType = ticketType;
-    this.ticketPrice = ticketPrice;
+    this.ticketPrice = this.getTicketPrice(ticketType);
     if (id != undefined) {
       this.id = id;
     } else {
@@ -27,6 +27,11 @@ export default class Ticket {
       if (ticketPrice.type === "adult") Ticket.adultPrice = ticketPrice.price;
       if (ticketPrice.type === "child") Ticket.seniorPrice = ticketPrice.price;
     }
+  }
+  getTicketPrice(ticketType) {
+    if (ticketType === TicketType.CHILD) return Ticket.childPrice;
+    if (ticketType === TicketType.ADULT) return Ticket.adultPrice;
+    if (ticketType === TicketType.SENIOR) return Ticket.seniorPrice;
   }
 
 }

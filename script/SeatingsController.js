@@ -1,3 +1,4 @@
+import Ticket from '/script/Ticket.js';
 import Showing from '/script/Showing.js';
 
 export default class SeatingsController {
@@ -12,8 +13,6 @@ export default class SeatingsController {
     this.tickets = []
     /*Event for selection of first seat*/
     this.seatSelectionEvent = new Event('seat selection updated');
-    /*Accessing db through this */
-    this.databaseController = databaseController;
   }
   init() {
     /*create html code for our cinema*/
@@ -53,15 +52,27 @@ export default class SeatingsController {
       document.dispatchEvent(parent.seatSelectionEvent);
     } else if ((newSeatStatus).localeCompare("selected") == 0) {
       $('.dropdown-content').remove();
+
       $(this).append(`<div class="dropdown-content">
-          <button value="child" class="dropbtn">Barn</button>
-          <button value="adult" class="dropbtn">Vuxen</button>
-          <button value="senior" class="dropbtn">Pensionär</button>
+          <button type="button" value="child" class="dropbtn">Barn</button>
+          <button type="button" value="adult" class="dropbtn">Vuxen</button>
+          <button type="button" value="senior" class="dropbtn">Pensionär</button>
         </div>`);
+      this.parent = parent;
+
+      $(".dropbtn").on('click', function () {
+        console.log(parent);
+        let colRow = parent.showing.getSeatCoordinates(seat);
+        let seatNumber = parent.showing.getSeatNumberFromCoordinates(colRow[0], colRow[1]);
+        parent.tickets.push(new Ticket(seatNumber, $(this).val()));
+        console.log(parent.tickets);
+        parent.selectedSeats.push(seat);
+        document.dispatchEvent(parent.seatSelectionEvent);
+        $('.dropdown-content').remove();
+      })
       $(`:button[value="${seat}"]`).css('background-color', 'var(--seat-selected)');
       //dispatch event if new seats are selected
-      parent.selectedSeats.push(seat);
-      document.dispatchEvent(parent.seatSelectionEvent);
+
     }
 
   }
