@@ -53,9 +53,24 @@
   --font-button: bold 120% var(--font-family);
 }
 
+/*
+html { 
+  background: url(https://cdn.wallpapersafari.com/49/22/6PHJ94.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+*/
+
 body {
-  background-image: url(https://wallpapercave.com/wp/Vvqe2Dp.jpg);
- /* background: var(--body-color); */
+  
+  background: url(https://cdn.wallpapersafari.com/49/22/6PHJ94.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  /* background: var(--body-color); */
   font: var(--font-bread);
   margin: 0;
 }
