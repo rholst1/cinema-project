@@ -1,5 +1,6 @@
 @import "styles/homepage.css";
 @import "styles/currentmovies.css";
+@import "/newBookingScript/newBookingMain.css";
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;400&display=swap');
 /*Variables for colors and fonts. Accessing example var(--blue) instead of rgb(30, 144, 255).*/
 :root {
@@ -57,6 +58,7 @@ body {
   background: var(--body-color);
   font: var(--font-bread);
   margin: 0;
+  color: white;
 }
 
 hr {
