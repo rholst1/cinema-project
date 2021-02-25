@@ -51,3 +51,19 @@ function runScript() {
   getData();
 }
 runScript();
+
+//add seatings
+
+async function addSeatings() {
+  let showingID = 1;
+  let status = 'empty';
+
+  while (showingID < 113) {
+    for (let seatNumber = 1; seatNumber < 201; seatNumber++) {
+      let query = /*sql*/ `INSERT INTO Seatings (seatNumber, showingID, status) VALUES (${seatNumber}, ${showingID}, '${status}')`;
+      console.log(query);
+      await db.run(query);
+    }
+  }
+  showingID++;
+}
