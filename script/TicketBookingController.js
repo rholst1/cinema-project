@@ -12,20 +12,18 @@ let dbController = new DatabaseController();
 /*Controller for reading and manageing the seat selector buttons and
 its related classes. */
 let seatingsController = null;
-
-
 //load current prices (maybe this shouldn't be done here?)
 (dbController.getTicketPriceReference()).then((ticketPrices) => {
   Ticket.loadPriceReference(ticketPrices);
 });
-
 init();
+
 /*Start up the page here */
 function init() {
   buildMovieSelectorDropdown();
   listenToMovieSelector();
 }
-
+/*Main container of ticket booking page*/
 function buildTicketBookingContainer() {
   if ($('.ticketbooking-container').length) {
     $('.ticketbooking-container').remove();
@@ -84,8 +82,8 @@ function buildShowingsSelectorDropdown() {
   $('.showings-selector-dropdown').html(`        
         <select id="date-and-time">
           <option value="0">Välj Datum och Tid:</option>
-          </select>`);
-
+        </select>`);
+  //We get all upcoming showings of the selected movie
   dbController.getShowings($("#select-movie").val(), 1).then((showings) => {
     for (let showing of showings) {
       $('#date-and-time').append(`
@@ -104,14 +102,11 @@ function buildUpcomingShowingsSection() {
   }
   $('.upcoming-showings-container').html(`
         <h2>Kommande visningar</h2>`);
-
   dbController.getShowings($("#select-movie").val(), 1).then((showings) => {
     for (let showing of showings) {
-      if (showing.auditorium != undefined) {
-        $('.upcoming-showings-container').append(`
+      $('.upcoming-showings-container').append(`
           <li value="${showing.id}">${showing.date} ${showing.time} ${showing.auditorium.name}</li>
           `);
-      }
     }
   });
 }
@@ -129,7 +124,6 @@ function listenToShowingSelector() {
     buildCinema();
     seatingsController = dbController.getShowings("ID", parseInt(selectedShowingID))
       .then(showing => {
-        //we need to check
         seatingsController = new SeatingsController(showing[0]);
         seatingsController.init();
         listenToSeatSelection();
@@ -139,49 +133,42 @@ function listenToShowingSelector() {
       });
   });
 }
-/*When the booking button is pressed we update db with a customer with data from the 
-textfields in form. TODO create a Booking/Tickets */
+/*When the booking button is pressed we update db with a customer/booking/ with data from the 
+textfields in form.*/
 function listenToBookingButton() {
   $(".button-section").on({
     click: function () {
       let name = $('form :input[id="username"]').val();
       let email = $('form :input[id="email"]').val();
       let phoneNr = $('form :input[id="phonenumber"]').val();
-
       let customer = new Customer(name, email, phoneNr);
       let showing = seatingsController.showing;
       let tickets = [];
-      //TODO check tickettype price
-      for (let seatNumber of listSelectedSeats()) {
-        tickets.push(new Ticket(seatNumber, "normal", 85));
+      //tickets are stored in seatingController as Ticket objects
+      for (let ticket of seatingsController.tickets) {
+        tickets.push(ticket);
       }
       makeBooking(new Booking(showing, tickets, customer));
       seatingsController.reserveSelected();
       seatingsController.clearSeatSelection();
-
     }
   }, '.general-button');
 }
 async function makeBooking(booking) {
-
-  //add customer (if already added nothing will happen since email, phoneNr is unique)
-
-  let customerID = await dbController.addCustomer(booking.customer);
+  let customerID = await dbController.addCustomer(booking.customer);//returning customer?
   booking.customer.id = customerID;
-  console.log(booking);
   let bookingID = await dbController.addBooking(booking);
   booking.id = bookingID;
   await dbController.addTickets(booking);
   await dbController.addReservedSeats(booking);
-  //get customer ID (should be added through auto incrementing in the db if new customer)
-
-
 }
 function listenToSeatSelection() {
   document.removeEventListener("seat selection updated'", seatsSelected, false);
   // New seat either selected or deselcted.
   document.addEventListener('seat selection updated', seatsSelected, false);
 }
+/*Seat selection event thrown from seatingsController - a seat has either been
+selected or deselected.*/
 function seatsSelected() {
   if (seatingsController.selectedSeats.length === 1) {
     buildInputForm();
@@ -194,22 +181,33 @@ function seatsSelected() {
     clearInputForm();
   }
   buildSeatNumberCounter();
+  buildPriceCounter();
 }
-function listSelectedSeats() {
-  let seatNumbers = []
-  /* for (let seat of seatingsController.selectedSeats) {
-     let seatCoordinate = seatingsController.showing.getSeatCoordinates(seat);
-     let column = seatCoordinate[0];
-     let row = seatCoordinate[1];
-     let seatNumber = 0;
-     for (let i = 0; i < row; i++) {
-       seatNumber += seatingsController.showing.auditorium.seatsPerRow[i];
-     }
-     seatNumbers.push(seatNumber + column);
-   }*/
-  return seatingsController.selectedSeats
+function buildPriceCounter() {
+  let adult = 0;
+  let child = 0;
+  let senior = 0;
+  let sum = 0;
+  for (let ticket of seatingsController.tickets) {
+    if (ticket.ticketType === "adult") ++adult;
+    else if (ticket.ticketType === "child") ++child;
+    else if (ticket.ticketType === "senior") ++senior;
+  }
+  sum = (Ticket.childPrice * child) + (Ticket.adultPrice * adult) + (Ticket.seniorPrice * senior);
+  if ($('.info-input').length) {
+    if (!$('.price-counter').length) {
+      $('.info-input').append(`<div class="price-counter"></div>`);
+    } else {
+      $('.price-counter').html('');
+    }
+    console.log(sum);
+    if (child) $('.price-counter').append(`<p>${child}x${Ticket.childPrice}kr Barn</p>`);
+    if (adult) $('.price-counter').append(`<p>${adult}x${Ticket.adultPrice}kr Vuxen</p>`);
+    if (senior) $('.price-counter').append(`<p>${senior}x${Ticket.seniorPrice}kr Penionär</p>`);
+    if (sum) $('.price-counter').append(`<p>Totallt kostnad: ${sum}kr</p>`);
+  }
 }
-/*todo join*/
+/*Lists all the currently selected seats*/
 function buildSeatNumberCounter() {
   let seatNumbers = seatingsController.selectedSeats;
   seatNumbers = seatNumbers.join(', ');
@@ -222,8 +220,7 @@ function buildSeatNumberCounter() {
     $('.seat-counter').append(`<p>${seatNumbers}</p>`);
   }
 }
-/*Each time input form changes we check if there is information in all fields.
-Later on we'll probably want to havve more specific conditions.*/
+/*Each time input form changes we check if there is information in all fields.*/
 function listenToInputForm() {
   $('form input').change(function () {
     if ($('form :input[id="username"]').val() !== ''
@@ -235,6 +232,7 @@ function listenToInputForm() {
     }
   });
 }
+/*We take in customer data here*/
 function buildInputForm() {
   if (!$('.info-input').length) {
     $('.booking-row2').append(`<section class="info-input">
@@ -251,6 +249,7 @@ function buildInputForm() {
       </section>`);
   }
 }
+/*This is cleared when no seats are selected */
 function clearInputForm() {
   $('.info-input').remove();
 }
@@ -259,6 +258,7 @@ function buildInfoButton() {
     $('.booking-row1-col2').append(`<button type="button" value="booking" class="general-button">INFO</button>`);
   }
 }
+/*Button to finalise the booking process */
 function buildBookingButton() {
   if (!$('.button-section').length) {
     $('.booking-row3').append(`<section class="button-section">
@@ -274,15 +274,15 @@ function buildBookingButton() {
 function clearBookingButton() {
   $('.button-section').remove();
 }
+/*This is were the seats button are located. They are put there in SeatingsController*/
 function buildCinema() {
-  /*If .cinema-container does not exist we create it. */
   if (!$('.cinema-container').length) {
     $('.booking-row1-col1').append(`
       <section class="cinema-container">
       </section>`);
   }
-  /*We reset the previous contents while seating the header. */
-  $('.cinema-container').html(/*'<h2>Platser</h2>'*/'');
+  /*We reset the previous contents */
+  $('.cinema-container').html('');
   $('.cinema-container').append('<div class="cinema"></div>');
   $('.cinema').append('<div class="cinema-screen-container"></div>');
   $('.cinema-screen-container').append('<div class="cinema-screen"></div>');

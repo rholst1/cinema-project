@@ -5,11 +5,11 @@ export default class SeatingsController {
 
   /*showing of type Showing*/
   constructor(showing, databaseController) {
-    /*We save our selected seats for ease of access*/
+    /*TODO should be worked out of the code, use tickets.seatNumber instead!*/
     this.selectedSeats = [];
     /*which showing are we viewing right now?*/
     this.showing = showing;
-    /**/
+    /*We build tickets corresponding to the selected seats.*/
     this.tickets = []
     /*Event for selection of first seat*/
     this.seatSelectionEvent = new Event('seat selection updated');
@@ -113,6 +113,7 @@ export default class SeatingsController {
   /*Clear selectedSeats array and notify observers that the array is empty.*/
   clearSeatSelection() {
     this.selectedSeats.length = 0;
+    this.tickets.length = 0;
     document.dispatchEvent(this.seatSelectionEvent);
   }
 
