@@ -36,7 +36,7 @@ export default class SeatingsController {
   }
   _activateCinemaButton() {
     /* Listen click on seat-buttons. */
-    let seat = $(this).val();
+    let seat = parseInt($(this).val());
     /* We get string telling us the new status of seat(selected,free,reserved) 
     and update backend.*/
     let newSeatStatus = parent.showing.toggleSeatValue(seat);
@@ -55,10 +55,11 @@ export default class SeatingsController {
     }
   }
   /* Populates html with buttons and row breaks visually corresponding to a Cinema object. */
-  _buildCinemaGUI(cinema) {
-    for (let row = 0; row < cinema.seatsPerRow.length; row++) {
-      for (let col = 0; col < cinema.seatsPerRow[row]; col++) {
-        $('.seat-selectors').append(`<button type="button" value="${col}_${row}" class="cinema-button"></button>`);
+  _buildCinemaGUI(auditorium) {
+    let seatNumber = 0;
+    for (let row = 0; row < auditorium.seatsPerRow.length; row++) {
+      for (let col = 0; col < auditorium.seatsPerRow[row]; col++) {
+        $('.seat-selectors').append(`<button type="button" value="${seatNumber++}" class="cinema-button"></button>`);
       }
       $('.seat-selectors').append('<br>');
     }
@@ -67,9 +68,9 @@ export default class SeatingsController {
   Showing object)*/
   _markReservedSeats(showing) {
     for (let seat of showing.seats) {
-      if ((seat.getSeatStatus()).localeCompare("reserved") == 0) {
-        $(`:button[value="${seat.column}_${seat.row}"]`).css('background-color', 'var(--seat-reserved)');
-        $(`:button[value="${seat.column}_${seat.row}"]`).prop('disabled', true);
+      if ((seat.seatStatus).localeCompare("reserved") === 0) {
+        $(`:button[value="${seat.seatNumber}"]`).css('background-color', 'var(--seat-reserved)');
+        $(`:button[value="${seat.seatNumber}"]`).prop('disabled', true);
       }
     }
   }

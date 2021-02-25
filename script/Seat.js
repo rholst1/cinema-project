@@ -11,7 +11,6 @@ export default class Seat {
 
   /*seatStatus should have any of the values from SeatStatus*/
   constructor(seatStatus, seatNumber) {
-
     this.setSeatStatus(seatStatus);
     this.seatNumber = seatNumber;
   }
@@ -30,7 +29,5 @@ export default class Seat {
         break;
     }
   }
-  getSeatStatus() {
-    return this.seatStatus;
-  }
+
 }

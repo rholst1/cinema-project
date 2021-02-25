@@ -10,46 +10,65 @@ export default class DatabaseController {
   }
   /*Add a showing to db from a Showing object. Does not apply seat reservations*/
   async addShowing(showing) {
+    db.run("BEGIN TRANSACTION");
     await db.run(` 
       INSERT INTO Showings (filmID,auditorium,date,time) 
       VALUES (${showing.film.id}, ${showing.auditorium.id}, "${showing.date}", "${showing.time}");
   `);
+    db.run("COMMIT");
   }
-
-  /*
-  makeBooking(booking) {
-    //add customer (if already added nothing will happen since email, phoneNr is unique)
-    this.addCustomer(booking.customer);
-    //get customer ID (should be added through auto incrementing in the db if new customer)
-    booking.customer.id = (this.getCustomer(booking.customer.email)).id;
-    console.log(booking.customer.id);
-    this.addBooking(booking);
-    let bookingID = this.getBookingID(booking);
-    this.addTickets(booking.tickets, bookingID);
-  }*/
-  async getBookingID(booking) {
+  async addReservedSeats(booking) {
+    for (let ticket of booking.tickets) {
+      db.run("BEGIN TRANSACTION");
+      let result = await db.run(`
+      INSERT INTO Seatings (seatNumber, showingID, status) 
+      VALUES (${ticket.seatNumber}, ${booking.showing.id}, "reserved");`);
+      db.run("COMMIT");
+    }
+  }
+  async getReservedSeats(showingID) {
+    db.run("BEGIN TRANSACTION");
     let result = await db.run(` 
-      SELECT ID FROM Bookings WHERE showingID=${booking.showing.id} AND customerID=${booking.customer.id};
+      SELECT seatNumber FROM Seatings
+      WHERE showingID=${showingID} 
+      AND status="reserved";
   `);
+    db.run("COMMIT");
+    let seatNumbers = []
+    result.map((seat) => seatNumbers.push(seat.seatNumber));
+    return seatNumbers;
+  }
+  async getBookingID(booking) {
+    db.run("BEGIN TRANSACTION");
+    let result = await db.run(` 
+      SELECT ID FROM Bookings
+      WHERE showingID=${booking.showing.id} 
+      AND customerID=${booking.customer.id};
+  `);
+    db.run("COMMIT");
     return result[0];
   }
-  async addBooking(showingID, customerID) {
-    let result = await db.run(`INSERT INTO Bookings (customerID, showingID) VALUES (${customerID}, ${showingID});`);
-    console.log(result);
+  async addBooking(booking) {
+    db.run("BEGIN TRANSACTION");
+    let result = await db.run(`
+    INSERT INTO Bookings (customerID, showingID) 
+    VALUES (${booking.customer.id}, ${booking.showing.id});`);
+    db.run("COMMIT");
     return result.lastInsertRowId;
   }
 
-  async addTickets(tickets, bookingID) {
-    //TODO make single query
-    for (let ticket of tickets) {
+  async addTickets(booking) {
+    for (let ticket of booking.tickets) {
+      db.run("BEGIN TRANSACTION");
       await db.run(` 
       INSERT INTO Tickets (bookingID, seatNumber, ticketType)
-      VALUES (${bookingID},${ticket.seatNumber},"${ticket.ticketType}");`);
+      VALUES (${booking.id},${ticket.seatNumber},"${ticket.ticketType}");`);
+      db.run("COMMIT");
     }
   }
   /*Add a customer from a customer object.*/
   async addCustomer(customer) {
-    console.log(customer);
+    db.run("BEGIN TRANSACTION");
     let result = await db.run(` 
       INSERT INTO Customer (name, email, phoneNr)
       VALUES ($name, $email, $phoneNr);
@@ -58,15 +77,17 @@ export default class DatabaseController {
       email: customer.email,
       phoneNr: customer.phoneNr
     });
-    console.log(result);
+    db.run("COMMIT");
     return result.lastInsertRowId;
   }
   /* Get all bookings belonging to a customer from their customer ID */
   async getBookings(email) {
     let customer = this.getCustomer(email);
+    db.run("BEGIN TRANSACTION");
     let result = await db.run(` 
       SELECT * FROM Bookings
       WHERE customerID=${customer.id};`);
+    db.run("COMMIT");
     let bookings = [];
     for (let booking of result) {
       bookings.push(
@@ -77,16 +98,20 @@ export default class DatabaseController {
     return bookings;
   }
   async getTicketPrice(ticketType) {
+    db.run("BEGIN TRANSACTION");
     let result = await db.run(` 
       SELECT price FROM TicketPriceReference
       WHERE type="${ticketType}";`);
+    db.run("COMMIT");
     return result[0];
   }
   /*Takes in ticket id. */
   async getTickets(bookingID) {
+    db.run("BEGIN TRANSACTION");
     let result = await db.run(` 
       SELECT * FROM Tickets
       WHERE ID="${bookingID}";`);
+    db.run("COMMIT");
     let tickets = [];
     for (let ticket of result) {
       tickets.push(new Ticket(ticket.seatNumber, ticket.ticketType,
@@ -97,10 +122,12 @@ export default class DatabaseController {
   /*returns array of film objects from selected column value (only single value).*/
   async getFilms(column, value) {
     if (column.localeCompare("name") === 0) value = '"' + value + '"';
+    db.run("BEGIN TRANSACTION");
     let result = await db.run(` 
       SELECT * FROM new_movie_list
       WHERE ${column}=${value};
   `);
+    db.run("COMMIT");
     let films = [];
     for (let film of result) {
       films.push(await new Film(film.title, film.productionCountries, film.productionYear, film.length,
@@ -111,12 +138,14 @@ export default class DatabaseController {
   }
   /* Only works with columns ID and name */
   async getAuditorium(column, value) {
+    db.run("BEGIN TRANSACTION");
     if (column.localeCompare("name") === 0) value = '"' + value + '"';
     let result = await db.run(` 
       SELECT * FROM Auditorium WHERE ${column}=${value}
       ORDER BY  ID,
                 rowNumber ASC;
   `);
+    db.run("COMMIT");
     let seatsPerRow = [];
     for (let seatRow of result) {
       seatsPerRow.push(seatRow.seatsAtRow);
@@ -127,9 +156,11 @@ export default class DatabaseController {
   }
   /*returns all films as film objects*/
   async getAllFilms() {
+    db.run("BEGIN TRANSACTION");
     let result = await db.run(` 
       SELECT * FROM new_movie_list;
   `);
+    db.run("COMMIT");
     let films = [];
     for (let film of result) {
       films.push(new Film(film.title, film.productionCountries, film.productionYear, film.length,
@@ -140,10 +171,14 @@ export default class DatabaseController {
   }
   /* Only single column, doesn't check if seat availability*/
   async getShowings(column, value) {
+    db.run("BEGIN TRANSACTION");
     if (column.localeCompare("name") === 0) value = '"' + value + '"';
     let result = await db.run(` 
-      SELECT * FROM Showings WHERE ${column} = ${value} ORDER BY date ASC;
+      SELECT * FROM Showings
+      WHERE ${column} = ${value} 
+      ORDER BY date ASC;
   `);
+    db.run("COMMIT");
     let showings = [];
     for (let showing of result) {
       showings.push(
@@ -151,38 +186,21 @@ export default class DatabaseController {
           await this.getAuditorium("ID", showing.auditoriumID),
           (await this.getFilms("ID", showing.filmID))[0],
           showing.date,
-          showing.time, showing.ID));
+          showing.time, showing.ID, await this.getReservedSeats(showing.ID))
+      );
     }
-    console.table(result);
     return showings;
   }
 
   async getCustomer(email) {
+    db.run("BEGIN TRANSACTION");
     let result = await db.run(` 
       SELECT *
       FROM Customer
       where email="${email}";
   `);
+    db.run("COMMIT");
     let customer = result[0];
     return new Customer(customer.name, customer.email, customer.phoneNr, customer.ID);
   }
-  /*wip 
-  async getBookings(customerID) {
-    let bookings = await db.run(` 
-      select distinct bookings.ID, Tickets.ID, Tickets.ticketType, ticketPrice, seatID, showingID
-      from TicketPriceReference, Tickets
-        (SELECT ID, ticketID
-          FROM Bookings
-          WHERE customerID=${customerID}) AS bookings
-      WHERE bookings.ticketID = ticketID 
-      AND Tickets.ticketType = TicketPriceReference.type
-  `);
-
-    console.table(bookings);
-
-  }
-
-  getBookingInfoDB(email) {
-    let customer = getCustomer(email);
-  }*/
 }

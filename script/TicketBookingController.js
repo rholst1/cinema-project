@@ -157,13 +157,17 @@ function listenToBookingButton() {
     }
   }, '.general-button');
 }
-function makeBooking(booking) {
+async function makeBooking(booking) {
 
   //add customer (if already added nothing will happen since email, phoneNr is unique)
 
-  //let customerID = dbController.addCustomer(booking.customer);
-  //let bookingID = customerID.then(customerID => dbController.addBooking(booking.showing.id, customerID));
-  //bookingID.then(bookingID => dbController.addTickets(booking.tickets, bookingID));
+  let customerID = await dbController.addCustomer(booking.customer);
+  booking.customer.id = customerID;
+  console.log(booking);
+  let bookingID = await dbController.addBooking(booking);
+  booking.id = bookingID;
+  await dbController.addTickets(booking);
+  await dbController.addReservedSeats(booking);
   //get customer ID (should be added through auto incrementing in the db if new customer)
 
 
@@ -188,17 +192,17 @@ function seatsSelected() {
 }
 function listSelectedSeats() {
   let seatNumbers = []
-  for (let seat of seatingsController.selectedSeats) {
-    let seatCoordinate = seatingsController.showing.getSeatCoordinates(seat);
-    let column = seatCoordinate[0];
-    let row = seatCoordinate[1];
-    let seatNumber = 0;
-    for (let i = 0; i < row; i++) {
-      seatNumber += seatingsController.showing.auditorium.seatsPerRow[i];
-    }
-    seatNumbers.push(seatNumber + column);
-  }
-  return seatNumbers
+  /* for (let seat of seatingsController.selectedSeats) {
+     let seatCoordinate = seatingsController.showing.getSeatCoordinates(seat);
+     let column = seatCoordinate[0];
+     let row = seatCoordinate[1];
+     let seatNumber = 0;
+     for (let i = 0; i < row; i++) {
+       seatNumber += seatingsController.showing.auditorium.seatsPerRow[i];
+     }
+     seatNumbers.push(seatNumber + column);
+   }*/
+  return seatingsController.selectedSeats
 }
 /*todo join*/
 function buildSeatNumberCounter() {
