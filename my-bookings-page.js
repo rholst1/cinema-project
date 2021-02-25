@@ -77,19 +77,18 @@ async function queryDatabase() {
   `);
 
     //add a for loop to check all history connected to one email
-    for (let x of runQuery) {
-      if ((dateToString >= fullDate) && (`${time}` >= time)) {
-        let queryHtml = /*HTML*/ `<li class= "kommandevisning"> Kommande visning : Salong: ${auditorium} film: ${filmID} sittplats: ${seats} Datum och tid: ${date} ${time}
+    if ((dateToString >= fullDate) && (`${time}` >= time)) {
+      let queryHtml = /*HTML*/ `<li class= "kommandevisning"> Kommande visning : Salong: ${auditorium} film: ${filmID} sittplats: ${seats} Datum och tid: ${date} ${time}
        <br> <button class="general-button removeButton" onclick=${deleteQuery} id ="delete">Avboka</button ></li> 
       `;
-        $('ul').append(queryHtml);
-      }
-
-      if ((dateToString <= fullDate) && (`${time}` <= time)) {
-        let queryHtml = /*HTML*/ `<li> Salong: ${auditorium} film: ${filmID} sittplats: ${seats} Datum och tid: ${date} ${time} </li>`;
-        $('ul').append(queryHtml);
-      }
+      $('ul').append(queryHtml);
     }
+
+    if ((dateToString <= fullDate) && (`${time}` <= time)) {
+      let queryHtml = /*HTML*/ `<li> Salong: ${auditorium} film: ${filmID} sittplats: ${seats} Datum och tid: ${date} ${time} </li>`;
+      $('ul').append(queryHtml);
+    }
+
   }
 }
 
