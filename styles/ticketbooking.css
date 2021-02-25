@@ -196,16 +196,15 @@ text-align: center;
   margin: 3px;
   z-index: 3;}
 .dropdown-content {
+  max-height: fit-content;
+  max-width: min-content;
   display: block;
-  position: relative;
-  max-width: none;
-  background: rgba(0, 0, 0, 0);
-  border: 0px;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 5;
 }
 .dropdown-content .dropbtn {
   text-decoration: none;
-  display: block;
-  position: relative;
   z-index: 6;
   border: 0px;
 }

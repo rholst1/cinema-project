@@ -52,22 +52,22 @@ export default class SeatingsController {
       document.dispatchEvent(parent.seatSelectionEvent);
     } else if ((newSeatStatus).localeCompare("selected") == 0) {
       $('.dropdown-content').remove();
-
+      /*TODO make it less ugly :D The following part adds a drop down when clicking a cinemabutton
+          the drop down contains 3 buttons corresponding to the 3 types of tickets.*/
       $(this).append(`<div class="dropdown-content">
-          <button type="button" value="child" class="dropbtn">Barn</button>
-          <button type="button" value="adult" class="dropbtn">Vuxen</button>
-          <button type="button" value="senior" class="dropbtn">Pensionär</button>
+          <button type="button" value="child" class="dropbtn general-button">Barn</button>
+          <button type="button" value="adult" class="dropbtn general-button">Vuxen</button>
+          <button type="button" value="senior" class="dropbtn general-button">Pensionär</button>
         </div>`);
       this.parent = parent;
-
+      this.seat = seat;
       $(".dropbtn").on('click', function () {
-        console.log(parent);
-        let colRow = parent.showing.getSeatCoordinates(seat);
-        let seatNumber = parent.showing.getSeatNumberFromCoordinates(colRow[0], colRow[1]);
-        parent.tickets.push(new Ticket(seatNumber, $(this).val()));
-        console.log(parent.tickets);
+        parent.tickets.push(new Ticket(seat, $(this).val()));
         parent.selectedSeats.push(seat);
         document.dispatchEvent(parent.seatSelectionEvent);
+        $('.dropdown-content').remove();
+      })
+      $(".dropdown-content").on('mouseleave', function () {
         $('.dropdown-content').remove();
       })
       $(`:button[value="${seat}"]`).css('background-color', 'var(--seat-selected)');
