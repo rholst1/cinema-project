@@ -65,6 +65,7 @@ async function queryDatabase() {
   } of runQuery) {
 
 
+
     let parts = `${date}`.split('-');
 
     let mydate = new Date(parts[0], parts[1] - 1, parts[2]);
@@ -79,9 +80,16 @@ async function queryDatabase() {
     //add a for loop to check all history connected to one email
     if ((dateToString >= fullDate) && (`${time}` >= time)) {
       let queryHtml = /*HTML*/ `<li class= "kommandevisning"> Kommande visning : Salong: ${auditorium} film: ${filmID} sittplats: ${seats} Datum och tid: ${date} ${time}
-       <br> <button class="general-button removeButton" onclick=${deleteQuery} id ="delete">Avboka</button ></li> 
+       <br> <button class="general-button removeButton" onclick="alert('Biljett avbokad!')" id ="delete">Avboka</button ></li> 
       `;
       $('ul').append(queryHtml);
+
+      $('.removeButton').on('click', async () => {
+        console.log(showingsID + email);
+        await db.run(`
+    DELETE FROM bookingHistory WHERE showingsID='${showingsID}' AND email = '${email}';
+    `);
+      });
     }
 
     if ((dateToString <= fullDate) && (`${time}` <= time)) {
@@ -113,3 +121,5 @@ async function currentDateAndTime() {
 //   `);
 
 // }
+
+
