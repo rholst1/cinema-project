@@ -89,3 +89,8 @@ async function renderSeatChooser() {
 	</div>`)
 }
 
+$(document).on('click', '.seat', function () {
+  if ($(this).hasClass('seat') && !$(this).hasClass('occupied')) {
+    $(this).toggleClass('selected')
+  }
+});
