@@ -9,7 +9,7 @@
 .news {
   color: var(--text);
   background: var(--news-color);
-  width: 50vw;
+  width: 40vw;
   padding: 3vh 3vw;
   margin: 3vh 2vw 3vh 0;
 }
@@ -24,7 +24,7 @@
 }
 .nowShowing h2 {
   font-size: 200%;
-
+  position:
 }
 .nowShowingTitles a {
   text-decoration: none;
