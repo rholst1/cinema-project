@@ -1,7 +1,7 @@
 /* The container <div> - needed to position the dropdown content */
 .choose-movie {
- display: flex;
- justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 .dropbtn {
   width: 15vw;
@@ -15,7 +15,7 @@
   position: absolute;
   background-color: #f9f9f9;
   width: 15vw;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
   border-radius: 5px;
 }
@@ -29,7 +29,9 @@
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #c7c6c6}
+.dropdown-content a:hover {
+  background-color: #c7c6c6;
+}
 
 .selectedShowing {
   display: flex;
@@ -44,71 +46,74 @@
 }
 
 .layout {
-	display: flex;
-	flex-direction: column;
-	color: #fff;
-	align-items: center;
-	justify-content: center;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  align-items: center;
+  justify-content: center;
   margin: 0;
 }
 .container {
   margin-top: 3vh;
-	perspective: 1000px;
+  perspective: 1000px;
 }
 
-.seat, .seatshow {
-	background-color: #444451;
-	height: 17px;
-	width: 20px;
-	margin: 3px;
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
+.seat,
+.seatshow {
+  background-color: #444451;
+  height: 17px;
+  width: 20px;
+  margin: 3px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
-.seat.occupied, .seatshow.occupied {
-	background-color: rgb(219, 62, 62);
+.seat.occupied,
+.seatshow.occupied {
+  background-color: rgb(219, 62, 62);
 }
 
-.seat.selected, .seatshow.selected{
-	background-color: #ffffff;
+.seat.selected,
+.seatshow.selected {
+  background-color: #ffffff;
 }
 
 .seat:not(.occupied):hover {
-	cursor: pointer;
-	transform: scale(1.2);
+  cursor: pointer;
+  transform: scale(1.2);
 }
 
 .screen {
-	background-color: #fff;
-	height: 70px;
-	width: 100%;
-	margin: 15px 0;
-	transform: rotateX(-45deg);
-	box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
+  background-color: #fff;
+  height: 70px;
+  width: 100%;
+  margin: 15px 0;
+  transform: rotateX(-45deg);
+  box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
 }
 
 .row {
-	display: flex;
+  display: flex;
 }
 
 .showcase {
-	background-color: rgba(0, 0, 0, 0.1);
-	padding: 5px 10px;
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 5px 10px;
   margin: 2vh 0 2vh 0;
-	border-radius: 5px;
-	color: #777;
-	list-style-type: none;
-	display: flex;
-	justify-content: space-between;
+  border-radius: 5px;
+  color: #777;
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
 }
 
-.showcase div{
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin: 0 10px;
+.showcase div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 10px;
 }
 
 .showcase div span {
-	margin-left: 2px;
+  margin-left: 2px;
 }

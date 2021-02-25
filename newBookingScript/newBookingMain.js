@@ -1,5 +1,5 @@
-$('header').after(/*html*/`<main></main>`);
-$('main').append(/*html*/`<div class="choose-movie"></div>`);
+$('header').after(/*html*/ `<main></main>`);
+$('main').append(/*html*/ `<div class="choose-movie"></div>`);
 $('.choose-movie').append(`<div class="dropdown">
   <button id="toggle" class="general-button dropbtn">Välj film</button>
   <div class="dropdown-content">
@@ -10,16 +10,19 @@ $('.choose-movie').after(`<div class="showings-container"><h1></h1></div>`);
 let movies;
 let id;
 let i;
+let amountOfSelectedSeats = 0;
+let totalAmountToSeatsToBook = 5; // Userinput
+let selectedSeatNrArray = [];
+let selectedShow = 1;
+
 async function addMovies() {
   movies = await db.run(`SELECT * FROM new_movie_list`);
   i = 0;
   id = [];
   while (i < movies.length) {
-    for (let {
-      title
-    } of movies) {
+    for (let { title } of movies) {
       id[i] = i;
-      let movieHtml = `<a href="#" id="${i}" onclick="renderMovieBooking(${i})">${title}</a>`
+      let movieHtml = `<a href="#" id="${i}" onclick="renderMovieBooking(${i})">${title}</a>`;
       i++;
       $('.dropdown-content').append(movieHtml);
     }
@@ -30,49 +33,75 @@ async function renderMovieBooking(i) {
   $('.selectedShowing').remove();
   $('h1').remove();
   $('.layout').remove();
-  let queryShowings = await db.run(/*sql*/ `SELECT * FROM Showings WHERE filmID = '${movies[i].title}'`)
+  let queryShowings = await db.run(
+    /*sql*/ `SELECT * FROM Showings WHERE filmID = '${movies[i].title}'`
+  );
 
-  $('.showings-container').append(`<h1>${movies[i].title}</h1>`)
+  $('.showings-container').append(`<h1>${movies[i].title}</h1>`);
   for (let { auditorium, date, time } of queryShowings) {
-    $('.showings-container').append(/*html*/`<div class="selectedShowing"><div><h3>Salong: ${auditorium} | Datum: ${date} | Time: ${time}</h3></div><div class="book"><button id="book" class="general-button">Boka</button></div></div>`);
+    $('.showings-container').append(
+      /*html*/ `<div class="selectedShowing"><div><h3>Salong: ${auditorium} | Datum: ${date} | Time: ${time}</h3></div><div class="book"><button id="book" class="general-button">Boka</button></div></div>`
+    );
   }
 }
 addMovies();
 
-$("#toggle").click(function () {
-  $(".dropdown-content").show();
+$('#toggle').click(function () {
+  $('.dropdown-content').show();
 });
 
-$(".dropdown-content").click(hideMenu).mouseleave(hideMenu);
+$('.dropdown-content').click(hideMenu).mouseleave(hideMenu);
 
 function hideMenu() {
-  $(".dropdown-content").hide();
-};
+  $('.dropdown-content').hide();
+}
 
-$(document).on("click", "#book", function () {
+$(document).on('click', '#book', function () {
   $('h1').remove();
   $('.selectedShowing').remove();
 
   renderSeatChooser();
-
 });
 
-
-async function renderSeatChooser() {
+//Enter selected show
+async function renderSeatChooser(selectedShow) {
   $('.layout').remove();
-  $('.showings-container').after(`<div class="layout"></div>`)
+  $('.showings-container').after(`<div class="layout"></div>`);
   $('.layout').append(`<div class="container">
-  	<div class="screen"></div>`)
+  	<div class="screen"></div>`);
 
+  let auditorium = await db.run(/*sql*/ `SELECT * FROM Auditorium`);
 
-  let auditorium = await db.run(/*sql*/`SELECT * FROM Auditorium`);
+  //Pulls seats from the selectedShow by the unique showingID
+  let seatStatus = await db.run(
+    /*sql*/ `SELECT * FROM Seatings WHERE showingID = 1`
+  );
+  let seatNumberArray = [];
+  let seatStatusArray = [];
+  let n = 0;
+
+  for (let { seatNumber, status } of seatStatus) {
+    seatNumberArray[n] = seatNumber;
+    seatStatusArray[n] = status;
+
+    n++;
+  }
+  n = 0;
 
   for (k = 0; k < auditorium[0].rows; k++) {
-    $('.container').append(`<div class="row"></div>`)
+    $('.container').append(`<div class="row" id=row${k + 1}></div>`);
+
+    for (l = 0; l < auditorium[0].seatsPerRow; l++) {
+      $(`#row${k + 1}`).append(
+        `<div class="seat" id="seat${seatNumberArray[n]}"></div>`
+      );
+      if (seatStatusArray[n].localeCompare('occupied') === 0) {
+        $(`#seat${seatNumberArray[n]}`).toggleClass('occupied');
+      }
+      n++;
+    }
   }
-  for (l = 0; l < auditorium[0].seatsPerRow; l++) {
-    $('.row').append(`<div class="seat"></div>`)
-  }
+
   $('.container').append(`<div class="showcase">
 		<div>
 			<div class="seatshow"></div>
@@ -86,11 +115,26 @@ async function renderSeatChooser() {
 			<div class="seatshow occupied"></div>
 			<span>Upptagna</span>
 		</div>
-	</div>`)
+	</div>`);
 }
 
 $(document).on('click', '.seat', function () {
   if ($(this).hasClass('seat') && !$(this).hasClass('occupied')) {
-    $(this).toggleClass('selected')
+    if ($(this).hasClass('seat') && $(this).hasClass('selected')) {
+      $(this).toggleClass('selected');
+      selectedSeatNrArray.pop($(this).get(0).id);
+      amountOfSelectedSeats--;
+      console.log(amountOfSelectedSeats);
+    } else if (!(amountOfSelectedSeats === totalAmountToSeatsToBook)) {
+      if ($(this).hasClass('seat') && !$(this).hasClass('occupied')) {
+        $(this).toggleClass('selected');
+        selectedSeatNrArray.push($(this).get(0).id);
+        amountOfSelectedSeats++;
+      }
+
+      console.log(selectedSeatNrArray);
+    } else {
+      alert('Du har valt för många din jävel');
+    }
   }
 });
