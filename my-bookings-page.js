@@ -69,22 +69,19 @@ async function queryDatabase() {
     //add if statement for kommande visningar vs history
     //in the kommande visningar if statement, add avboka knapp
 
+    let parts = `${date}`.split('-');
 
-    let parsedDate = Date.parse(`${date}`);
-    // let notMilliDate = new Date(parsedDate);
-    // down.innerHTML = notMilliDate.toString();
+    let mydate = new Date(parts[0], parts[1] - 1, parts[2]);
 
-    console.log(parsedDate);
-    // console.log(notMilliDate);
+    let dateToString = mydate.toDateString();
+    console.log(dateToString);
 
-    let on = true;
-
-    if (on) {
+    if (dateToString >= fullDate) {
       let queryHtml = /*HTML*/ `<li class= "kommandevisning"> Kommande visning : Salong: ${auditorium} film: ${filmID} sittplats: ${seats} Datum och tid: ${date} ${time} <br> <button class="general-button removeButton" onclick = "remove booking" id ="delete">Avboka</button ></li> 
       `;
       $('ul').append(queryHtml);
     }
-    if (on) {
+    if (dateToString <= fullDate) {
       let queryHtml = /*HTML*/ `<li> Salong: ${auditorium} film: ${filmID} sittplats: ${seats} Datum och tid: ${date} ${time} </li>`;
       $('ul').append(queryHtml);
     }
