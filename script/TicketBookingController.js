@@ -211,7 +211,7 @@ function listSelectedSeats() {
 }
 /*todo join*/
 function buildSeatNumberCounter() {
-  let seatNumbers = listSelectedSeats()
+  let seatNumbers = seatingsController.selectedSeats;
   seatNumbers = seatNumbers.join(', ');
   if ($('.info-input').length) {
     if (!$('.seat-counter').length) {

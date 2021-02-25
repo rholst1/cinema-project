@@ -40,18 +40,20 @@ export default class SeatingsController {
   _activateCinemaButton() {
     /* Listen click on seat-buttons. */
     let seat = parseInt($(this).val());
-    /* We get string telling us the new status of seat(selected,free,reserved) 
-    and update backend.*/
-    let newSeatStatus = parent.showing.toggleSeatValue(seat);
+
+    let seatStatus = parent.showing.getSeat(seat).seatStatus;
+
+    $('.dropdown-content').remove();
     /* If new status is free or selected we change button color */
-    if ((newSeatStatus).localeCompare("free") == 0) {
+    if (seatStatus === "selected") {
+      parent.showing.toggleSeatValue(seat);
+
       $(`:button[value="${seat}"]`).css('background-color', 'var(--seat-free)');
       //color = $(this).css('background-color');
       parent.selectedSeats.splice(parent.selectedSeats.indexOf(seat), 1);
       //dispatch event if seats are deselected
       document.dispatchEvent(parent.seatSelectionEvent);
-    } else if ((newSeatStatus).localeCompare("selected") == 0) {
-      $('.dropdown-content').remove();
+    } else if (seatStatus === "free") {
       /*TODO make it less ugly :D The following part adds a drop down when clicking a cinemabutton
           the drop down contains 3 buttons corresponding to the 3 types of tickets.*/
       $(this).append(`<div class="dropdown-content">
@@ -62,15 +64,18 @@ export default class SeatingsController {
       this.parent = parent;
       this.seat = seat;
       $(".dropbtn").on('click', function () {
+        parent.showing.toggleSeatValue(seat);
         parent.tickets.push(new Ticket(seat, $(this).val()));
         parent.selectedSeats.push(seat);
         document.dispatchEvent(parent.seatSelectionEvent);
+        $(`:button[value="${seat}"]`).css('background-color', 'var(--seat-selected)');
         $('.dropdown-content').remove();
       })
       $(".dropdown-content").on('mouseleave', function () {
+
         $('.dropdown-content').remove();
       })
-      $(`:button[value="${seat}"]`).css('background-color', 'var(--seat-selected)');
+
       //dispatch event if new seats are selected
 
     }
