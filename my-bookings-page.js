@@ -71,15 +71,20 @@ async function queryDatabase() {
 
 
     let parsedDate = Date.parse(`${date}`);
-    console.log(parsedDate);
-    (parsedDate >= fullDate)
+    // let notMilliDate = new Date(parsedDate);
+    // down.innerHTML = notMilliDate.toString();
 
-    if (parsedDate >= fullDate) {
-      let queryHtml = /*HTML*/ `<li class= "kommandevisning"> Kommande visning : Salong: ${auditorium} film: ${filmID} sittplats: ${seats} Datum och tid: ${date} ${time} </li> 
-      <button class="general-button" onclick = "remove booking">Avboka</button >`;
+    console.log(parsedDate);
+    // console.log(notMilliDate);
+
+    let on = true;
+
+    if (on) {
+      let queryHtml = /*HTML*/ `<li class= "kommandevisning"> Kommande visning : Salong: ${auditorium} film: ${filmID} sittplats: ${seats} Datum och tid: ${date} ${time} <br> <button class="general-button removeButton" onclick = "remove booking" id ="delete">Avboka</button ></li> 
+      `;
       $('ul').append(queryHtml);
     }
-    if ((`${date}` <= fullDate) && (`${time}` <= time)) {
+    if (on) {
       let queryHtml = /*HTML*/ `<li> Salong: ${auditorium} film: ${filmID} sittplats: ${seats} Datum och tid: ${date} ${time} </li>`;
       $('ul').append(queryHtml);
     }
