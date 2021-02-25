@@ -6,6 +6,9 @@
 .dropbtn {
   width: 15vw;
 }
+.dropdown {
+  margin-top: 2vh;
+}
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
   display: none;
@@ -35,8 +38,77 @@
 }
 .showings-container h1 {
   padding: 0;
-  margin: 0;
   font-size: 300%;
   text-align: center;
   text-decoration: underline;
+}
+
+.layout {
+	display: flex;
+	flex-direction: column;
+	color: #fff;
+	align-items: center;
+	justify-content: center;
+  margin: 0;
+}
+.container {
+  margin-top: 3vh;
+	perspective: 1000px;
+}
+
+.seat, .seatshow {
+	background-color: #444451;
+	height: 17px;
+	width: 20px;
+	margin: 3px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+
+.seat.occupied, .seatshow.occupied {
+	background-color: rgb(219, 62, 62);
+}
+
+.seat.selected, .seatshow.selected{
+	background-color: #ffffff;
+}
+
+.seat:not(.occupied):hover {
+	cursor: pointer;
+	transform: scale(1.2);
+}
+
+.screen {
+	background-color: #fff;
+	height: 70px;
+	width: 100%;
+	margin: 15px 0;
+	transform: rotateX(-45deg);
+	box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
+}
+
+.row {
+	display: flex;
+}
+
+.showcase {
+	background-color: rgba(0, 0, 0, 0.1);
+	padding: 5px 10px;
+  margin: 2vh 0 2vh 0;
+	border-radius: 5px;
+	color: #777;
+	list-style-type: none;
+	display: flex;
+	justify-content: space-between;
+}
+
+.showcase div{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0 10px;
+}
+
+.showcase div span {
+	margin-left: 2px;
 }
