@@ -14,6 +14,11 @@ its related classes. */
 let seatingsController = null;
 
 
+//load current prices (maybe this shouldn't be done here?)
+(dbController.getTicketPriceReference()).then((ticketPrices) => {
+  Ticket.loadPriceReference(ticketPrices);
+});
+
 init();
 /*Start up the page here */
 function init() {

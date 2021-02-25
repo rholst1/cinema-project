@@ -1,13 +1,16 @@
+import Ticket from '/script/Ticket.js';
 import Showing from '/script/Showing.js';
 
 export default class SeatingsController {
 
   /*showing of type Showing*/
-  constructor(showing) {
+  constructor(showing, databaseController) {
     /*We save our selected seats for ease of access*/
     this.selectedSeats = [];
     /*which showing are we viewing right now?*/
     this.showing = showing;
+    /**/
+    this.tickets = []
     /*Event for selection of first seat*/
     this.seatSelectionEvent = new Event('seat selection updated');
   }
@@ -48,11 +51,30 @@ export default class SeatingsController {
       //dispatch event if seats are deselected
       document.dispatchEvent(parent.seatSelectionEvent);
     } else if ((newSeatStatus).localeCompare("selected") == 0) {
+      $('.dropdown-content').remove();
+
+      $(this).append(`<div class="dropdown-content">
+          <button type="button" value="child" class="dropbtn">Barn</button>
+          <button type="button" value="adult" class="dropbtn">Vuxen</button>
+          <button type="button" value="senior" class="dropbtn">Pensionär</button>
+        </div>`);
+      this.parent = parent;
+
+      $(".dropbtn").on('click', function () {
+        console.log(parent);
+        let colRow = parent.showing.getSeatCoordinates(seat);
+        let seatNumber = parent.showing.getSeatNumberFromCoordinates(colRow[0], colRow[1]);
+        parent.tickets.push(new Ticket(seatNumber, $(this).val()));
+        console.log(parent.tickets);
+        parent.selectedSeats.push(seat);
+        document.dispatchEvent(parent.seatSelectionEvent);
+        $('.dropdown-content').remove();
+      })
       $(`:button[value="${seat}"]`).css('background-color', 'var(--seat-selected)');
       //dispatch event if new seats are selected
-      parent.selectedSeats.push(seat);
-      document.dispatchEvent(parent.seatSelectionEvent);
+
     }
+
   }
   /* Populates html with buttons and row breaks visually corresponding to a Cinema object. */
   _buildCinemaGUI(auditorium) {

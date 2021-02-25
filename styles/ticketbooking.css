@@ -195,3 +195,19 @@ text-align: center;
   cursor: pointer;
   margin: 3px;
   z-index: 3;}
+.dropdown-content {
+  display: block;
+  position: relative;
+  max-width: none;
+  background: rgba(0, 0, 0, 0);
+  border: 0px;
+}
+.dropdown-content .dropbtn {
+  text-decoration: none;
+  display: block;
+  position: relative;
+  z-index: 6;
+  border: 0px;
+}
+.cinema-button:hover .dropdown-content {
+}

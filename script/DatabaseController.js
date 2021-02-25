@@ -105,6 +105,11 @@ export default class DatabaseController {
     db.run("COMMIT");
     return result[0];
   }
+  async getTicketPriceReference() {
+    let result = await db.run(` 
+      SELECT * FROM TicketPriceReference;`);
+    return result;
+  }
   /*Takes in ticket id. */
   async getTickets(bookingID) {
     db.run("BEGIN TRANSACTION");
