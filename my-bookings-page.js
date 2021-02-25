@@ -76,12 +76,12 @@ async function queryDatabase() {
     let dateToString = mydate.toDateString();
     console.log(dateToString);
 
-    if (dateToString >= fullDate) {
+    if ((dateToString >= fullDate) && (`${time}` >= time)) {
       let queryHtml = /*HTML*/ `<li class= "kommandevisning"> Kommande visning : Salong: ${auditorium} film: ${filmID} sittplats: ${seats} Datum och tid: ${date} ${time} <br> <button class="general-button removeButton" onclick = "remove booking" id ="delete">Avboka</button ></li> 
       `;
       $('ul').append(queryHtml);
     }
-    if (dateToString <= fullDate) {
+    if ((dateToString <= fullDate) && (`${time}` <= time)) {
       let queryHtml = /*HTML*/ `<li> Salong: ${auditorium} film: ${filmID} sittplats: ${seats} Datum och tid: ${date} ${time} </li>`;
       $('ul').append(queryHtml);
     }
