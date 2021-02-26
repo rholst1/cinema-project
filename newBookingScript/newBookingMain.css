@@ -117,3 +117,25 @@
 .showcase div span {
   margin-left: 2px;
 }
+.booking-form {
+  margin-top: 2vh;
+  display: flex;
+  justify-content: center;
+}
+.book-tickets {
+  display: flex;
+  justify-content: center;
+}
+.book-tickets input {
+  font: var(--font-bread);
+  padding: 10px;
+  border: 1px solid black;
+}
+.bookbtn {
+  display: flex;
+  justify-content: center;
+}
+.bookbtn button {
+  margin-top: 1vh;
+  width: 10vw;
+}

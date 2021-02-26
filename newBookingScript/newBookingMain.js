@@ -137,11 +137,11 @@ $(document).on('click', '#book', function () {
   $('.selectedShowing').remove();
   selectedSeatNrArray.length = 0;
   renderSeatChooser();
+  inputInfo();
 });
 
 $('#childTicketAdd').click(addChildTicket);
 $('#childTicketRem').click(remChildTicket);
-
 $(document).on('click', '.seat', function () {
   if ($(this).hasClass('seat') && !$(this).hasClass('occupied')) {
     if ($(this).hasClass('seat') && $(this).hasClass('selected')) {
@@ -159,3 +159,19 @@ $(document).on('click', '.seat', function () {
     }
   }
 });
+
+function inputInfo() {
+  $('.layout').after(/*html*/`<div class="booking-form"><form id="form" class="book-tickets">
+    <input type="text" placeholder="Ange email..." id="email" />
+    <input type="text" placeholder="Ange telefonnummer..." id="phonenumber" />
+    <button type="submit" class="general-button" id="bookbtn" >Boka</button>
+  </form></div>`);
+ $('#form').submit(function() {
+    if ($.trim($("#email").val()) === "" || $.trim($("#phonenumber").val()) === "") {
+        alert('Var vänlig och fyll i alla fälten, tack!');
+        return false;
+    } else {
+      alert('Tack för din bokning!')
+    }
+});
+}
