@@ -1,5 +1,7 @@
 $('header').after(/*html*/ `<main></main>`);
-$('main').append(/*html*/ `<div class="choose-movie"></div>`);
+$('main').append(
+  /*html*/ `<div class="choose-movie"><button id="childTicketRem" class="general-button">-</button><button id="childTicket" class="general-button">Barn</button><button id="childTicketAdd" class="general-button">+</button></div>`
+);
 $('.choose-movie').append(`<div class="dropdown">
   <button id="toggle" class="general-button dropbtn">Välj film</button>
   <div class="dropdown-content">
@@ -11,9 +13,28 @@ let movies;
 let id;
 let i;
 let amountOfSelectedSeats = 0;
-let totalAmountToSeatsToBook = 5; // Userinput
+let childTickets = 0;
+let adultTickets;
+let seniorTickets;
+let totalAmountTickets = 5; // Userinput
 let selectedSeatNrArray = [];
 let selectedShow = 1;
+
+function renderChosenTickets() {
+  let html = /*html*/ `<div id="amountChildTickets">Antal: ${childTickets} </div>`;
+  $('.choose-movie').append(html);
+}
+
+function addChildTicket() {
+  childTickets++;
+  totalAmountTickets++;
+  renderChosenTickets();
+}
+
+function remChildTicket() {
+  childTickets--;
+  totalAmountTickets--;
+}
 
 async function addMovies() {
   movies = await db.run(`SELECT * FROM new_movie_list`);
@@ -45,23 +66,6 @@ async function renderMovieBooking(i) {
   }
 }
 addMovies();
-
-$('#toggle').click(function () {
-  $('.dropdown-content').show();
-});
-
-$('.dropdown-content').click(hideMenu).mouseleave(hideMenu);
-
-function hideMenu() {
-  $('.dropdown-content').hide();
-}
-
-$(document).on('click', '#book', function () {
-  $('h1').remove();
-  $('.selectedShowing').remove();
-
-  renderSeatChooser();
-});
 
 //Enter selected show
 async function renderSeatChooser(selectedShow) {
@@ -118,20 +122,35 @@ async function renderSeatChooser(selectedShow) {
 	</div>`);
 }
 
+$('#toggle').click(function () {
+  $('.dropdown-content').show();
+});
+
+$('.dropdown-content').click(hideMenu).mouseleave(hideMenu);
+
+function hideMenu() {
+  $('.dropdown-content').hide();
+}
+
+$(document).on('click', '#book', function () {
+  $('h1').remove();
+  $('.selectedShowing').remove();
+  selectedSeatNrArray.length = 0;
+  renderSeatChooser();
+});
+
+$('#childTicketAdd').click(addChildTicket);
+$('#childTicketRem').click(remChildTicket);
+
 $(document).on('click', '.seat', function () {
   if ($(this).hasClass('seat') && !$(this).hasClass('occupied')) {
     if ($(this).hasClass('seat') && $(this).hasClass('selected')) {
       $(this).toggleClass('selected');
-      function removeFromListByIndex(index) { selectedSeatNrArray.splice(index, 1); }
-      index = selectedSeatNrArray.indexOf($(this).get(0).id);
-      removeFromListByIndex(index);
-      amountOfSelectedSeats--;
-      console.log(selectedSeatNrArray);
-    } else if (!(amountOfSelectedSeats === totalAmountToSeatsToBook)) {
+      selectedSeatNrArray.pop($(this).get(0).id);
+    } else if (!(selectedSeatNrArray.length === totalAmountTickets)) {
       if ($(this).hasClass('seat') && !$(this).hasClass('occupied')) {
         $(this).toggleClass('selected');
         selectedSeatNrArray.push($(this).get(0).id);
-        amountOfSelectedSeats++;
       }
 
       console.log(selectedSeatNrArray);
