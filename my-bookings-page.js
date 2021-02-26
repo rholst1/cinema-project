@@ -49,6 +49,8 @@ currentDateAndTime();
 //Runs when user clicks "Hämta bokningar"
 async function queryDatabase() {
   let inputEmail = document.getElementById('emailInput').value;
+
+
   runQuery = await db.run(/*sql*/ `
     SELECT * FROM Showings JOIN bookingHistory ON showingsID WHERE ID = showingsID AND email = '${inputEmail}';
   `);
@@ -71,34 +73,40 @@ async function queryDatabase() {
     let mydate = new Date(parts[0], parts[1] - 1, parts[2]);
 
     let dateToString = mydate.toDateString();
+
     console.log(dateToString);
 
-    let deleteQuery = await db.run(/*sql*/ `
-    DELETE FROM bookingHistory WHERE showingsID = '${showingsID}';
-  `);
+    // let deleteQuery = await db.run(/*sql*/ `
+    // DELETE FROM bookingHistory WHERE showingsID = '${showingsID}' AND email = '${inputEmail}';
+    // `);
 
-    //add a for loop to check all history connected to one email
-    if ((dateToString >= fullDate) && (`${time}` >= time)) {
-      let queryHtml = /*HTML*/ `<li class= "kommandevisning"> Kommande visning : Salong: ${auditorium} film: ${filmID} sittplats: ${seats} Datum och tid: ${date} ${time}
-       <br> <button class="general-button removeButton" onclick="alert('Biljett avbokad!')" id ="delete">Avboka</button ></li> 
-      `;
+    if ((dateToString >= fullDate) && (`${time} ` >= time)) {
+      let queryHtml = /*HTML*/ `<li class= "kommandevisning" > Kommande visning: Salong: ${auditorium} Film: ${filmID} Sittplats: ${seats} Datum och tid: ${date} ${time}
+    <br> <button class="general-button removeButton" onclick="alert('Biljett avbokad!')" id="delete">Avboka</button></li>
+    `;
       $('ul').append(queryHtml);
+
 
       $('.removeButton').on('click', async () => {
-        console.log(showingsID + email);
-        await db.run(`
-    DELETE FROM bookingHistory WHERE showingsID='${showingsID}' AND email = '${email}';
-    `);
+        //  db.run("BEGIN TRANSACTION");
+        console.log("data", showingsID, email);
+        let result = await db.run(/*sql*/`
+      DELETE FROM bookingHistory WHERE showingsID = $showingsID AND email = $email;
+    `, { showingsID, email });
+
+        console.log("result", result);
+
       });
+      //db.run("COMMIT");
     }
 
-    if ((dateToString <= fullDate) && (`${time}` <= time)) {
-      let queryHtml = /*HTML*/ `<li> Salong: ${auditorium} film: ${filmID} sittplats: ${seats} Datum och tid: ${date} ${time} </li>`;
+    if ((dateToString <= fullDate) && (`${time} ` <= time)) {
+      let queryHtml = /*HTML*/ `< li > Salong: ${auditorium} film: ${filmID} sittplats: ${seats} Datum och tid: ${date} ${time} </li > `;
       $('ul').append(queryHtml);
     }
-
   }
 }
+
 
 
 async function currentDateAndTime() {
@@ -114,12 +122,6 @@ async function currentDateAndTime() {
   console.log(time);
 }
 
-// async function deleteRowQuery() {
 
-//   let deleteQuery = await db.run(/*sql*/ `
-//     DELETE FROM bookingHistory WHERE showingsID = ${showingsID};
-//   `);
-
-// }
 
 

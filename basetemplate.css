@@ -555,7 +555,7 @@ padding: 1%;
 }
 
 .kommandevisning{
-  border: 1px solid rgb(226, 136, 17);
+  border: 4px dotted rgb(226, 136, 17);
 }
 
 .kommandevisning .removeButton{
