@@ -20,11 +20,18 @@ init();
 
 /*Start up the page here */
 function init() {
-  buildMovieSelectorDropdown();
-  listenToMovieSelector();
+  _buildMovieSelectorDropdown();
+  _listenToMovieSelector();
+  loadMovie("1");
+  console.log($("#select-movie").val());
+}
+/*Load movie into movie selector*/
+function loadMovie(filmID) {
+
+  $("#select-movie").val(filmID);
 }
 /*Main container of ticket booking page*/
-function buildTicketBookingContainer() {
+function _buildTicketBookingContainer() {
   if ($('.ticketbooking-container').length) {
     $('.ticketbooking-container').remove();
   }
@@ -39,7 +46,7 @@ function buildTicketBookingContainer() {
   </article>`);
 }
 
-function buildMovieSelectorDropdown() {
+function _buildMovieSelectorDropdown() {
   $('.border').html(`
   <div class="booking-row0"></div>
   `);
@@ -52,19 +59,21 @@ function buildMovieSelectorDropdown() {
   /*Get all films from DB and build dropdown with their titles*/
   dbController.getAllFilms().then((films) => {
     for (let film of films) {
+      console.log(film.id);
       $('#select-movie').append(`<option value="${film.id}">${film.title}</option>`)
     }
   });
 }
 
-function listenToMovieSelector() {
+function _listenToMovieSelector() {
   $("#select-movie").change(function (e) {
     if (this.value !== "0") {
-      buildTicketBookingContainer();
-      buildShowingsSelectorDropdown();
-      buildUpcomingShowingsSection();
-      buildInfoButton();
-      listenToShowingSelector();
+      _buildTicketBookingContainer();
+      _buildShowingsSelectorDropdown();
+      _buildUpcomingShowingsSection();
+      _buildInfoButton();
+      _listenToInfoButton();
+      _listenToShowingSelector();
     } else {
       $(".border").html('');
       init();
@@ -73,7 +82,7 @@ function listenToMovieSelector() {
 }
 /*Build the dropdown selector for choosing the specific showing of a movie.
 The movie should already be choosen when this is used. */
-function buildShowingsSelectorDropdown() {
+function _buildShowingsSelectorDropdown() {
   if (!$('.showings-selector-dropdown').length) {
     $(".booking-row1-col1").append(`        
       <div class="showings-selector-dropdown">
@@ -92,7 +101,7 @@ function buildShowingsSelectorDropdown() {
     }
   });
 }
-function buildUpcomingShowingsSection() {
+function _buildUpcomingShowingsSection() {
   /* If .upcoming-showings-container does not exist we create it otherwise we just
   change its contents.*/
   if (!$('.upcoming-showings-container').length) {
@@ -112,21 +121,21 @@ function buildUpcomingShowingsSection() {
 }
 
 /* Listen to which showing the user picks*/
-function listenToShowingSelector() {
+function _listenToShowingSelector() {
   $(".booking-row1-col1").on('change', "#date-and-time", function (e) {
     $('.cinema-container').html('');
-    clearBookingButton();
-    clearInputForm();
+    _clearBookingButton();
+    _clearInputForm();
     let selectedShowingID = $(this).val();
     if (selectedShowingID == "0") {
       return; //do nothing more if first item selected (should just be info text)
     }
-    buildCinema();
+    _buildCinema();
     seatingsController = dbController.getShowings("ID", parseInt(selectedShowingID))
       .then(showing => {
         seatingsController = new SeatingsController(showing[0]);
         seatingsController.init();
-        listenToSeatSelection();
+        _listenToSeatSelection();
         return seatingsController;
       }).catch(err => {
         console.log(err);
@@ -135,7 +144,7 @@ function listenToShowingSelector() {
 }
 /*When the booking button is pressed we update db with a customer/booking/ with data from the 
 textfields in form.*/
-function listenToBookingButton() {
+function _listenToBookingButton() {
   $(".button-section").on({
     click: function () {
       let name = $('form :input[id="username"]').val();
@@ -148,13 +157,13 @@ function listenToBookingButton() {
       for (let ticket of seatingsController.tickets) {
         tickets.push(ticket);
       }
-      makeBooking(new Booking(showing, tickets, customer));
+      _makeBooking(new Booking(showing, tickets, customer));
       seatingsController.reserveSelected();
       seatingsController.clearSeatSelection();
     }
   }, '.general-button');
 }
-async function makeBooking(booking) {
+async function _makeBooking(booking) {
   let customerID = await dbController.addCustomer(booking.customer);//returning customer?
   booking.customer.id = customerID;
   let bookingID = await dbController.addBooking(booking);
@@ -162,28 +171,28 @@ async function makeBooking(booking) {
   await dbController.addTickets(booking);
   await dbController.addReservedSeats(booking);
 }
-function listenToSeatSelection() {
-  document.removeEventListener("seat selection updated'", seatsSelected, false);
+function _listenToSeatSelection() {
+  document.removeEventListener("seat selection updated'", _seatsSelected, false);
   // New seat either selected or deselcted.
-  document.addEventListener('seat selection updated', seatsSelected, false);
+  document.addEventListener('seat selection updated', _seatsSelected, false);
 }
 /*Seat selection event thrown from seatingsController - a seat has either been
 selected or deselected.*/
-function seatsSelected() {
+function _seatsSelected() {
   if (seatingsController.selectedSeats.length === 1) {
-    buildInputForm();
-    buildBookingButton();
-    disableBookingButton();
-    listenToInputForm();
-    listenToBookingButton();
+    _buildInputForm();
+    _buildBookingButton();
+    _disableBookingButton();
+    _listenToInputForm();
+    _listenToBookingButton();
   } else if (seatingsController.selectedSeats.length === 0) {
-    clearBookingButton();
-    clearInputForm();
+    _clearBookingButton();
+    _clearInputForm();
   }
-  buildSeatNumberCounter();
-  buildPriceCounter();
+  _buildSeatNumberCounter();
+  _buildPriceCounter();
 }
-function buildPriceCounter() {
+function _buildPriceCounter() {
   let adult = 0;
   let child = 0;
   let senior = 0;
@@ -208,7 +217,7 @@ function buildPriceCounter() {
   }
 }
 /*Lists all the currently selected seats*/
-function buildSeatNumberCounter() {
+function _buildSeatNumberCounter() {
   let seatNumbers = seatingsController.selectedSeats;
   seatNumbers = seatNumbers.join(', ');
   if ($('.info-input').length) {
@@ -221,19 +230,19 @@ function buildSeatNumberCounter() {
   }
 }
 /*Each time input form changes we check if there is information in all fields.*/
-function listenToInputForm() {
+function _listenToInputForm() {
   $('form input').change(function () {
     if ($('form :input[id="username"]').val() !== ''
       && $('form :input[id="email"]').val() !== ''
       && $('form :input[id="phonenumber"]').val() !== '') {
-      enableBookingButton();
+      _enableBookingButton();
     } else {
-      disableBookingButton();
+      _disableBookingButton();
     }
   });
 }
 /*We take in customer data here*/
-function buildInputForm() {
+function _buildInputForm() {
   if (!$('.info-input').length) {
     $('.booking-row2').append(`<section class="info-input">
         <form>      
@@ -250,16 +259,25 @@ function buildInputForm() {
   }
 }
 /*This is cleared when no seats are selected */
-function clearInputForm() {
+function _clearInputForm() {
   $('.info-input').remove();
 }
-function buildInfoButton() {
+function _buildInfoButton() {
   if (!$('.booking-row1-col2 button').length) {
-    $('.booking-row1-col2').append(`<button type="button" value="booking" class="general-button">INFO</button>`);
+    $('.booking-row1-col2').append(`<button type="button" id="info" class="general-button">INFO</button>`);
   }
 }
+function _listenToInfoButton() {
+  $('.booking-row1-col2 #info').on('click', () => {
+    console.log($);
+    $.getScript("/currentmovies.js", function () {
+      //$("#select-movie").val()
+      //call function to buil moreinfo
+    });
+  });
+}
 /*Button to finalise the booking process */
-function buildBookingButton() {
+function _buildBookingButton() {
   if (!$('.button-section').length) {
     $('.booking-row3').append(`<section class="button-section">
         <input
@@ -271,11 +289,11 @@ function buildBookingButton() {
       </section>`);
   }
 }
-function clearBookingButton() {
+function _clearBookingButton() {
   $('.button-section').remove();
 }
 /*This is were the seats button are located. They are put there in SeatingsController*/
-function buildCinema() {
+function _buildCinema() {
   if (!$('.cinema-container').length) {
     $('.booking-row1-col1').append(`
       <section class="cinema-container">
@@ -288,9 +306,9 @@ function buildCinema() {
   $('.cinema-screen-container').append('<div class="cinema-screen"></div>');
   $('.cinema').append('<div class="seat-selectors"></div>');
 }
-function enableBookingButton() {
+function _enableBookingButton() {
   $('.button-section .general-button').removeClass("disabled");
 }
-function disableBookingButton() {
+function _disableBookingButton() {
   $('.button-section .general-button').addClass("disabled");
 }
