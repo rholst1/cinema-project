@@ -54,6 +54,7 @@ async function renderMovieBooking(i) {
   $('.selectedShowing').remove();
   $('h1').remove();
   $('.layout').remove();
+  $('.booking-form').remove();
   let queryShowings = await db.run(
     /*sql*/ `SELECT * FROM Showings WHERE filmID = '${movies[i].title}'`
   );
