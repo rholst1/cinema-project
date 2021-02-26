@@ -146,7 +146,10 @@ $(document).on('click', '.seat', function () {
   if ($(this).hasClass('seat') && !$(this).hasClass('occupied')) {
     if ($(this).hasClass('seat') && $(this).hasClass('selected')) {
       $(this).toggleClass('selected');
-      selectedSeatNrArray.pop($(this).get(0).id);
+      function removeFromListByIndex(index) { selectedSeatNrArray.splice(index, 1); }
+      index = selectedSeatNrArray.indexOf($(this).get(0).id);
+      removeFromListByIndex(index);
+      console.log(selectedSeatNrArray);
     } else if (!(selectedSeatNrArray.length === totalAmountTickets)) {
       if ($(this).hasClass('seat') && !$(this).hasClass('occupied')) {
         $(this).toggleClass('selected');
