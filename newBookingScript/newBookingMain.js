@@ -52,6 +52,7 @@ async function addMovies() {
 
 async function renderMovieBooking(i) {
   $('.selectedShowing').remove();
+  $('.dropdown').remove();
   $('h1').remove();
   $('.layout').remove();
   $('.booking-form').remove();
@@ -166,6 +167,18 @@ $(document).on('click', '.seat', function () {
     }
   }
 });
+
+function actualBooking(selectedSeatNrArray) {
+  $('.actual-booking').remove();
+  $('.layout').after(/*html*/`<div class="actual-booking"><p class ="platser">Valda platser: </p><p>Totalt pris: </p></div>`)
+  for (i = 0; i < selectedSeatNrArray.length; i++) {
+    let seat = selectedSeatNrArray[i].match(/\d/g).join("");
+    $('.platser').append(`<span class="seatSpan${i}">${seat}</span>`);
+       if (i > 0) {
+        $(`.seatSpan${i}`).prepend(`, `);
+    }
+  }
+}
 
 function inputInfo() {
   $('.layout').after(/*html*/`<div class="booking-form"><form id="form" class="book-tickets">
