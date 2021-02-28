@@ -2,23 +2,23 @@ $('header').after(/*html*/ `<main></main>`);
 $('main').append(
   /*html*/ `<div class="choose-movie"><button id="childTicketRem" class="general-button">-</button><button id="childTicket" class="general-button">Barn</button><button id="childTicketAdd" class="general-button">+</button></div>`
 );
-$('.choose-movie').append(`<div class="dropdown">
+$('.choose-movie').append(/*html*/`<div class="dropdown">
   <button id="toggle" class="general-button dropbtn">Välj film</button>
   <div class="dropdown-content">
   </div>
 </div>`);
-$('.choose-movie').after(`<div class="showings-container"><h1></h1></div>`);
+$('.choose-movie').after(/*html*/`<div class="showings-container"><h1></h1></div>`);
 
 let movies;
 let id;
 let i;
-let amountOfSelectedSeats = 0;
 let childTickets = 0;
 let adultTickets;
 let seniorTickets;
 let totalAmountTickets = 5; // Userinput
 let selectedSeatNrArray = [];
 let selectedShow = 1;
+let showingID;
 
 function renderChosenTickets() {
   let html = /*html*/ `<div id="amountChildTickets">Antal: ${childTickets} </div>`;
@@ -60,16 +60,16 @@ async function renderMovieBooking(i) {
   );
 
   $('.showings-container').append(`<h1>${movies[i].title}</h1>`);
-  for (let { auditorium, date, time } of queryShowings) {
+  for (let { ID, auditorium, date, time } of queryShowings) {
     $('.showings-container').append(
-      /*html*/ `<div class="selectedShowing"><div><h3>Salong: ${auditorium} | Datum: ${date} | Time: ${time}</h3></div><div class="book"><button id="book" class="general-button">Boka</button></div></div>`
+      /*html*/ `<div class="selectedShowing"><div><h3>Salong: ${auditorium} | Datum: ${date} | Time: ${time}</h3></div><div class="book"><button id="book" class="general-button" value="${ID}">Boka</button></div></div>`
     );
   }
 }
 addMovies();
 
 //Enter selected show
-async function renderSeatChooser(selectedShow) {
+async function renderSeatChooser(showingID) {
   $('.layout').remove();
   $('.showings-container').after(`<div class="layout"></div>`);
   $('.layout').append(`<div class="container">
@@ -79,7 +79,7 @@ async function renderSeatChooser(selectedShow) {
 
   //Pulls seats from the selectedShow by the unique showingID
   let seatStatus = await db.run(
-    /*sql*/ `SELECT * FROM Seatings WHERE showingID = 1`
+    /*sql*/ `SELECT * FROM Seatings WHERE showingID = ${showingID}`
   );
   let seatNumberArray = [];
   let seatStatusArray = [];
@@ -107,7 +107,7 @@ async function renderSeatChooser(selectedShow) {
     }
   }
 
-  $('.container').append(`<div class="showcase">
+  $('.container').append(/*html*/`<div class="showcase">
 		<div>
 			<div class="seatshow"></div>
 			<span>N/A</span>
@@ -137,27 +137,30 @@ $(document).on('click', '#book', function () {
   $('h1').remove();
   $('.selectedShowing').remove();
   selectedSeatNrArray.length = 0;
-  renderSeatChooser();
+  showingID = $(this).val();
+  renderSeatChooser(showingID);
   inputInfo();
 });
 
 $('#childTicketAdd').click(addChildTicket);
 $('#childTicketRem').click(remChildTicket);
 $(document).on('click', '.seat', function () {
+  
   if ($(this).hasClass('seat') && !$(this).hasClass('occupied')) {
     if ($(this).hasClass('seat') && $(this).hasClass('selected')) {
       $(this).toggleClass('selected');
       function removeFromListByIndex(index) { selectedSeatNrArray.splice(index, 1); }
       index = selectedSeatNrArray.indexOf($(this).get(0).id);
       removeFromListByIndex(index);
-      console.log(selectedSeatNrArray);
+      // saveSeats(selectedSeatNrArray);
+      // console.log(selectedSeatNrArray);
     } else if (!(selectedSeatNrArray.length === totalAmountTickets)) {
       if ($(this).hasClass('seat') && !$(this).hasClass('occupied')) {
         $(this).toggleClass('selected');
         selectedSeatNrArray.push($(this).get(0).id);
       }
-
-      console.log(selectedSeatNrArray);
+      // saveSeats(selectedSeatNrArray);
+      // console.log(selectedSeatNrArray);
     } else {
       alert('Du har valt för många din jävel');
     }
@@ -175,7 +178,27 @@ function inputInfo() {
         alert('Var vänlig och fyll i alla fälten, tack!');
         return false;
     } else {
+      let email = $("#email").val();
+      let phonenumber = $("#phonenumber").val();
+      saveSeats(selectedSeatNrArray);
+      saveBooking(email, phonenumber);
+      // Ändra bekräftelse till valda stolsnummer, film och datum.
       alert('Tack för din bokning!')
+      
     }
-});
+ });
 }
+
+async function saveBooking(email, phonenumber) {
+  db.run("BEGIN TRANSACTION");
+  await db.run(/*sql*/`INSERT INTO Bookings (phonenumber, email, showingID, price) VALUES ('${phonenumber}', '${email}', ${showingID}, 180)`);
+}
+async function saveSeats(seatings) {
+  for (i = 0; i < seatings.length; i++){
+    db.run("BEGIN TRANSACTION")
+    let seat = seatings[i].match(/\d/g).join("");
+    await db.run(/*sql*/`UPDATE Seatings SET status = "occupied" WHERE seatNumber = ${seat} AND showingID = ${showingID}`)
+  }
+  db.run("COMMIT");
+}
+db.run("COMMIT");
