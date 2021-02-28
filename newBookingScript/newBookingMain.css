@@ -139,3 +139,27 @@
   margin-top: 1vh;
   width: 10vw;
 }
+.ticket-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.continue-container {
+  display: flex;
+  justify-content: center;
+}
+.button-container {
+  display: flex;
+}
+.button-container div {
+  display: flex;
+  padding: 0 2vw 0 2vw;
+  align-items: center;
+}
+.actual-booking {
+  display: flex;
+  justify-content: center;
+}
+.actual-booking p {
+  margin: 0 2vw;
+}

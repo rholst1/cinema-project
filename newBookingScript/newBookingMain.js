@@ -1,6 +1,6 @@
 $('header').after(/*html*/ `<main></main>`);
 $('main').append(
-  /*html*/ `<div class="choose-movie"><button id="childTicketRem" class="general-button">-</button><button id="childTicket" class="general-button">Barn</button><button id="childTicketAdd" class="general-button">+</button></div>`
+  /*html*/ `<div class="choose-movie"></div>`
 );
 $('.choose-movie').append(/*html*/`<div class="dropdown">
   <button id="toggle" class="general-button dropbtn">Välj film</button>
@@ -13,27 +13,64 @@ let movies;
 let id;
 let i;
 let childTickets = 0;
-let adultTickets;
-let seniorTickets;
-let totalAmountTickets = 5; // Userinput
+let adultTickets = 0;
+let seniorTickets = 0;
+let totalAmountTickets = 0; // Userinput
 let selectedSeatNrArray = [];
 let selectedShow = 1;
 let showingID;
 
-function renderChosenTickets() {
-  let html = /*html*/ `<div id="amountChildTickets">Antal: ${childTickets} </div>`;
-  $('.choose-movie').append(html);
+function renderChosenTicketsC() {
+  $('.showAmountC').remove();
+  let html = /*html*/ `<p class="showAmountC">${childTickets}</p>`;
+ $('.amountC').append(html);
+}
+
+function renderChosenTicketsA() {
+  $('.showAmountA').remove();
+  let html = /*html*/ `<p class="showAmountA">${adultTickets}</p>`;
+ $('.amountA').append(html);
+}
+
+function renderChosenTicketsS() {
+  $('.showAmountS').remove();
+  let html = /*html*/ `<p class="showAmountS">${seniorTickets}</p>`;
+ $('.amountS').append(html);
 }
 
 function addChildTicket() {
   childTickets++;
   totalAmountTickets++;
-  renderChosenTickets();
+  renderChosenTicketsC();
 }
 
 function remChildTicket() {
   childTickets--;
   totalAmountTickets--;
+  renderChosenTicketsC();
+}
+
+function addAdultTicket() {
+  adultTickets++;
+  totalAmountTickets++;
+  renderChosenTicketsA();
+}
+
+function remAdultTicket() {
+  adultTickets--;
+  totalAmountTickets--;
+  renderChosenTicketsA();
+}
+function addSeniorTicket() {
+  seniorTickets++;
+  totalAmountTickets++;
+  renderChosenTicketsS();
+}
+
+function remSeniorTicket() {
+  seniorTickets--;
+  totalAmountTickets--;
+  renderChosenTicketsS();
 }
 
 async function addMovies() {
@@ -137,31 +174,44 @@ function hideMenu() {
 $(document).on('click', '#book', function () {
   $('h1').remove();
   $('.selectedShowing').remove();
+  renderTicketChooser();
   selectedSeatNrArray.length = 0;
   showingID = $(this).val();
-  renderSeatChooser(showingID);
-  inputInfo();
+  // renderSeatChooser(showingID);
+  // inputInfo();
 });
 
-$('#childTicketAdd').click(addChildTicket);
-$('#childTicketRem').click(remChildTicket);
-$(document).on('click', '.seat', function () {
+function renderTicketChooser() {
+  $('main').append(`<div class="ticket-container"></div>`);
+  $('main').append(`<div class="continue-container"></div>`);
+  let htmlChild = /*html*/ `<div class="button-container"><button id="childTicketRem" class="general-button">-</button><div class="amountC"><p class="showAmountC">0</p></div><button id="childTicketAdd" class="general-button">+</button></div>`;
+
+  let htmlAdult = /*html*/ `<div class="button-container"><button id="adultTicketRem" class="general-button">-</button><div class="amountA"><p class="showAmountA">0</p></div><button id="adultTicketAdd" class="general-button">+</button></div>`;
   
+  let htmlSenior = /*html*/ `<div class="button-container"><button id="seniorTicketRem" class="general-button">-</button><div class="amountS"><p class="showAmountS">0</p></div><button id="seniorTicketAdd" class="general-button">+</button></div>`;
+    
+  let htmlButton = /*html*/ `<div><button id="continue-button" class="general-button">Fortsätt</button></div>`
+
+  let html = htmlChild + htmlAdult + htmlSenior;
+  $('.ticket-container').append(html);
+  $('.continue-container').append(htmlButton);
+}
+
+
+$(document).on('click', '.seat', function () {
   if ($(this).hasClass('seat') && !$(this).hasClass('occupied')) {
     if ($(this).hasClass('seat') && $(this).hasClass('selected')) {
       $(this).toggleClass('selected');
       function removeFromListByIndex(index) { selectedSeatNrArray.splice(index, 1); }
       index = selectedSeatNrArray.indexOf($(this).get(0).id);
       removeFromListByIndex(index);
-      // saveSeats(selectedSeatNrArray);
-      // console.log(selectedSeatNrArray);
+      actualBooking(selectedSeatNrArray)
     } else if (!(selectedSeatNrArray.length === totalAmountTickets)) {
       if ($(this).hasClass('seat') && !$(this).hasClass('occupied')) {
         $(this).toggleClass('selected');
         selectedSeatNrArray.push($(this).get(0).id);
       }
-      // saveSeats(selectedSeatNrArray);
-      // console.log(selectedSeatNrArray);
+      actualBooking(selectedSeatNrArray)
     } else {
       alert('Du har valt för många din jävel');
     }
@@ -170,7 +220,7 @@ $(document).on('click', '.seat', function () {
 
 function actualBooking(selectedSeatNrArray) {
   $('.actual-booking').remove();
-  $('.layout').after(/*html*/`<div class="actual-booking"><p class ="platser">Valda platser: </p><p>Totalt pris: </p></div>`)
+  $('.layout').after(/*html*/`<div class="actual-booking"><p class ="platser">Valda platser: </p></div>`)
   for (i = 0; i < selectedSeatNrArray.length; i++) {
     let seat = selectedSeatNrArray[i].match(/\d/g).join("");
     $('.platser').append(`<span class="seatSpan${i}">${seat}</span>`);
@@ -183,11 +233,10 @@ function actualBooking(selectedSeatNrArray) {
 function inputInfo() {
   $('.layout').after(/*html*/`<div class="booking-form"><form id="form" class="book-tickets">
     <input type="text" placeholder="Ange email..." id="email" />
-    <input type="text" placeholder="Ange telefonnummer..." id="phonenumber" />
     <button type="submit" class="general-button" id="bookbtn" >Boka</button>
   </form></div>`);
  $('#form').submit(function() {
-    if ($.trim($("#email").val()) === "" || $.trim($("#phonenumber").val()) === "") {
+    if ($.trim($("#email").val()) === "") {
         alert('Var vänlig och fyll i alla fälten, tack!');
         return false;
     } else {
@@ -215,3 +264,35 @@ async function saveSeats(seatings) {
   db.run("COMMIT");
 }
 db.run("COMMIT");
+
+$(document).on('click', '#childTicketAdd', function () {
+  addChildTicket();
+});
+$(document).on('click', '#childTicketRem', function () {
+  remChildTicket();
+});
+$(document).on('click', '#adultTicketAdd', function () {
+  addAdultTicket();
+});
+$(document).on('click', '#adultTicketRem', function () {
+  remAdultTicket();
+});
+$(document).on('click', '#seniorTicketAdd', function () {
+  addSeniorTicket();
+});
+$(document).on('click', '#seniorTicketRem', function () {
+  remSeniorTicket();
+});
+$(document).on('click', '#continue-button', function () {
+  $('.ticket-container').remove();
+  $('.continue-container').remove();
+  renderSeatChooser(showingID);
+  inputInfo();
+  actualBooking();
+  
+
+});
+  
+  //$('#childTicketAdd').click(addChildTicket());
+  // $('#childTicketRem').click(remChildTicket());
+
