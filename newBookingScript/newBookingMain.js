@@ -184,11 +184,11 @@ $(document).on('click', '#book', function () {
 function renderTicketChooser() {
   $('main').append(`<div class="ticket-container"></div>`);
   $('main').append(`<div class="continue-container"></div>`);
-  let htmlChild = /*html*/ `<div class="button-container"><button id="childTicketRem" class="general-button">-</button><div class="amountC"><p class="showAmountC">0</p></div><button id="childTicketAdd" class="general-button">+</button></div>`;
+  let htmlChild = /*html*/ `<span>Barn - 75kr</span><div class="button-container"><button id="childTicketRem" class="general-button">-</button><div class="amountC"><p class="showAmountC">0</p></div><button id="childTicketAdd" class="general-button">+</button></div>`;
 
-  let htmlAdult = /*html*/ `<div class="button-container"><button id="adultTicketRem" class="general-button">-</button><div class="amountA"><p class="showAmountA">0</p></div><button id="adultTicketAdd" class="general-button">+</button></div>`;
+  let htmlAdult = /*html*/ `<span>Vuxen - 85kr</span><div class="button-container"><button id="adultTicketRem" class="general-button">-</button><div class="amountA"><p class="showAmountA">0</p></div><button id="adultTicketAdd" class="general-button">+</button></div>`;
   
-  let htmlSenior = /*html*/ `<div class="button-container"><button id="seniorTicketRem" class="general-button">-</button><div class="amountS"><p class="showAmountS">0</p></div><button id="seniorTicketAdd" class="general-button">+</button></div>`;
+  let htmlSenior = /*html*/ `<span>Pensionär - 65kr</span><div class="button-container"><button id="seniorTicketRem" class="general-button">-</button><div class="amountS"><p class="showAmountS">0</p></div><button id="seniorTicketAdd" class="general-button">+</button></div>`;
     
   let htmlButton = /*html*/ `<div><button id="continue-button" class="general-button">Fortsätt</button></div>`
 
@@ -242,8 +242,9 @@ function inputInfo() {
     } else {
       let email = $("#email").val();
       let phonenumber = $("#phonenumber").val();
+      let price = (childTickets * 75)+(adultTickets * 85)+(seniorTickets * 65);
       saveSeats(selectedSeatNrArray);
-      saveBooking(email, phonenumber);
+      saveBooking(email, phonenumber, price);
       // Ändra bekräftelse till valda stolsnummer, film och datum.
       alert('Tack för din bokning!')
       
@@ -251,9 +252,9 @@ function inputInfo() {
  });
 }
 
-async function saveBooking(email, phonenumber) {
+async function saveBooking(email, phonenumber, price) {
   db.run("BEGIN TRANSACTION");
-  await db.run(/*sql*/`INSERT INTO Bookings (phonenumber, email, showingID, price) VALUES ('${phonenumber}', '${email}', ${showingID}, 180)`);
+  await db.run(/*sql*/`INSERT INTO Bookings (phonenumber, email, showingID, price) VALUES ('${phonenumber}', '${email}', ${showingID}, ${price})`);
 }
 async function saveSeats(seatings) {
   for (i = 0; i < seatings.length; i++){
@@ -263,7 +264,7 @@ async function saveSeats(seatings) {
   }
   db.run("COMMIT");
 }
-db.run("COMMIT");
+
 
 $(document).on('click', '#childTicketAdd', function () {
   addChildTicket();
@@ -292,7 +293,7 @@ $(document).on('click', '#continue-button', function () {
   
 
 });
-  
+db.run("COMMIT");
   //$('#childTicketAdd').click(addChildTicket());
   // $('#childTicketRem').click(remChildTicket());
 
