@@ -262,12 +262,10 @@ async function saveSeats(seatings) {
     db.run("BEGIN TRANSACTION")
     let seat = seatings[i].match(/\d/g).join("");
     await db.run(/*sql*/`UPDATE Seatings SET status = "occupied" WHERE seatNumber = ${seat} AND showingID = ${showingID}`);
-    db.run("COMMIT");
   }
   db.run("COMMIT");
-  location.reload();
 }
-
+db.run("COMMIT");
 $(document).on('click', '#childTicketAdd', function () {
   addChildTicket();
 });
@@ -295,7 +293,6 @@ $(document).on('click', '#continue-button', function () {
   
 
 });
-db.run("COMMIT");
   //$('#childTicketAdd').click(addChildTicket());
   // $('#childTicketRem').click(remChildTicket());
 
