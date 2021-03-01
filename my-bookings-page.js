@@ -88,7 +88,7 @@ async function queryDatabase() {
 
 
       $('.removeButton').on('click', async () => {
-        //  db.run("BEGIN TRANSACTION");
+        db.run("BEGIN TRANSACTION");
         console.log("data", showingsID, email);
         let result = await db.run(/*sql*/`
       DELETE FROM bookingHistory WHERE showingsID = $showingsID AND email = $email;
@@ -97,7 +97,7 @@ async function queryDatabase() {
         console.log("result", result);
 
       });
-      //db.run("COMMIT");
+
     }
 
     if ((dateToString <= fullDate) && (`${time} ` <= time)) {
@@ -107,7 +107,7 @@ async function queryDatabase() {
   }
 }
 
-
+db.run("COMMIT");
 
 async function currentDateAndTime() {
 
