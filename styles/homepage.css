@@ -5,18 +5,29 @@
   flex-direction: row;
   justify-content: space-between;
   padding: 0 5vw;
+  
 }
 .news {
+  border-radius: 10px;
   color: var(--text);
-  background: var(--news-color);
+  background:  rgba(6, 43, 88, 0.8);
   width: 40vw;
   padding: 3vh 3vw;
   margin: 3vh 2vw 3vh 0;
 }
 
+.news h2 {
+  font-size: 200%;
+}
+
+.news p {
+  font-size: 120%;
+}
+
 .nowShowing {
+  border-radius: 10px;
   color: var(--text);
-  background: var(--nowShowing-color);
+  background:  rgba(38, 42, 46, 0.9);
   width: 25vw;
   padding: 3vh 3vw;
   margin: 3vh 0;
@@ -24,8 +35,13 @@
 }
 .nowShowing h2 {
   font-size: 200%;
-  position:
+  
 }
+
+.nowShowing li {
+  font-size: 140%;
+}
+
 .nowShowingTitles a {
   text-decoration: none;
 }

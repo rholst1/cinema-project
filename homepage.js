@@ -8,7 +8,6 @@ $('.newsAndShowtimeElements').append(buildNews());
 $('.newsAndShowtimeElements').append(buildNowShowing());
 
 
-
 /* Function that builds the "Nyheter" section with the bullet point news */
 function buildNews() {
 
@@ -46,7 +45,7 @@ function buildNowShowing() {
   let nowShowingHtml;
 
   nowShowingHtml = /*html*/ `<div class="nowShowing">
-      <h2 class="nowShowingh2">På Bio idag</h2>
+      <h2 class="nowShowingh2">På Bio idag:</h2>
       <ul class="nowShowingTitles">
      </div>`;
   databasePullShowings();
@@ -54,9 +53,15 @@ function buildNowShowing() {
 
 }
 
+
 /* Function that loads DB entries from Showings into Now Showing box */
-let showings = [];
 async function databasePullShowings() {
+
+  let todaysDate = new Date().toISOString().slice(0, 10);
+
+  if (todaysDate[8] == "0") {
+    todaysDate = todaysDate.slice(0, 8) + todaysDate[9];
+  }
   try {
     showings = await db.run(`SELECT * FROM Showings`);
   }
@@ -66,7 +71,7 @@ async function databasePullShowings() {
 
   for (let { filmID, auditorium, date, time } of showings) {
 
-    if (date.localeCompare("2021-03-1") === 0) {
+    if (date.localeCompare(todaysDate) === 0) {
       buildNowShowingElements(filmID, auditorium, time);
 
     }
@@ -77,7 +82,7 @@ async function databasePullShowings() {
 
 /* Function that builds the elements that gets loaded underneath "Visas Just Nu" Header */
 function buildNowShowingElements(filmID, auditorium, time) {
-  let html = /*html*/ `<li><a href="ticketbooking.html" style="color: ghostwhite" class="hoverabe"l>${filmID} | ${time} | Salong ${auditorium}</a><hr></li>
+  let html = /*html*/ `<li><a href="ticketbooking.html" style="color: ghostwhite" class="hoverabe"l>${filmID} | ${time} | Salong ${auditorium}</a></li>
   `;
   $('.nowShowingTitles').append(html);
 }
