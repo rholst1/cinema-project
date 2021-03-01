@@ -44,7 +44,7 @@ let runQuery;
 let fullDate;
 let time;
 
-currentDateAndTime();
+//currentDateAndTime();
 
 //Runs when user clicks "Hämta bokningar"
 async function queryDatabase() {
@@ -67,28 +67,36 @@ async function queryDatabase() {
   } of runQuery) {
 
 
+    let today = new Date();
+    let leadingZero = today.getFullYear() + ('0' + (today.getMonth() + 1)).slice(-2) + ('0' + today.getDate()).slice(-2);
+    console.log("date today with leading zero", leadingZero);
+
+    let todayDateInt = parseInt(leadingZero);
+    console.log("parsed int", todayDateInt);
 
     let parts = `${date}`.split('-');
+    let movieDate = new Date(parts[0], parts[1] - 1, parts[2]);
 
-    let mydate = new Date(parts[0], parts[1] - 1, parts[2]);
+    let movieLeadingZero = movieDate.getFullYear() + ('0' + (movieDate.getMonth() + 1)).slice(-2) + ('0' + movieDate.getDate()).slice(-2);
+    console.log("MOVIE DATE WITH LEADING ZERO", movieLeadingZero);
 
-    let dateToString = mydate.toDateString();
+    let movieIntDate = parseInt(movieLeadingZero);
 
-    console.log(dateToString);
+    console.log("MOVIEDATE PARSED INT", movieIntDate);
 
     // let deleteQuery = await db.run(/*sql*/ `
     // DELETE FROM bookingHistory WHERE showingsID = '${showingsID}' AND email = '${inputEmail}';
     // `);
 
-    if ((dateToString >= fullDate) && (`${time} ` >= time)) {
-      let queryHtml = /*HTML*/ `<li class= "kommandevisning" > Kommande visning: Salong: ${auditorium} Film: ${filmID} Sittplats: ${seats} Datum och tid: ${date} ${time}
+    if (movieIntDate >= todayDateInt) {
+      let queryHtml = /*HTML*/ `<li class="kommandevisning"> Kommande visning: Salong: ${auditorium} Film: ${filmID} Sittplats: ${seats} Datum och tid: ${date} ${time} 
     <br> <button class="general-button removeButton" onclick="alert('Biljett avbokad!')" id="delete">Avboka</button></li>
     `;
       $('ul').append(queryHtml);
 
 
       $('.removeButton').on('click', async () => {
-        db.run("BEGIN TRANSACTION");
+        db.run("BEGIN TRANSACTION")
         console.log("data", showingsID, email);
         let result = await db.run(/*sql*/`
       DELETE FROM bookingHistory WHERE showingsID = $showingsID AND email = $email;
@@ -100,8 +108,8 @@ async function queryDatabase() {
 
     }
 
-    if ((dateToString <= fullDate) && (`${time} ` <= time)) {
-      let queryHtml = /*HTML*/ `< li > Salong: ${auditorium} film: ${filmID} sittplats: ${seats} Datum och tid: ${date} ${time} </li > `;
+    if (movieIntDate < todayDateInt) {
+      let queryHtml = /*HTML*/ `<li> Salong: ${auditorium} film: ${filmID} sittplats: ${seats} Datum och tid: ${date} ${time} </li> `;
       $('ul').append(queryHtml);
     }
   }
@@ -109,18 +117,22 @@ async function queryDatabase() {
 
 db.run("COMMIT");
 
-async function currentDateAndTime() {
+// async function currentDateAndTime() {
 
-  let currentDate = new Date();
-  let cDay = currentDate.getDate();
-  let cMonth = currentDate.getMonth() + 1;
-  let cYear = currentDate.getFullYear();
-  console.log(cYear + "-" + cMonth + "-" + cDay);
-  fullDate = cYear + "-" + cMonth + "-" + cDay;
+//   let currentDate = new Date();
+//   let cDay = currentDate.getDate();
+//   let cMonth = currentDate.getMonth() + 1;
+//   let cYear = currentDate.getFullYear();
+//   fullDate = "" + cYear + cMonth + cDay;
+//   console.log("d", fullDate);
 
-  time = currentDate.getHours() + ":" + currentDate.getMinutes();
-  console.log(time);
-}
+//   let dateInt = parseInt(fullDate);
+//   console.log("parsed int", dateInt);
+
+//   time = "" + currentDate.getHours() + currentDate.getMinutes();
+//   console.log("kl", time);
+
+// }
 
 
 
