@@ -283,11 +283,10 @@ async function saveSeats(seatings, email) {
     );
   }
 
-  db.run('COMMIT');
   console.log('skicka till query', bookingIdNewest);
   renderConfirmation(bookingIdNewest);
 }
-//db.run('COMMIT');
+db.run('COMMIT');
 $(document).on('click', '#childTicketAdd', function () {
   addChildTicket();
 });
