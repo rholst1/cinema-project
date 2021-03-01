@@ -232,7 +232,7 @@ function actualBooking(selectedSeatNrArray) {
 
 function inputInfo() {
   $('.layout').after(/*html*/`<div class="booking-form"><form id="form" class="book-tickets">
-    <input type="text" placeholder="Ange email..." id="email" />
+    <input type="email" placeholder="Ange email..." id="email" />
     <button type="submit" class="general-button" id="bookbtn" >Boka</button>
   </form></div>`);
  $('#form').submit(function() {
