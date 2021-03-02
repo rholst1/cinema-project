@@ -50,7 +50,6 @@ let time;
 async function queryDatabase() {
   let inputEmail = document.getElementById('emailInput').value;
 
-
   runQuery = await db.run(/*sql*/ `
     SELECT * FROM Showings JOIN bookingHistory ON showingsID WHERE ID = showingsID AND email = '${inputEmail}';
   `);
@@ -66,13 +65,12 @@ async function queryDatabase() {
     showingsID,
   } of runQuery) {
 
-
     let today = new Date();
     let leadingZero = today.getFullYear() + ('0' + (today.getMonth() + 1)).slice(-2) + ('0' + today.getDate()).slice(-2);
-    console.log("date today with leading zero", leadingZero);
+    // console.log("date today with leading zero", leadingZero);
 
     let todayDateInt = parseInt(leadingZero);
-    console.log("parsed int", todayDateInt);
+    console.log(" TODAY parsed int", todayDateInt);
 
     let parts = `${date}`.split('-');
     let movieDate = new Date(parts[0], parts[1] - 1, parts[2]);
@@ -84,55 +82,51 @@ async function queryDatabase() {
 
     console.log("MOVIEDATE PARSED INT", movieIntDate);
 
-    // let deleteQuery = await db.run(/*sql*/ `
-    // DELETE FROM bookingHistory WHERE showingsID = '${showingsID}' AND email = '${inputEmail}';
-    // `);
+    let hourNow = today.getHours();
+    let minutesNow = today.getMinutes();
 
-    if (movieIntDate >= todayDateInt) {
-      let queryHtml = /*HTML*/ `<li class="kommandevisning"> Kommande visning: Salong: ${auditorium} Film: ${filmID} Sittplats: ${seats} Datum och tid: ${date} ${time} 
+    let timeNowString = "" + ('0' + hourNow).slice(-2) + ('0' + minutesNow).slice(-2);
+    console.log("string time now", timeNowString);
+
+    let timeNowInt = parseInt(timeNowString);
+    console.log("time now int parsed!", timeNowInt);
+
+    let movieTimeParts = `${time}`.split(':');
+
+    let movieTimeString = "" + ('0' + movieTimeParts[0]).slice(-2) + ('0' + movieTimeParts[1]).slice(-2);
+    console.log("movie time string", movieTimeString);
+
+    let movieTimeInt = parseInt(movieTimeString, 10);
+    console.log("movie time int parsed", movieTimeInt);
+
+
+    if ((movieIntDate < todayDateInt) || ((movieIntDate = todayDateInt) && (movieTimeInt < timeNowInt))) {
+      let queryHtml = /*HTML*/ `<li> Salong: ${auditorium} film: ${filmID} sittplats: ${seats} Datum och tid: ${date} ${time} </li> `;
+
+      $('ul').append(queryHtml);
+    }
+    else if ((movieIntDate = todayDateInt) && (movieTimeInt > timeNowInt) || ((movieIntDate > todayDateInt) && (movieTimeInt > timeNowInt))) {
+      let queryHtmlKommande = /*HTML*/ `<li class="kommandevisning"> Kommande visning: Salong: ${auditorium} Film: ${filmID} Sittplats: ${seats} Datum och tid: ${date} ${time} 
     <br> <button class="general-button removeButton" onclick="alert('Biljett avbokad!')" id="delete">Avboka</button></li>
     `;
-      $('ul').append(queryHtml);
 
+      $('ul').append(queryHtmlKommande);
+    }
 
-      $('.removeButton').on('click', async () => {
-        db.run("BEGIN TRANSACTION")
-        console.log("data", showingsID, email);
-        let result = await db.run(/*sql*/`
+    $('.removeButton').on('click', async () => {
+      db.run("BEGIN TRANSACTION")
+      console.log("data", showingsID, email);
+      let result = await db.run(/*sql*/`
       DELETE FROM bookingHistory WHERE showingsID = $showingsID AND email = $email;
     `, { showingsID, email });
 
-        console.log("result", result);
-
-      });
-
-    }
-
-    if (movieIntDate < todayDateInt) {
-      let queryHtml = /*HTML*/ `<li> Salong: ${auditorium} film: ${filmID} sittplats: ${seats} Datum och tid: ${date} ${time} </li> `;
-      $('ul').append(queryHtml);
-    }
+      console.log("result", result);
+    });
   }
 }
 
 db.run("COMMIT");
 
-// async function currentDateAndTime() {
-
-//   let currentDate = new Date();
-//   let cDay = currentDate.getDate();
-//   let cMonth = currentDate.getMonth() + 1;
-//   let cYear = currentDate.getFullYear();
-//   fullDate = "" + cYear + cMonth + cDay;
-//   console.log("d", fullDate);
-
-//   let dateInt = parseInt(fullDate);
-//   console.log("parsed int", dateInt);
-
-//   time = "" + currentDate.getHours() + currentDate.getMinutes();
-//   console.log("kl", time);
-
-// }
 
 
 
