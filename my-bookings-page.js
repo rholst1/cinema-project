@@ -148,6 +148,8 @@ $(document).on('click', '.removeButton', async function () {
   let result = await db.run(/*sql*/ `
       DELETE FROM Bookings WHERE ID = ${removeID}; UPDATE Seatings SET status = 'empty' WHERE bookingID = ${removeID}`);
 
+  alert('Din bokning är nu avbokad!');
+  location.reload();
   console.log('result', result);
 });
 
