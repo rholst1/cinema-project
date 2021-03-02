@@ -237,10 +237,10 @@ function inputInfo() {
     .after(/*html*/ `<div class="booking-form"><form id="form" class="book-tickets">
     <input type="email" placeholder="Ange email..." id="email" />
     <input type="tel" placeholder="Ange telefonnummer..." id="phonenumber" />
-    <button type="submit" class="general-button" id="bookbtn" >Boka</button>
+    <button type="button" class="general-button" id="bookbtn" >Boka</button>
   </form></div>`);
-  $('#form').submit(function () {
-    if ($.trim($('#email').val()) === '') {
+  $('#bookbtn').click(function () {
+    if ($.trim($('#email').val()) === ''||$.trim($('#phonenumber').val()) === '') {
       alert('Var vänlig och fyll i alla fälten, tack!');
       return false;
     } else {
