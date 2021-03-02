@@ -1,0 +1,174 @@
+/* The container <div> - needed to position the dropdown content */
+.choose-movie {
+  display: flex;
+  justify-content: center;
+}
+.dropbtn {
+  width: 15vw;
+}
+.dropdown {
+  margin-top: 2vh;
+}
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  width: 15vw;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-radius: 5px;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #c7c6c6;
+}
+
+.selectedShowing {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+.showings-container h1 {
+  padding: 0;
+  font-size: 300%;
+  text-align: center;
+  text-decoration: underline;
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+.container {
+  margin-top: 3vh;
+  perspective: 1000px;
+}
+
+.seat,
+.seatshow {
+  background-color: #444451;
+  height: 17px;
+  width: 20px;
+  margin: 3px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.seat.occupied,
+.seatshow.occupied {
+  background-color: rgb(219, 62, 62);
+}
+
+.seat.selected,
+.seatshow.selected {
+  background-color: #ffffff;
+}
+
+.seat:not(.occupied):hover {
+  cursor: pointer;
+  transform: scale(1.2);
+}
+
+.screen {
+  background-color: #fff;
+  height: 70px;
+  width: 100%;
+  margin: 15px 0;
+  transform: rotateX(-45deg);
+  box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
+}
+
+.row {
+  display: flex;
+}
+
+.showcase {
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 5px 10px;
+  margin: 2vh 0 2vh 0;
+  border-radius: 5px;
+  color: #777;
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+.showcase div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 10px;
+}
+
+.showcase div span {
+  margin-left: 2px;
+}
+.booking-form {
+  margin-top: 2vh;
+  display: flex;
+  justify-content: center;
+}
+.book-tickets {
+  display: flex;
+  justify-content: center;
+}
+.book-tickets input {
+  font: var(--font-bread);
+  padding: 10px;
+  border: 1px solid black;
+}
+.bookbtn {
+  display: flex;
+  justify-content: center;
+}
+.bookbtn button {
+  margin-top: 1vh;
+  width: 10vw;
+}
+.ticket-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.continue-container {
+  display: flex;
+  justify-content: center;
+}
+.button-container {
+  display: flex;
+}
+.button-container div {
+  display: flex;
+  padding: 0 2vw 0 2vw;
+  align-items: center;
+}
+.actual-booking {
+  display: flex;
+  justify-content: center;
+}
+.actual-booking p {
+  margin: 0 2vw;
+}
+.tack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: larger;
+}
+.tack h1 {
+  margin-bottom: 0;
+}
