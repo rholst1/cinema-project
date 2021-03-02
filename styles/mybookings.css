@@ -5,8 +5,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 7%;
-  margin-left: 1%;
+  /* margin: 0 7%;
+  margin-left: 1%; */
 }
 .maindiv section {
   display: flex;
