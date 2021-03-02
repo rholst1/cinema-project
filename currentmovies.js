@@ -46,7 +46,7 @@ function buildMovieList(selectedMovie) {
                 </div>
                 <div class="currentMovieTitleDiv">
                     <a href = "javascript:buttonPage('${title}')" class="movie-link"><h2>${title}</h2></a><article class="currentMovieTitleContainer"> <p class="title-p"> ${genres} | ${length} | ${ageGroup} </p>
-                    <article><button class="general-button" onclick = "buttonPage('${title}')">Mer info</button><button class="general-button" onclick="#">Köp biljett</button></article></article><hr>
+                    <article><button class="general-button article-button" onclick = "buttonPage('${title}')">Mer info</button><button class="general-button article-button" onclick="#">Köp biljett</button></article></article><hr>
                       <p>${description}
                       </p>
                   </div></div>`;
