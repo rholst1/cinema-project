@@ -1,6 +1,7 @@
-@import "styles/homepage.css";
-@import "styles/currentmovies.css";
-@import "/newBookingScript/newBookingMain.css";
+@import 'styles/homepage.css';
+@import 'styles/currentmovies.css';
+@import '/newBookingScript/newBookingMain.css';
+@import 'styles/mybookings.css';
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;400&display=swap');
 /*Variables for colors and fonts. Accessing example var(--blue) instead of rgb(30, 144, 255).*/
 :root {
@@ -54,13 +55,30 @@
   --font-button: bold 120% var(--font-family);
 }
 
+html,
 body {
-  background: var(--body-color);
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background: url(https://cdn.wallpapersafari.com/49/22/6PHJ94.jpg) no-repeat
+    center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  /* background: var(--body-color); */
   font: var(--font-bread);
   margin: 0;
   color: white;
 }
-
+/*
+main {
+  height: 100vh;
+}
+*/
 hr {
   border: none;
   background-color: #ccc;
@@ -82,7 +100,7 @@ hr {
   text-shadow: 0px 1px 0px var(--darker-shade);
 }
 button:hover {
-  background-color: var(--hover) ;
+  background-color: var(--hover);
   border: 0px;
 }
 
@@ -97,42 +115,6 @@ button:hover {
    background:var(--hover-background);
    cursor: pointer;
  }*/
-
-/* "Nyheter" and "Visas just nu" Elements | REMOVE WHEN CLEANING UP basetemplate CSS */
-
-/*
-.newsAndShowtimeElements {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 0 5vw;
-}
-.news {
-  color: var(--text);
-  background: var(--news-color);
-  width: 50vw;
-  padding: 3vh 3vw;
-  margin: 3vh 2vw 3vh 0;
-}
-
-.nowShowing {
-  color: var(--text);
-  background: var(--nowShowing-color);
-  width: 25vw;
-  padding: 3vh 3vw;
-  margin: 3vh 0;
-}
-.nowShowing h2 {
-  font-size: 200%;
-}
-.nowShowingTitles li {
-  margin-bottom: 1vw;
-  padding: 0;
-}
-.nowShowingTitles a {
-  text-decoration: none;
-}
-*/
 
 /* Header elements */
 header {
@@ -194,7 +176,13 @@ header {
   text-decoration: none;
   color: var(--text);
 }
+
+.stickyFooterAdjuster {
+  flex: 1 0 auto;
+}
+
 .footer {
+  flex-shrink: 0;
   background: var(--footer-color);
   text-align: center;
   border-top: 1px solid var(--text);
@@ -207,7 +195,7 @@ header {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: max(2%,2vw);
+  padding: max(2%, 2vw);
 }
 
 .get-booking {
@@ -272,8 +260,6 @@ p.title-p {
   margin: 0;
 } */
 
-
-
 /* a.movie-link {
   text-decoration: none;
   color: var(--text);
@@ -298,7 +284,7 @@ p.title-p {
 }
 .upcoming-showings-container {
   order: 1;
-  display:flex;
+  display: flex;
   flex-direction: column;
   word-wrap: break-word;
   background: var(--upcoming-showings-container-color);
@@ -315,41 +301,41 @@ p.title-p {
 }
 /*Booking page is divided into 4 rows startif from .booking-row0. the 2nd row
 has 3 columns starting from .booking-row1-col0.*/
-.booking-row0{
-display: flex;
-justify-content: center;
+.booking-row0 {
+  display: flex;
+  justify-content: center;
 }
-.booking-row1{
-display: flex;
-flex-direction: row;
-align-content: center;
-min-width: fit-content;
+.booking-row1 {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  min-width: fit-content;
 }
-.booking-row1-col0{
+.booking-row1-col0 {
   width: fit-content;
   flex-grow: 3;
 }
-.booking-row1-col1{
+.booking-row1-col1 {
   flex-grow: 4;
-  padding:2vw;
+  padding: 2vw;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border:1px solid white;
+  border: 1px solid white;
 }
-.booking-row1-col2{
+.booking-row1-col2 {
   display: flex;
   flex-direction: row;
-justify-self: stretch;
+  justify-self: stretch;
   min-width: max-content;
 }
 /*info button*/
-.booking-row1-col2>button{
-height: min-content;
-width:min-content;
+.booking-row1-col2 > button {
+  height: min-content;
+  width: min-content;
 }
-.booking-row3{
-text-align: center;
+.booking-row3 {
+  text-align: center;
 }
 .info-input form {
   grid-column: 2;
@@ -366,7 +352,7 @@ text-align: center;
   justify-self: right;
   padding: 1%;
 }
-.booking-row2{
+.booking-row2 {
   display: flex;
   justify-content: flex-end;
 }
@@ -381,7 +367,7 @@ text-align: center;
   grid-template-columns: 1fr 1fr 1fr;
   width: fit-content;
   max-width: 90vw;
-  border:1px solid white;
+  border: 1px solid white;
 }
 
 .info-input > .seat-counter {
@@ -397,28 +383,27 @@ text-align: center;
   max-width: 10em;
   font: var(--font-bread);
 }
-.general-button:hover{
-  background-color: var(--hover) ;
+.general-button:hover {
+  background-color: var(--hover);
   border: 0px;
 }
 .disabled {
-    opacity: 0.3;
-    pointer-events: none;
+  opacity: 0.3;
+  pointer-events: none;
 }
 .ticketbooking-container {
   align-self: left;
   display: flex;
   flex-direction: column;
-  border:1px solid white;
+  border: 1px solid white;
   /*min-width: fit-content;*/
   min-width: 80vw;
-
 }
 /*Showing selection dropdowns*/
-.showings-picker-dropdown{
+.showings-picker-dropdown {
   text-align: center;
 }
- select {
+select {
   border-radius: 4px;
   color: var(--text);
   background: var(--darker-shade);
@@ -430,8 +415,7 @@ text-align: center;
 .showings-picker-dropdown {
   border-radius: 4px;
 }
-.movie-picker-dropdown{
-  
+.movie-picker-dropdown {
 }
 
 /*Seat-picker*/
@@ -457,8 +441,9 @@ text-align: center;
   border: 0px;
   cursor: pointer;
   margin: 3px;
-  z-index: 3;}
-  
+  z-index: 3;
+}
+
 /* .movie-info {
   display: flex;
   justify-content: center;
@@ -505,15 +490,15 @@ text-align: center;
   width: fit-content;
   max-height: min-content;
 }
-.info-input label{
-grid-column: 1;
-justify-self: right;
-padding: 1%; 
+.info-input label {
+  grid-column: 1;
+  justify-self: right;
+  padding: 1%;
 }
 
 /* my bookings page */
 
-.maindiv{
+/* .maindiv{
   color: var(--text);
   word-spacing: 5px;
   font: 150% var(--font-family); 
@@ -551,10 +536,20 @@ padding: 1%;
   margin-left: 2%;
 }
 
+.kommandevisning{
+  border: 4px dotted rgb(226, 136, 17);
+}
+
+.kommandevisning .removeButton{
+  font-size: 75%;
+  padding: 2% 5%;
+} */
+
 .info-input label {
   grid-column: 1;
   justify-self: right;
   padding: 1%;
+}
 
 .cinema-screen-container {
   perspective: 400px;
@@ -579,5 +574,5 @@ padding: 1%;
 }
 .seat-selectors {
   width: max-content;
-  text-align: center;  
+  text-align: center;
 }
