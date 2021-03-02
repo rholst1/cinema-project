@@ -183,7 +183,6 @@ header {
 
 .footer {
   flex-shrink: 0;
-  background: var(--footer-color);
   text-align: center;
   border-top: 1px solid var(--text);
   margin: 2vh 20vw 2vh 20vw;
