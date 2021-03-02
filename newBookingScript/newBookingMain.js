@@ -248,7 +248,7 @@ function inputInfo() {
       let phonenumber = $('#phonenumber').val();
       let price = childTickets * 75 + adultTickets * 85 + seniorTickets * 65;
       saveBooking(email, phonenumber, price);
-      saveSeats(selectedSeatNrArray, email);
+      // saveSeats(selectedSeatNrArray, email);
       // Ändra bekräftelse till valda stolsnummer, film och datum.
     }
   });
@@ -260,33 +260,52 @@ async function saveBooking(email, phonenumber, price) {
     /*sql*/ `INSERT INTO Bookings (phonenumber, email, showingID, price) VALUES ('${phonenumber}', '${email}', ${showingID}, ${price})`
   );
   db.run('COMMIT');
+  getBookingID(email);
 }
-async function saveSeats(seatings, email) {
-  console.log('hej från saveSeats', showingID);
+async function getBookingID(email) {
+console.log('hej från saveSeats', showingID);
   let bookingID = await db.run(
-    /*sql*/ `SELECT ID FROM Bookings WHERE email = '${email}' AND showingID = ${showingID}`
+    /*sql*/ `SELECT * FROM Bookings WHERE email = '${email}' AND showingID = ${showingID}`
   );
   console.log(bookingID);
   let bookingIdNewest = 0;
   for (let { ID } of bookingID) {
+    console.log('vad är id',ID);
     if (bookingIdNewest < ID) {
       bookingIdNewest = ID;
     }
   }
   console.log(bookingIdNewest);
+  saveSeats(selectedSeatNrArray, bookingIdNewest)
+}
+async function saveSeats(selectedSeatNrArray, bookingIdNewest) {
+  // console.log('hej från saveSeats', showingID);
+  // let bookingID = await db.run(
+  //   /*sql*/ `SELECT * FROM Bookings WHERE email = '${email}' AND showingID = ${showingID}`
+  // );
+  // console.log(bookingID);
+  // let bookingIdNewest = 0;
+  // for (let { ID } of bookingID) {
+  //   console.log('vad är id',ID);
+  //   if (bookingIdNewest < ID) {
+  //     bookingIdNewest = ID;
+  //   }
+  // }
+  // console.log(bookingIdNewest);
 
-  for (i = 0; i < seatings.length; i++) {
+  for (i = 0; i < selectedSeatNrArray.length; i++) {
+    let seat = selectedSeatNrArray[i].match(/\d/g).join('');
+    console.log('vilken plats', seat);
     db.run('BEGIN TRANSACTION');
-    let seat = seatings[i].match(/\d/g).join('');
     await db.run(
       /*sql*/ `UPDATE Seatings SET status = "occupied", bookingID = ${bookingIdNewest} WHERE seatNumber = ${seat} AND showingID = ${showingID}`
     );
   }
-
+  db.run('COMMIT');
   console.log('skicka till query', bookingIdNewest);
   renderConfirmation(bookingIdNewest);
 }
-db.run('COMMIT');
+// db.run('COMMIT');
 $(document).on('click', '#childTicketAdd', function () {
   addChildTicket();
 });
@@ -315,25 +334,27 @@ $(document).on('click', '#continue-button', function () {
 
 async function renderConfirmation(bookingIdNewest) {
   console.log('innan query', bookingIdNewest);
-  db.run('BEGIN TRANSACTION');
+  // db.run('BEGIN TRANSACTION');
   let confirmation = await db.run(
-    /*sql*/ `SELECT DISTINCT Showings.filmID, Showings.date, Showings.time, Seatings.seatNumber, Showings.auditorium FROM Showings INNER JOIN Bookings ON (Bookings.showingID = Showings.ID) INNER JOIN Seatings ON (Seatings.bookingID = ${bookingIdNewest}) WHERE Showings.ID = ${showingID}`
+    /*sql*/ `SELECT DISTINCT Showings.filmID, Showings.date, Showings.time, Seatings.seatNumber, Showings.auditorium, Bookings.price FROM Showings INNER JOIN Bookings ON (Bookings.showingID = Showings.ID) INNER JOIN Seatings ON (Seatings.bookingID = ${bookingIdNewest}) WHERE Showings.ID = ${showingID}`
   );
-  db.run('COMMIT');
-  let { filmID, date, time, auditorium } = confirmation[0];
+  // db.run('COMMIT');
+  let { filmID, date, time, auditorium, price } = confirmation[0];
   $('.layout').replaceWith(
-    `<div class="tack" ><h1>Tack för din bokning</h1></div>`
+    `<div class="tack" ><h1>Tack för din bokning!</h1></div>`
   );
   $('.actual-booking').remove();
   $('.booking-form').remove();
   $('.tack').append(`
     <div class="färdigbokningLOL">
-      <h2>${filmID}</h2>
+      <h2>Film: ${filmID}</h2>
       <h3>
-        ${date} ${time} 
+       Datum: ${date}  
       </h3>
+      <h3>Tid: ${time}</h3>
       <h3>Salong: ${auditorium}</h3>
       <h3 class="stol"> Stolsnummer: </h3>
+      <h3>Total pris: ${price}kr </h3>
     </div>`);
   console.log(confirmation);
 

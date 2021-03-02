@@ -163,3 +163,12 @@
 .actual-booking p {
   margin: 0 2vw;
 }
+.tack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: larger;
+}
+.tack h1 {
+  margin-bottom: 0;
+}
