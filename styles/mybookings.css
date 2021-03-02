@@ -23,13 +23,12 @@
   letter-spacing: 3px;
 }
 
-.col2,
 li {
   margin: 3% 0;
   padding: 1%;
 }
 
-.col2 li:nth-child(odd) {
+li:nth-child(odd) {
   background-color: var(--header-color);
 }
 
