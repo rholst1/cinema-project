@@ -64,7 +64,11 @@ body {
   font: var(--font-bread);
   margin: 0;
 }
-
+/*
+main {
+  height: 100vh;
+}
+*/
 hr {
   border: none;
   background-color: #ccc;

@@ -3,7 +3,7 @@
 .newsAndShowtimeElements {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   padding: 0 5vw;
   
 }
@@ -49,14 +49,14 @@
 
 /* Carousel styling */
 .slideshow-container {
-  width: 70vw;
+  width: 84vw;
   position: relative;
   margin: auto;
-  margin-top: 1vh;
+  margin-top: 5vh;
 }
 .slideshow-container img {
-  width: 70vw;
-  height: 40vh;
+  width: 84vw;
+  height: 50vh;
 }
 
 .slides {
