@@ -53,8 +53,9 @@
   --font-button: bold 120% var(--font-family);
 }
 
+
 body {
-  background: url(https://cdn.wallpapersafari.com/49/22/6PHJ94.jpg) no-repeat center center fixed; 
+  background: url(https://cdn.wallpapersafari.com/49/22/6PHJ94.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -63,7 +64,11 @@ body {
   font: var(--font-bread);
   margin: 0;
 }
-
+/*
+main {
+  height: 100vh;
+}
+*/
 hr {
   border: none;
   background-color: #ccc;
@@ -567,6 +572,7 @@ padding: 1%;
   grid-column: 1;
   justify-self: right;
   padding: 1%;
+}
 
 .cinema-screen-container {
   perspective: 400px;
