@@ -1,5 +1,6 @@
 @import "styles/homepage.css";
 @import "styles/currentmovies.css";
+@import "styles/mybookings.css";
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;400&display=swap');
 /*Variables for colors and fonts. Accessing example var(--blue) instead of rgb(30, 144, 255).*/
 :root {
@@ -521,7 +522,7 @@ padding: 1%;
 
 /* my bookings page */
 
-.maindiv{
+/* .maindiv{
   color: var(--text);
   word-spacing: 5px;
   font: 150% var(--font-family); 
@@ -566,7 +567,7 @@ padding: 1%;
 .kommandevisning .removeButton{
   font-size: 75%;
   padding: 2% 5%;
-}
+} */
 
 .info-input label {
   grid-column: 1;

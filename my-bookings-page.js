@@ -10,7 +10,7 @@ $('.space').prepend(`<br> <br>`);
 
 $('.space').after(`<form class="get-booking">
   <input type="text" class="other-button" placeholder="Ange email..." id="emailInput" />
-  <button type="button" class="generalButton hoverable email-button">Hämta dina bokningar</button>
+  <button type="button" class="generalButton hoverable email-button get-bookings">Hämta dina bokningar</button>
 </form>`);
 
 
