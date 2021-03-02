@@ -575,3 +575,27 @@ padding: 1%;
   width: max-content;
   text-align: center;  
 }
+
+
+/* media queries for more-info pages*/
+@media screen and (max-width: 800px) {
+
+.info-text{
+  padding: 2vw;
+}
+.title-row{
+  display: flex;
+  flex-direction: column;
+}
+
+.title-row h2{
+  justify-content: center;
+}
+
+.button-title{
+  justify-content: center;
+  margin-left: 10%;
+  margin-bottom: 3%;
+}
+
+}
