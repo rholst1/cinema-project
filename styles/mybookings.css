@@ -59,3 +59,33 @@
  background-color: var(--hover); 
  border: 0px;
 }
+
+@media screen and (max-width: 800px) {
+
+  .currentMovieTitleH1{
+    margin-top: 5vw;
+    font-size:12vw;
+  }
+
+  .get-booking{
+    padding: 0 10%;
+  }
+
+  .col2 h1{
+    font-size: 7vw;
+  }
+
+  .maindiv{
+    justify-content: left;
+
+  }
+  .maindiv section{
+    max-width: 80vw;
+    margin-left: 2%;
+  }
+
+  ul {
+    padding-left: 10%;
+  }
+
+}
