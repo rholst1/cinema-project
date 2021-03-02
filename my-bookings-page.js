@@ -43,6 +43,7 @@ let runQuery;
 let fullDate;
 let time;
 let bookingInfo;
+let increment = 1;
 
 //currentDateAndTime();
 
@@ -108,7 +109,7 @@ async function queryDatabase() {
 
     let movieTimeInt = parseInt(movieTimeString, 10);
     console.log('movie time int parsed', movieTimeInt);
-    let increment = 1;
+
     if (
       movieIntDate < todayDateInt ||
       ((movieIntDate = todayDateInt) && movieTimeInt < timeNowInt)
@@ -126,6 +127,7 @@ async function queryDatabase() {
     `;
 
       $('ul').prepend(queryHtmlKommande);
+      loopSeats(seatResult, increment);
     }
 
     $('.removeButton').on('click', async () => {
@@ -140,6 +142,7 @@ async function queryDatabase() {
 
       console.log('result', result);
     });
+    increment++;
   }
 }
 function loopSeats(seatResult, increment) {
