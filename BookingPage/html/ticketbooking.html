@@ -8,7 +8,7 @@
     />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="basetemplate.css" />
+    <link rel="stylesheet" href="/basetemplate.css" />
     <title>Biograf Småstad</title>
     <link rel="shortcut icon" type=image/png" href="img/browsericon.png">
   </head>
@@ -16,15 +16,19 @@
   <body>
     <header>
       <nav class="menu-bar">
-        <a href="index.html" class="hoverable">Bio Småstad</a>
-        <a href="currentmovies.html" class="hoverable">Filmer</a>
+        <a href="/index.html" class="hoverable">Bio Småstad</a>
+        <a href="/MoviePage/html/currentmovies.html" class="hoverable"
+          >Filmer</a
+        >
         <a
-          href="ticketbooking.html"
+          href="/BookingPage/html/ticketbooking.html"
           style="color: var(--hover)"
           class="hoverable"
           >Boka Biljetter</a
         >
-        <a href="mybookings.html" class="hoverable">Mina Bokningar</a>
+        <a href="/myBookingsPage/html/mybookings.html" class="hoverable"
+          >Mina Bokningar</a
+        >
       </nav>
     </header>
     <div class="stickyFooterAdjuster"></div>
@@ -41,6 +45,6 @@
     ></script>
     <!-- <script type="module" src="/script/TicketBookingController.js"></script> -->
     <script src="/best-sqlite3-frontend.js"></script>
-    <script src="newBookingScript/newBookingMain.js"></script>
+    <script src="/BookingPage/script/newBookingMain.js"></script>
   </body>
 </html>

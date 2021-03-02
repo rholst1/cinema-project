@@ -1,7 +1,7 @@
-@import 'styles/homepage.css';
-@import 'styles/currentmovies.css';
-@import '/newBookingScript/newBookingMain.css';
-@import 'styles/mybookings.css';
+@import '/HomePage/css/homepage.css';
+@import '/MoviePage/css/currentmovies.css';
+@import '/BookingPage/css/newBookingMain.css';
+@import '/myBookingsPage/css/mybookings.css';
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;400&display=swap');
 /*Variables for colors and fonts. Accessing example var(--blue) instead of rgb(30, 144, 255).*/
 :root {
@@ -576,31 +576,28 @@ select {
   text-align: center;
 }
 
-
 /* media queries for more-info pages*/
 @media screen and (max-width: 800px) {
-
-  .info-text{
+  .info-text {
     padding: 2vw;
   }
-  .title-row{
+  .title-row {
     display: flex;
     flex-direction: column;
   }
 
-  .title-row h2{
+  .title-row h2 {
     justify-content: center;
   }
 
-  .button-title{
+  .button-title {
     justify-content: center;
     margin-left: 10%;
     margin-bottom: 3%;
   }
 
-  .menu-bar .hoverable{
-   display: flex;
-   align-self: flex-end;
+  .menu-bar .hoverable {
+    display: flex;
+    align-self: flex-end;
   }
-
 }

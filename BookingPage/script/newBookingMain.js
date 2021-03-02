@@ -1,7 +1,7 @@
-$.getScript('newBookingScript/movies.js');
-$.getScript('newBookingScript/eventHandling.js');
-$.getScript('newBookingScript/booking.js');
-$.getScript('newBookingScript/tickets.js');
+$.getScript('/BookingPage/script/movies.js');
+$.getScript('/BookingPage/script/eventHandling.js');
+$.getScript('/BookingPage/script/booking.js');
+$.getScript('/BookingPage/script/tickets.js');
 
 let movies;
 let id;

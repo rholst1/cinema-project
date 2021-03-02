@@ -1,4 +1,4 @@
-$.getScript('script/Filterbutton.js');
+$.getScript('/MoviePage/script/Filterbutton.js');
 
 $('header').after(`<main></main > `);
 $('main').append(`<section class="movies"></section>`);
@@ -11,14 +11,6 @@ $('.movies')
 <button class="btn general-button" id="11-år">11 år</button>
 <button class="btn general-button" id="7-år">7 år</button>
 <button class="btn general-button" id="Barntillåten">Barntillåten</button></div>`);
-
-// let movieDivs = [];
-// function createDivs(numberOfMovies) {
-//   for (let i = 1; i < numberOfMovies + 1; i++) {
-//     movieDivs.push(`<div class="currentMovies"></div>`);
-//   }
-//   $('section').append(movieDivs);
-// }
 
 let movies;
 async function buildInitialPage() {
@@ -83,7 +75,7 @@ function buildMoreInfoPage(selectedMovie) {
                               <div class="title-row">
                               <h2>${title}</h2>
                               <div class="button-title">
-                                <button class="general-button" onclick = "window.location.href='/currentmovies.html'">Gå tillbaka</button><button class="general-button" onclick="#">Köp biljett</button>
+                                <button class="general-button" onclick = "window.location.href='/MoviePage/html/currentmovies.html'">Gå tillbaka</button><button class="general-button" onclick="#">Köp biljett</button>
                                 </div>
                               </div>
                                 <hr width='100%'>
