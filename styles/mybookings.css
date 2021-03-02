@@ -1,20 +1,21 @@
-.maindiv {
+.maindiv{
   color: var(--text);
   word-spacing: 5px;
-  font: 150% var(--font-family);
+  font: 150% var(--font-family); 
   display: flex;
   justify-content: center;
   margin: 0 7%;
   margin-left: 1%;
+
 }
-.maindiv section {
-  display: flex;
+.maindiv section{
+  display: flex; 
   flex-flow: column;
   max-width: 50vw;
   margin-top: 0;
 }
 
-.maindiv h1 {
+.maindiv h1{
   margin-bottom: 0;
   border-bottom: 1px solid var(--text);
   padding-bottom: 2%;
@@ -22,31 +23,29 @@
   letter-spacing: 3px;
 }
 
-.col2,
-li {
+.col2, li {
   margin: 3% 0;
   padding: 1%;
 }
 
-.col2 li:nth-child(odd) {
+.col2 li:nth-child(odd){
   background-color: var(--header-color);
 }
 
-.other-button {
+.other-button{
   margin-left: 2%;
-  border-radius: 10px;
 }
 
-.kommandevisning {
+.kommandevisning{
   border: 4px dotted rgb(226, 136, 17);
 }
 
-.kommandevisning .removeButton {
+.kommandevisning .removeButton{
   font-size: 75%;
   padding: 2% 5%;
 }
 
-.get-booking .get-bookings {
+.get-booking .get-bookings{
   background-color: rgb(6, 43, 88);
   border-color: rgb(6, 43, 88);
   color: rgb(255, 255, 255);
@@ -56,7 +55,7 @@ li {
   font-weight: normal;
 }
 
-.get-booking .get-bookings:hover {
-  background-color: var(--hover);
-  border: 0px;
+.get-booking .get-bookings:hover{
+ background-color: var(--hover); 
+ border: 0px;
 }
