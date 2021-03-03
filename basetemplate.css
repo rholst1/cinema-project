@@ -366,8 +366,8 @@ select {
   text-align: center;
 }
 
-/* media queries for more-info pages*/
 @media screen and (max-width: 800px) {
+  /* media queries for more-info pages*/
   .info-text {
     padding: 2vw;
   }
@@ -389,5 +389,82 @@ select {
   .menu-bar .hoverable {
     display: flex;
     align-self: flex-end;
+  }
+  /* media queries for booking tickets page*/
+
+  .choose-movie {
+    display: flex;
+    justify-content: center;
+  }
+
+  .choose-movie .dropbtn {
+    width: 50vw;
+  }
+
+  .dropdown-content {
+    flex-direction: column;
+    width: 50vw;
+  }
+
+  .dropdown-content a {
+    display: flex;
+    justify-content: center;
+  }
+
+  .showings-container {
+    padding: 2vw;
+  }
+
+  .selectedShowing {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-bottom: 1px solid whitesmoke;
+    margin-bottom: 1%;
+    padding-bottom: 3%;
+  }
+
+  .selectedShowing h3 {
+    margin-left: 7vw;
+  }
+
+  .selectedShowing .general-button {
+    justify-content: center;
+    width: 50vw;
+    font: var(--font-button);
+    letter-spacing: 0.5px;
+    font-weight: normal;
+    margin-left: 20vw;
+    padding: 3% 7%;
+  }
+
+  .ticket-container,
+  .general-button,
+  .tack,
+  .selectedShowing h3,
+  .choose-movie .dropbtn {
+    font: var(--font-button);
+    letter-spacing: 0.5px;
+    font-weight: normal;
+  }
+
+  div .container {
+    padding: 2vw;
+    max-width: 95vw;
+    justify-content: center;
+  }
+
+  .book-tickets {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .tack {
+    justify-content: center;
+  }
+
+  .showcase {
+    max-width: 50vw;
+    margin-left: 4vw;
   }
 }
