@@ -26,6 +26,7 @@
 
 .nowShowing {
   border-radius: 10px;
+  border: 4px dotted rgb(226, 136, 17);
   color: var(--text);
   background:  rgba(38, 42, 46, 0.9);
   width: 25vw;
@@ -38,8 +39,23 @@
   
 }
 
+.btn-container {
+  padding-right: 10vw;
+  margin-left: 95%;
+  margin-top: -20%;
+}
+/*
+.general-button.btn {
+  display: none;
+}
+*/
+
 .nowShowing li {
   font-size: 140%;
+}
+
+.nowShowingTitles a:hover {
+  color: grey;
 }
 
 .nowShowingTitles a {

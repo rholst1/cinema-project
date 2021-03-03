@@ -46,6 +46,7 @@ function buildNowShowing() {
 
   nowShowingHtml = /*html*/ `<div class="nowShowing">
       <h2 class="nowShowingh2">På Bio idag:</h2>
+      <div class="btn-container"><button class="general-button" onclick="location.href='ticketbooking.html'">KöpDinBiljettHär</button></div>
       <ul class="nowShowingTitles">
      </div>`;
   databasePullShowings();
@@ -81,13 +82,12 @@ async function databasePullShowings() {
 }
 
 /* Function that builds the elements that gets loaded underneath "Visas Just Nu" Header */
+/* Lends the buildInfo method from Carousel to direct the user to the info page on the specific movie shown on the current day */
 function buildNowShowingElements(filmID, auditorium, time) {
-  let html = /*html*/ `<li><a href="ticketbooking.html" style="color: ghostwhite" class="hoverabe"l>${filmID} | ${time} | Salong ${auditorium}</a></li>
+  let html = /*html*/ `<li><a href="#" onclick="buildInfo('${filmID}')" style="color: ghostwhite" class="hoverabel">${filmID} | ${time} | Salong ${auditorium}</a></li>
   `;
   $('.nowShowingTitles').append(html);
 }
-
-
 
 /* Function that builds the carousel */
 function buildCarousel() {
