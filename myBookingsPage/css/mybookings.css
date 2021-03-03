@@ -56,31 +56,29 @@ li:nth-child(odd) {
   font-weight: normal;
 }
 
-.get-booking .get-bookings:hover{
- background-color: var(--hover); 
- border: 0px;
+.get-booking .get-bookings:hover {
+  background-color: var(--hover);
+  border: 0px;
 }
 
 @media screen and (max-width: 800px) {
-
-  .currentMovieTitleH1{
+  .currentMovieTitleH1 {
     margin-top: 5vw;
-    font-size:12vw;
+    font-size: 12vw;
   }
 
-  .get-booking{
+  .get-booking {
     padding: 0 10%;
   }
 
-  .col2 h1{
+  .col2 .col3 h1 {
     font-size: 7vw;
   }
 
-  .maindiv{
+  .maindiv {
     justify-content: left;
-
   }
-  .maindiv section{
+  .maindiv section {
     max-width: 80vw;
     margin-left: 2%;
   }
@@ -88,5 +86,4 @@ li:nth-child(odd) {
   ul {
     padding-left: 10%;
   }
-
 }

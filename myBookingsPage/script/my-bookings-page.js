@@ -59,8 +59,6 @@ async function queryDatabase() {
     /*sql*/ `SELECT DISTINCT Showings.filmID, Showings.date, Showings.time, Showings.auditorium, Bookings.price, Bookings.ID, Bookings.showingID FROM Bookings INNER JOIN Showings ON(Bookings.showingID = Showings.ID) WHERE Bookings.email = '${inputEmail}'`
   );
 
-  console.log('booking ID: ', bookingInfo);
-
   for (let {
     filmID,
     auditorium,
@@ -77,12 +75,10 @@ async function queryDatabase() {
       ('0' + today.getDate()).slice(-2);
     // console.log("date today with leading zero", leadingZero);
 
-    console.log('Showing ID:', showingID);
     let seatResult = await db.run(
       /*SQL*/ `SELECT * FROM Seatings WHERE Seatings.bookingID = ${ID}`
     );
     let todayDateInt = parseInt(leadingZero);
-    console.log(' TODAY parsed int', todayDateInt);
 
     let parts = `${date}`.split('-');
     let movieDate = new Date(parts[0], parts[1] - 1, parts[2]);
@@ -91,21 +87,16 @@ async function queryDatabase() {
       movieDate.getFullYear() +
       ('0' + (movieDate.getMonth() + 1)).slice(-2) +
       ('0' + movieDate.getDate()).slice(-2);
-    console.log('MOVIE DATE WITH LEADING ZERO', movieLeadingZero);
 
     let movieIntDate = parseInt(movieLeadingZero);
-
-    console.log('MOVIEDATE PARSED INT', movieIntDate);
 
     let hourNow = today.getHours();
     let minutesNow = today.getMinutes();
 
     let timeNowString =
       '' + ('0' + hourNow).slice(-2) + ('0' + minutesNow).slice(-2);
-    console.log('string time now', timeNowString);
 
     let timeNowInt = parseInt(timeNowString);
-    console.log('time now int parsed!', timeNowInt);
 
     let movieTimeParts = `${time}`.split(':');
 
@@ -113,10 +104,8 @@ async function queryDatabase() {
       '' +
       ('0' + movieTimeParts[0]).slice(-2) +
       ('0' + movieTimeParts[1]).slice(-2);
-    console.log('movie time string', movieTimeString);
 
     let movieTimeInt = parseInt(movieTimeString, 10);
-    console.log('movie time int parsed', movieTimeInt);
 
     if (
       movieIntDate < todayDateInt ||
@@ -144,13 +133,11 @@ async function queryDatabase() {
 $(document).on('click', '.removeButton', async function () {
   db.run('BEGIN TRANSACTION');
   let removeID = $(this).val();
-  console.log('made into remove button');
   let result = await db.run(/*sql*/ `
       DELETE FROM Bookings WHERE ID = ${removeID}; UPDATE Seatings SET status = 'empty' WHERE bookingID = ${removeID}`);
 
   alert('Din bokning är nu avbokad!');
   location.reload();
-  console.log('result', result);
 });
 
 function loopSeats(seatResult, increment) {
