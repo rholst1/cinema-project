@@ -1,0 +1,162 @@
+
+/* "Nyheter" and "Visas just nu" Elements */ 
+.newsAndShowtimeElements {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 0 5vw;
+  
+}
+.news {
+  border-radius: 10px;
+  color: var(--text);
+  background:  rgba(6, 43, 88, 0.8);
+  width: 40vw;
+  padding: 3vh 3vw;
+  margin: 3vh 2vw 3vh 0;
+}
+
+.news h2 {
+  font-size: 200%;
+}
+
+.news p {
+  font-size: 120%;
+}
+
+.nowShowing {
+  border-radius: 10px;
+  border: 4px dotted rgb(226, 136, 17);
+  color: var(--text);
+  background:  rgba(38, 42, 46, 0.9);
+  width: 25vw;
+  padding: 3vh 3vw;
+  margin: 3vh 0;
+
+}
+.nowShowing h2 {
+  font-size: 200%;
+  
+}
+
+.btn-container-homepage {
+  padding-right: 10vw;
+  margin-left: 50px;
+  margin-top: 10px;
+}
+
+.nowShowing li {
+  font-size: 140%;
+}
+
+.nowShowingTitles a:hover {
+  color: grey;
+}
+
+.nowShowingTitles a {
+  text-decoration: none;
+}
+
+
+/* Carousel styling */
+.slideshow-container {
+  width: 84vw;
+  position: relative;
+  margin: auto;
+  margin-top: 5vh;
+}
+.slideshow-container img {
+  width: 84vw;
+  height: 50vh;
+}
+
+.slides {
+  display: none;
+}
+
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+.text {
+  color: #f2f2f2;
+  font-size: 30px;
+  font-weight: bold;
+  padding: 1vh 1vw;
+  position: absolute;
+  bottom: 20px;
+  text-align: left;
+}
+
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: rgb(187, 187, 187);
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot-container {
+  text-align: center;
+}
+
+.active, .dot:hover {
+  background-color: #c57805;
+}
+
+@media screen and (max-width: 800px) {
+
+  main{
+    display: flex;
+    flex-direction: column;
+    padding: 2vw;
+  }
+
+  .newsAndShowtimeElements{
+    flex-direction: column;
+  }
+
+ .slideshow-container img{
+    max-width: 80vw;
+    height: 30vh;
+    margin-left: 3%;
+    width: auto;
+  }
+
+  .news, .nowShowing{
+    max-width: 90vw;
+    width: auto;
+  }
+
+  .newsh2, .nowShowingh2{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2vw;
+  }
+
+ .news p{
+    margin-left: 0;
+  }
+
+}
