@@ -18,7 +18,7 @@ async function buildInitialPage() {
   buildMovieList();
 }
 
-function buildMovieList(selectedMovie) {
+function buildMovieList() {
   $('section').append(`<div class="currentMovies"></div>`);
   // createDivs(movies.length);
   let i = 0;
@@ -38,7 +38,7 @@ function buildMovieList(selectedMovie) {
                 </div>
                 <div class="currentMovieTitleDiv">
                     <a href = "javascript:buttonPage('${title}')" class="movie-link"><h2>${title}</h2></a><article class="currentMovieTitleContainer"> <p class="title-p"> ${genres} | ${length} | ${ageGroup} </p>
-                    <article><button class="general-button article-button" onclick = "buttonPage('${title}')">Mer info</button><button class="general-button article-button" onclick="buyTicket(${i})">Köp biljett</button></article></article><hr>
+                    <article><button class="general-button article-button" onclick = "buildMoreInfoPage('${title}')">Mer info</button><button class="general-button article-button" onclick="buyTicket(${i})">Köp biljett</button></article></article><hr>
                       <p>${description}
                       </p>
                   </div></div>`;
@@ -90,11 +90,6 @@ function buildMoreInfoPage(selectedMovie) {
       $(`.movies`).replaceWith(movieHtml);
     }
   }
-}
-
-function buttonPage(title) {
-  console.log(title);
-  buildMoreInfoPage(title);
 }
 
 function buyTicket(i) {
