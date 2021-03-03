@@ -49,7 +49,6 @@ let time;
 let bookingInfo;
 let increment = 1;
 
-//currentDateAndTime();
 
 //Runs when user clicks "Hämta bokningar"
 async function queryDatabase() {
@@ -68,6 +67,7 @@ async function queryDatabase() {
     price,
     showingID,
   } of bookingInfo) {
+
     let today = new Date();
     let leadingZero =
       today.getFullYear() +
@@ -75,9 +75,6 @@ async function queryDatabase() {
       ('0' + today.getDate()).slice(-2);
     // console.log("date today with leading zero", leadingZero);
 
-    let seatResult = await db.run(
-      /*SQL*/ `SELECT * FROM Seatings WHERE Seatings.bookingID = ${ID}`
-    );
     let todayDateInt = parseInt(leadingZero);
 
     let parts = `${date}`.split('-');
@@ -106,6 +103,10 @@ async function queryDatabase() {
       ('0' + movieTimeParts[1]).slice(-2);
 
     let movieTimeInt = parseInt(movieTimeString, 10);
+
+    let seatResult = await db.run(
+      /*SQL*/ `SELECT * FROM Seatings WHERE Seatings.bookingID = ${ID}`
+    );
 
     if (
       movieIntDate < todayDateInt ||
