@@ -16,9 +16,9 @@ function buildNews() {
   newsHtml = /*html*/ `<div class="news">
       <h2 class="newsh2">Nyheter</h2>
       <article>
-        <p>"COMMANDO" - Stor succé på Svenska Biografer</p>
+        <p>"Toy Story 4" - Stor succé på Svenska Biografer</p>
         <p>
-          "Sällskapsresan" - En alltid välkommen Klassiker, återigen på Bio
+          "Pulp Fiction" - En alltid välkommen Klassiker, återigen på Bio
           hos oss
         </p>
         <p>
