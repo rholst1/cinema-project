@@ -1,12 +1,13 @@
-let movies;
+
+let movies
+
 async function buildInitialPage(title) {
   movies = await db.run(`SELECT * FROM new_movie_list`);
   buildMoreInfoPage(title);
 }
 
 function buildMoreInfoPage(selectedMovie) {
-  $('header').after(`<section class="movie-info"></section>`);
-
+  $('main').append(`<section class="movie-info"></section>`);
   for (let {
     title,
     productionCountries,
@@ -31,7 +32,8 @@ function buildMoreInfoPage(selectedMovie) {
                               <div class="title-row">
                               <h2>${title}</h2>
                               <div class="button-title">
-                                <button class="general-button" onclick = "window.location.href='/index.html'" >Gå tillbaka</button><button class="general-button" onclick="#">Köp biljett</button>
+                                <button class="general-button" onclick ='history.pushState(null, null, "#home");window.dispatchEvent(new HashChangeEvent("hashchange"));' >Gå tillbaka</button>                                
+                                <button class="general-button" onclick='history.pushState(null, null, "#tickets/film=${title}");window.dispatchEvent(new HashChangeEvent("hashchange"));'>Köp biljett</button>
                                 </div>
                               </div>
                                 <hr width='100%'>
@@ -42,8 +44,7 @@ function buildMoreInfoPage(selectedMovie) {
                                                                
                                 </div>
                             </div>`;
-
-      $(`main`).replaceWith(movieHtml);
+      $(`main`).append(movieHtml);
     }
   }
-};
+}; 

@@ -1,4 +1,8 @@
-let button = $('.btn').click(function () {
+if (typeof button !== 'undefined') {
+  let button
+}
+
+button = $('.btn').click(function () {
   if (this.id == 'all') {
     $('.currentMovies > .movie-container').fadeIn(450);
   } else {

@@ -1,7 +1,3 @@
-
-
-
-
 function initHomepage() {
   $.getScript('script/Carousel.js');
   $('main').append(`<div class="slideshow-container"></div>`);
@@ -9,9 +5,6 @@ function initHomepage() {
   $('.slideshow-container').after(`<section class="newsAndShowtimeElements"></section>`);
   $('.newsAndShowtimeElements').append(buildNews());
   $('.newsAndShowtimeElements').append(buildNowShowing());
-}
-function clearHomepage() {
-  $("main").remove();
 }
 /* Function that builds the "Nyheter" section with the bullet point news */
 function buildNews() {
@@ -61,7 +54,7 @@ function buildNowShowing() {
 
 /* Function that loads DB entries from Showings into Now Showing box */
 async function databasePullShowings() {
-
+  let showings;
   let todaysDate = new Date().toISOString().slice(0, 10);
 
   if (todaysDate[8] == "0") {
@@ -78,38 +71,34 @@ async function databasePullShowings() {
 
     if (date.localeCompare(todaysDate) === 0) {
       buildNowShowingElements(filmID, auditorium, time);
-
     }
-
   }
-
 }
-
 /* Function that builds the elements that gets loaded underneath "Visas Just Nu" Header */
 function buildNowShowingElements(filmID, auditorium, time) {
-  let html = /*html*/ `<li><a href="ticketbooking.html" style="color: ghostwhite" class="hoverabe"l>${filmID} | ${time} | Salong ${auditorium}</a></li>
+  let html = /*html*/ `<li><a onclick='history.pushState(null, null, "#moreInfo/${filmID}")
+    window.dispatchEvent(new HashChangeEvent("hashchange"));' style="color: ghostwhite" class="hoverabe">${filmID} | ${time} | Salong ${auditorium}</a></li>
   `;
   $('.nowShowingTitles').append(html);
 }
 
-
-
 /* Function that builds the carousel */
 function buildCarousel() {
   return /*html*/ `<div class="slides">
-    <a href="#" onclick="buildInfo('Hidden Figures')">
+    <a onclick='buildInfo("Hidden Figures");history.pushState(null, null, "#moreInfo")
+    window.dispatchEvent(new HashChangeEvent("hashchange"));'>
       <img src="img/hf.jpeg">
     </a>
     </div>
-
     <div class="slides">
-    <a href="#" onclick="buildInfo('Toy Story 4')">
+    <a onclick='buildInfo("Toy Story 4");history.pushState(null, null, "#moreInfo")
+    window.dispatchEvent(new HashChangeEvent("hashchange"));'>
       <img src="/img/ts.jpg">
     </a>
     </div>
-
     <div class="slides">
-    <a href="#" onclick="buildInfo('Tenet')">
+    <a onclick='buildInfo("Tenet");history.pushState(null, null, "#moreInfo");
+    window.dispatchEvent(new HashChangeEvent("hashchange"));'>
       <img src="img/tenet.jpg">
     </a>
     </div>
@@ -123,4 +112,4 @@ function buildCarousel() {
     <span class="dot" onclick="changeDotSlide(3)"></span>
   </div>`
 }
-export { initHomepage, clearHomepage }
+export { initHomepage }

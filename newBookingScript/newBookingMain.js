@@ -1,19 +1,7 @@
-function initNewBookingMain() {
-  $.getScript('newBookingScript/movies.js');
-  $.getScript('newBookingScript/eventHandling.js');
-  $.getScript('newBookingScript/booking.js');
-  $.getScript('newBookingScript/tickets.js');
-  $('main').append(/*html*/ `<div class="choose-movie"></div>`);
-  $('.choose-movie').append(/*html*/ `<div class="dropdown">
-  <button id="toggle" class="general-button dropbtn">Välj film</button>
-  <div class="dropdown-content">
-  </div>
-</div>`);
-  $('.choose-movie').after(
-  /*html*/ `<div class="showings-container"><h1></h1></div>`
-  );
-}
-
+$.getScript('newBookingScript/movies.js');
+$.getScript('newBookingScript/eventHandling.js');
+$.getScript('newBookingScript/booking.js');
+$.getScript('newBookingScript/tickets.js');
 
 let movies;
 let id;
@@ -22,7 +10,15 @@ let totalAmountTickets = 0; // Userinput
 let selectedSeatNrArray = [];
 let showingID;
 
-
+$('main').append(/*html*/ `<div class="choose-movie"></div>`);
+$('.choose-movie').append(/*html*/ `<div class="dropdown">
+  <button id="toggle" class="general-button dropbtn">Välj film</button>
+  <div class="dropdown-content">
+  </div>
+</div>`);
+$('.choose-movie').after(
+  /*html*/ `<div class="showings-container"><h1></h1></div>`
+);
 
 // addMovies();
 // renderMovieBooking();
@@ -84,11 +80,13 @@ function selectedSeats(selectedSeatNrArray) {
   $('.layout').after(
     /*html*/ `<div class="actual-booking"><p class ="platser">Valda platser: </p></div>`
   );
-  for (i = 0; i < selectedSeatNrArray.length; i++) {
-    let seat = selectedSeatNrArray[i].match(/\d/g).join('');
-    $('.platser').append(/*html*/ `<span class="seatSpan${i}">${seat}</span>`);
-    if (i > 0) {
-      $(`.seatSpan${i}`).prepend(`, `);
+  if (selectedSeatNrArray !== undefined) {
+    for (i = 0; i < selectedSeatNrArray.length; i++) {
+      let seat = selectedSeatNrArray[i].match(/\d/g).join('');
+      $('.platser').append(/*html*/ `<span class="seatSpan${i}">${seat}</span>`);
+      if (i > 0) {
+        $(`.seatSpan${i}`).prepend(`, `);
+      }
     }
   }
 }
@@ -116,4 +114,3 @@ function inputInfo() {
     }
   });
 }
-export { initNewBookingMain }

@@ -1,5 +1,8 @@
 
 function initCurrentmovies() {
+  window.buttonPage = buttonPage;
+  window.buildInitialPage = buildInitialPage;
+  window.buildMoreInfoPage = buildMoreInfoPage;
   $.getScript('script/Filterbutton.js');
   $('main').append(`<section class="movies"></section>`);
   $('.movies').prepend(
@@ -50,7 +53,7 @@ function buildMovieList(selectedMovie) {
                 </div>
                 <div class="currentMovieTitleDiv">
                     <a href = "javascript:buttonPage('${title}')" class="movie-link"><h2>${title}</h2></a><article class="currentMovieTitleContainer"> <p class="title-p"> ${genres} | ${length} | ${ageGroup} </p>
-                    <article><button class="general-button article-button" onclick = "buttonPage('${title}')">Mer info</button><button class="general-button article-button" onclick="#">Köp biljett</button></article></article><hr>
+                    <article><button class="general-button article-button" onclick = "buttonPage('${title}')">Mer info</button><button class="general-button article-button" onclick='history.pushState(null, null, "#tickets/film=${title}" );window.dispatchEvent(new HashChangeEvent("hashchange"));'>Köp biljett</button></article></article><hr>
                       <p>${description}
                       </p>
                   </div></div>`;
@@ -87,7 +90,7 @@ function buildMoreInfoPage(selectedMovie) {
                               <div class="title-row">
                               <h2>${title}</h2>
                               <div class="button-title">
-                                <button class="general-button" onclick = "window.location.href='/currentmovies.html'">Gå tillbaka</button><button class="general-button" onclick="#">Köp biljett</button>
+                                <button class="general-button" onclick = 'history.pushState(null, null, "#currentMovies" );window.dispatchEvent(new HashChangeEvent("hashchange"));'>Gå tillbaka</button><button class="general-button" onclick='history.pushState(null, null, "#tickets/film=${title}" );window.dispatchEvent(new HashChangeEvent("hashchange"));'>Köp biljett</button>
                                 </div>
                               </div>
                                 <hr width='100%'>
