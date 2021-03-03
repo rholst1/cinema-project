@@ -101,3 +101,73 @@ a.movie-link {
   margin-top: 5px;
   margin-bottom: 0px;
 }
+
+@media screen and (max-width: 800px) {
+
+
+.btn-container{
+justify-content: center;
+flex-direction: column;
+margin-left: 10%;
+margin-bottom: 10%;
+
+}
+
+.movie-container{
+flex-direction: column;
+
+}
+
+img{
+  margin-left: 8vw;
+}
+
+.currentMovieTitleContainer{
+  flex-direction: column;
+}
+
+p.title-p{
+align-self: flex-start;
+margin-left: 2vw;
+
+}
+
+.currentMovieTitleDiv{
+padding-left: 0;
+
+}
+
+.movie-link{
+  flex-direction: column;
+  justify-content: left;
+}
+
+h2{
+margin-left: 4vw;
+margin-top: 2vw;
+max-width: 80vw;
+}
+
+hr{
+  align-self: flex-start;
+
+max-width: 80vw;
+margin-left: 3vw;
+}
+article{
+ display: flex;
+ justify-content: center;
+  flex-direction: column;
+  margin-left: 2vw;
+
+}
+
+.article-button{
+  max-width: 80vw;
+}
+
+p{
+  max-width: 80vw;
+  margin-left: 8vw;
+}
+}

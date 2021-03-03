@@ -129,3 +129,39 @@
 .active, .dot:hover {
   background-color: #c57805;
 }
+
+@media screen and (max-width: 800px) {
+
+  main{
+    display: flex;
+    flex-direction: column;
+    padding: 2vw;
+  }
+
+  .newsAndShowtimeElements{
+    flex-direction: column;
+  }
+
+ .slideshow-container img{
+    max-width: 80vw;
+    height: 30vh;
+    margin-left: 3%;
+    width: auto;
+  }
+
+  .news, .nowShowing{
+    max-width: 90vw;
+    width: auto;
+  }
+
+  .newsh2, .nowShowingh2{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2vw;
+  }
+
+ .news p{
+    margin-left: 0;
+  }
+
+}
