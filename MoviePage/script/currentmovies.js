@@ -38,7 +38,7 @@ function buildMovieList() {
                 </div>
                 <div class="currentMovieTitleDiv">
                     <a href = "javascript:buttonPage('${title}')" class="movie-link"><h2>${title}</h2></a><article class="currentMovieTitleContainer"> <p class="title-p"> ${genres} | ${length} | ${ageGroup} </p>
-                    <article><button class="general-button article-button" onclick = "buildMoreInfoPage('${title}')">Mer info</button><button class="general-button article-button" onclick="buyTicket(${i})">Köp biljett</button></article></article><hr>
+                    <article><button class="general-button article-button" onclick = "buildMoreInfoPage('${title}', ${i})">Mer info</button><button class="general-button article-button" onclick="buyTicket(${i})">Köp biljett</button></article></article><hr>
                       <p>${description}
                       </p>
                   </div></div>`;
@@ -48,7 +48,7 @@ function buildMovieList() {
   }
 }
 
-function buildMoreInfoPage(selectedMovie) {
+function buildMoreInfoPage(selectedMovie, i) {
   $('header').after(`<section class="movie-info"></section>`);
 
   for (let {
@@ -75,7 +75,7 @@ function buildMoreInfoPage(selectedMovie) {
                               <div class="title-row">
                               <h2>${title}</h2>
                               <div class="button-title">
-                                <button class="general-button" onclick = "window.location.href='/MoviePage/html/currentmovies.html'">Gå tillbaka</button><button class="general-button" onclick="#">Köp biljett</button>
+                                <button class="general-button" onclick = "window.location.href='/MoviePage/html/currentmovies.html'">Gå tillbaka</button><button class="general-button" onclick="buyTicket(${i})">Köp biljett</button>
                                 </div>
                               </div>
                                 <hr width='100%'>
