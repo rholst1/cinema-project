@@ -1,4 +1,4 @@
-if (typeof slideIndex !== 'undefined') {
+if (typeof slideIndex === 'undefined') {
   let slideIndex
 }
 slideIndex = 1;

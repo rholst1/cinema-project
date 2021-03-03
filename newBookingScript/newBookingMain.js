@@ -2,13 +2,22 @@ $.getScript('newBookingScript/movies.js');
 $.getScript('newBookingScript/eventHandling.js');
 $.getScript('newBookingScript/booking.js');
 $.getScript('newBookingScript/tickets.js');
+if (typeof movies !== 'undefined') {
+  movies = undefined;
+  id = undefined;
+  i = undefined;
+  totalAmountTickets = 0; // Userinput
+  selectedSeatNrArray = [];
+  showingID = undefined;
+} else {
+  let movies = undefined;
+  let id;
+  let i;
+  let totalAmountTickets = 0; // Userinput
+  let selectedSeatNrArray = [];
+  let showingID;
+}
 
-let movies;
-let id;
-let i;
-let totalAmountTickets = 0; // Userinput
-let selectedSeatNrArray = [];
-let showingID;
 
 $('main').append(/*html*/ `<div class="choose-movie"></div>`);
 $('.choose-movie').append(/*html*/ `<div class="dropdown">

@@ -1,9 +1,13 @@
-
-let movies
+if (typeof movies !== 'undefined') {
+  movies = undefined;
+} else {
+  let movies;
+}
 
 async function buildInitialPage(title) {
+
   movies = await db.run(`SELECT * FROM new_movie_list`);
-  buildMoreInfoPage(title);
+  buildMoreInfoPage(title.toUpperCase());
 }
 
 function buildMoreInfoPage(selectedMovie) {
@@ -22,7 +26,7 @@ function buildMoreInfoPage(selectedMovie) {
     trailer,
     director,
   } of movies) {
-    if (selectedMovie === title) {
+    if (selectedMovie === title.toUpperCase()) {
       let movieHtml = /*html*/ `
                           <div>
                                <div class="youtube">

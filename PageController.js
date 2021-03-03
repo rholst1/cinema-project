@@ -44,6 +44,14 @@ function clear() {
   $(".movie-info").remove();
   $('main').html('');
 }
+function buildMoreInfoPage(hash) {
+  let title = (hash.split('='))[1];
+  title = title.replaceAll('-', ' ');
+  console.log(title);
+  $.getScript('moremovieinfo.js', () => {
+    buildInitialPage(title);
+  })
+}
 function hashchanged() {
   clear();
   let hash = location.hash.replace(/^#/, '');
@@ -51,4 +59,5 @@ function hashchanged() {
   if (hash.startsWith('currentMovies')) buildCurrentMoviesPage();
   if (hash.startsWith('tickets')) buildTicketPage(hash.slice(8)); // slice at "ticket-"
   if (hash.startsWith('bookings')) buildBookingsPage();
+  if (hash.startsWith('moreinfo')) buildMoreInfoPage(hash.slice(9));
 }

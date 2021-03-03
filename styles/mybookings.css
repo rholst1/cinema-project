@@ -89,4 +89,8 @@ li:nth-child(odd) {
     padding-left: 10%;
   }
 
+  .other-button{
+    max-height: 10vw;
+    margin-top: 7vw;
+  }
 }
