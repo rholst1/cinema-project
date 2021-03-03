@@ -1,16 +1,14 @@
-
-/* "Nyheter" and "Visas just nu" Elements */ 
+/* "Nyheter" and "Visas just nu" Elements */
 .newsAndShowtimeElements {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   padding: 0 5vw;
-  
 }
 .news {
   border-radius: 10px;
   color: var(--text);
-  background:  rgba(6, 43, 88, 0.8);
+  background: rgba(6, 43, 88, 0.8);
   width: 40vw;
   padding: 3vh 3vw;
   margin: 3vh 2vw 3vh 0;
@@ -28,15 +26,13 @@
   border-radius: 10px;
   border: 4px dotted rgb(226, 136, 17);
   color: var(--text);
-  background:  rgba(38, 42, 46, 0.9);
+  background: rgba(38, 42, 46, 0.9);
   width: 25vw;
   padding: 3vh 3vw;
   margin: 3vh 0;
-
 }
 .nowShowing h2 {
   font-size: 200%;
-  
 }
 
 .btn-container-homepage {
@@ -47,6 +43,7 @@
 
 .nowShowing li {
   font-size: 140%;
+  margin-top: 2vh;
 }
 
 .nowShowingTitles a:hover {
@@ -56,7 +53,6 @@
 .nowShowingTitles a {
   text-decoration: none;
 }
-
 
 /* Carousel styling */
 .slideshow-container {
@@ -74,7 +70,8 @@
   display: none;
 }
 
-.prev, .next {
+.prev,
+.next {
   cursor: pointer;
   position: absolute;
   top: 50%;
@@ -93,8 +90,9 @@
   border-radius: 3px 0 0 3px;
 }
 
-.prev:hover, .next:hover {
-  background-color: rgba(0,0,0,0.8);
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 .text {
@@ -121,42 +119,43 @@
   text-align: center;
 }
 
-.active, .dot:hover {
+.active,
+.dot:hover {
   background-color: #c57805;
 }
 
 @media screen and (max-width: 800px) {
-
-  main{
+  main {
     display: flex;
     flex-direction: column;
     padding: 2vw;
   }
 
-  .newsAndShowtimeElements{
+  .newsAndShowtimeElements {
     flex-direction: column;
   }
 
- .slideshow-container img{
+  .slideshow-container img {
     max-width: 80vw;
     height: 30vh;
     margin-left: 3%;
     width: auto;
   }
 
-  .news, .nowShowing{
+  .news,
+  .nowShowing {
     max-width: 90vw;
     width: auto;
   }
 
-  .newsh2, .nowShowingh2{
+  .newsh2,
+  .nowShowingh2 {
     display: flex;
     justify-content: center;
     margin-bottom: 2vw;
   }
 
- .news p{
+  .news p {
     margin-left: 0;
   }
-
 }
