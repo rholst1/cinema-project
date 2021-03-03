@@ -6,7 +6,7 @@ $.getScript('/BookingPage/script/tickets.js');
 let movies;
 let id;
 let i;
-let totalAmountTickets = 0; // Userinput
+let totalAmountTickets = 0;
 let selectedSeatNrArray = [];
 let showingID;
 
@@ -20,9 +20,6 @@ $('.choose-movie').append(/*html*/ `<div class="dropdown">
 $('.choose-movie').after(
   /*html*/ `<div class="showings-container"><h1></h1></div>`
 );
-
-// addMovies();
-// renderMovieBooking();
 
 // After choosing movie and amount of tickets, this functions builds the auditorium depending on wich movie, saloon and date you picked.
 async function renderSeatChooser(showingID) {

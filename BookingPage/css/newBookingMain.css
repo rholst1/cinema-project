@@ -143,6 +143,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-size: 150%;
+  margin-top: 5vh;
 }
 .continue-container {
   display: flex;
