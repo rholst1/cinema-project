@@ -23,12 +23,12 @@
   letter-spacing: 3px;
 }
 
-li {
+.li-bookings {
   margin: 3% 0;
   padding: 1%;
 }
 
-li:nth-child(odd) {
+.li-bookings:nth-child(odd) {
   background-color: var(--header-color);
 }
 
