@@ -39,16 +39,11 @@
   
 }
 
-.btn-container {
+.btn-container-homepage {
   padding-right: 10vw;
-  margin-left: 95%;
-  margin-top: -20%;
+  margin-left: 70%;
+  margin-top: -18%;
 }
-/*
-.general-button.btn {
-  display: none;
-}
-*/
 
 .nowShowing li {
   font-size: 140%;
