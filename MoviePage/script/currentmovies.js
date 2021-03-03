@@ -38,7 +38,7 @@ function buildMovieList(selectedMovie) {
                 </div>
                 <div class="currentMovieTitleDiv">
                     <a href = "javascript:buttonPage('${title}')" class="movie-link"><h2>${title}</h2></a><article class="currentMovieTitleContainer"> <p class="title-p"> ${genres} | ${length} | ${ageGroup} </p>
-                    <article><button class="general-button article-button" onclick = "buttonPage('${title}')">Mer info</button><button class="general-button article-button" onclick="#">Köp biljett</button></article></article><hr>
+                    <article><button class="general-button article-button" onclick = "buttonPage('${title}')">Mer info</button><button class="general-button article-button" onclick="buyTicket(${i})">Köp biljett</button></article></article><hr>
                       <p>${description}
                       </p>
                   </div></div>`;
@@ -95,6 +95,11 @@ function buildMoreInfoPage(selectedMovie) {
 function buttonPage(title) {
   console.log(title);
   buildMoreInfoPage(title);
+}
+
+function buyTicket(i) {
+  localStorage['selected-movie'] = i;
+  window.location.href = '/BookingPage/html/ticketbooking.html';
 }
 
 buildInitialPage();
