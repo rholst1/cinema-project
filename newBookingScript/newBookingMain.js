@@ -1,7 +1,19 @@
-$.getScript('newBookingScript/movies.js');
-$.getScript('newBookingScript/eventHandling.js');
-$.getScript('newBookingScript/booking.js');
-$.getScript('newBookingScript/tickets.js');
+function initNewBookingMain() {
+  $.getScript('newBookingScript/movies.js');
+  $.getScript('newBookingScript/eventHandling.js');
+  $.getScript('newBookingScript/booking.js');
+  $.getScript('newBookingScript/tickets.js');
+  $('main').append(/*html*/ `<div class="choose-movie"></div>`);
+  $('.choose-movie').append(/*html*/ `<div class="dropdown">
+  <button id="toggle" class="general-button dropbtn">Välj film</button>
+  <div class="dropdown-content">
+  </div>
+</div>`);
+  $('.choose-movie').after(
+  /*html*/ `<div class="showings-container"><h1></h1></div>`
+  );
+}
+
 
 let movies;
 let id;
@@ -10,16 +22,7 @@ let totalAmountTickets = 0; // Userinput
 let selectedSeatNrArray = [];
 let showingID;
 
-$('header').after(/*html*/ `<main></main>`);
-$('main').append(/*html*/ `<div class="choose-movie"></div>`);
-$('.choose-movie').append(/*html*/ `<div class="dropdown">
-  <button id="toggle" class="general-button dropbtn">Välj film</button>
-  <div class="dropdown-content">
-  </div>
-</div>`);
-$('.choose-movie').after(
-  /*html*/ `<div class="showings-container"><h1></h1></div>`
-);
+
 
 // addMovies();
 // renderMovieBooking();
@@ -113,3 +116,4 @@ function inputInfo() {
     }
   });
 }
+export { initNewBookingMain }

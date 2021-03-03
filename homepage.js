@@ -1,13 +1,18 @@
-$.getScript('script/Carousel.js');
-
-$('header').after(`<main></main > `);
-$('main').append(`<div class="slideshow-container"></div>`);
-$('.slideshow-container').append(buildCarousel());
-$('.slideshow-container').after(`<section class="newsAndShowtimeElements"></section>`);
-$('.newsAndShowtimeElements').append(buildNews());
-$('.newsAndShowtimeElements').append(buildNowShowing());
 
 
+
+
+function initHomepage() {
+  $.getScript('script/Carousel.js');
+  $('main').append(`<div class="slideshow-container"></div>`);
+  $('.slideshow-container').append(buildCarousel());
+  $('.slideshow-container').after(`<section class="newsAndShowtimeElements"></section>`);
+  $('.newsAndShowtimeElements').append(buildNews());
+  $('.newsAndShowtimeElements').append(buildNowShowing());
+}
+function clearHomepage() {
+  $("main").remove();
+}
 /* Function that builds the "Nyheter" section with the bullet point news */
 function buildNews() {
 
@@ -118,3 +123,4 @@ function buildCarousel() {
     <span class="dot" onclick="changeDotSlide(3)"></span>
   </div>`
 }
+export { initHomepage, clearHomepage }
