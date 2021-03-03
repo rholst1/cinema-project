@@ -389,6 +389,7 @@ select {
   .menu-bar .hoverable {
     display: flex;
     align-self: flex-end;
+    font-size: 130%;
   }
   /* media queries for booking tickets page*/
 
@@ -466,5 +467,10 @@ select {
   .showcase {
     max-width: 50vw;
     margin-left: 4vw;
+  }
+
+  .menu-bar a {
+    justify-content: center;
+    text-align: center;
   }
 }
