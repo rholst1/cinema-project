@@ -39,7 +39,7 @@ async function saveSeats(selectedSeatNrArray, bookingIdNewest) {
 // Finally when the booking is done, you get a confirmation of your booking
 async function renderConfirmation(bookingIdNewest) {
   let confirmation = await db.run(
-    /*sql*/ `SELECT DISTINCT Showings.filmID, Showings.date, Showings.time, Seatings.seatNumber, Showings.auditorium, Bookings.price FROM Showings INNER JOIN Bookings ON (Bookings.showingID = Showings.ID) INNER JOIN Seatings ON (Seatings.bookingID = ${bookingIdNewest}) WHERE Showings.ID = ${showingID}`
+    /*sql*/ `SELECT DISTINCT Showings.filmID, Showings.date, Showings.time, Seatings.seatNumber, Showings.auditorium, Bookings.price FROM Showings INNER JOIN Bookings ON (Bookings.ID =  ${bookingIdNewest}) INNER JOIN Seatings ON (Seatings.bookingID = ${bookingIdNewest}) WHERE Showings.ID = ${showingID}`
   );
 
   let { filmID, date, time, auditorium, price } = confirmation[0];
