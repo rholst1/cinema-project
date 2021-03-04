@@ -1,7 +1,7 @@
 //import { initNewBookingMain } from "/newBookingScript/newBookingMain.js";
-import { initMyBookings } from "/my-bookings-page.js";
-import { initHomepage } from "/homepage.js";
-import { initCurrentmovies } from "/currentmovies.js"
+import { initMyBookings } from "/myBookingsPage/script/my-bookings-page.js";
+import { initHomepage } from "/HomePage/script/homepage.js";
+import { initCurrentmovies } from "/MoviePage/script/currentmovies.js"
 
 if (!window.HashChangeEvent) (function () {
   var lastURL = document.URL;
@@ -24,17 +24,16 @@ function buildTicketPage(hash) {
   if (hash !== '') {
     if (hash.includes('showing')) {
       hash = hash.split('-'); //#tickets-film:filmID-showing:showingID
-
       let title = (hash[0].split('='))[1];
       let showingID = (hash[1].split('='))[1];
-      $.getScript('newBookingScript/newBookingMain.js');
+      $.getScript('BookingPage/script/newBookingMain.js');
     }
     if (hash.includes('film')) {
       let title = (hash.split('='))[1];
-      $.getScript('newBookingScript/newBookingMain.js');
+      $.getScript('BookingPage/script/newBookingMain.js');
     }
   } else {
-    $.getScript('newBookingScript/newBookingMain.js');
+    $.getScript('BookingPage/script/newBookingMain.js');
   }
 }
 function buildBookingsPage() {
@@ -48,7 +47,7 @@ function buildMoreInfoPage(hash) {
   let title = (hash.split('='))[1];
   title = title.replaceAll('-', ' ');
   console.log(title);
-  $.getScript('moremovieinfo.js', () => {
+  $.getScript('/MoviePage/script/moremovieinfo.js', () => {
     buildInitialPage(title);
   })
 }

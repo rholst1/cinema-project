@@ -1,6 +1,11 @@
 // Get movies from database and load them into a list
 (async function addMovies() {
   movies = await db.run(`SELECT * FROM new_movie_list`);
+  if (localStorage['selected-movie']) {
+    renderMovieBooking(localStorage['selected-movie']);
+    delete localStorage['selected-movie'];
+    return;
+  }
   i = 0;
   id = [];
   while (i < movies.length) {

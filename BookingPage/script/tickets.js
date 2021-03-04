@@ -1,14 +1,15 @@
 // Script for when you are selecting amount and type of tickets
 
-if (typeof childTickets !== 'undefined') {
-  childTickets = 0;
-  adultTickets = 0;
-  seniorTickets = 0;
-} else {
+if (typeof childTickets === undefined) {
   let childTickets = 0;
   let adultTickets = 0;
   let seniorTickets = 0;
+} else {
+  childTickets = 0;
+  adultTickets = 0;
+  seniorTickets = 0;
 }
+
 // Here you decide how many tickets you want and what type of tickets
 function renderTicketChooser() {
   $('main').append(`<div class="ticket-container"></div>`);

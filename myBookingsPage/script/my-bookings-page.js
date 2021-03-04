@@ -17,16 +17,15 @@ function initMyBookings() {
 </form>`);
   listenToEmailButton();
 
+
   $(document).on('click', '.removeButton', async function () {
     db.run('BEGIN TRANSACTION');
     let removeID = $(this).val();
-    console.log('made into remove button');
     let result = await db.run(/*sql*/ `
       DELETE FROM Bookings WHERE ID = ${removeID}; UPDATE Seatings SET status = 'empty' WHERE bookingID = ${removeID}`);
 
     alert('Din bokning är nu avbokad!');
     location.reload();
-    console.log('result', result);
   });
   db.run('COMMIT');
 }
@@ -65,7 +64,6 @@ let time;
 let bookingInfo;
 let increment = 1;
 
-//currentDateAndTime();
 
 //Runs when user clicks "Hämta bokningar"
 async function queryDatabase() {
@@ -74,8 +72,6 @@ async function queryDatabase() {
   bookingInfo = await db.run(
     /*sql*/ `SELECT DISTINCT Showings.filmID, Showings.date, Showings.time, Showings.auditorium, Bookings.price, Bookings.ID, Bookings.showingID FROM Bookings INNER JOIN Showings ON(Bookings.showingID = Showings.ID) WHERE Bookings.email = '${inputEmail}'`
   );
-
-  console.log('booking ID: ', bookingInfo);
 
   for (let {
     filmID,
@@ -86,6 +82,7 @@ async function queryDatabase() {
     price,
     showingID,
   } of bookingInfo) {
+
     let today = new Date();
     let leadingZero =
       today.getFullYear() +
@@ -93,12 +90,7 @@ async function queryDatabase() {
       ('0' + today.getDate()).slice(-2);
     // console.log("date today with leading zero", leadingZero);
 
-    console.log('Showing ID:', showingID);
-    let seatResult = await db.run(
-      /*SQL*/ `SELECT * FROM Seatings WHERE Seatings.bookingID = ${ID}`
-    );
     let todayDateInt = parseInt(leadingZero);
-    console.log(' TODAY parsed int', todayDateInt);
 
     let parts = `${date}`.split('-');
     let movieDate = new Date(parts[0], parts[1] - 1, parts[2]);
@@ -107,21 +99,16 @@ async function queryDatabase() {
       movieDate.getFullYear() +
       ('0' + (movieDate.getMonth() + 1)).slice(-2) +
       ('0' + movieDate.getDate()).slice(-2);
-    console.log('MOVIE DATE WITH LEADING ZERO', movieLeadingZero);
 
     let movieIntDate = parseInt(movieLeadingZero);
-
-    console.log('MOVIEDATE PARSED INT', movieIntDate);
 
     let hourNow = today.getHours();
     let minutesNow = today.getMinutes();
 
     let timeNowString =
       '' + ('0' + hourNow).slice(-2) + ('0' + minutesNow).slice(-2);
-    console.log('string time now', timeNowString);
 
     let timeNowInt = parseInt(timeNowString);
-    console.log('time now int parsed!', timeNowInt);
 
     let movieTimeParts = `${time}`.split(':');
 
@@ -129,16 +116,18 @@ async function queryDatabase() {
       '' +
       ('0' + movieTimeParts[0]).slice(-2) +
       ('0' + movieTimeParts[1]).slice(-2);
-    console.log('movie time string', movieTimeString);
 
     let movieTimeInt = parseInt(movieTimeString, 10);
-    console.log('movie time int parsed', movieTimeInt);
+
+    let seatResult = await db.run(
+      /*SQL*/ `SELECT * FROM Seatings WHERE Seatings.bookingID = ${ID}`
+    );
 
     if (
       movieIntDate < todayDateInt ||
       ((movieIntDate = todayDateInt) && movieTimeInt < timeNowInt)
     ) {
-      let queryHtml = /*html*/ `<li class="historik"> Salong: ${auditorium} film: ${filmID} Datum och tid: ${date} ${time} Sittplatser:<span class="seats${increment}"></span> </li> `;
+      let queryHtml = /*html*/ `<li class="historik li-bookings"> Salong: ${auditorium} film: ${filmID} Datum och tid: ${date} ${time} Sittplatser:<span class="seats${increment}"></span> </li> `;
 
       $('.history').append(queryHtml);
       loopSeats(seatResult, increment);
@@ -146,7 +135,7 @@ async function queryDatabase() {
       ((movieIntDate = todayDateInt) && movieTimeInt > timeNowInt) ||
       (movieIntDate > todayDateInt && movieTimeInt > timeNowInt)
     ) {
-      let queryHtmlKommande = /*html*/ `<li class="kommandevisning"> Salong: ${auditorium} Film: ${filmID} Datum och tid: ${date} ${time} Sittplatser:<span class="seats${increment}"></span>
+      let queryHtmlKommande = /*html*/ `<li class="kommandevisning li-bookings"> Salong: ${auditorium} Film: ${filmID} Datum och tid: ${date} ${time} Sittplatser:<span class="seats${increment}"></span>
     <br> <button class="general-button removeButton" value="${ID}">Avboka</button></li>
     `;
 
@@ -156,6 +145,7 @@ async function queryDatabase() {
     increment++;
   }
 }
+
 
 
 

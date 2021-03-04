@@ -1,8 +1,6 @@
-$.getScript('newBookingScript/movies.js');
-$.getScript('newBookingScript/eventHandling.js');
-$.getScript('newBookingScript/booking.js');
-$.getScript('newBookingScript/tickets.js');
-if (typeof movies !== 'undefined') {
+
+console.log(typeof selectedSeatNrArray);
+if (typeof selectedSeatNrArray !== undefined) {
   movies = undefined;
   id = undefined;
   i = undefined;
@@ -17,8 +15,10 @@ if (typeof movies !== 'undefined') {
   let selectedSeatNrArray = [];
   let showingID;
 }
-
-
+$.getScript('BookingPage/script/movies.js');
+$.getScript('BookingPage/script/eventHandling.js');
+$.getScript('BookingPage/script/booking.js');
+$.getScript('BookingPage/script/tickets.js');
 $('main').append(/*html*/ `<div class="choose-movie"></div>`);
 $('.choose-movie').append(/*html*/ `<div class="dropdown">
   <button id="toggle" class="general-button dropbtn">Välj film</button>
@@ -28,9 +28,6 @@ $('.choose-movie').append(/*html*/ `<div class="dropdown">
 $('.choose-movie').after(
   /*html*/ `<div class="showings-container"><h1></h1></div>`
 );
-
-// addMovies();
-// renderMovieBooking();
 
 // After choosing movie and amount of tickets, this functions builds the auditorium depending on wich movie, saloon and date you picked.
 async function renderSeatChooser(showingID) {

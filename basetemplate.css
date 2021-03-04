@@ -1,21 +1,10 @@
-@import 'styles/homepage.css';
-@import 'styles/currentmovies.css';
-@import '/newBookingScript/newBookingMain.css';
-@import 'styles/mybookings.css';
+@import '/HomePage/css/homepage.css';
+@import '/MoviePage/css/currentmovies.css';
+@import '/BookingPage/css/newBookingMain.css';
+@import '/myBookingsPage/css/mybookings.css';
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;400&display=swap');
 /*Variables for colors and fonts. Accessing example var(--blue) instead of rgb(30, 144, 255).*/
 :root {
-  /* Experimental colors.
-  --lighter-shade: linear-gradient(to bottom, rgba(48,47,48,1) 0%,rgba(59,58,59,0.9) 20%,rgba(65,64,66,0.9) 32%,rgba(65,64,66,0.9) 78%,rgba(56,55,57,0.9) 87%,rgba(43,43,43,1) 100%);
-  --shade: linear-gradient(to bottom, rgba(14,13,13,1) 0%,rgba(114,0,21,1) 21%,rgba(143,2,34,1) 40%,rgba(143,2,34,1) 62%,rgba(102,0,28,1) 83%,rgba(14,13,13,1) 100%); 
-  --darker-shade: #1b1818;
-  --text: rgb(255, 255, 255);
-  --accent: rgb(226, 136, 17);
-
-  --shade-variation-list: linear-gradient(to bottom, rgba(27,24,24,0.87) 0%,rgba(114,0,21,0.98) 14%,rgba(118,0,23,1) 17%,rgba(143,2,34,1) 35%,rgba(143,2,34,1) 64%,rgba(107,0,29,1) 85%,rgba(102,0,28,0.97) 88%,rgba(27,24,24,0.87) 100%);
-  --shade-variation-menu-top: linear-gradient(to bottom, rgba(114,0,21,1) 17%,rgba(114,0,21,1) 21%,rgba(120,0,24,1) 25%,rgba(125,0,26,1) 28%,rgba(143,2,34,1) 40%,rgba(143,2,34,1) 62%,rgba(102,0,28,1) 83%,rgba(93,3,28,1) 85%,rgba(27,24,24,0.87) 100%);
-  --shade-variation-menu-left: var(--darker-shade);*/
-
   /*Colors - feel free to add here, don't forget to connect specific elements to your new variable*/
   --lighter-shade: rgb(61, 59, 68);
   --shade: rgb(33, 32, 36);
@@ -74,11 +63,7 @@ body {
   margin: 0;
   color: white;
 }
-/*
-main {
-  height: 100vh;
-}
-*/
+
 hr {
   border: none;
   background-color: #ccc;
@@ -108,13 +93,6 @@ button:hover {
   position: relative;
   top: 1px;
 }
-/*General hovereffect. 
- .hoverable:hover{
-   opacity:var(--hover) !important;
-   color: var(--hover) !important;
-   background:var(--hover-background);
-   cursor: pointer;
- }*/
 
 /* Header elements */
 header {
@@ -134,47 +112,6 @@ header {
   font: var(--font-title-medium);
   color: var(--text);
   padding: 0 2vw;
-}
-
-/*Featured movies on front page*/
-.featured {
-  display: flex;
-  text-decoration: none;
-  color: var(--text);
-  background: var(--featured-color);
-  padding: 1vh 1vw;
-  margin: 0 5vw;
-}
-
-.featDivImg {
-  block-size: 350px;
-}
-
-.featDivComment {
-  width: 150%;
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  line-height: 1.5vh;
-}
-
-.featArticle {
-  padding-left: 1vw;
-  padding-right: 1vw;
-}
-
-.featTitle {
-  border-bottom: solid;
-  border-width: 1px;
-  position: top;
-}
-
-.featDivInfo {
-  width: 200vw;
-}
-.featLink {
-  text-decoration: none;
-  color: var(--text);
 }
 
 .stickyFooterAdjuster {
@@ -207,70 +144,10 @@ header {
   border: 1px solid black;
 }
 
-/* .currentMovieTitleH1 {
-  color: var(--text);
-  font: var(--font-title-x-large);
-  margin: auto;
-  text-align: center;
-} */
-
-/* img {
-  width: 280px;
-  height: 330px;
-} */
-
 hr {
   position: relative;
 }
-/* .movie-container {
-  color: var(--text);
-  display: flex;
-  padding: 1vh 5vw;
-}
-.btn-container {
-  padding-right: 10vw;
-  display: flex;
-  flex-direction: row-reverse;
-}
-.btn {
-  display: none;
-}
-.currentMovieTitleDiv {
-  padding: 0 5vw;
-  width: 100vw;
-}
 
-.movies h2 {
-  font: var(--font-title-large);
-  letter-spacing: 3px;
-  margin-bottom: 0;
-}
-
-.movies p {
-  letter-spacing: 0.5px;
-}
-.movies h2:hover {
-  text-decoration: underline;
-}
-p.title-p {
-  font: var(--font-title-small);
-  font-weight: lighter;
-  align-self: flex-end;
-  margin: 0;
-} */
-
-/* a.movie-link {
-  text-decoration: none;
-  color: var(--text);
-  display: inline-block;
-  font-size: 140%;
-} */
-
-/* .currentMovieTitleContainer {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-} */
 /*=============TicketBooking page=================*/
 /*Upcoming showings*/
 .upcoming-showings-container li {
@@ -425,12 +302,7 @@ select {
   margin-left: 1vw;
   margin-right: 1vw;
 }
-/*
-.cinema-container h2 {
-  font: var(--font-title-medium);
-  color: var(--text);
-  margin-bottom: 0px;
-}*/
+
 .cinema-button {
   height: 30px;
   min-width: 5px;
@@ -442,39 +314,6 @@ select {
   margin: 3px;
   z-index: 3;
 }
-
-/* .movie-info {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-}
-.youtube {
-  height: 40vh;
-  width: 100vw;
-}
-
-.info-text {
-  color: white;
-  padding: 0 20vw;
-}
-.info-text h2 {
-  font-size: 300%;
-  margin: 0;
-  display: flex;
-  align-items: flex-end;
-}
-.info-text article {
-  font-size: 130%;
-  letter-spacing: 0.5px;
-}
-.title-row {
-  display: flex;
-  justify-content: space-between;
-}
-.button-title {
-  margin-top: 5px;
-  margin-bottom: 0px;
-} */
 
 .info-input form {
   display: grid;
@@ -494,7 +333,6 @@ select {
   justify-self: right;
   padding: 1%;
 }
-
 
 .info-input label {
   grid-column: 1;
@@ -528,44 +366,43 @@ select {
   text-align: center;
 }
 
-
-
 @media screen and (max-width: 800px) {
   /* media queries for more-info pages*/
-  .info-text{
+  .info-text {
     padding: 2vw;
   }
-  .title-row{
+  .title-row {
     display: flex;
     flex-direction: column;
   }
 
-  .title-row h2{
+  .title-row h2 {
     justify-content: center;
   }
 
-  .button-title{
+  .button-title {
     justify-content: center;
     margin-left: 10%;
     margin-bottom: 3%;
   }
 
-  .menu-bar .hoverable{
-   display: flex;
-   align-self: flex-end;
+  .menu-bar .hoverable {
+    display: flex;
+    align-self: flex-end;
+    font-size: 130%;
   }
   /* media queries for booking tickets page*/
 
-  .choose-movie{
+  .choose-movie {
     display: flex;
     justify-content: center;
   }
-  
-  .choose-movie .dropbtn{
+
+  .choose-movie .dropbtn {
     width: 50vw;
   }
 
-  .dropdown-content{
+  .dropdown-content {
     flex-direction: column;
     width: 50vw;
   }
@@ -575,59 +412,65 @@ select {
     justify-content: center;
   }
 
-  .showings-container{
+  .showings-container {
     padding: 2vw;
-    
   }
 
-  .selectedShowing{
+  .selectedShowing {
     display: flex;
     flex-direction: column;
     justify-content: center;
     border-bottom: 1px solid whitesmoke;
     margin-bottom: 1%;
     padding-bottom: 3%;
-   
   }
-  
-  .selectedShowing h3{
+
+  .selectedShowing h3 {
     margin-left: 7vw;
   }
 
-  .selectedShowing .general-button{
+  .selectedShowing .general-button {
     justify-content: center;
     width: 50vw;
     font: var(--font-button);
     letter-spacing: 0.5px;
     font-weight: normal;
-    margin-left: 20vw;  
+    margin-left: 20vw;
     padding: 3% 7%;
   }
 
-  .ticket-container, .general-button, .tack, .selectedShowing h3, .choose-movie .dropbtn{
+  .ticket-container,
+  .general-button,
+  .tack,
+  .selectedShowing h3,
+  .choose-movie .dropbtn {
     font: var(--font-button);
     letter-spacing: 0.5px;
     font-weight: normal;
   }
 
-  div .container{
+  div .container {
     padding: 2vw;
     max-width: 95vw;
     justify-content: center;
   }
 
-  .book-tickets{
+  .book-tickets {
     flex-direction: column;
     justify-content: center;
   }
 
-  .tack{
+  .tack {
     justify-content: center;
   }
 
-  .showcase{
+  .showcase {
     max-width: 50vw;
     margin-left: 4vw;
   }
 
+  .menu-bar a {
+    justify-content: center;
+    text-align: center;
+  }
 }

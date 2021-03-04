@@ -1,5 +1,5 @@
 function initHomepage() {
-  $.getScript('script/Carousel.js');
+  $.getScript('HomePage/script/carousel.js');
   $('main').append(`<div class="slideshow-container"></div>`);
   $('.slideshow-container').append(buildCarousel());
   $('.slideshow-container').after(`<section class="newsAndShowtimeElements"></section>`);
@@ -8,15 +8,14 @@ function initHomepage() {
 }
 /* Function that builds the "Nyheter" section with the bullet point news */
 function buildNews() {
-
   let newsHtml;
 
   newsHtml = /*html*/ `<div class="news">
       <h2 class="newsh2">Nyheter</h2>
       <article>
-        <p>"COMMANDO" - Stor succé på Svenska Biografer</p>
+        <p>"Toy Story 4" - Stor succé på Svenska Biografer</p>
         <p>
-          "Sällskapsresan" - En alltid välkommen Klassiker, återigen på Bio
+          "Pulp Fiction" - En alltid välkommen Klassiker, återigen på Bio
           hos oss
         </p>
         <p>
@@ -39,7 +38,6 @@ function buildNews() {
 
 /* Function that builds the "Visas just nu" section with links etc and database info */
 function buildNowShowing() {
-
   let nowShowingHtml;
 
   nowShowingHtml = /*html*/ `<div class="nowShowing">
@@ -49,27 +47,22 @@ function buildNowShowing() {
      </div>`;
   databasePullShowings();
   return nowShowingHtml;
-
 }
-
 
 /* Function that loads DB entries from Showings into Now Showing box */
 async function databasePullShowings() {
-  let showings;
   let todaysDate = new Date().toISOString().slice(0, 10);
-
-  if (todaysDate[8] == "0") {
+  let showings;
+  if (todaysDate[8] == '0') {
     todaysDate = todaysDate.slice(0, 8) + todaysDate[9];
   }
   try {
     showings = await db.run(`SELECT * FROM Showings`);
-  }
-  catch (err) {
-    console.log("Failed to load from Database");
+  } catch (err) {
+    console.log('Failed to load from Database');
   }
 
   for (let { filmID, auditorium, date, time } of showings) {
-
     if (date.localeCompare(todaysDate) === 0) {
       buildNowShowingElements(filmID, auditorium, time);
     }
@@ -112,6 +105,6 @@ function buildCarousel() {
     <span class="dot" onclick="changeDotSlide(1)"></span>
     <span class="dot" onclick="changeDotSlide(2)"></span>
     <span class="dot" onclick="changeDotSlide(3)"></span>
-  </div>`
+  </div>`;
 }
 export { initHomepage }
