@@ -38,7 +38,6 @@
 .title-btn-container {
   display: flex;
   flex-direction: row;
-  align-self: flex-end;
   align-items: center;
 }
 .title-btn-container h2 {
