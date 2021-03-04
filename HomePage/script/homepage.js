@@ -43,9 +43,8 @@ function buildNews() {
 function buildNowShowing() {
   let nowShowingHtml;
 
-  nowShowingHtml = /*html*/ `<div class="nowShowing">
-      <h2 class="nowShowingh2">På Bio idag:</h2>
-    <!-- <div class="btn-container-homepage"><button class="general-button" onclick="location.href='/BookingPage/html/ticketbooking.html'">KöpDinBiljettHär</button></div> -->
+  nowShowingHtml = /*html*/ `<div class="nowShowing"><div class="title-btn-container">
+      <div><h2>På Bio idag:</h2></div><div><button class="general-button" onclick="location.href='/BookingPage/html/ticketbooking.html'">Köp biljetter här</button></div></div>
       <ul class="nowShowingTitles">
      </div>`;
   databasePullShowings();

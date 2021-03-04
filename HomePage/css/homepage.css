@@ -35,10 +35,19 @@
   font-size: 200%;
 }
 
-.btn-container-homepage {
-  padding-right: 10vw;
-  margin-left: 70%;
-  margin-top: -18%;
+.title-btn-container {
+  display: flex;
+  flex-direction: row;
+  align-self: flex-end;
+  align-items: center;
+}
+.title-btn-container h2 {
+  margin: 0;
+}
+
+.title-btn-container button {
+  margin: 0;
+  margin-left: 3vw;
 }
 
 .nowShowing li {
