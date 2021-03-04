@@ -45,12 +45,13 @@ async function renderConfirmation(bookingIdNewest) {
   let { filmID, date, time, auditorium, price } = confirmation[0];
   $('.layout').replaceWith(
     /*html*/
-    `<div class="tack" ><h1>Tack för din bokning!</h1></div>`
+    `<div class="tack"></div>`
   );
   $('.actual-booking').remove();
   $('.booking-form').remove();
   $('.tack').append(/*html*/ `
-    <div class="färdigbokningLOL">
+    <div class="completed-booking">
+    <h1>Tack för din bokning!</h1>
       <h2>Film: ${filmID}</h2>
       <h3>
        Datum: ${date}  
