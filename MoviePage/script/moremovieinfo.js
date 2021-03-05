@@ -1,11 +1,16 @@
+$.getScript('/MoviePage/script/buyTicket.js');
+
 let movies;
-async function buildInitialPage(title) {
+async function buildInitialPage(title, i) {
   movies = await db.run(`SELECT * FROM new_movie_list`);
-  buildMoreInfoPage(title);
+  buildMoreInfoPage(title, i);
 }
 
-function buildMoreInfoPage(selectedMovie) {
-  $('header').after(`<section class="movie-info"></section>`);
+function buildMoreInfoPage(selectedMovie, i) {
+  $('main').remove();
+  $('header').after(`<main></main > `);
+  $('main').append(`<section class="movies"></section>`);
+  $('.movies').after(`<section class="movie-info"></section>`);
 
   for (let {
     title,
@@ -31,7 +36,7 @@ function buildMoreInfoPage(selectedMovie) {
                               <div class="title-row">
                               <h2>${title}</h2>
                               <div class="button-title">
-                                <button class="general-button" onclick = "window.location.href='/index.html'" >Gå tillbaka</button><button class="general-button" onclick="#">Köp biljett</button>
+                                <button class="general-button" onclick="buyTicket(${i})">Köp biljett</button>
                                 </div>
                               </div>
                                 <hr width='100%'>
@@ -43,7 +48,7 @@ function buildMoreInfoPage(selectedMovie) {
                                 </div>
                             </div>`;
 
-      $(`main`).replaceWith(movieHtml);
+      $(`.movies`).replaceWith(movieHtml);
     }
   }
-};
+}

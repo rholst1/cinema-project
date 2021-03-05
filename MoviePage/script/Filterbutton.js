@@ -7,18 +7,18 @@ let button = $('.btn').click(function () {
   }
   button.removeClass('active');
   $(this).addClass('active');
-})
+});
 
 $(document).ready(function () {
-  $("#toggle").click(function () {
-    $(".btn").toggle();
+  $('#toggle').click(function () {
+    $('.btn').toggle();
   });
 });
 
 $(function () {
-  $("#toggle").click(function () {
+  $('#toggle').click(function () {
     $(this).text(function (i, text) {
-      return text === "Visa filter" ? "Dölj filter" : "Visa filter";
-    })
+      return text === 'Visa filter' ? 'Dölj filter' : 'Visa filter';
+    });
   });
-})
+});
