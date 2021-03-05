@@ -82,19 +82,19 @@ function buildNowShowingElements(filmID, auditorium, time) {
 /* Function that builds the carousel */
 function buildCarousel() {
   return /*html*/ `<div class="slides">
-    <a href="#" onclick="buildInfo('Hidden Figures')">
+    <a href="#" onclick="buildInfo('Hidden Figures',1)">
       <img src="img/hf.jpeg">
     </a>
     </div>
 
     <div class="slides">
-    <a href="#" onclick="buildInfo('Toy Story 4')">
+    <a href="#" onclick="buildInfo('Toy Story 4',5)">
       <img src="/img/ts.jpg">
     </a>
     </div>
 
     <div class="slides">
-    <a href="#" onclick="buildInfo('Tenet')">
+    <a href="#" onclick="buildInfo('Tenet',2)">
       <img src="img/tenet.jpg">
     </a>
     </div>
@@ -107,4 +107,11 @@ function buildCarousel() {
     <span class="dot" onclick="changeDotSlide(2)"></span>
     <span class="dot" onclick="changeDotSlide(3)"></span>
   </div>`;
+}
+
+/* Function to build the more info site when you click a slide or a movie thats on "todays showings" */
+function buildInfo(title, i) {
+  $.getScript('/MoviePage/script/moremovieinfo.js', function () {
+    buildInitialPage(title, i);
+  });
 }
