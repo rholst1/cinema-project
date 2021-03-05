@@ -54,12 +54,15 @@
   margin-top: 2vh;
 }
 
-.nowShowingTitles a:hover {
+.nowShowing a:hover {
   color: grey;
 }
-
+.nowShowingTitles {
+  /* margin-top: 5vh; */
+}
 .nowShowingTitles a {
   text-decoration: none;
+  color: ghostwhite;
 }
 
 /* Carousel styling */
