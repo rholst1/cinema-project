@@ -37,7 +37,7 @@ function buildMoreInfoPage(selectedMovie) {
                               <h2>${title}</h2>
                               <div class="button-title">
                                 <button class="general-button" onclick ='window.history.back(1);' >Gå tillbaka</button>                                
-                                <button class="general-button" onclick='history.pushState(null, null, "#tickets/film=${title}");window.dispatchEvent(new HashChangeEvent("hashchange"));'>Köp biljett</button>
+                                <button class="general-button" onclick='history.pushState(null, null, "#tickets/film=${title.replaceAll(' ', '-')}");window.dispatchEvent(new HashChangeEvent("hashchange"));'>Köp biljett</button>
                                 </div>
                               </div>
                                 <hr width='100%'>

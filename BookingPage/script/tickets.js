@@ -13,6 +13,7 @@ if (typeof childTickets === undefined) {
 // Here you decide how many tickets you want and what type of tickets
 function renderTicketChooser() {
   $('main').append(`<div class="ticket-container"></div>`);
+  listenToTicketSelection();
   $('main').append(`<div class="continue-container"></div>`);
   let htmlChild = /*html*/ `<span>Barn - 75kr</span><div class="button-container"><button id="childTicketRem" class="general-button">-</button><div class="amountC"><p class="showAmountC">0</p></div><button id="childTicketAdd" class="general-button">+</button></div>`;
 
@@ -79,22 +80,24 @@ function remSeniorTicket() {
   totalAmountTickets--;
   renderChosenTicketsS();
 }
+function listenToTicketSelection() {
+  $('.ticket-container').on('click', '#childTicketAdd', function () {
+    addChildTicket();
+  });
+  $('.ticket-container').on('click', '#childTicketRem', function () {
+    remChildTicket();
+  });
+  $('.ticket-container').on('click', '#adultTicketAdd', function () {
+    addAdultTicket();
+  });
+  $('.ticket-container').on('click', '#adultTicketRem', function () {
+    remAdultTicket();
+  });
+  $('.ticket-container').on('click', '#seniorTicketAdd', function () {
+    addSeniorTicket();
+  });
+  $('.ticket-container').on('click', '#seniorTicketRem', function () {
+    remSeniorTicket();
+  });
+}
 
-$(document).on('click', '#childTicketAdd', function () {
-  addChildTicket();
-});
-$(document).on('click', '#childTicketRem', function () {
-  remChildTicket();
-});
-$(document).on('click', '#adultTicketAdd', function () {
-  addAdultTicket();
-});
-$(document).on('click', '#adultTicketRem', function () {
-  remAdultTicket();
-});
-$(document).on('click', '#seniorTicketAdd', function () {
-  addSeniorTicket();
-});
-$(document).on('click', '#seniorTicketRem', function () {
-  remSeniorTicket();
-});

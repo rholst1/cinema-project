@@ -42,7 +42,7 @@ function buildMovieList() {
                 </div>
                 <div class="currentMovieTitleDiv">
                     <a href = "javascript:buttonPage('${title}')" class="movie-link"><h2>${title}</h2></a><article class="currentMovieTitleContainer"> <p class="title-p"> ${genres} | ${length} | ${ageGroup} </p>
-                    <article><button class="general-button article-button" onclick = "buildMoreInfoPage('${title}')">Mer info</button><button class="general-button article-button" onclick='buyTicket(${i})'>Köp biljett</button></article></article><hr>
+                    <article><button class="general-button article-button" onclick = "buildMoreInfoPage('${title}')">Mer info</button><button class="general-button article-button" onclick="buyTicket('${title}');">Köp biljett</button></article></article><hr>
                       <p>${description}
                       </p>
                   </div></div>`;
@@ -56,11 +56,10 @@ function buildMoreInfoPage(title) {
   history.pushState(null, null, "#moreinfo/title=" + title.replaceAll(" ", "-"));
   window.dispatchEvent(new HashChangeEvent("hashchange"));
 }
-function buyTicket(i) {
-  history.pushState(null, null, `#tickets/film=${title.replaceAll(" ", " - ")}`);
+function buyTicket(title) {
+  history.pushState(null, null, `#tickets/film=${title.replaceAll(" ", "-")}`);
   window.dispatchEvent(new HashChangeEvent("hashchange"));
-  window.dispatchEvent(new HashChangeEvent("hashchange"));
-  localStorage['selected-movie'] = i;
+  //localStorage['selected-movie'] = i;
   //  window.location.href = '/BookingPage/html/ticketbooking.html';
 }
 

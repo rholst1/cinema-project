@@ -1,3 +1,5 @@
+
+
 // Eventhandler for choosing movie
 $('#toggle').click(function () {
   $('.dropdown-content').show();
@@ -8,7 +10,7 @@ function hideMenu() {
 }
 
 // Eventhandler for choosing specifik movie and showing
-$(document).on('click', '#book', function () {
+$('.showings-container').on('click', '#book', function () {
   $('h1').remove();
   $('.selectedShowing').remove();
   renderTicketChooser();
@@ -17,16 +19,16 @@ $(document).on('click', '#book', function () {
 });
 
 // Eventhandler for confirming your amount of tickets
-$(document).on('click', '#continue-button', function () {
+$('main').on('click', '#continue-button', function () {
+  console.log("ticket confirmation listener")
   $('.ticket-container').remove();
   $('.continue-container').remove();
   renderSeatChooser(showingID);
   inputInfo();
   selectedSeats();
 });
-
 // Eventhandler for selecting seats 
-$(document).on('click', '.seat', function () {
+$('main').on('click', '.seat', function () {
   if ($(this).hasClass('seat') && !$(this).hasClass('occupied')) {
     if ($(this).hasClass('seat') && $(this).hasClass('selected')) {
       $(this).toggleClass('selected');
@@ -47,3 +49,4 @@ $(document).on('click', '.seat', function () {
     }
   }
 });
+

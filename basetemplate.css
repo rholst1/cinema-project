@@ -112,8 +112,25 @@ header {
   font: var(--font-title-medium);
   color: var(--text);
   padding: 0 2vw;
+  justify-content: center;
+  text-align: center;
+  display: flex;
+  align-self: flex-end;
+  font-size: 130%;
 }
 
+.menu-bar a:hover {
+  color: var(--hover);
+}
+
+.selected-text{
+ /* color: var(--hover) !important;*/
+  text-decoration: underline !important;
+}
+.selected-text:hover{
+
+  
+}
 .stickyFooterAdjuster {
   flex: 1 0 auto;
 }
@@ -386,11 +403,6 @@ select {
     margin-bottom: 3%;
   }
 
-  .menu-bar .hoverable {
-    display: flex;
-    align-self: flex-end;
-    font-size: 130%;
-  }
   /* media queries for booking tickets page*/
 
   .choose-movie {
@@ -469,8 +481,5 @@ select {
     margin-left: 4vw;
   }
 
-  .menu-bar a {
-    justify-content: center;
-    text-align: center;
-  }
+
 }

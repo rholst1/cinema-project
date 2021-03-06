@@ -1,20 +1,20 @@
 
-console.log(typeof selectedSeatNrArray);
-if (typeof selectedSeatNrArray !== undefined) {
-  movies = undefined;
-  id = undefined;
-  i = undefined;
-  totalAmountTickets = 0; // Userinput
-  selectedSeatNrArray = [];
-  showingID = undefined;
-} else {
-  let movies = undefined;
+if (typeof selectedSeatNrArray === "undefined") {
+  let movies;
   let id;
   let i;
-  let totalAmountTickets = 0; // Userinput
-  let selectedSeatNrArray = [];
+  let totalAmountTickets; // Userinput
+  let selectedSeatNrArray;
   let showingID;
 }
+
+movies = undefined;
+id = undefined;
+i = undefined;
+totalAmountTickets = 0; // Userinput
+selectedSeatNrArray = [];
+showingID = undefined;
+
 $.getScript('BookingPage/script/movies.js');
 $.getScript('BookingPage/script/eventHandling.js');
 $.getScript('BookingPage/script/booking.js');
@@ -99,13 +99,15 @@ function selectedSeats(selectedSeatNrArray) {
 
 // Displays the form you have to fill out to get your booking done
 function inputInfo() {
+  console.log("inputInfo")
   $('.layout')
     .after(/*html*/ `<div class="booking-form"><form id="form" class="book-tickets">
     <input type="email" placeholder="Ange email..." id="email" />
     <input type="tel" placeholder="Ange telefonnummer..." id="phonenumber" />
     <button type="button" class="general-button" id="bookbtn" >Boka</button>
   </form></div>`);
-  $('#bookbtn').click(function () {
+  $('#bookbtn').on('click', function () {
+    console.log("in bookingbtn handler")
     if (
       $.trim($('#email').val()) === '' ||
       $.trim($('#phonenumber').val()) === ''
