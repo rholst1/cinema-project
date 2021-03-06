@@ -74,7 +74,7 @@ async function databasePullShowings() {
 /* Function that builds the elements that gets loaded underneath "Visas Just Nu" Header */
 /* Lends the buildInfo method from Carousel to direct the user to the info page on the specific movie shown on the current day */
 function buildNowShowingElements(filmID, auditorium, time) {
-  let html = /*html*/ `<li><a href="#" onclick="buildInfo('${filmID}')">${filmID} | ${time} | Salong ${auditorium}</a></li>
+  let html = /*html*/ `<li><a href="#" onclick="buildInfo('${filmID}')">${filmID}</a> | ${time} | Salong ${auditorium}</li>
   `;
   $('.nowShowingTitles').append(html);
 }
