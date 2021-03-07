@@ -1,16 +1,13 @@
-function initCurrentmovies() {
-  window.buildInitialPage = buildInitialPage;
-  window.buildMoreInfoPage = buildMoreInfoPage;
-  window.buyTicket = buyTicket;
-  $.getScript('/MoviePage/script/Filterbutton.js');
-  $('main').append(`<section class="movies"></section>`);
-  $('.movies').prepend(
-    `<h1 class="currentMovieTitleH1">AKTUELLA FILMER JUST NU</h1>`
-  );
-  $('.movies').append(renderFilterButton);
-  buildInitialPage();
-}
-let movies;
+$.getScript('/MoviePage/script/Filterbutton.js');
+$.getScript('/MoviePage/script/buyTicket.js');
+
+$('header').after(`<main></main > `);
+$('main').append(`<section class="movies"></section>`);
+$('.movies').prepend(
+  `<h1 class="currentMovieTitleH1">AKTUELLA FILMER JUST NU</h1>`
+);
+$('.movies').append(renderFilterButton());
+
 async function buildInitialPage() {
   let movies = await db.run(`SELECT * FROM new_movie_list`);
   buildMovieList(movies);
@@ -35,7 +32,7 @@ function buildMovieList(movies) {
                 </div>
                 <div class="currentMovieTitleDiv">
                     <a href = "javascript:buttonPage('${title}')" class="movie-link"><h2>${title}</h2></a><article class="currentMovieTitleContainer"> <p class="title-p"> ${genres} | ${length} | ${ageGroup} </p>
-                    <article><button class="general-button article-button" onclick = "buildMoreInfoPage('${title}')">Mer info</button><button class="general-button article-button" onclick='buyTicket(${i})'>Köp biljett</button></article></article><hr>
+                    <article><button class="general-button article-button" onclick = "buildInfo('${title}', ${i})">Mer info</button><button class="general-button article-button" onclick="buyTicket(${i})">Köp biljett</button></article></article><hr>
                       <p>${description}
                       </p>
                   </div></div>`;
@@ -45,34 +42,6 @@ function buildMovieList(movies) {
   }
 }
 
-function buildMoreInfoPage(title) {
-  history.pushState(
-    null,
-    null,
-    '#moreinfo/title=' + title.replaceAll(' ', '-')
-  );
-  window.dispatchEvent(new HashChangeEvent('hashchange'));
-}
-<<<<<<< HEAD
-<<<<<<< HEAD
-function buyTicket(title) {
-  history.pushState(null, null, `#tickets/film=${title.replaceAll(' ', '-')}`);
-  window.dispatchEvent(new HashChangeEvent('hashchange'));
-  //localStorage['selected-movie'] = i;
-=======
-=======
->>>>>>> parent of 63bd406 (Fixed type error in db comms during booking. Listen to header items and update url accordingly. Build url for specific movie in moreinfo page and ticket page. Fixed some global variables from getting declared multiple times. Changed listeners in ticket page be killed off to avoid duplicates. Removed unnecesary function for getting last bookingID.)
-function buyTicket(i) {
-  history.pushState(null, null, `#tickets/film=${title.replaceAll(" ", " - ")}`);
-  window.dispatchEvent(new HashChangeEvent("hashchange"));
-  window.dispatchEvent(new HashChangeEvent("hashchange"));
-  localStorage['selected-movie'] = i;
-<<<<<<< HEAD
->>>>>>> parent of 63bd406 (Fixed type error in db comms during booking. Listen to header items and update url accordingly. Build url for specific movie in moreinfo page and ticket page. Fixed some global variables from getting declared multiple times. Changed listeners in ticket page be killed off to avoid duplicates. Removed unnecesary function for getting last bookingID.)
-=======
->>>>>>> parent of 63bd406 (Fixed type error in db comms during booking. Listen to header items and update url accordingly. Build url for specific movie in moreinfo page and ticket page. Fixed some global variables from getting declared multiple times. Changed listeners in ticket page be killed off to avoid duplicates. Removed unnecesary function for getting last bookingID.)
-  //  window.location.href = '/BookingPage/html/ticketbooking.html';
-}
 function renderFilterButton() {
   return /*html*/ `<div class="btn-container"><button class="general-button" id="toggle">Visa filter</button><button class="btn general-button" id="all">Alla</button>
 <button class="btn general-button" id="15-år">15 år</button>
@@ -81,4 +50,10 @@ function renderFilterButton() {
 <button class="btn general-button" id="Barntillåten">Barntillåten</button></div>`;
 }
 
-export { initCurrentmovies };
+function buildInfo(title, i) {
+  $.getScript('/MoviePage/script/moremovieinfo.js', function () {
+    buildInitialPage(title, i);
+  });
+}
+
+buildInitialPage();

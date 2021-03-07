@@ -1,14 +1,8 @@
 // Script for when you are selecting amount and type of tickets
 
-if (typeof childTickets === undefined) {
-  let childTickets = 0;
-  let adultTickets = 0;
-  let seniorTickets = 0;
-} else {
-  childTickets = 0;
-  adultTickets = 0;
-  seniorTickets = 0;
-}
+let childTickets = 0;
+let adultTickets = 0;
+let seniorTickets = 0;
 
 // Here you decide how many tickets you want and what type of tickets
 function renderTicketChooser() {
@@ -52,11 +46,9 @@ function addChildTicket() {
 }
 
 function remChildTicket() {
-  if (childTickets > 0) {
-    childTickets--;
-    totalAmountTickets--;
-    renderChosenTicketsC();
-  }
+  childTickets--;
+  totalAmountTickets--;
+  renderChosenTicketsC();
 }
 
 function addAdultTicket() {
@@ -66,11 +58,9 @@ function addAdultTicket() {
 }
 
 function remAdultTicket() {
-  if (adultTickets > 0) {
-    adultTickets--;
-    totalAmountTickets--;
-    renderChosenTicketsA();
-  }
+  adultTickets--;
+  totalAmountTickets--;
+  renderChosenTicketsA();
 }
 function addSeniorTicket() {
   seniorTickets++;
@@ -79,37 +69,10 @@ function addSeniorTicket() {
 }
 
 function remSeniorTicket() {
-  if (seniorTickets > 0) {
-    seniorTickets--;
-    totalAmountTickets--;
-    renderChosenTicketsS();
-  }
+  seniorTickets--;
+  totalAmountTickets--;
+  renderChosenTicketsS();
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-function listenToTicketSelection() {
-  $('.ticket-container').on('click', '#childTicketAdd', function () {
-    addChildTicket();
-  });
-  $('.ticket-container').on('click', '#childTicketRem', function () {
-    remChildTicket();
-  });
-  $('.ticket-container').on('click', '#adultTicketAdd', function () {
-    addAdultTicket();
-  });
-  $('.ticket-container').on('click', '#adultTicketRem', function () {
-    remAdultTicket();
-  });
-  $('.ticket-container').on('click', '#seniorTicketAdd', function () {
-    addSeniorTicket();
-  });
-  $('.ticket-container').on('click', '#seniorTicketRem', function () {
-    remSeniorTicket();
-  });
-}
-=======
-=======
->>>>>>> parent of 63bd406 (Fixed type error in db comms during booking. Listen to header items and update url accordingly. Build url for specific movie in moreinfo page and ticket page. Fixed some global variables from getting declared multiple times. Changed listeners in ticket page be killed off to avoid duplicates. Removed unnecesary function for getting last bookingID.)
 
 $(document).on('click', '#childTicketAdd', function () {
   addChildTicket();
@@ -129,7 +92,3 @@ $(document).on('click', '#seniorTicketAdd', function () {
 $(document).on('click', '#seniorTicketRem', function () {
   remSeniorTicket();
 });
-<<<<<<< HEAD
->>>>>>> parent of 63bd406 (Fixed type error in db comms during booking. Listen to header items and update url accordingly. Build url for specific movie in moreinfo page and ticket page. Fixed some global variables from getting declared multiple times. Changed listeners in ticket page be killed off to avoid duplicates. Removed unnecesary function for getting last bookingID.)
-=======
->>>>>>> parent of 63bd406 (Fixed type error in db comms during booking. Listen to header items and update url accordingly. Build url for specific movie in moreinfo page and ticket page. Fixed some global variables from getting declared multiple times. Changed listeners in ticket page be killed off to avoid duplicates. Removed unnecesary function for getting last bookingID.)

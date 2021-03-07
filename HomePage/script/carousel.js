@@ -1,7 +1,4 @@
-if (typeof slideIndex === 'undefined') {
-  let slideIndex
-}
-slideIndex = 1;
+let slideIndex = 1;
 
 function changeSlide(slideNumber) {
   slideShow((slideIndex += slideNumber));

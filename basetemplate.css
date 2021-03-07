@@ -113,19 +113,6 @@ header {
   color: var(--text);
   padding: 0 2vw;
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-.menu-bar a:hover {
-  opacity: 70%;
-}
-.selected-text{
-  color: var(--hover) !important;
-  
-}
-=======
->>>>>>> parent of 63bd406 (Fixed type error in db comms during booking. Listen to header items and update url accordingly. Build url for specific movie in moreinfo page and ticket page. Fixed some global variables from getting declared multiple times. Changed listeners in ticket page be killed off to avoid duplicates. Removed unnecesary function for getting last bookingID.)
-=======
->>>>>>> parent of 63bd406 (Fixed type error in db comms during booking. Listen to header items and update url accordingly. Build url for specific movie in moreinfo page and ticket page. Fixed some global variables from getting declared multiple times. Changed listeners in ticket page be killed off to avoid duplicates. Removed unnecesary function for getting last bookingID.)
 
 .stickyFooterAdjuster {
   flex: 1 0 auto;
@@ -399,15 +386,7 @@ select {
     margin-bottom: 3%;
   }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-  .menu-bar a{
-=======
   .menu-bar .hoverable {
->>>>>>> parent of 63bd406 (Fixed type error in db comms during booking. Listen to header items and update url accordingly. Build url for specific movie in moreinfo page and ticket page. Fixed some global variables from getting declared multiple times. Changed listeners in ticket page be killed off to avoid duplicates. Removed unnecesary function for getting last bookingID.)
-=======
-  .menu-bar .hoverable {
->>>>>>> parent of 63bd406 (Fixed type error in db comms during booking. Listen to header items and update url accordingly. Build url for specific movie in moreinfo page and ticket page. Fixed some global variables from getting declared multiple times. Changed listeners in ticket page be killed off to avoid duplicates. Removed unnecesary function for getting last bookingID.)
     display: flex;
     align-self: flex-end;
     font-size: 130%;

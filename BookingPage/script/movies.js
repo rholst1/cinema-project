@@ -11,7 +11,7 @@
   while (i < movies.length) {
     for (let { title } of movies) {
       id[i] = i;
-      let movieHtml = `<a  id="${i}" onclick="renderMovieBooking(${i})">${title}</a>`;
+      let movieHtml = `<a href="#" id="${i}" onclick="renderMovieBooking(${i})">${title}</a>`;
       i++;
       $('.dropdown-content').append(movieHtml);
     }

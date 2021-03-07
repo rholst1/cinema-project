@@ -1,34 +1,19 @@
+$('header').after(`<main></main>`);
 
-function initMyBookings() {
+$('main').append(/*html*/ `<section class="bookings"></section>`);
 
-  $('main').append(/*html*/ `<section class="bookings"></section>`);
-
-  $('.bookings').prepend(
+$('.bookings').prepend(
   /*html*/ `<h1 class="currentMovieTitleH1">MINA BOKNINGAR</h1>`
-  );
+);
 
-  $('main').append(/*html*/ `<div class="space"></div>`);
+$('main').append(/*html*/ `<div class="space"></div>`);
 
-  $('.space').prepend(/*html*/ `<br> <br>`);
+$('.space').prepend(/*html*/ `<br> <br>`);
 
-  $('.space').after(/*html*/ `<form class="get-booking">
+$('.space').after(/*html*/ `<form class="get-booking">
   <input type="text" class="other-button" placeholder="Ange email..." id="emailInput" />
   <button type="button" class="general-button hoverable email-button get-bookings">Hämta dina bokningar</button>
 </form>`);
-  listenToEmailButton();
-
-
-  $(document).on('click', '.removeButton', async function () {
-    db.run('BEGIN TRANSACTION');
-    let removeID = $(this).val();
-    let result = await db.run(/*sql*/ `
-      DELETE FROM Bookings WHERE ID = ${removeID}; UPDATE Seatings SET status = 'empty' WHERE bookingID = ${removeID}`);
-
-    alert('Din bokning är nu avbokad!');
-    location.reload();
-  });
-  db.run('COMMIT');
-}
 
 function listenToEmailButton() {
   $('form').on(
@@ -56,7 +41,7 @@ function listenToEmailButton() {
   );
 }
 
-
+listenToEmailButton();
 
 let runQuery;
 let fullDate;
@@ -144,8 +129,15 @@ async function queryDatabase() {
   }
 }
 
+$(document).on('click', '.removeButton', async function () {
+  db.run('BEGIN TRANSACTION');
+  let removeID = $(this).val();
+  let result = await db.run(/*sql*/ `
+      DELETE FROM Bookings WHERE ID = ${removeID}; UPDATE Seatings SET status = 'empty' WHERE bookingID = ${removeID}`);
 
-
+  alert('Din bokning är nu avbokad!');
+  location.reload();
+});
 
 function loopSeats(seatResult, increment) {
   let n = 0;
@@ -161,4 +153,4 @@ function loopSeats(seatResult, increment) {
   }
 }
 
-export { initMyBookings };
+db.run('COMMIT');

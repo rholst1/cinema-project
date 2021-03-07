@@ -1,24 +1,16 @@
+$.getScript('/BookingPage/script/movies.js');
+$.getScript('/BookingPage/script/eventHandling.js');
+$.getScript('/BookingPage/script/booking.js');
+$.getScript('/BookingPage/script/tickets.js');
 
-console.log(typeof selectedSeatNrArray);
-if (typeof selectedSeatNrArray !== undefined) {
-  movies = undefined;
-  id = undefined;
-  i = undefined;
-  totalAmountTickets = 0; // Userinput
-  selectedSeatNrArray = [];
-  showingID = undefined;
-} else {
-  let movies = undefined;
-  let id;
-  let i;
-  let totalAmountTickets = 0; // Userinput
-  let selectedSeatNrArray = [];
-  let showingID;
-}
-$.getScript('BookingPage/script/movies.js');
-$.getScript('BookingPage/script/eventHandling.js');
-$.getScript('BookingPage/script/booking.js');
-$.getScript('BookingPage/script/tickets.js');
+let movies;
+let id;
+let i;
+let totalAmountTickets = 0;
+let selectedSeatNrArray = [];
+let showingID;
+
+$('header').after(/*html*/ `<main></main>`);
 $('main').append(/*html*/ `<div class="choose-movie"></div>`);
 $('.choose-movie').append(/*html*/ `<div class="dropdown">
   <button id="toggle" class="general-button dropbtn">Välj film</button>
@@ -86,13 +78,11 @@ function selectedSeats(selectedSeatNrArray) {
   $('.layout').after(
     /*html*/ `<div class="actual-booking"><p class ="platser">Valda platser: </p></div>`
   );
-  if (selectedSeatNrArray !== undefined) {
-    for (i = 0; i < selectedSeatNrArray.length; i++) {
-      let seat = selectedSeatNrArray[i].match(/\d/g).join('');
-      $('.platser').append(/*html*/ `<span class="seatSpan${i}">${seat}</span>`);
-      if (i > 0) {
-        $(`.seatSpan${i}`).prepend(`, `);
-      }
+  for (i = 0; i < selectedSeatNrArray.length; i++) {
+    let seat = selectedSeatNrArray[i].match(/\d/g).join('');
+    $('.platser').append(/*html*/ `<span class="seatSpan${i}">${seat}</span>`);
+    if (i > 0) {
+      $(`.seatSpan${i}`).prepend(`, `);
     }
   }
 }
@@ -105,15 +95,7 @@ function inputInfo() {
     <input type="tel" placeholder="Ange telefonnummer..." id="phonenumber" />
     <button type="button" class="general-button" id="bookbtn" >Boka</button>
   </form></div>`);
-<<<<<<< HEAD
-<<<<<<< HEAD
-  $('#bookbtn').on('click', function () {
-=======
   $('#bookbtn').click(function () {
->>>>>>> parent of 63bd406 (Fixed type error in db comms during booking. Listen to header items and update url accordingly. Build url for specific movie in moreinfo page and ticket page. Fixed some global variables from getting declared multiple times. Changed listeners in ticket page be killed off to avoid duplicates. Removed unnecesary function for getting last bookingID.)
-=======
-  $('#bookbtn').click(function () {
->>>>>>> parent of 63bd406 (Fixed type error in db comms during booking. Listen to header items and update url accordingly. Build url for specific movie in moreinfo page and ticket page. Fixed some global variables from getting declared multiple times. Changed listeners in ticket page be killed off to avoid duplicates. Removed unnecesary function for getting last bookingID.)
     if (
       $.trim($('#email').val()) === '' ||
       $.trim($('#phonenumber').val()) === ''

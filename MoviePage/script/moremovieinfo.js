@@ -1,17 +1,17 @@
-if (typeof movies !== 'undefined') {
-  movies = undefined;
-} else {
-  let movies;
-}
+$.getScript('/MoviePage/script/buyTicket.js');
 
-async function buildInitialPage(title) {
-
+let movies;
+async function buildInitialPage(title, i) {
   movies = await db.run(`SELECT * FROM new_movie_list`);
-  buildMoreInfoPage(title.toUpperCase());
+  buildMoreInfoPage(title, i);
 }
 
-function buildMoreInfoPage(selectedMovie) {
-  $('main').append(`<section class="movie-info"></section>`);
+function buildMoreInfoPage(selectedMovie, i) {
+  $('main').remove();
+  $('header').after(`<main></main > `);
+  $('main').append(`<section class="movies"></section>`);
+  $('.movies').after(`<section class="movie-info"></section>`);
+
   for (let {
     title,
     productionCountries,
@@ -26,7 +26,7 @@ function buildMoreInfoPage(selectedMovie) {
     trailer,
     director,
   } of movies) {
-    if (selectedMovie === title.toUpperCase()) {
+    if (selectedMovie === title) {
       let movieHtml = /*html*/ `
                           <div>
                                <div class="youtube">
@@ -36,8 +36,7 @@ function buildMoreInfoPage(selectedMovie) {
                               <div class="title-row">
                               <h2>${title}</h2>
                               <div class="button-title">
-                                <button class="general-button" onclick ='window.history.back(1);' >Gå tillbaka</button>                                
-                                <button class="general-button" onclick='history.pushState(null, null, "#tickets/film=${title}");window.dispatchEvent(new HashChangeEvent("hashchange"));'>Köp biljett</button>
+                                <button class="general-button" onclick="buyTicket(${i})">Köp biljett</button>
                                 </div>
                               </div>
                                 <hr width='100%'>
@@ -48,8 +47,8 @@ function buildMoreInfoPage(selectedMovie) {
                                                                
                                 </div>
                             </div>`;
-      $(`main`).append(movieHtml);
+
+      $(`.movies`).replaceWith(movieHtml);
     }
   }
 }
-
