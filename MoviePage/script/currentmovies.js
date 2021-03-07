@@ -54,16 +54,22 @@ function buildMoreInfoPage(title) {
   window.dispatchEvent(new HashChangeEvent('hashchange'));
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 function buyTicket(title) {
   history.pushState(null, null, `#tickets/film=${title.replaceAll(' ', '-')}`);
   window.dispatchEvent(new HashChangeEvent('hashchange'));
   //localStorage['selected-movie'] = i;
 =======
+=======
+>>>>>>> parent of 63bd406 (Fixed type error in db comms during booking. Listen to header items and update url accordingly. Build url for specific movie in moreinfo page and ticket page. Fixed some global variables from getting declared multiple times. Changed listeners in ticket page be killed off to avoid duplicates. Removed unnecesary function for getting last bookingID.)
 function buyTicket(i) {
   history.pushState(null, null, `#tickets/film=${title.replaceAll(" ", " - ")}`);
   window.dispatchEvent(new HashChangeEvent("hashchange"));
   window.dispatchEvent(new HashChangeEvent("hashchange"));
   localStorage['selected-movie'] = i;
+<<<<<<< HEAD
+>>>>>>> parent of 63bd406 (Fixed type error in db comms during booking. Listen to header items and update url accordingly. Build url for specific movie in moreinfo page and ticket page. Fixed some global variables from getting declared multiple times. Changed listeners in ticket page be killed off to avoid duplicates. Removed unnecesary function for getting last bookingID.)
+=======
 >>>>>>> parent of 63bd406 (Fixed type error in db comms during booking. Listen to header items and update url accordingly. Build url for specific movie in moreinfo page and ticket page. Fixed some global variables from getting declared multiple times. Changed listeners in ticket page be killed off to avoid duplicates. Removed unnecesary function for getting last bookingID.)
   //  window.location.href = '/BookingPage/html/ticketbooking.html';
 }

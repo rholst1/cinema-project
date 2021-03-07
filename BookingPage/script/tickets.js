@@ -86,6 +86,7 @@ function remSeniorTicket() {
   }
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 function listenToTicketSelection() {
   $('.ticket-container').on('click', '#childTicketAdd', function () {
     addChildTicket();
@@ -107,6 +108,8 @@ function listenToTicketSelection() {
   });
 }
 =======
+=======
+>>>>>>> parent of 63bd406 (Fixed type error in db comms during booking. Listen to header items and update url accordingly. Build url for specific movie in moreinfo page and ticket page. Fixed some global variables from getting declared multiple times. Changed listeners in ticket page be killed off to avoid duplicates. Removed unnecesary function for getting last bookingID.)
 
 $(document).on('click', '#childTicketAdd', function () {
   addChildTicket();
@@ -126,4 +129,7 @@ $(document).on('click', '#seniorTicketAdd', function () {
 $(document).on('click', '#seniorTicketRem', function () {
   remSeniorTicket();
 });
+<<<<<<< HEAD
+>>>>>>> parent of 63bd406 (Fixed type error in db comms during booking. Listen to header items and update url accordingly. Build url for specific movie in moreinfo page and ticket page. Fixed some global variables from getting declared multiple times. Changed listeners in ticket page be killed off to avoid duplicates. Removed unnecesary function for getting last bookingID.)
+=======
 >>>>>>> parent of 63bd406 (Fixed type error in db comms during booking. Listen to header items and update url accordingly. Build url for specific movie in moreinfo page and ticket page. Fixed some global variables from getting declared multiple times. Changed listeners in ticket page be killed off to avoid duplicates. Removed unnecesary function for getting last bookingID.)

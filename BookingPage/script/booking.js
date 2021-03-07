@@ -28,6 +28,7 @@ async function saveSeats(selectedSeatNrArray, bookingIdNewest) {
   for (i = 0; i < selectedSeatNrArray.length; i++) {
     let seat = selectedSeatNrArray[i].match(/\d/g).join('');
 <<<<<<< HEAD
+<<<<<<< HEAD
     seat = parseInt(seat);
     db.run('BEGIN TRANSACTION');
     await db.run(/*sql*/ `UPDATE Seatings 
@@ -35,6 +36,12 @@ async function saveSeats(selectedSeatNrArray, bookingIdNewest) {
       status = "occupied"
        WHERE seatNumber = ${seat} 
        AND showingID = ${parseInt(showingID)}`);
+=======
+    db.run('BEGIN TRANSACTION');
+    await db.run(
+      /*sql*/ `UPDATE Seatings SET status = "occupied", bookingID = ${bookingIdNewest} WHERE seatNumber = ${seat} AND showingID = ${showingID}`
+    );
+>>>>>>> parent of 63bd406 (Fixed type error in db comms during booking. Listen to header items and update url accordingly. Build url for specific movie in moreinfo page and ticket page. Fixed some global variables from getting declared multiple times. Changed listeners in ticket page be killed off to avoid duplicates. Removed unnecesary function for getting last bookingID.)
 =======
     db.run('BEGIN TRANSACTION');
     await db.run(
@@ -52,7 +59,11 @@ async function renderConfirmation(bookingIdNewest) {
     /*sql*/ `SELECT DISTINCT Showings.filmID, Showings.date, Showings.time, Seatings.seatNumber, Showings.auditorium, Bookings.price FROM Showings INNER JOIN Bookings ON (Bookings.ID =  ${bookingIdNewest}) INNER JOIN Seatings ON (Seatings.bookingID = ${bookingIdNewest}) WHERE Showings.ID = ${showingID}`
   );
 <<<<<<< HEAD
+<<<<<<< HEAD
   db.run('COMMIT');
+=======
+
+>>>>>>> parent of 63bd406 (Fixed type error in db comms during booking. Listen to header items and update url accordingly. Build url for specific movie in moreinfo page and ticket page. Fixed some global variables from getting declared multiple times. Changed listeners in ticket page be killed off to avoid duplicates. Removed unnecesary function for getting last bookingID.)
 =======
 
 >>>>>>> parent of 63bd406 (Fixed type error in db comms during booking. Listen to header items and update url accordingly. Build url for specific movie in moreinfo page and ticket page. Fixed some global variables from getting declared multiple times. Changed listeners in ticket page be killed off to avoid duplicates. Removed unnecesary function for getting last bookingID.)
@@ -76,6 +87,7 @@ async function renderConfirmation(bookingIdNewest) {
       <h3>Total pris: ${price}kr </h3>
     </div>`);
 <<<<<<< HEAD
+<<<<<<< HEAD
   let seatNumbers = confirmation.map((ticket) => ticket.seatNumber);
   seatNumbers = seatNumbers.join(',');
 =======
@@ -85,6 +97,13 @@ async function renderConfirmation(bookingIdNewest) {
   for (let { seatNumber } of confirmation) {
     let html = '';
 
+=======
+
+  let n = 0;
+  for (let { seatNumber } of confirmation) {
+    let html = '';
+
+>>>>>>> parent of 63bd406 (Fixed type error in db comms during booking. Listen to header items and update url accordingly. Build url for specific movie in moreinfo page and ticket page. Fixed some global variables from getting declared multiple times. Changed listeners in ticket page be killed off to avoid duplicates. Removed unnecesary function for getting last bookingID.)
     if (n > 0) {
       html += ' ,';
     }

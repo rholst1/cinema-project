@@ -106,7 +106,11 @@ function inputInfo() {
     <button type="button" class="general-button" id="bookbtn" >Boka</button>
   </form></div>`);
 <<<<<<< HEAD
+<<<<<<< HEAD
   $('#bookbtn').on('click', function () {
+=======
+  $('#bookbtn').click(function () {
+>>>>>>> parent of 63bd406 (Fixed type error in db comms during booking. Listen to header items and update url accordingly. Build url for specific movie in moreinfo page and ticket page. Fixed some global variables from getting declared multiple times. Changed listeners in ticket page be killed off to avoid duplicates. Removed unnecesary function for getting last bookingID.)
 =======
   $('#bookbtn').click(function () {
 >>>>>>> parent of 63bd406 (Fixed type error in db comms during booking. Listen to header items and update url accordingly. Build url for specific movie in moreinfo page and ticket page. Fixed some global variables from getting declared multiple times. Changed listeners in ticket page be killed off to avoid duplicates. Removed unnecesary function for getting last bookingID.)
