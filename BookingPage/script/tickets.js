@@ -53,9 +53,11 @@ function addChildTicket() {
 }
 
 function remChildTicket() {
-  childTickets--;
-  totalAmountTickets--;
-  renderChosenTicketsC();
+  if (childTickets > 0) {
+    childTickets--;
+    totalAmountTickets--;
+    renderChosenTicketsC();
+  }
 }
 
 function addAdultTicket() {
@@ -65,9 +67,11 @@ function addAdultTicket() {
 }
 
 function remAdultTicket() {
-  adultTickets--;
-  totalAmountTickets--;
-  renderChosenTicketsA();
+  if (adultTickets > 0) {
+    adultTickets--;
+    totalAmountTickets--;
+    renderChosenTicketsA();
+  }
 }
 function addSeniorTicket() {
   seniorTickets++;
@@ -76,9 +80,11 @@ function addSeniorTicket() {
 }
 
 function remSeniorTicket() {
-  seniorTickets--;
-  totalAmountTickets--;
-  renderChosenTicketsS();
+  if (seniorTickets > 0) {
+    seniorTickets--;
+    totalAmountTickets--;
+    renderChosenTicketsS();
+  }
 }
 function listenToTicketSelection() {
   $('.ticket-container').on('click', '#childTicketAdd', function () {
@@ -100,4 +106,3 @@ function listenToTicketSelection() {
     remSeniorTicket();
   });
 }
-
