@@ -1,5 +1,3 @@
-
-
 // Eventhandler for choosing movie
 $('#toggle').click(function () {
   $('.dropdown-content').show();
@@ -10,7 +8,7 @@ function hideMenu() {
 }
 
 // Eventhandler for choosing specifik movie and showing
-$('.showings-container').on('click', '#book', function () {
+$(document).on('click', '#book', function () {
   $('h1').remove();
   $('.selectedShowing').remove();
   renderTicketChooser();
@@ -19,15 +17,20 @@ $('.showings-container').on('click', '#book', function () {
 });
 
 // Eventhandler for confirming your amount of tickets
+<<<<<<< HEAD
 $('main').on('click', '#continue-button', function () {
+=======
+$(document).on('click', '#continue-button', function () {
+>>>>>>> parent of 63bd406 (Fixed type error in db comms during booking. Listen to header items and update url accordingly. Build url for specific movie in moreinfo page and ticket page. Fixed some global variables from getting declared multiple times. Changed listeners in ticket page be killed off to avoid duplicates. Removed unnecesary function for getting last bookingID.)
   $('.ticket-container').remove();
   $('.continue-container').remove();
   renderSeatChooser(showingID);
   inputInfo();
   selectedSeats();
 });
+
 // Eventhandler for selecting seats 
-$('main').on('click', '.seat', function () {
+$(document).on('click', '.seat', function () {
   if ($(this).hasClass('seat') && !$(this).hasClass('occupied')) {
     if ($(this).hasClass('seat') && $(this).hasClass('selected')) {
       $(this).toggleClass('selected');
@@ -48,4 +51,3 @@ $('main').on('click', '.seat', function () {
     }
   }
 });
-

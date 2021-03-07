@@ -13,7 +13,6 @@ if (typeof childTickets === undefined) {
 // Here you decide how many tickets you want and what type of tickets
 function renderTicketChooser() {
   $('main').append(`<div class="ticket-container"></div>`);
-  listenToTicketSelection();
   $('main').append(`<div class="continue-container"></div>`);
   let htmlChild = /*html*/ `<span>Barn - 75kr</span><div class="button-container"><button id="childTicketRem" class="general-button">-</button><div class="amountC"><p class="showAmountC">0</p></div><button id="childTicketAdd" class="general-button">+</button></div>`;
 
@@ -86,6 +85,7 @@ function remSeniorTicket() {
     renderChosenTicketsS();
   }
 }
+<<<<<<< HEAD
 function listenToTicketSelection() {
   $('.ticket-container').on('click', '#childTicketAdd', function () {
     addChildTicket();
@@ -106,3 +106,24 @@ function listenToTicketSelection() {
     remSeniorTicket();
   });
 }
+=======
+
+$(document).on('click', '#childTicketAdd', function () {
+  addChildTicket();
+});
+$(document).on('click', '#childTicketRem', function () {
+  remChildTicket();
+});
+$(document).on('click', '#adultTicketAdd', function () {
+  addAdultTicket();
+});
+$(document).on('click', '#adultTicketRem', function () {
+  remAdultTicket();
+});
+$(document).on('click', '#seniorTicketAdd', function () {
+  addSeniorTicket();
+});
+$(document).on('click', '#seniorTicketRem', function () {
+  remSeniorTicket();
+});
+>>>>>>> parent of 63bd406 (Fixed type error in db comms during booking. Listen to header items and update url accordingly. Build url for specific movie in moreinfo page and ticket page. Fixed some global variables from getting declared multiple times. Changed listeners in ticket page be killed off to avoid duplicates. Removed unnecesary function for getting last bookingID.)

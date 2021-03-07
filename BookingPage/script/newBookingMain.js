@@ -1,20 +1,20 @@
 
-if (typeof selectedSeatNrArray === "undefined") {
-  let movies;
+console.log(typeof selectedSeatNrArray);
+if (typeof selectedSeatNrArray !== undefined) {
+  movies = undefined;
+  id = undefined;
+  i = undefined;
+  totalAmountTickets = 0; // Userinput
+  selectedSeatNrArray = [];
+  showingID = undefined;
+} else {
+  let movies = undefined;
   let id;
   let i;
-  let totalAmountTickets; // Userinput
-  let selectedSeatNrArray;
+  let totalAmountTickets = 0; // Userinput
+  let selectedSeatNrArray = [];
   let showingID;
 }
-
-movies = undefined;
-id = undefined;
-i = undefined;
-totalAmountTickets = 0; // Userinput
-selectedSeatNrArray = [];
-showingID = undefined;
-
 $.getScript('BookingPage/script/movies.js');
 $.getScript('BookingPage/script/eventHandling.js');
 $.getScript('BookingPage/script/booking.js');
@@ -105,7 +105,11 @@ function inputInfo() {
     <input type="tel" placeholder="Ange telefonnummer..." id="phonenumber" />
     <button type="button" class="general-button" id="bookbtn" >Boka</button>
   </form></div>`);
+<<<<<<< HEAD
   $('#bookbtn').on('click', function () {
+=======
+  $('#bookbtn').click(function () {
+>>>>>>> parent of 63bd406 (Fixed type error in db comms during booking. Listen to header items and update url accordingly. Build url for specific movie in moreinfo page and ticket page. Fixed some global variables from getting declared multiple times. Changed listeners in ticket page be killed off to avoid duplicates. Removed unnecesary function for getting last bookingID.)
     if (
       $.trim($('#email').val()) === '' ||
       $.trim($('#phonenumber').val()) === ''
