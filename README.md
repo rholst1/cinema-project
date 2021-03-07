@@ -7,9 +7,8 @@ This project was made by 5 Java-developer students att Teknikhögskolan, Gothenb
 
 Team members where(Github nicknames in parenteses):
 
-Markus Zarabi - (mzarabi)
+Marcus Zarabi - (mzarabi)
 Rasmus Holst - (rholst1)
 Jesper Utriainen - (lemuringen)
 Stefan Holmqvist - (sholmqvist)
 Sena Abdul Hussein - (Sena-AH)
-
