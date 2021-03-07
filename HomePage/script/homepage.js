@@ -2,7 +2,9 @@ function initHomepage() {
   $.getScript('HomePage/script/carousel.js');
   $('main').append(`<div class="slideshow-container"></div>`);
   $('.slideshow-container').append(buildCarousel());
-  $('.slideshow-container').after(`<section class="newsAndShowtimeElements"></section>`);
+  $('.slideshow-container').after(
+    `<section class="newsAndShowtimeElements"></section>`
+  );
   $('.newsAndShowtimeElements').append(buildNews());
   $('.newsAndShowtimeElements').append(buildNowShowing());
 }
@@ -69,14 +71,17 @@ async function databasePullShowings() {
 /* Function that builds the elements that gets loaded underneath "Visas Just Nu" Header */
 /* Lends the buildInfo method from Carousel to direct the user to the info page on the specific movie shown on the current day */
 function buildNowShowingElements(filmID, auditorium, time) {
-  let html = /*html*/ `<li> <a href='#moreinfo/title=${filmID.replaceAll(" ", "-")}'>${filmID}</a> | ${time} | Salong ${auditorium}</li>`
+  let html = /*html*/ `<li> <a href='#moreinfo/title=${filmID.replaceAll(
+    ' ',
+    '-'
+  )}'>${filmID}</a> | ${time} | Salong ${auditorium}</li>`;
   $('.nowShowingTitles').append(html);
 }
 
 /* Function that builds the carousel */
 function buildCarousel() {
   return /*html*/ `<div class="slides" >
-    <a href="#moreinfo/title=hidden-figures"">
+    <a href="#moreinfo/title=hidden-figures">
         <img src="img/hf.jpeg">
     </a>
     </div>
@@ -99,41 +104,5 @@ function buildCarousel() {
           <span class="dot" onclick="changeDotSlide(3)"></span>
         </div>`;
 }
-/* Function that builds the carousel */
-function buildCahgghjrousel() {
-  return /*html*/ ` <div class="slides">
-    <a onclick='history.pushState(null, null, "#moreinfo/title=hidden-figures")
-    window.dispatchEvent(new HashChangeEvent("hashchange"));'>
-        <img src="img/hf.jpeg">
-    </a>
-    </div>
-      <div class="slides">
-      <a onclick='history.pushState(null, null, "#moreinfo/title=toy-story-4")
-    window.dispatchEvent(new HashChangeEvent("hashchange"));'>
-          <img src="/img/ts.jpg">
-    </a>
-    </div>
-        <div class="slides">
-        <a onclick='history.pushState(null, null, "#moreinfo/title=tenet");
-    window.dispatchEvent(new HashChangeEvent("hashchange"));'>
-            <img src="img/tenet.jpg">
-    </a>
-    </div>
-          <a class="prev" onclick="changeSlide(-1)"></a>
-          <a class="next" onclick="changeSlide(1)"></a>
-  </div>
-        <div class="dot-container">
-          <span class="dot" onclick="changeDotSlide(1)"></span>
-          <span class="dot" onclick="changeDotSlide(2)"></span>
-          <span class="dot" onclick="changeDotSlide(3)"></span>
-        </div>`;
-}
 
-export { initHomepage }
-
-/* Function to build the more info site when you click a slide or a movie thats on "todays showings" */
-function buildInfo(title, i) {
-  $.getScript('/MoviePage/script/moremovieinfo.js', function () {
-    buildInitialPage(title, i);
-  });
-}
+export { initHomepage };

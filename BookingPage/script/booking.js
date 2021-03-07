@@ -14,15 +14,13 @@ async function saveSeats(selectedSeatNrArray, bookingIdNewest) {
     let seat = selectedSeatNrArray[i].match(/\d/g).join('');
     seat = parseInt(seat);
     db.run('BEGIN TRANSACTION');
-    await db.run(
-      /*sql*/ `UPDATE Seatings 
+    await db.run(/*sql*/ `UPDATE Seatings 
       SET bookingID = ${parseInt(bookingIdNewest)},
       status = "occupied"
        WHERE seatNumber = ${seat} 
-       AND showingID = ${parseInt(showingID)}`
-    );
-    db.run('COMMIT');
+       AND showingID = ${parseInt(showingID)}`);
   }
+  db.run('COMMIT');
   renderConfirmation(bookingIdNewest);
 }
 
@@ -52,7 +50,7 @@ async function renderConfirmation(bookingIdNewest) {
       <h3 class="stol"> Stolsnummer: </h3>
       <h3>Total pris: ${price}kr </h3>
     </div>`);
-  let seatNumbers = confirmation.map(ticket => ticket.seatNumber);
+  let seatNumbers = confirmation.map((ticket) => ticket.seatNumber);
   seatNumbers = seatNumbers.join(',');
 
   $('.stol').append(`${seatNumbers}`);

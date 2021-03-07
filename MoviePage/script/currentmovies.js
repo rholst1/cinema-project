@@ -1,5 +1,3 @@
-
-
 function initCurrentmovies() {
   window.buildInitialPage = buildInitialPage;
   window.buildMoreInfoPage = buildMoreInfoPage;
@@ -9,12 +7,7 @@ function initCurrentmovies() {
   $('.movies').prepend(
     `<h1 class="currentMovieTitleH1">AKTUELLA FILMER JUST NU</h1>`
   );
-  $('.movies')
-    .append(/*html*/ `<div class="btn-container"><button class="general-button" id="toggle">Visa filter</button><button class="btn general-button" id="all">Alla</button>
-<button class="btn general-button" id="15-år">15 år</button>
-<button class="btn general-button" id="11-år">11 år</button>
-<button class="btn general-button" id="7-år">7 år</button>
-<button class="btn general-button" id="Barntillåten">Barntillåten</button></div>`);
+  $('.movies').append(renderFilterButton);
   buildInitialPage();
 }
 let movies;
@@ -53,12 +46,16 @@ function buildMovieList(movies) {
 }
 
 function buildMoreInfoPage(title) {
-  history.pushState(null, null, "#moreinfo/title=" + title.replaceAll(" ", "-"));
-  window.dispatchEvent(new HashChangeEvent("hashchange"));
+  history.pushState(
+    null,
+    null,
+    '#moreinfo/title=' + title.replaceAll(' ', '-')
+  );
+  window.dispatchEvent(new HashChangeEvent('hashchange'));
 }
 function buyTicket(title) {
-  history.pushState(null, null, `#tickets/film=${title.replaceAll(" ", "-")}`);
-  window.dispatchEvent(new HashChangeEvent("hashchange"));
+  history.pushState(null, null, `#tickets/film=${title.replaceAll(' ', '-')}`);
+  window.dispatchEvent(new HashChangeEvent('hashchange'));
   //localStorage['selected-movie'] = i;
   //  window.location.href = '/BookingPage/html/ticketbooking.html';
 }
@@ -70,5 +67,4 @@ function renderFilterButton() {
 <button class="btn general-button" id="Barntillåten">Barntillåten</button></div>`;
 }
 
-
-export { initCurrentmovies }
+export { initCurrentmovies };
