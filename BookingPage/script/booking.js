@@ -36,18 +36,19 @@ async function saveSeats(selectedSeatNrArray, bookingIdNewest) {
 async function renderConfirmation(bookingIdNewest) {
   db.run('BEGIN TRANSACTION');
   let confirmation = await db.run(
-    /*sql*/ `SELECT DISTINCT Showings.filmID, Showings.date, Showings.time, Seatings.seatNumber, Showings.auditorium, Bookings.price FROM Showings INNER JOIN Bookings ON (Bookings.showingID = Showings.ID) INNER JOIN Seatings ON (Seatings.bookingID = ${bookingIdNewest}) WHERE Showings.ID = ${showingID}`
+    /*sql*/ `SELECT DISTINCT Showings.filmID, Showings.date, Showings.time, Seatings.seatNumber, Showings.auditorium, Bookings.price FROM Showings INNER JOIN Bookings ON (Bookings.ID =  ${bookingIdNewest}) INNER JOIN Seatings ON (Seatings.bookingID = ${bookingIdNewest}) WHERE Showings.ID = ${showingID}`
   );
   db.run('COMMIT');
   let { filmID, date, time, auditorium, price } = await confirmation[0];
   $('.layout').replaceWith(
     /*html*/
-    `<div class="tack" ><h1>Tack för din bokning!</h1></div>`
+    `<div class="tack"></div>`
   );
   $('.actual-booking').remove();
   $('.booking-form').remove();
   $('.tack').append(/*html*/ `
-    <div class="färdigbokningLOL">
+    <div class="completed-booking">
+    <h1>Tack för din bokning!</h1>
       <h2>Film: ${filmID}</h2>
       <h3>
        Datum: ${date}  

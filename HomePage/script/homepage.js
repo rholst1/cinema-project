@@ -39,10 +39,8 @@ function buildNews() {
 /* Function that builds the "Visas just nu" section with links etc and database info */
 function buildNowShowing() {
   let nowShowingHtml;
-
-  nowShowingHtml = /*html*/ `<div class="nowShowing">
-      <h2 class="nowShowingh2">På Bio idag:</h2>
-      <div class="btn-container"><button class="general-button" onclick='history.pushState(null, null, "#tickets");window.dispatchEvent(new HashChangeEvent("hashchange"));'>KöpDinBiljettHär</button></div>
+  nowShowingHtml = /*html*/ `<div class="nowShowing"><div class="title-btn-container">
+      <div><h2>På Bio idag:</h2></div><div><button class="general-button" onclick="location.href='#tickets'">Köp biljetter här</button></div></div>
       <ul class="nowShowingTitles">
      </div>`;
   databasePullShowings();
@@ -71,40 +69,71 @@ async function databasePullShowings() {
 /* Function that builds the elements that gets loaded underneath "Visas Just Nu" Header */
 /* Lends the buildInfo method from Carousel to direct the user to the info page on the specific movie shown on the current day */
 function buildNowShowingElements(filmID, auditorium, time) {
-  let html = /*html*/ `<li><a onclick='history.pushState(null, null, "#moreinfo/title=${filmID.replaceAll(" ", "-")}")
-    window.dispatchEvent(new HashChangeEvent("hashchange"));' style="color: ghostwhite" class="hoverable">${filmID} | ${time} | Salong ${auditorium}</a></li>
-  `;
+  let html = /*html*/ `<li> <a href='#moreinfo/title=${filmID.replaceAll(" ", "-")}'>${filmID}</a> | ${time} | Salong ${auditorium}</li>`
   $('.nowShowingTitles').append(html);
 }
 
 /* Function that builds the carousel */
 function buildCarousel() {
-  return /*html*/ `<div class="slides">
+  return /*html*/ `<div class="slides" >
+    <a href="#moreinfo/title=hidden-figures"">
+        <img src="img/hf.jpeg">
+    </a>
+    </div>
+      <div class="slides">
+    <a href="#moreinfo/title=toy-story-4">
+          <img src="/img/ts.jpg">
+    </a>
+    </div>
+        <div class="slides">
+    <a href="#moreinfo/title=tenet">
+            <img src="img/tenet.jpg">
+    </a>
+    </div>
+          <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+          <a class="next" onclick="changeSlide(1)">&#10095;</a>
+  </div>
+        <div class="dot-container">
+          <span class="dot" onclick="changeDotSlide(1)"></span>
+          <span class="dot" onclick="changeDotSlide(2)"></span>
+          <span class="dot" onclick="changeDotSlide(3)"></span>
+        </div>`;
+}
+/* Function that builds the carousel */
+function buildCahgghjrousel() {
+  return /*html*/ ` <div class="slides">
     <a onclick='history.pushState(null, null, "#moreinfo/title=hidden-figures")
     window.dispatchEvent(new HashChangeEvent("hashchange"));'>
-      <img src="img/hf.jpeg">
+        <img src="img/hf.jpeg">
     </a>
     </div>
-    <div class="slides">
-    <a onclick='history.pushState(null, null, "#moreinfo/title=toy-story-4")
+      <div class="slides">
+      <a onclick='history.pushState(null, null, "#moreinfo/title=toy-story-4")
     window.dispatchEvent(new HashChangeEvent("hashchange"));'>
-      <img src="/img/ts.jpg">
+          <img src="/img/ts.jpg">
     </a>
     </div>
-    <div class="slides">
-    <a onclick='history.pushState(null, null, "#moreinfo/title=tenet");
+        <div class="slides">
+        <a onclick='history.pushState(null, null, "#moreinfo/title=tenet");
     window.dispatchEvent(new HashChangeEvent("hashchange"));'>
-      <img src="img/tenet.jpg">
+            <img src="img/tenet.jpg">
     </a>
     </div>
-
-    <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
-    <a class="next" onclick="changeSlide(1)">&#10095;</a>
+          <a class="prev" onclick="changeSlide(-1)"></a>
+          <a class="next" onclick="changeSlide(1)"></a>
   </div>
-  <div class="dot-container">
-    <span class="dot" onclick="changeDotSlide(1)"></span>
-    <span class="dot" onclick="changeDotSlide(2)"></span>
-    <span class="dot" onclick="changeDotSlide(3)"></span>
-  </div>`;
+        <div class="dot-container">
+          <span class="dot" onclick="changeDotSlide(1)"></span>
+          <span class="dot" onclick="changeDotSlide(2)"></span>
+          <span class="dot" onclick="changeDotSlide(3)"></span>
+        </div>`;
 }
+
 export { initHomepage }
+
+/* Function to build the more info site when you click a slide or a movie thats on "todays showings" */
+function buildInfo(title, i) {
+  $.getScript('/MoviePage/script/moremovieinfo.js', function () {
+    buildInitialPage(title, i);
+  });
+}

@@ -19,12 +19,12 @@ function initCurrentmovies() {
 }
 let movies;
 async function buildInitialPage() {
-  movies = await db.run(`SELECT * FROM new_movie_list`);
-  buildMovieList();
+  let movies = await db.run(`SELECT * FROM new_movie_list`);
+  buildMovieList(movies);
 }
-function buildMovieList() {
+
+function buildMovieList(movies) {
   $('section').append(`<div class="currentMovies"></div>`);
-  // createDivs(movies.length);
   let i = 0;
   while (i < movies.length) {
     for (let {
@@ -62,5 +62,13 @@ function buyTicket(title) {
   //localStorage['selected-movie'] = i;
   //  window.location.href = '/BookingPage/html/ticketbooking.html';
 }
+function renderFilterButton() {
+  return /*html*/ `<div class="btn-container"><button class="general-button" id="toggle">Visa filter</button><button class="btn general-button" id="all">Alla</button>
+<button class="btn general-button" id="15-år">15 år</button>
+<button class="btn general-button" id="11-år">11 år</button>
+<button class="btn general-button" id="7-år">7 år</button>
+<button class="btn general-button" id="Barntillåten">Barntillåten</button></div>`;
+}
+
 
 export { initCurrentmovies }

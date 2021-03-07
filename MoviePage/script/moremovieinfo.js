@@ -51,4 +51,5 @@ function buildMoreInfoPage(selectedMovie) {
       $(`main`).append(movieHtml);
     }
   }
-}; 
+}
+

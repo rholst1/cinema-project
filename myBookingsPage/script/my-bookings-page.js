@@ -64,7 +64,6 @@ let time;
 let bookingInfo;
 let increment = 1;
 
-
 //Runs when user clicks "Hämta bokningar"
 async function queryDatabase() {
   let inputEmail = document.getElementById('emailInput').value;
@@ -82,7 +81,6 @@ async function queryDatabase() {
     price,
     showingID,
   } of bookingInfo) {
-
     let today = new Date();
     let leadingZero =
       today.getFullYear() +
@@ -127,7 +125,7 @@ async function queryDatabase() {
       movieIntDate < todayDateInt ||
       ((movieIntDate = todayDateInt) && movieTimeInt < timeNowInt)
     ) {
-      let queryHtml = /*html*/ `<li class="historik li-bookings"> Salong: ${auditorium} film: ${filmID} Datum och tid: ${date} ${time} Sittplatser:<span class="seats${increment}"></span> </li> `;
+      let queryHtml = /*html*/ `<li class="historik li-bookings"> Salong: ${auditorium} | Film: ${filmID} | Datum och tid: ${date} ${time} | Pris: ${price}kr | Sittplatser:<span class="seats${increment}"></span> </li> `;
 
       $('.history').append(queryHtml);
       loopSeats(seatResult, increment);
@@ -135,7 +133,7 @@ async function queryDatabase() {
       ((movieIntDate = todayDateInt) && movieTimeInt > timeNowInt) ||
       (movieIntDate > todayDateInt && movieTimeInt > timeNowInt)
     ) {
-      let queryHtmlKommande = /*html*/ `<li class="kommandevisning li-bookings"> Salong: ${auditorium} Film: ${filmID} Datum och tid: ${date} ${time} Sittplatser:<span class="seats${increment}"></span>
+      let queryHtmlKommande = /*html*/ `<li class="kommandevisning li-bookings"> Salong: ${auditorium} | Film: ${filmID} | Datum och tid: ${date} ${time} | Pris: ${price}kr | Sittplatser:<span class="seats${increment}"></span>
     <br> <button class="general-button removeButton" value="${ID}">Avboka</button></li>
     `;
 
