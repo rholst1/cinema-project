@@ -31,7 +31,7 @@ async function renderConfirmation(bookingIdNewest) {
     /*sql*/ `SELECT DISTINCT Showings.filmID, Showings.date, Showings.time, Seatings.seatNumber, Showings.auditorium, Bookings.price FROM Showings INNER JOIN Bookings ON (Bookings.ID =  ${bookingIdNewest}) INNER JOIN Seatings ON (Seatings.bookingID = ${bookingIdNewest}) WHERE Showings.ID = ${showingID}`
   );
   db.run('COMMIT');
-  let { filmID, date, time, auditorium, price } = await confirmation[0];
+  let { filmID, date, time, auditorium, price } = confirmation[0];
   $('.layout').replaceWith(
     /*html*/
     `<div class="tack"></div>`
