@@ -1,0 +1,17 @@
+{
+  "name": "node-js-first-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "best-sqlite3": "^1.0.17",
+    "best-sqlite3-frontend": "^1.0.2",
+    "express": "^4.17.1"
+  }
+}
