@@ -20,7 +20,6 @@ $('.showings-container').on('click', '#book', function () {
 
 // Eventhandler for confirming your amount of tickets
 $('main').on('click', '#continue-button', function () {
-  console.log("ticket confirmation listener")
   $('.ticket-container').remove();
   $('.continue-container').remove();
   renderSeatChooser(showingID);

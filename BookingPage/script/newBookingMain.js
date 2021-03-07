@@ -99,7 +99,6 @@ function selectedSeats(selectedSeatNrArray) {
 
 // Displays the form you have to fill out to get your booking done
 function inputInfo() {
-  console.log("inputInfo")
   $('.layout')
     .after(/*html*/ `<div class="booking-form"><form id="form" class="book-tickets">
     <input type="email" placeholder="Ange email..." id="email" />
@@ -107,7 +106,6 @@ function inputInfo() {
     <button type="button" class="general-button" id="bookbtn" >Boka</button>
   </form></div>`);
   $('#bookbtn').on('click', function () {
-    console.log("in bookingbtn handler")
     if (
       $.trim($('#email').val()) === '' ||
       $.trim($('#phonenumber').val()) === ''

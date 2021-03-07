@@ -1,6 +1,5 @@
 // Saves the customers information to the database
 async function saveBooking(email, phonenumber, price) {
-  console.log('in save booking');
   db.run('BEGIN TRANSACTION');
   let result = await db.run(
     /*sql*/ `INSERT INTO Bookings (phonenumber, email, showingID, price) VALUES ('${phonenumber}', '${email}', ${showingID}, ${price})`
@@ -11,23 +10,18 @@ async function saveBooking(email, phonenumber, price) {
 
 // Saves the seats for the booking you just made with the bookingID and the seats you selected
 async function saveSeats(selectedSeatNrArray, bookingIdNewest) {
-  console.log(selectedSeatNrArray);
   for (i = 0; i < selectedSeatNrArray.length; i++) {
     let seat = selectedSeatNrArray[i].match(/\d/g).join('');
     seat = parseInt(seat);
-    console.log(seat);
     db.run('BEGIN TRANSACTION');
-    let result = await db.run(
+    await db.run(
       /*sql*/ `UPDATE Seatings 
       SET bookingID = ${parseInt(bookingIdNewest)},
       status = "occupied"
        WHERE seatNumber = ${seat} 
        AND showingID = ${parseInt(showingID)}`
     );
-
-
     db.run('COMMIT');
-    console.log(result);
   }
   renderConfirmation(bookingIdNewest);
 }
@@ -59,7 +53,6 @@ async function renderConfirmation(bookingIdNewest) {
       <h3>Total pris: ${price}kr </h3>
     </div>`);
   let seatNumbers = confirmation.map(ticket => ticket.seatNumber);
-  console.log(confirmation);
   seatNumbers = seatNumbers.join(',');
 
   $('.stol').append(`${seatNumbers}`);

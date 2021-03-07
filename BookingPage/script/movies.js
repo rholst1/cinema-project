@@ -2,7 +2,6 @@
 (async function addMovies() {
   movies = await db.run(`SELECT * FROM new_movie_list`);
   if (localStorage['selected-movie']) {
-    console.log(localStorage['selected-movie']);
     renderMovieBooking(localStorage['selected-movie']);
     delete localStorage['selected-movie'];
     return;
