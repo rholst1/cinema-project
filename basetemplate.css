@@ -117,8 +117,8 @@ header {
   opacity: 70%;
 }
 .selected-text{
- /* color: var(--hover) !important;*/
-  text-decoration: underline !important;
+  color: var(--hover) !important;
+  
 }
 
 .stickyFooterAdjuster {
